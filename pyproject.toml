@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clipcart"
+version = "0.1.0"
+description = "살림해결소 — 생활문제 해결형 affiliate 숏폼 자동화"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.1",
+    "python-dotenv>=1.0",
+    "google-api-python-client>=2.100",
+    "google-auth-oauthlib>=1.1",
+    "google-auth-httplib2>=0.2",
+    "requests>=2.31",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+clipcart = "clipcart.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
