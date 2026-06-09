@@ -4,7 +4,10 @@ __pycache__/
 .venv/
 venv/
 .env
+.gen-lang-client-*.json
+client_secret*.json
 .youtube_client_secret.json
+.youtube-token.json
 *.egg-info/
 src/*.egg-info/
 

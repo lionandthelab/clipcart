@@ -36,12 +36,12 @@
   {
     "product_id": "P001",
     "created_at": "2026-06-09",
-    "status": "CANDIDATE",
+    "status": "PUBLISHED",
     "product_name": "창틀 틈새 청소 브러시",
     "category": "청소",
     "source": "쿠팡/네이버쇼핑",
     "product_url": "https://www.coupang.com/np/search?q=창틀+틈새+청소+브러시",
-    "affiliate_url": "https://www.coupang.com/np/search?q=창틀+틈새+청소+브러시",
+    "affiliate_url": "https://link.coupang.com/a/eruI9htqTI",
     "price": 8900,
     "rating": 4.6,
     "review_count": 3200,
@@ -63,9 +63,10 @@
     "why_selected": "Before/After가 명확하고 가격이 낮음",
     "risk": "곰팡이 완전 제거 표현 금지",
     "risk_status": "PASS",
-    "human_approval": "PENDING",
+    "human_approval": "APPROVED",
     "decision": "APPROVE_CANDIDATE",
-    "decision_reason": "강력 추천. 사람 승인 요청."
+    "decision_reason": "강력 추천. 사람 승인 요청.",
+    "youtube_test_upload": "B12nGWnGPDI"
   },
   {
     "product_id": "P002",

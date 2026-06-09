@@ -22,17 +22,41 @@ class YouTubePublisher(PlatformPublisher):
     def is_configured(self) -> bool:
         return self.config.configured
 
-    def _build_service(self):
-        creds = Credentials(
-            token=None,
-            refresh_token=self.config.refresh_token,
-            token_uri="https://oauth2.googleapis.com/token",
-            client_id=self.config.client_id,
-            client_secret=self.config.client_secret,
-            scopes=SCOPES,
-        )
-        creds.refresh(Request())
-        return build("youtube", "v3", credentials=creds)
+    def _build_credentials(self) -> Credentials:
+        if self.config.token_file.is_file():
+            creds = Credentials.from_authorized_user_file(str(self.config.token_file), SCOPES)
+        else:
+            creds = Credentials(
+                token=None,
+                refresh_token=self.config.refresh_token,
+                token_uri="https://oauth2.googleapis.com/token",
+                client_id=self.config.client_id,
+                client_secret=self.config.client_secret,
+                scopes=SCOPES,
+            )
+        if creds.expired or not creds.valid:
+            creds.refresh(Request())
+            if self.config.token_file.is_file():
+                self.config.token_file.write_text(creds.to_json(), encoding="utf-8")
+        return creds
+
+    def verify(self) -> dict:
+        if not self.is_configured():
+            return {"ok": False, "error": "YouTube 미설정 (.youtube-token.json 또는 .env)"}
+        try:
+            yt = build("youtube", "v3", credentials=self._build_credentials())
+            resp = yt.channels().list(part="snippet", mine=True).execute()
+            items = resp.get("items", [])
+            if not items:
+                return {"ok": False, "error": "연결된 YouTube 채널 없음"}
+            ch = items[0]
+            return {
+                "ok": True,
+                "channel_id": ch["id"],
+                "channel_title": ch["snippet"]["title"],
+            }
+        except Exception as exc:  # noqa: BLE001
+            return {"ok": False, "error": str(exc)[:300]}
 
     def publish(
         self,
@@ -55,7 +79,7 @@ class YouTubePublisher(PlatformPublisher):
             return PublishResult(
                 platform=self.platform,
                 success=False,
-                error="YouTube OAuth 미설정 (.env 참고, clipcart auth youtube)",
+                error="YouTube OAuth 미설정 (clipcart auth youtube)",
             )
 
         if not video_path.exists():
@@ -66,7 +90,7 @@ class YouTubePublisher(PlatformPublisher):
             )
 
         try:
-            youtube = self._build_service()
+            youtube = build("youtube", "v3", credentials=self._build_credentials())
             body = {
                 "snippet": {
                     "title": title[:100],
@@ -75,7 +99,7 @@ class YouTubePublisher(PlatformPublisher):
                     "categoryId": "22",
                 },
                 "status": {
-                    "privacyStatus": "public",
+                    "privacyStatus": self.config.privacy_status,
                     "selfDeclaredMadeForKids": False,
                 },
             }
@@ -84,7 +108,9 @@ class YouTubePublisher(PlatformPublisher):
 
             response = None
             while response is None:
-                _, response = request.next_chunk()
+                status, response = request.next_chunk()
+                if status:
+                    pass  # upload progress
 
             video_id = response["id"]
             return PublishResult(
@@ -93,7 +119,7 @@ class YouTubePublisher(PlatformPublisher):
                 post_id=video_id,
                 post_url=f"https://www.youtube.com/shorts/{video_id}",
             )
-        except Exception as exc:  # noqa: BLE001 — API 오류 메시지 전달
+        except Exception as exc:  # noqa: BLE001
             return PublishResult(
                 platform=self.platform,
                 success=False,

@@ -12,6 +12,7 @@ from clipcart.config import (
 from clipcart.publishing.instagram import InstagramPublisher
 from clipcart.publishing.pinterest import PinterestPublisher
 from clipcart.publishing.tiktok import TikTokPublisher
+from clipcart.publishing.youtube import YouTubePublisher
 
 TIKTOK_API = "https://open.tiktokapis.com/v2"
 PINTEREST_API = "https://api.pinterest.com/v5"
@@ -22,7 +23,7 @@ def verify_all() -> dict[str, Any]:
     tt_cfg = load_tiktok_config()
     pin_cfg = load_pinterest_config()
 
-    result: dict[str, Any] = {}
+    result: dict[str, Any] = {"youtube_shorts": YouTubePublisher().verify()}
 
     ig_pub = InstagramPublisher(ig_cfg)
     if ig_cfg.configured:

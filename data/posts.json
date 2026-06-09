@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "post_id": "B12nGWnGPDI",
+    "product_id": "P001",
+    "platform": "youtube_shorts",
+    "post_url": "https://www.youtube.com/shorts/B12nGWnGPDI",
+    "published_at": "2026-06-09T11:42:00+00:00",
+    "status": "PUBLISHED",
+    "note": "pipeline test - logo placeholder, unlisted"
+  }
+]

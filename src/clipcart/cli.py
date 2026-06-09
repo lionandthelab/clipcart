@@ -110,12 +110,14 @@ def cmd_reject(product_ids: str) -> None:
     help="instagram_reels, tiktok, pinterest",
 )
 @click.option("--video-url", default=None, help="Instagram Reels용 공개 video URL")
+@click.option("--video-path", default=None, type=click.Path(exists=True), help="업로드할 mp4 경로")
 @click.option("--cover-url", default=None, help="Pinterest 비디오 Pin 커버 이미지 URL")
 def cmd_publish(
     product_id: str,
     dry_run: bool,
     platform: tuple[str, ...],
     video_url: str | None,
+    video_path: str | None,
     cover_url: str | None,
 ) -> None:
     """PUBLISH P001 — 플랫폼 게시 (기본 dry-run)."""
@@ -125,6 +127,7 @@ def cmd_publish(
         platforms=list(platform) if platform else None,
         video_url=video_url,
         cover_url=cover_url,
+        video_path=Path(video_path) if video_path else None,
     )
     _print_json(result)
     if result.get("status") == "BLOCKED":
@@ -181,26 +184,32 @@ def cmd_verify() -> None:
 @main.command("auth")
 @click.argument(
     "platform",
-    type=click.Choice(["instagram", "tiktok", "pinterest"]),
+    type=click.Choice(["instagram", "tiktok", "pinterest", "youtube"]),
 )
+@click.option("--credentials", default=None, help="YouTube: root의 JSON (SA 또는 client_secret)")
 @click.option("--app-id", envvar="META_APP_ID", help="Instagram: Meta App ID / Pinterest: App ID")
 @click.option("--app-secret", envvar="META_APP_SECRET", help="Instagram: Meta App Secret")
 @click.option("--client-key", envvar="TIKTOK_CLIENT_KEY")
 @click.option("--client-secret", envvar="TIKTOK_CLIENT_SECRET")
 @click.option("--pinterest-app-id", envvar="PINTEREST_APP_ID")
 @click.option("--pinterest-app-secret", envvar="PINTEREST_APP_SECRET")
+@click.option("--youtube-client-id", envvar="YOUTUBE_CLIENT_ID")
+@click.option("--youtube-client-secret", envvar="YOUTUBE_CLIENT_SECRET")
 @click.option("--save/--no-save", default=True, help=".env에 자동 저장")
 def cmd_auth(
     platform: str,
+    credentials: str | None,
     app_id: str | None,
     app_secret: str | None,
     client_key: str | None,
     client_secret: str | None,
     pinterest_app_id: str | None,
     pinterest_app_secret: str | None,
+    youtube_client_id: str | None,
+    youtube_client_secret: str | None,
     save: bool,
 ) -> None:
-    """OAuth 토큰 발급 (Instagram / TikTok / Pinterest)."""
+    """OAuth 토큰 발급 (Instagram / TikTok / Pinterest / YouTube)."""
     env_path = Path(".env")
     extra: dict[str, str] = {}
 
@@ -231,6 +240,26 @@ def cmd_auth(
         extra = setup_pinterest_oauth(pinterest_app_id, pinterest_app_secret)
         board = extra.get("pinterest_board_name", "")
         click.echo(f"Pinterest 연결: board={board} ({extra.get('PINTEREST_BOARD_ID', '')})")
+
+    elif platform == "youtube":
+        from clipcart.auth.youtube_auth import setup_youtube
+
+        extra = setup_youtube(
+            credentials_path=credentials,
+            client_id=youtube_client_id,
+            client_secret=youtube_client_secret,
+        )
+        if extra.get("type") == "service_account":
+            click.echo(f"서비스 계정 확인: {extra.get('client_email')} (project: {extra.get('project_id')})")
+            click.echo(extra.get("note", ""))
+            if extra.get("youtube_ok") == "false":
+                click.echo(f"YouTube API 테스트: {extra.get('error', '')[:200]}")
+        if extra.get("oauth_required") == "true":
+            click.echo(extra.get("oauth_error", ""), err=True)
+            sys.exit(1)
+        ch = extra.get("youtube_channel_title")
+        if ch:
+            click.echo(f"YouTube 채널 연결: {ch} ({extra.get('youtube_channel_id', '')})")
 
     _print_json({k: v for k, v in extra.items() if not k.endswith("_name") and k != "instagram_page"})
     if save:

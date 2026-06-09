@@ -8,6 +8,7 @@ from clipcart.config import DEFAULT_DISCLOSURE, INBOX_DIR
 from clipcart.publishing.instagram import InstagramPublisher
 from clipcart.publishing.pinterest import PinterestPublisher
 from clipcart.publishing.tiktok import TikTokPublisher
+from clipcart.publishing.youtube import YouTubePublisher
 from clipcart.storage import load_posts, load_products, save_posts
 
 DEFAULT_PLATFORMS = ["instagram_reels", "tiktok", "pinterest"]
@@ -38,6 +39,7 @@ def publish_product(
     platforms: list[str] | None = None,
     video_url: str | None = None,
     cover_url: str | None = None,
+    video_path: Path | None = None,
 ) -> dict[str, Any]:
     products = load_products()
     product = next((p for p in products if p.get("product_id") == product_id), None)
@@ -51,12 +53,12 @@ def publish_product(
             "human_action": f"APPROVE {product_id}",
         }
 
-    video_path = INBOX_DIR / f"{product_id}.mp4"
-    if not video_path.exists() and not video_url:
+    video_file = video_path or (INBOX_DIR / f"{product_id}.mp4")
+    if not video_file.exists() and not video_url:
         return {
             "status": "FAILED",
-            "reason": f"영상 없음: {video_path}",
-            "human_action": f"VIDEO READY {product_id} path={video_path}",
+            "reason": f"영상 없음: {video_file}",
+            "human_action": f"VIDEO READY {product_id} path={INBOX_DIR / f'{product_id}.mp4'}",
         }
 
     title = _build_title(product)
@@ -68,19 +70,22 @@ def publish_product(
     ig = InstagramPublisher()
     tt = TikTokPublisher()
     pin = PinterestPublisher()
+    yt = YouTubePublisher()
 
     results = []
     for name in selected:
-        if name == "instagram_reels":
+        if name == "youtube_shorts":
+            result = yt.publish(video_file, title, caption, tags, dry_run=dry_run)
+        elif name == "instagram_reels":
             if video_url:
                 result = ig.publish_reel(video_url, caption, dry_run=dry_run)
             else:
-                result = ig.publish(video_path, title, caption, tags, dry_run=dry_run)
+                result = ig.publish(video_file, title, caption, tags, dry_run=dry_run)
         elif name == "tiktok":
-            result = tt.publish(video_path, title, caption, tags, dry_run=dry_run)
+            result = tt.publish(video_file, title, caption, tags, dry_run=dry_run)
         elif name == "pinterest":
             result = pin.publish(
-                video_path,
+                video_file,
                 title,
                 caption,
                 tags,
