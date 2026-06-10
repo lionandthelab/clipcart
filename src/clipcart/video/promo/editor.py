@@ -26,7 +26,6 @@ from moviepy import (
 )
 
 from clipcart.config import PROJECT_ROOT
-from clipcart.coupang import COUPANG_DISCLOSURE
 from clipcart.video import sfx
 from clipcart.video.promo import sources
 
@@ -349,9 +348,9 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             overlays.append(_overlay(png, est, min(1.1, beat_dur * 0.5), fi=0.05, fo=0.16))
             sfx_cues.append((sfx.pop(), est, 0.5))
 
-        # CTA disclosure (baked, bottom)
+        # CTA disclosure (baked, bottom) — 비트가 들고 있는 소스별 고지를 그린다
         if b.get("disclosure"):
-            disc = _draw_block(COUPANG_DISCLOSURE, _FONT_REG, int(0.70 * H), int(0.78 * H),
+            disc = _draw_block(b["disclosure"], _FONT_REG, int(0.70 * H), int(0.78 * H),
                                max_size=34, min_size=24, stroke=3, color=DIM)
             overlays.append(_overlay(disc, t + 0.1, beat_dur - 0.15, fi=0.1, fo=0.1))
 

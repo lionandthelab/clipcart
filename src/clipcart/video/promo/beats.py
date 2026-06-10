@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from clipcart.coupang import COUPANG_DISCLOSURE
+from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
 from clipcart.video.promo.broll import get_broll
 
@@ -88,7 +88,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "caption": "링크는 고정 댓글에 ▼",
             "source": "product",
             "color": "white",
-            "disclosure": COUPANG_DISCLOSURE,
+            "disclosure": disclosure_for(product),
         },
     ]
     return beats

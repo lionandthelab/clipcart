@@ -7,7 +7,7 @@ from datetime import date
 from typing import Any
 
 from clipcart.config import DEFAULT_DISCLOSURE
-from clipcart.coupang import COUPANG_DISCLOSURE
+from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
 
 
@@ -62,9 +62,10 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
     price = product["price"]
     rocket = product.get("is_rocket", False)
 
-    disclosure_full = COUPANG_DISCLOSURE
+    src_disclosure = disclosure_for(product)
+    disclosure_full = src_disclosure
     if DEFAULT_DISCLOSURE and DEFAULT_DISCLOSURE not in disclosure_full:
-        disclosure_full = f"{COUPANG_DISCLOSURE}\n{DEFAULT_DISCLOSURE}"
+        disclosure_full = f"{src_disclosure}\n{DEFAULT_DISCLOSURE}"
 
     accent, hook_rest = _split_hook(niche["hook"])
 
@@ -118,7 +119,7 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
             "zoom": "in",
             "narration": f"물론 단점도 있어요. {niche['downside']}. 그래도 끌린다면, 링크는 고정 댓글에 있어요.",
             "rate": "+24%",
-            "disclosure": COUPANG_DISCLOSURE,
+            "disclosure": src_disclosure,
         },
     ]
 
@@ -139,10 +140,11 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
     return {
         "title": title,
         "description": description,
+        "disclosure": src_disclosure,
         "tags": list(profile.get("tags") or []),
         "hashtags": profile.get("hashtags") or [],
         "pinned_comment": (
-            f"제품 보러가기 → {product['affiliate_url']}\n{COUPANG_DISCLOSURE}"
+            f"제품 보러가기 → {product['affiliate_url']}\n{src_disclosure}"
         ),
         "scenes": scenes,
         "thumbnail_line1": accent.rstrip(","),

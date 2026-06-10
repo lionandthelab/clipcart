@@ -37,9 +37,11 @@ def check_texts(creative: dict[str, Any]) -> list[str]:
         if banned in blob:
             issues.append(f"금지 표현 포함: '{banned}'")
     description = creative.get("description", "")
-    if COUPANG_DISCLOSURE not in description:
-        issues.append("설명란에 쿠팡 파트너스 고지 누락")
-    elif description.find(COUPANG_DISCLOSURE) > 250:
+    # creative가 선언한 소스별 고지를 기준으로 검사(쿠팡/알리 공통). 미지정이면 쿠팡 고지.
+    required = creative.get("disclosure") or COUPANG_DISCLOSURE
+    if required not in description:
+        issues.append("설명란에 어필리에이트 의무 고지 누락")
+    elif description.find(required) > 250:
         issues.append("고지 문구가 설명란 첫 부분(더보기 위)에 없음 — 공정위 요건")
     if not any(s.get("disclosure") for s in creative.get("scenes", [])):
         issues.append("영상 내 고지 장면 누락")
