@@ -22,6 +22,13 @@ def make_promo_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
     product_png = OUTBOX_DIR / "work" / pid / "product.png"
     product_png.parent.mkdir(parents=True, exist_ok=True)
 
+    # 실데이터 리뷰 요약 카드(평점/주문수) — 있으면 CTA 장면에 캡처풍으로 노출
+    from clipcart.video.promo.review_card import compose_review_card
+
+    card = compose_review_card(product, product_png.parent / "review_card.png")
+    if card:
+        product = {**product, "review_card_path": str(card)}
+
     # 메타데이터(제목/설명/태그/고정댓글/썸네일 문구)는 기존 카피라이터 재사용
     creative = build_creative(product, load_profile())
     beats = build_beats(product)
