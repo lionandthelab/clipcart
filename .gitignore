@@ -19,6 +19,7 @@ outbox/work/
 outbox/publishing/*.mp4
 outbox/publishing/*.jpg
 tools/
+*TEMP_MPY*
 
 # IDE
 .idea/

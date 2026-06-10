@@ -28,9 +28,18 @@ clipcart daily --live
 
 1. 쿠팡 파트너스 API로 상품 선정 (니치 풀 순환, 중복 방지, 점수화)
 2. 대본/제목/설명 생성 (`data/format_profile.json` 흥행 포맷 모방)
-3. 영상 렌더링 (edge-tts 내레이션 + ffmpeg 합성, 1080x1920)
+3. 영상 렌더링 — **marketing_promo 엔진**(`src/clipcart/video/promo/`, steward-lab video_engine 기반)
 4. 자동 컴플라이언스 검수 (금지 표현, 고지 문구·위치, 길이, 세로 비율) — **실패 시 게시 차단**
 5. YouTube 업로드 (public) + 기록 (`data/posts.json`, `logs/publishing.log`)
+
+### 영상 엔진 (`CLIPCART_ENGINE`)
+
+* `promo` (기본) — 3단 레이아웃(상단 훅+광고배너 / 중앙 미디어 / 하단 자막).
+  * 미디어: 불편함·스토리텔링 장면은 **Pexels 실영상** 우선(없으면 Gemini 생성 이미지), 제품 장면은 **쿠팡 제품 이미지**.
+  * 내레이션: **Typecast 한국어**(기본 음성 진희 `tc_6731b2b2478a48710ecc9158`, env `CLIPCART_TTS_VOICE_ID`로 교체, 템포 `CLIPCART_TTS_TEMPO` 기본 1.12). 실패 시 edge-tts 폴백.
+  * SFX(휘익/팝/라이저/임팩트) + 로고 아웃트로. BGM은 저작권 위험으로 미사용.
+* `kinetic` — 경량 Pillow 카라오케 엔진(폴백, 키 없을 때).
+* 키: `.env`의 `TYPECAST_API_KEY`, `PEXELS_API_KEY`, `GEMINI_API_KEY` (steward-lab .env에서 가져옴). 키 없거나 promo 실패 시 자동 kinetic 폴백.
 
 스케줄: 매일 아침 Windows 작업 스케줄러 07:20 (`scripts/daily_task.ps1`) + Claude 크론 07:10.
 같은 날 중복 실행은 파이프라인이 자동 스킵한다.

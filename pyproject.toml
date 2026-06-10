@@ -19,6 +19,10 @@ dependencies = [
     "edge-tts>=7.0",
     "pillow>=11.0",
     "imageio-ffmpeg>=0.6",
+    "moviepy>=2.0",
+    "typecast-python>=0.1",
+    "google-genai>=1.0",
+    "numpy>=1.26",
 ]
 
 [project.scripts]
