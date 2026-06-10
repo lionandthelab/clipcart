@@ -59,12 +59,19 @@ def _color(name: str):
 # --------------------------------------------------------------------------- #
 # Sourcing
 # --------------------------------------------------------------------------- #
-def _try_one(pex, token: str, index: int) -> tuple[str | None, str | None]:
+def _try_one(pex, token: str, index: int, product_img_path: str = "") -> tuple[str | None, str | None]:
     """단일 source 토큰 시도 → (path, kind) 또는 (None, None)."""
     if token == "product":
         return None, None  # product는 호출부에서 최종 폴백으로만
+    if token.startswith("file:"):
+        p = token[5:]
+        return (p, "image") if p and Path(p).exists() else (None, None)
+    if token.startswith("productshot:"):
+        g = sources.gemini_product_shot(product_img_path, token[12:], index)
+        return (g, "image") if g else (None, None)
     if token.startswith("gemini:"):
-        g = sources.gemini_still(token[7:], "cinematic", index)
+        # candid: 사람/손 없는 실사 폰카풍 (AI티 방지)
+        g = sources.gemini_still(token[7:], "candid", index)
         return (g, "image") if g else (None, None)
     if token.startswith("pexels:"):
         q = token[7:]
@@ -84,7 +91,7 @@ def _resolve_media(pex, tokens: list[str], product_img_path: str, index: int) ->
     for tok in tokens:
         if tok == "product":
             return product_img_path, "product"
-        p, k = _try_one(pex, tok, index)
+        p, k = _try_one(pex, tok, index, product_img_path)
         if p:
             return p, k
     return product_img_path, "product"
@@ -318,10 +325,24 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
         beat_dur = adur + post
         col = _color(b.get("color", "white"))
 
-        # media — source 후보 + fallback 순서로 해결
-        tokens = [b["source"]] + ([b["fallback"]] if b.get("fallback") else [])
-        path, kind = _resolve_media(pex, tokens, product_img_path, 0)
-        media_segs.append(_media_clip(path, kind, beat_dur))
+        # media — 멀티샷(shots)이면 비트 시간을 나눠 퀵컷, 아니면 단일 소스
+        shots = b.get("shots")
+        if shots:
+            # 샷당 최소 0.8초 확보 (짧으면 샷 수 축소)
+            n = max(1, min(len(shots), int(beat_dur // 0.8) or 1))
+            sub_dur = beat_dur / n
+            sub_clips = []
+            for si in range(n):
+                tokens = [shots[si]] + ([b["fallback"]] if b.get("fallback") else [])
+                path, kind = _resolve_media(pex, tokens, product_img_path, si)
+                sub_clips.append(_media_clip(path, kind, sub_dur))
+                if si > 0:
+                    sfx_cues.append((sfx.whoosh(), t + si * sub_dur, 0.35))
+            media_segs.append(concatenate_videoclips(sub_clips, method="chain").with_duration(beat_dur))
+        else:
+            tokens = [b["source"]] + ([b["fallback"]] if b.get("fallback") else [])
+            path, kind = _resolve_media(pex, tokens, product_img_path, 0)
+            media_segs.append(_media_clip(path, kind, beat_dur))
 
         # SFX: whoosh on cut, impact on hook/emphasis
         if i > 0:
