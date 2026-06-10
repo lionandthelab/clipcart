@@ -56,6 +56,10 @@ def used_coupang_ids() -> set[str]:
     return {str(e["coupang_product_id"]) for e in load_history() if e.get("coupang_product_id")}
 
 
+def used_aliexpress_ids() -> set[str]:
+    return {str(e["aliexpress_product_id"]) for e in load_history() if e.get("aliexpress_product_id")}
+
+
 def used_name_keys() -> set[str]:
     return {name_key(e["product_name"]) for e in load_history() if e.get("product_name")}
 
