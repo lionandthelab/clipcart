@@ -134,6 +134,20 @@ def cmd_publish(
         sys.exit(1)
 
 
+@main.command("daily")
+@click.option("--live/--dry-run", default=False, help="--live면 YouTube에 실제 게시")
+@click.option("--force", is_flag=True, help="오늘 이미 게시했어도 다시 실행")
+@click.option("--keyword", default=None, help="특정 니치 키워드 강제 선택")
+def cmd_daily(live: bool, force: bool, keyword: str | None) -> None:
+    """전자동 데일리 파이프라인: 선정→제작→검수→업로드."""
+    from clipcart.pipeline.daily import run_daily
+
+    result = run_daily(live=live, force=force, keyword=keyword)
+    _print_json(result)
+    if result.get("status") in {"FAILED", "BLOCKED"}:
+        sys.exit(1)
+
+
 @main.command("status")
 def cmd_status() -> None:
     """플랫폼 .env 설정 상태."""

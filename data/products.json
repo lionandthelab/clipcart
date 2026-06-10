@@ -407,5 +407,47 @@
     "human_approval": "PENDING",
     "decision": "APPROVE_CANDIDATE",
     "decision_reason": "테스트 후보. 우선순위 낮음."
+  },
+  {
+    "product_id": "CP8843938097",
+    "coupang_product_id": "8843938097",
+    "created_at": "2026-06-10",
+    "status": "PUBLISHED",
+    "product_name": "앞날창창 주방 싱크대 스테인리스 개수대 배수구 거름망 11cm",
+    "display_name": "배수구 거름망",
+    "category": "욕실",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&pageKey=8843938097&itemId=25776788278&vendorItemId=93670325982&traceid=V0-153-539c9dc71b0c9b1b&requestid=20260610122152949301873121&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eszNO9B95g",
+    "price": 13380,
+    "is_rocket": false,
+    "image_url": "https://ads-partners.coupang.com/image1/94TW6RT04lrNJ3KL92C4bypLeQB2lCYYn5fVVqfIbPIYk32jXCbnNPT6JxUOwSQqJ62tlvU_TLvdCLv1WT2F842VI7pwmFcrQxZ8FrGGoo6nV34UNEotVh6B5n0oGek1v-qeMojy0CXwZ6EXi0IZjoE-b-71nFSn7srV9f5WSZcZ0v9IGR948YAvYLTlz4OndHctjzG9W8vq39VC0hC9ENHa7cQCtyO0xMFLX4Y1DxxDMvqZLvoxQ-bCTvhvFGUu-BE2cy5fwYhhcLJMaSSDsZYUhwV4HVfa-2Jm2xyPMVUoVzzdgPZwgcF2VmLXhOM4YvXYqg==",
+    "score": 86,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "배수구 거름망 스테인리스",
+      "category": "욕실",
+      "title_keyword": "배수구 거름망",
+      "old_way": "배수구 머리카락 손으로 빼기",
+      "hook": "배수구 청소, 아직 손으로 하세요?",
+      "problem": "샤워하고 나면 배수구에 머리카락이 한가득. 손으로 빼자니 매번 곤욕이죠.",
+      "usage": "배수구 위에 올려두기만 하면 머리카락과 찌꺼기를 걸러줍니다. 가득 차면 들어서 탈탈 비우면 끝.",
+      "benefit": "손 안 대고 휴지로 한 번에 비울 수 있어서 배수구 막힘 걱정이 확 줄어요.",
+      "downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
+      "target": "배수구 머리카락 치우는 게 곤욕인 사람"
+    },
+    "problem": "샤워하고 나면 배수구에 머리카락이 한가득. 손으로 빼자니 매번 곤욕이죠.",
+    "video_angle": "배수구 청소, 아직 손으로 하세요?",
+    "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8843938097.mp4",
+    "post_url": "https://www.youtube.com/shorts/C9_x6RbEZuw"
   }
 ]

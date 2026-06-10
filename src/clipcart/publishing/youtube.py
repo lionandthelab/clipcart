@@ -58,6 +58,18 @@ class YouTubePublisher(PlatformPublisher):
         except Exception as exc:  # noqa: BLE001
             return {"ok": False, "error": str(exc)[:300]}
 
+    def set_thumbnail(self, video_id: str, thumbnail_path: Path) -> bool:
+        """커스텀 썸네일 업로드 (채널 미인증 등으로 실패해도 게시는 유지)."""
+        try:
+            youtube = build("youtube", "v3", credentials=self._build_credentials())
+            youtube.thumbnails().set(
+                videoId=video_id,
+                media_body=MediaFileUpload(str(thumbnail_path), mimetype="image/jpeg"),
+            ).execute()
+            return True
+        except Exception:  # noqa: BLE001
+            return False
+
     def publish(
         self,
         video_path: Path,
@@ -96,7 +108,7 @@ class YouTubePublisher(PlatformPublisher):
                     "title": title[:100],
                     "description": caption[:5000],
                     "tags": tags or [],
-                    "categoryId": "22",
+                    "categoryId": "26",  # Howto & Style — 생활용품 리뷰에 적합
                 },
                 "status": {
                     "privacyStatus": self.config.privacy_status,

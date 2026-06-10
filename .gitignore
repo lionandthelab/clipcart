@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 venv/
 .env
+gen-lang-client-*.json
 .gen-lang-client-*.json
 client_secret*.json
 .youtube_client_secret.json
@@ -14,6 +15,10 @@ src/*.egg-info/
 # Data & media (keep structure, ignore large files)
 inbox/videos/*.mp4
 logs/*.log
+outbox/work/
+outbox/publishing/*.mp4
+outbox/publishing/*.jpg
+tools/
 
 # IDE
 .idea/
