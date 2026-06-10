@@ -68,6 +68,23 @@ posts.append({
 save_posts(posts)
 upsert_product({**product, "status": "PUBLISHED", "post_url": res.post_url})
 
+from datetime import date as _date
+
+from clipcart.research import history
+
+history.record({
+    "date": _date.today().isoformat(),
+    "post_id": res.post_id,
+    "product_id": pid,
+    "coupang_product_id": product.get("coupang_product_id"),
+    "product_name": product.get("product_name"),
+    "niche_keyword": product.get("niche", {}).get("keyword"),
+    "category": product.get("category"),
+    "title": creative["title"],
+    "post_url": res.post_url,
+    "affiliate_url": product["affiliate_url"],
+})
+
 print(json.dumps({
     "new_post_url": res.post_url,
     "new_video_id": res.post_id,

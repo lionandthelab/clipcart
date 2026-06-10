@@ -148,6 +148,33 @@ def cmd_daily(live: bool, force: bool, keyword: str | None) -> None:
         sys.exit(1)
 
 
+@main.command("history")
+@click.option("--limit", default=30, help="최근 N건 표시")
+def cmd_history(limit: int) -> None:
+    """업로드 히스토리(중복 방지 원장) 조회."""
+    from clipcart.research.history import load_history
+
+    items = load_history()
+    rows = items[-limit:]
+    _print_json(
+        {
+            "total_uploads": len(items),
+            "unique_products": len({i.get("coupang_product_id") for i in items if i.get("coupang_product_id")}),
+            "unique_keywords": len({i.get("niche_keyword") for i in items if i.get("niche_keyword")}),
+            "recent": [
+                {
+                    "date": i.get("date"),
+                    "product_name": i.get("product_name"),
+                    "niche_keyword": i.get("niche_keyword"),
+                    "title": i.get("title"),
+                    "post_url": i.get("post_url"),
+                }
+                for i in rows
+            ],
+        }
+    )
+
+
 @main.command("status")
 def cmd_status() -> None:
     """플랫폼 .env 설정 상태."""

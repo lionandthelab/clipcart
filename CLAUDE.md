@@ -44,6 +44,16 @@ clipcart daily --live
 스케줄: 매일 아침 Windows 작업 스케줄러 07:20 (`scripts/daily_task.ps1`) + Claude 크론 07:10.
 같은 날 중복 실행은 파이프라인이 자동 스킵한다.
 
+### 중복 방지 (히스토리)
+
+게시 성공분은 `data/history.json`(append-only 원장)에 기록된다. 다음 선정 시 이 원장을 기준으로:
+
+* 같은 **쿠팡 상품ID** 재업로드 차단
+* 같은 **상품명**(정규화 키) 재업로드 차단 — 다른 판매자의 동일 상품도 차단
+* 같은 **니치 키워드(문제 유형)**는 `CLIPCART_KEYWORD_GAP_DAYS`(기본 10일) 이내 재사용 회피 — 가장 오래 안 쓴 니치 우선
+
+조회: `clipcart history`. (선정 커서는 `data/niche_state.json`, 권위 원장은 `data/history.json`.)
+
 전자동 모드에서도 변하지 않는 것:
 
 * 1.2 금지 행동 전부

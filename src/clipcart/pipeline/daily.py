@@ -149,6 +149,24 @@ def run_daily(live: bool = False, force: bool = False, keyword: str | None = Non
     save_posts(posts)
     upsert_product({**product, "status": "PUBLISHED", "post_url": publish_result.post_url})
 
+    # 권위 있는 업로드 히스토리 기록(다음 선정 시 상품/이름/문제 중복 차단)
+    from clipcart.research import history
+
+    history.record(
+        {
+            "date": date.today().isoformat(),
+            "post_id": publish_result.post_id,
+            "product_id": product["product_id"],
+            "coupang_product_id": product.get("coupang_product_id"),
+            "product_name": product.get("product_name"),
+            "niche_keyword": product.get("niche", {}).get("keyword"),
+            "category": product.get("category"),
+            "title": creative["title"],
+            "post_url": publish_result.post_url,
+            "affiliate_url": product["affiliate_url"],
+        }
+    )
+
     result = {
         "status": "PUBLISHED",
         "product_id": product["product_id"],

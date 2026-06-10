@@ -15,6 +15,7 @@ from urllib.parse import parse_qs, urlparse
 
 from clipcart.config import DATA_DIR
 from clipcart.coupang import create_deeplinks, search_products
+from clipcart.research import history
 from clipcart.research.niches import NICHES, PRODUCT_EXCLUDE_KEYWORDS
 from clipcart.research.scoring import ScoreInput, score_product
 
@@ -84,12 +85,16 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
     sub_id = os.getenv("COUPANG_SUB_ID", "") or None
     state = _load_state()
     used_keywords = set(state.get("used_keywords", []))
-    used_product_ids = set(state.get("used_product_ids", []))
+    # 중복 차단: niche_state(시도 가드) + 히스토리(실제 업로드, 권위)
+    used_product_ids = set(state.get("used_product_ids", [])) | history.used_coupang_ids()
+    used_names = history.used_name_keys()
 
-    niche_queue = [n for n in NICHES if n["keyword"] not in used_keywords]
-    if not niche_queue:  # 풀 소진 시 처음부터 다시 (상품 중복은 계속 차단)
-        niche_queue = list(NICHES)
-        used_keywords = set()
+    # 니치 순서: 최근 덜 쓴 것 우선(같은 문제 반복 방지). GAP일 이내 사용분은 뒤로.
+    last_used = history.keyword_last_used()
+    gap_days = int(os.getenv("CLIPCART_KEYWORD_GAP_DAYS", "10"))
+    ranked = sorted(NICHES, key=lambda n: (last_used.get(n["keyword"], ""), n["keyword"]))
+    fresh = [n for n in ranked if history.days_since(last_used.get(n["keyword"], "")) >= gap_days]
+    niche_queue = fresh or ranked
     if force_keyword:
         niche_queue = [n for n in NICHES if n["keyword"] == force_keyword] or niche_queue
 
@@ -107,6 +112,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
             if PRICE_MIN <= int(it.get("productPrice") or 0) <= PRICE_MAX
             and not _is_excluded(it.get("productName", ""))
             and str(it.get("productId")) not in used_product_ids
+            and history.name_key(it.get("productName", "")) not in used_names
             and it.get("productImage")
             and it.get("productUrl")
         ]
@@ -144,7 +150,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
         }
 
         state["used_keywords"] = sorted(used_keywords | {niche["keyword"]})
-        state["used_product_ids"] = sorted(used_product_ids | {str(item["productId"])})
+        state["used_product_ids"] = sorted(set(state.get("used_product_ids", [])) | {str(item["productId"])})
         state["last_selected"] = {
             "date": date.today().isoformat(),
             "product_id": product["product_id"],
