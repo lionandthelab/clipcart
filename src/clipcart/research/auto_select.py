@@ -16,7 +16,7 @@ from urllib.parse import parse_qs, urlparse
 from clipcart.config import DATA_DIR
 from clipcart.coupang import create_deeplinks, search_products
 from clipcart.research import history
-from clipcart.research.niches import NICHES, PRODUCT_EXCLUDE_KEYWORDS
+from clipcart.research.niches import NICHES, PRODUCT_EXCLUDE_KEYWORDS, product_type_ok
 from clipcart.research.scoring import ScoreInput, score_product
 
 NICHE_STATE_FILE = DATA_DIR / "niche_state.json"
@@ -111,6 +111,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
             for it in items
             if PRICE_MIN <= int(it.get("productPrice") or 0) <= PRICE_MAX
             and not _is_excluded(it.get("productName", ""))
+            and product_type_ok(it.get("productName", ""), niche["keyword"])
             and str(it.get("productId")) not in used_product_ids
             and history.name_key(it.get("productName", "")) not in used_names
             and it.get("productImage")

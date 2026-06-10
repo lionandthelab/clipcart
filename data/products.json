@@ -449,5 +449,47 @@
     "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8843938097.mp4",
     "post_url": "https://www.youtube.com/shorts/-UcAOFZZIjI"
+  },
+  {
+    "product_id": "CP8520017991",
+    "coupang_product_id": "8520017991",
+    "created_at": "2026-06-10",
+    "status": "PUBLISHED",
+    "product_name": "대쉬 틈세척 틈새브러쉬",
+    "display_name": "가스레인지 틈새 커버",
+    "category": "주방",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=8520017991&itemId=24724274377&vendorItemId=91678595392&traceid=V0-153-80e097194e58c141&requestid=20260610182816188287927113&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/esZY87avoy",
+    "price": 10800,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/G4XwYUFS-6QXK7ACG7I1vDgATL6UEFA6pg9UCXDu5Fzo__xQMYKY8LBPMmNf9PQWnoO-fYLmRmGibjfZrb8qOdPTYknupeRQ1yY-b5zx-EBtHzIU52qDOsY0TzZ8wJz7Gyxr2qgcANGD2DQue-o9K1J-WR6rNindddcMXd9lDFqIOV38dXNZPB3HGOKjrQ-xWEkwDoqIodBTmxGcyf74OaV_KQQ4CfmL-iJVDr6LMuXLOZRD5cXk6sfEbouUyoh8kHocUyk67Ot70oHGU4Ha9eldpsKlfdcR9X9pbxwo25lSqgp0fiSAU-XPUcGLTsTyUDIP9AJCEHc5V-vc",
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "가스레인지 틈새 커버 실리콘",
+      "category": "주방",
+      "title_keyword": "가스레인지 틈새 커버",
+      "old_way": "틈에 낀 음식물 이쑤시개로 파기",
+      "hook": "가스레인지 옆 틈, 그 사이로 다 떨어져요",
+      "problem": "가스레인지와 싱크대 사이 틈으로 국물이며 부스러기가 떨어져서 닦을 수도 없죠.",
+      "usage": "틈 위에 올려 길이에 맞게 잘라 덮기만 하면 이물질이 못 들어갑니다.",
+      "benefit": "틈새 대청소를 할 일이 없어져요. 더러워지면 커버만 닦으면 끝.",
+      "downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
+      "target": "주방 틈새 청소를 포기한 사람"
+    },
+    "problem": "가스레인지와 싱크대 사이 틈으로 국물이며 부스러기가 떨어져서 닦을 수도 없죠.",
+    "video_angle": "가스레인지 옆 틈, 그 사이로 다 떨어져요",
+    "known_downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8520017991.mp4",
+    "post_url": "https://www.youtube.com/shorts/J2tUYoArTWE"
   }
 ]
