@@ -128,6 +128,7 @@ def run_daily(live: bool = False, force: bool = False, keyword: str | None = Non
         return result
 
     thumbnail_set = yt.set_thumbnail(publish_result.post_id, thumb_path)
+    comment_id = yt.post_comment(publish_result.post_id, creative["pinned_comment"])
 
     now = datetime.now(timezone.utc).isoformat()
     posts = load_posts()
@@ -142,6 +143,7 @@ def run_daily(live: bool = False, force: bool = False, keyword: str | None = Non
             "title": creative["title"],
             "affiliate_url": product["affiliate_url"],
             "thumbnail_set": thumbnail_set,
+            "comment_id": comment_id,
         }
     )
     save_posts(posts)
@@ -156,10 +158,10 @@ def run_daily(live: bool = False, force: bool = False, keyword: str | None = Non
         "post_url": publish_result.post_url,
         "affiliate_url": product["affiliate_url"],
         "thumbnail_set": thumbnail_set,
-        "pinned_comment_suggestion": creative["pinned_comment"],
+        "comment_id": comment_id,
         "manual_steps": [
             "YouTube Studio에서 '유료 프로모션 포함' 체크 (API 설정 불가)",
-            "고정댓글로 pinned_comment_suggestion 등록",
+            "자동 등록된 링크 댓글을 고정(핀)으로 설정 (핀 고정은 API 미지원)",
         ],
     }
     _log(result)

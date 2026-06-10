@@ -10,7 +10,10 @@ from googleapiclient.http import MediaFileUpload
 from clipcart.config import YouTubeConfig, load_youtube_config
 from clipcart.publishing.base import PlatformPublisher, PublishResult
 
-SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+SCOPES = [
+    "https://www.googleapis.com/auth/youtube.upload",
+    "https://www.googleapis.com/auth/youtube.force-ssl",  # 댓글 작성/메타데이터 수정
+]
 
 
 class YouTubePublisher(PlatformPublisher):
@@ -57,6 +60,47 @@ class YouTubePublisher(PlatformPublisher):
             }
         except Exception as exc:  # noqa: BLE001
             return {"ok": False, "error": str(exc)[:300]}
+
+    def post_comment(self, video_id: str, text: str) -> str | None:
+        """영상에 채널 소유자 댓글 작성. 성공 시 comment id (핀 고정은 API 미지원 — Studio에서 한 번 클릭)."""
+        try:
+            youtube = build("youtube", "v3", credentials=self._build_credentials())
+            resp = (
+                youtube.commentThreads()
+                .insert(
+                    part="snippet",
+                    body={
+                        "snippet": {
+                            "videoId": video_id,
+                            "topLevelComment": {"snippet": {"textOriginal": text}},
+                        }
+                    },
+                )
+                .execute()
+            )
+            return resp.get("id")
+        except Exception:  # noqa: BLE001
+            return None
+
+    def update_metadata(self, video_id: str, title: str, description: str, tags: list[str]) -> bool:
+        """게시된 영상의 제목/설명/태그 수정 (categoryId 필수 재포함)."""
+        try:
+            youtube = build("youtube", "v3", credentials=self._build_credentials())
+            youtube.videos().update(
+                part="snippet",
+                body={
+                    "id": video_id,
+                    "snippet": {
+                        "title": title[:100],
+                        "description": description[:5000],
+                        "tags": tags,
+                        "categoryId": "26",
+                    },
+                },
+            ).execute()
+            return True
+        except Exception:  # noqa: BLE001
+            return False
 
     def set_thumbnail(self, video_id: str, thumbnail_path: Path) -> bool:
         """커스텀 썸네일 업로드 (채널 미인증 등으로 실패해도 게시는 유지)."""
