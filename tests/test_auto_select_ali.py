@@ -28,6 +28,11 @@ def _patch_clean_history(monkeypatch):
     monkeypatch.setattr(sel.history, "keyword_last_used", lambda: {})
     monkeypatch.setattr(sel, "_load_state", lambda: {"used_keywords": [], "used_product_ids": []})
     monkeypatch.setattr(sel, "_save_state", lambda state: None)
+    # 선택된 제품의 제휴링크는 link.generate로 만든다(제품별 딥링크)
+    monkeypatch.setattr(
+        sel, "generate_affiliate_links",
+        lambda urls, tracking_id=None: [{"source_value": urls[0], "promotion_link": "https://s.click.aliexpress.com/e/_GEN"}],
+    )
 
 
 def test_selects_valid_candidate_and_maps_fields(monkeypatch):
@@ -44,7 +49,7 @@ def test_selects_valid_candidate_and_maps_fields(monkeypatch):
     assert product["aliexpress_product_id"] == "1005"
     assert product["product_id"] == "AE1005"
     assert product["price"] == 6900
-    assert product["affiliate_url"].startswith("https://s.click.aliexpress.com/")
+    assert product["affiliate_url"] == "https://s.click.aliexpress.com/e/_GEN"
     assert product["image_url"] == "https://img/x.jpg"
     assert product["niche"]["keyword"] == kw
     assert "is_rocket" not in product  # 알리는 로켓배송 아님 → 배송 과장 금지

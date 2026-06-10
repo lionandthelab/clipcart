@@ -15,7 +15,7 @@ import os
 from datetime import date
 from typing import Any
 
-from clipcart.aliexpress import query_products
+from clipcart.aliexpress import generate_affiliate_links, query_products
 from clipcart.config import DATA_DIR
 from clipcart.research import history
 from clipcart.research.niches import NICHES, PRODUCT_EXCLUDE_KEYWORDS, product_type_ok
@@ -86,8 +86,26 @@ def _derive_score(item: dict[str, Any]) -> Any:
     )
 
 
-def _affiliate_url(item: dict[str, Any]) -> str:
-    return item.get("promotion_link") or item.get("product_detail_url") or ""
+def _has_link(item: dict[str, Any]) -> bool:
+    return bool(item.get("product_detail_url") or item.get("promotion_link"))
+
+
+def _resolve_affiliate_link(item: dict[str, Any], tracking_id: str | None) -> str:
+    """선택된 제품의 제품별 딥 제휴링크를 link.generate로 생성.
+
+    product.query의 promotion_link는 제품 무관 generic일 수 있어, detail_url로
+    제품별 추적 링크를 따로 만든다. 실패 시 query 링크/원본 URL로 폴백.
+    """
+    detail = item.get("product_detail_url") or ""
+    if detail:
+        try:
+            links = generate_affiliate_links([detail], tracking_id=tracking_id)
+            promo = links[0].get("promotion_link") if links else ""
+            if promo:
+                return promo
+        except Exception:  # noqa: BLE001
+            pass
+    return item.get("promotion_link") or detail
 
 
 def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | None:
@@ -124,7 +142,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
             and str(it.get("product_id")) not in used_product_ids
             and history.name_key(it.get("product_title", "")) not in used_names
             and it.get("product_main_image_url")
-            and _affiliate_url(it)
+            and _has_link(it)
         ]
         if not candidates:
             continue
@@ -146,7 +164,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
             "category": niche["category"],
             "source": "aliexpress",
             "product_url": item.get("product_detail_url", ""),
-            "affiliate_url": _affiliate_url(item),
+            "affiliate_url": _resolve_affiliate_link(item, tracking_id),
             "price": _price_of(item),
             "image_url": item.get("product_main_image_url", ""),
             "rating": _rate_of(item),
