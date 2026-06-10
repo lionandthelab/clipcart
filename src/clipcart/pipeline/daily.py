@@ -14,7 +14,6 @@ from pathlib import Path
 
 from clipcart.config import LOGS_DIR, OUTBOX_DIR
 from clipcart.publishing.youtube import YouTubePublisher
-from clipcart.research.auto_select import select_today_product
 from clipcart.storage import load_posts, load_products, save_posts, upsert_product
 from clipcart.video.compliance import check_texts, check_video
 from clipcart.video.copywriter import build_creative
@@ -29,21 +28,26 @@ def _log(entry: dict[str, Any]) -> None:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 
-def _already_posted_today() -> dict[str, Any] | None:
+def _already_posted_today(source: str = "coupang") -> dict[str, Any] | None:
     today = date.today().isoformat()
     for post in load_posts():
-        if post.get("platform") == "youtube_shorts" and str(post.get("published_at", "")).startswith(today):
+        if (
+            post.get("platform") == "youtube_shorts"
+            and post.get("source", "coupang") == source
+            and str(post.get("published_at", "")).startswith(today)
+        ):
             return post
     return None
 
 
-def _todays_ready_product() -> dict[str, Any] | None:
+def _todays_ready_product(source: str = "coupang") -> dict[str, Any] | None:
     """오늘 이미 렌더링까지 끝난(미게시) 상품 — 재실행 시 재선정/재렌더 방지."""
     today = date.today().isoformat()
     for p in load_products():
         if (
             p.get("status") == "VIDEO_READY"
             and p.get("created_at") == today
+            and p.get("source", "coupang") == source
             and p.get("video_path")
             and Path(p["video_path"]).exists()
         ):
@@ -51,16 +55,26 @@ def _todays_ready_product() -> dict[str, Any] | None:
     return None
 
 
-def run_daily(live: bool = False, force: bool = False, keyword: str | None = None) -> dict[str, Any]:
+def run_daily(
+    live: bool = False,
+    force: bool = False,
+    keyword: str | None = None,
+    source: str = "coupang",
+) -> dict[str, Any]:
+    if source == "aliexpress":
+        from clipcart.research.auto_select_ali import select_today_product
+    else:
+        from clipcart.research.auto_select import select_today_product
+
     if not force:
-        existing = _already_posted_today()
+        existing = _already_posted_today(source)
         if existing:
             return {
                 "status": "SKIPPED",
-                "reason": f"오늘 이미 게시됨: {existing.get('post_url')}",
+                "reason": f"오늘 이미 게시됨({source}): {existing.get('post_url')}",
             }
 
-    resume = None if keyword else _todays_ready_product()
+    resume = None if keyword else _todays_ready_product(source)
     if resume:
         product = resume
         creative = build_creative(product, load_profile())
@@ -137,6 +151,7 @@ def run_daily(live: bool = False, force: bool = False, keyword: str | None = Non
             "post_id": publish_result.post_id,
             "product_id": product["product_id"],
             "platform": "youtube_shorts",
+            "source": source,
             "post_url": publish_result.post_url,
             "published_at": now,
             "status": "PUBLISHED",
@@ -157,7 +172,9 @@ def run_daily(live: bool = False, force: bool = False, keyword: str | None = Non
             "date": date.today().isoformat(),
             "post_id": publish_result.post_id,
             "product_id": product["product_id"],
+            "source": source,
             "coupang_product_id": product.get("coupang_product_id"),
+            "aliexpress_product_id": product.get("aliexpress_product_id"),
             "product_name": product.get("product_name"),
             "niche_keyword": product.get("niche", {}).get("keyword"),
             "category": product.get("category"),

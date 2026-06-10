@@ -138,11 +138,17 @@ def cmd_publish(
 @click.option("--live/--dry-run", default=False, help="--live면 YouTube에 실제 게시")
 @click.option("--force", is_flag=True, help="오늘 이미 게시했어도 다시 실행")
 @click.option("--keyword", default=None, help="특정 니치 키워드 강제 선택")
-def cmd_daily(live: bool, force: bool, keyword: str | None) -> None:
+@click.option(
+    "--source",
+    type=click.Choice(["coupang", "aliexpress"]),
+    default="coupang",
+    help="상품 소스 (기본 coupang, 알리는 aliexpress)",
+)
+def cmd_daily(live: bool, force: bool, keyword: str | None, source: str) -> None:
     """전자동 데일리 파이프라인: 선정→제작→검수→업로드."""
     from clipcart.pipeline.daily import run_daily
 
-    result = run_daily(live=live, force=force, keyword=keyword)
+    result = run_daily(live=live, force=force, keyword=keyword, source=source)
     _print_json(result)
     if result.get("status") in {"FAILED", "BLOCKED"}:
         sys.exit(1)
@@ -159,11 +165,15 @@ def cmd_history(limit: int) -> None:
     _print_json(
         {
             "total_uploads": len(items),
-            "unique_products": len({i.get("coupang_product_id") for i in items if i.get("coupang_product_id")}),
+            "unique_products": len(
+                {i.get("coupang_product_id") for i in items if i.get("coupang_product_id")}
+                | {i.get("aliexpress_product_id") for i in items if i.get("aliexpress_product_id")}
+            ),
             "unique_keywords": len({i.get("niche_keyword") for i in items if i.get("niche_keyword")}),
             "recent": [
                 {
                     "date": i.get("date"),
+                    "source": i.get("source", "coupang"),
                     "product_name": i.get("product_name"),
                     "niche_keyword": i.get("niche_keyword"),
                     "title": i.get("title"),
