@@ -75,7 +75,44 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         f"natural daily-life context"
     )
 
+    # 전환 장면: 기존 방식의 도구들이 방치된 모습 (실망의 흔적, 사람 없음)
+    switch_scene = (
+        f"worn-out old cleaning tools and failed makeshift solutions related to "
+        f"'{br['pain']}', abandoned on the floor, the problem still unsolved, "
+        f"no people, no hands"
+    )
+
     review_card = product.get("review_card_path")
+
+    # ---- 실측 수치 카피 (API 데이터만, 날조 금지) -------------------------- #
+    discount_pct = product.get("discount_pct")
+    original_price = product.get("original_price")
+    try:
+        rating = float(product.get("rating") or 0)
+    except (TypeError, ValueError):
+        rating = 0.0
+    orders = int(product.get("review_count") or 0)
+
+    if discount_pct and original_price:
+        # 획기적 실측 할인: 정가→현재가를 숫자로 박는다
+        product_line = (
+            f"해결책은 간단해요. {name}. 정가 {original_price:,}원인데, "
+            f"지금 {discount_pct}% 할인된 {price:,}원이에요."
+        )
+        product_emphasis = f"{discount_pct}% 할인"
+        product_caption = f"{name} · {original_price:,}원 → {price:,}원"
+    else:
+        product_line = f"해결책은 간단해요. {name}. 단돈 {price:,}원. {rocket_line}"
+        product_emphasis = f"{price:,}원"
+        product_caption = f"{name} · {price:,}원"
+
+    # 만족도/주문수는 충분히 인상적일 때만 대본에 얹는다
+    if rating >= 90 and orders >= 100:
+        result_stats_line = f" 이미 {orders:,}명이 시켰고, 구매자 만족도 {rating:g}%예요."
+        result_emphasis = f"만족도 {rating:g}%"
+    else:
+        result_stats_line = ""
+        result_emphasis = name  # 제품명 유지(썸네일 프레임 노출 대비)
 
     beats: list[dict[str, Any]] = [
         {
@@ -100,14 +137,28 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "color": "white",
         },
         {
+            "role": "switch",
+            "tone": "switch",
+            # 기존 방식 실패 공감 → 차별화 전환 (구매의욕 자극, 보장 표현 금지)
+            "narration": (
+                f"{niche['old_way']}… 이미 해보셨잖아요. 그때마다 실망하셨다면, "
+                f"이번엔 다릅니다."
+            ),
+            "caption": "써봤는데 실망했던 사람, 주목",
+            "source": f"gemini:{switch_scene}",
+            "fallback": f"pexels:{br['pain']}",
+            "emphasis": "이번엔 다릅니다",
+            "color": "yellow",
+        },
+        {
             "role": "product",
             "tone": "product",
-            "narration": f"해결책은 간단해요. {name}. 단돈 {price:,}원. {rocket_line}",
-            "caption": f"{name} · {price:,}원",
+            "narration": product_line,
+            "caption": product_caption,
             # 제품 추출 → 예쁜 배경/구도 화보샷. 생성 실패 시 원본 제품컷.
             "source": f"productshot:{scenes[0]}",
             "fallback": "product",
-            "emphasis": f"{price:,}원",
+            "emphasis": product_emphasis,
             "color": "red",
         },
         {
@@ -127,7 +178,10 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         {
             "role": "result",
             "tone": "result",
-            "narration": f"{niche['benefit']} 이게 {price:,}원이면, 장바구니 안 담을 이유가 없죠.",
+            "narration": (
+                f"{niche['benefit']}{result_stats_line} "
+                f"이게 {price:,}원이면, 장바구니 안 담을 이유가 없죠."
+            ),
             "caption": niche["benefit"],
             # 결과도 2컷 퀵컷: 깨끗해진 실영상 + 제품 화보샷
             "shots": [
@@ -135,9 +189,8 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
                 f"productshot:{scenes[1 % len(scenes)]}",
             ],
             "fallback": "product",
-            # 대형 강조 자막이 썸네일 프레임으로 노출되는 경우가 많다 —
-            # 범용 '장바구니' 대신 제품명을 박아 어떤 제품 영상인지 보이게 한다
-            "emphasis": name,
+            # 수치가 인상적이면 만족도 슬램, 아니면 제품명(썸네일 프레임 대비)
+            "emphasis": result_emphasis,
             "color": "yellow",
         },
         {

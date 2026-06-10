@@ -72,3 +72,65 @@ def test_cta_falls_back_to_product_without_review_card():
     beats = build_beats(_product())
     cta = next(b for b in beats if b["role"] == "cta")
     assert cta["source"] == "product"
+
+
+def test_switch_beat_between_problem_and_product():
+    # "다른 제품/방법 써봤지만 실망 → 이번엔 다르다" 전환 비트로 구매의욕 자극
+    beats = build_beats(_product())
+    roles = [b["role"] for b in beats]
+    assert "switch" in roles
+    assert roles.index("problem") < roles.index("switch") < roles.index("product")
+
+
+def test_switch_narration_references_old_way_and_difference():
+    beats = build_beats(_product())
+    switch = next(b for b in beats if b["role"] == "switch")
+    niche_old_way = "바닥 멀티탭 먼지 방치"
+    assert niche_old_way in switch["narration"]
+    assert "이번엔 다릅니다" in switch["narration"]
+    # 과장/보장 금지 표현이 들어가면 안 된다
+    for banned in ("무조건", "100%", "완벽", "효과 보장"):
+        assert banned not in switch["narration"]
+
+
+def test_switch_scene_is_candid_without_people():
+    beats = build_beats(_product())
+    switch = next(b for b in beats if b["role"] == "switch")
+    assert switch["source"].startswith("gemini:")
+    assert "no people" in switch["source"]
+
+
+def test_big_discount_pops_in_product_beat():
+    p = {**_product(), "original_price": 5560, "discount_pct": 50}
+    beats = build_beats(p)
+    product_beat = next(b for b in beats if b["role"] == "product")
+    assert "50%" in product_beat["narration"]
+    assert product_beat["emphasis"] == "50% 할인"
+    # 정가도 실측치 그대로 노출
+    assert "5,560" in product_beat["narration"]
+
+
+def test_without_discount_price_emphasis_as_before():
+    beats = build_beats(_product())
+    product_beat = next(b for b in beats if b["role"] == "product")
+    assert product_beat["emphasis"] == "2,780원"
+
+
+def test_high_satisfaction_and_orders_pop_in_result_beat():
+    p = {**_product(), "rating": 95.6, "review_count": 396}
+    beats = build_beats(p)
+    result = next(b for b in beats if b["role"] == "result")
+    assert "95.6%" in result["narration"]
+    assert "396" in result["narration"]
+    # 숫자 팡: result 강조는 만족도 수치
+    assert result["emphasis"] == "만족도 95.6%"
+
+
+def test_weak_stats_are_not_woven_into_script():
+    # 낮은 수치는 날조/과장 인상만 주므로 대본에 넣지 않는다
+    p = {**_product(), "rating": 78.0, "review_count": 12}
+    beats = build_beats(p)
+    result = next(b for b in beats if b["role"] == "result")
+    assert "78%" not in result["narration"]
+    assert "만족도" not in result["narration"]
+    assert result["emphasis"] == "멀티탭 정리함"  # 제품명 유지(썸네일 프레임)

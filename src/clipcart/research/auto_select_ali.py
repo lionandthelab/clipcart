@@ -53,6 +53,25 @@ def _price_of(item: dict[str, Any]) -> int:
         return 0
 
 
+MIN_DISCOUNT_PCT = 15  # 이보다 작은 할인은 대본 소재로 쓰지 않음 (과장 인상 방지)
+
+
+def _discount_of(item: dict[str, Any], sale: int) -> tuple[int | None, int | None]:
+    """실측 정가(KRW) 기반 (정가, 할인율%). 정가 없거나 할인 미미하면 (None, None)."""
+    if (item.get("target_original_price_currency") or "KRW") != "KRW":
+        return None, None
+    try:
+        orig = int(round(float(item.get("target_original_price") or 0)))
+    except (TypeError, ValueError):
+        return None, None
+    if orig <= sale or sale <= 0:
+        return None, None
+    pct = round((1 - sale / orig) * 100)
+    if pct < MIN_DISCOUNT_PCT:
+        return None, None
+    return orig, pct
+
+
 def _volume_of(item: dict[str, Any]) -> int:
     try:
         return int(item.get("lastest_volume") or 0)
@@ -154,6 +173,8 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
         if score.decision == "REJECT":
             continue
 
+        sale_price = _price_of(item)
+        original_price, discount_pct = _discount_of(item, sale_price)
         product = {
             "product_id": f"AE{item['product_id']}",
             "aliexpress_product_id": str(item["product_id"]),
@@ -165,7 +186,9 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
             "source": "aliexpress",
             "product_url": item.get("product_detail_url", ""),
             "affiliate_url": _resolve_affiliate_link(item, tracking_id),
-            "price": _price_of(item),
+            "price": sale_price,
+            "original_price": original_price,
+            "discount_pct": discount_pct,
             "image_url": item.get("product_main_image_url", ""),
             "rating": _rate_of(item),
             "review_count": _volume_of(item),

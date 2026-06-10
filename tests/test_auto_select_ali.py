@@ -8,12 +8,14 @@ from __future__ import annotations
 import clipcart.research.auto_select_ali as sel
 
 
-def _item(pid, title, price, *, volume=500, rate="95.0%", promo=True, img=True):
+def _item(pid, title, price, *, volume=500, rate="95.0%", promo=True, img=True, original=None):
     return {
         "product_id": str(pid),
         "product_title": title,
         "target_sale_price": str(price),
         "target_sale_price_currency": "KRW",
+        "target_original_price": str(original) if original else None,
+        "target_original_price_currency": "KRW" if original else None,
         "lastest_volume": volume,
         "evaluate_rate": rate,
         "product_main_image_url": "https://img/x.jpg" if img else "",
@@ -53,6 +55,30 @@ def test_selects_valid_candidate_and_maps_fields(monkeypatch):
     assert product["image_url"] == "https://img/x.jpg"
     assert product["niche"]["keyword"] == kw
     assert "is_rocket" not in product  # 알리는 로켓배송 아님 → 배송 과장 금지
+
+
+def test_discount_pct_derived_from_real_original_price(monkeypatch):
+    _patch_clean_history(monkeypatch)
+    kw = "배수구 거름망 스테인리스"
+    monkeypatch.setattr(
+        sel, "query_products",
+        lambda keyword, **kw_: [_item(1, "스테인리스 배수구 거름망", 4760, original=9517)],
+    )
+    p = sel.select_today_product(force_keyword=kw)
+    assert p["original_price"] == 9517
+    assert p["discount_pct"] == 50  # 실측 정가 기반
+
+
+def test_no_discount_fields_when_original_missing_or_trivial(monkeypatch):
+    _patch_clean_history(monkeypatch)
+    kw = "배수구 거름망 스테인리스"
+    monkeypatch.setattr(
+        sel, "query_products",
+        lambda keyword, **kw_: [_item(1, "스테인리스 배수구 거름망", 3540, original=3843)],
+    )
+    p = sel.select_today_product(force_keyword=kw)
+    # 8% 수준의 미미한 할인은 대본 소재로 쓰지 않는다 (과장 인상 방지)
+    assert p.get("discount_pct") is None
 
 
 def test_excluded_keyword_is_filtered(monkeypatch):

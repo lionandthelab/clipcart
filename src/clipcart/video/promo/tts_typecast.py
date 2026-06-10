@@ -25,6 +25,7 @@ TEMPO = float(os.getenv("CLIPCART_TTS_TEMPO", "1.12"))
 _TONE_EMOTION = {
     "hook": ("happy", 1.3),
     "problem": ("sad", 1.1),
+    "switch": ("sad", 1.2),  # 기존 방식 실망 공감 → 직후 product(happy)로 전환 아크
     "product": ("happy", 1.2),
     "usage": ("happy", 1.0),
     "result": ("happy", 1.3),
