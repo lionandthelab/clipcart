@@ -78,7 +78,9 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "caption": niche["benefit"],
             "source": f"pexels:{br['clean']}",
             "fallback": "product",
-            "emphasis": "장바구니",
+            # 대형 강조 자막이 썸네일 프레임으로 노출되는 경우가 많다 —
+            # 범용 '장바구니' 대신 제품명을 박아 어떤 제품 영상인지 보이게 한다
+            "emphasis": name,
             "color": "yellow",
         },
         {
