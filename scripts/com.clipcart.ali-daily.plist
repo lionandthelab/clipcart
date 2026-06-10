@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.clipcart.ali-daily</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>/Users/mac/Workspace/lionandthelab/clipcart/scripts/ali_daily.sh</string>
+  </array>
+  <!-- 시스템 로컬 타임존 기준. 맥이 KST면 19:00 = 19:00 KST -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>19</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/mac/Workspace/lionandthelab/clipcart/logs/launchd_ali.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/mac/Workspace/lionandthelab/clipcart/logs/launchd_ali.err.log</string>
+  <!-- 적재 시 즉시 실행 금지(예약 시각에만). 첫 편은 수동 공개. -->
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>
