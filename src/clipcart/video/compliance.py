@@ -5,8 +5,12 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from clipcart.aliexpress import ALIEXPRESS_DISCLOSURE
 from clipcart.coupang import COUPANG_DISCLOSURE
 from clipcart.video.ff import media_duration, video_resolution
+
+# 소스별 의무 고지 전체 집합 — 다른 소스 고지가 섞이면 허위 고지로 차단한다
+_ALL_DISCLOSURES = {COUPANG_DISCLOSURE, ALIEXPRESS_DISCLOSURE}
 
 BANNED_EXPRESSIONS = [
     "무조건",
@@ -43,6 +47,9 @@ def check_texts(creative: dict[str, Any]) -> list[str]:
         issues.append("설명란에 어필리에이트 의무 고지 누락")
     elif description.find(required) > 250:
         issues.append("고지 문구가 설명란 첫 부분(더보기 위)에 없음 — 공정위 요건")
+    for foreign in _ALL_DISCLOSURES - {required}:
+        if foreign and foreign in description:
+            issues.append("다른 소스의 어필리에이트 고지 혼입 — 허위 고지")
     if not any(s.get("disclosure") for s in creative.get("scenes", [])):
         issues.append("영상 내 고지 장면 누락")
     if len(creative.get("title", "")) > 100:

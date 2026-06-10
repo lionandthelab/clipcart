@@ -43,3 +43,15 @@ def test_banned_expression_still_flagged_for_aliexpress():
     c = _creative(ALIEXPRESS_DISCLOSURE)
     c["title"] = "이거 사면 무조건 해결됩니다"
     assert any("금지 표현" in issue for issue in check_texts(c))
+
+
+def test_foreign_source_disclosure_contamination_is_flagged():
+    # 알리 상품 설명에 쿠팡 고지가 섞이면 허위 고지 → 차단돼야
+    c = _creative(ALIEXPRESS_DISCLOSURE)
+    c["description"] = f"{ALIEXPRESS_DISCLOSURE}\n{COUPANG_DISCLOSURE}\n설명"
+    assert any("혼입" in issue for issue in check_texts(c))
+
+
+def test_coupang_only_description_has_no_contamination_flag():
+    c = _creative(COUPANG_DISCLOSURE)
+    assert not any("혼입" in issue for issue in check_texts(c))

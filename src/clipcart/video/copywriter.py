@@ -6,7 +6,6 @@ import hashlib
 from datetime import date
 from typing import Any
 
-from clipcart.config import DEFAULT_DISCLOSURE
 from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
 
@@ -62,10 +61,10 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
     price = product["price"]
     rocket = product.get("is_rocket", False)
 
+    # 소스별 고지가 곧 의무 고지. 소스 무관 default를 덧붙이면 타 소스 고지가
+    # 섞여 허위 고지가 되므로(예: 알리 영상에 쿠팡 고지) 덧붙이지 않는다.
     src_disclosure = disclosure_for(product)
     disclosure_full = src_disclosure
-    if DEFAULT_DISCLOSURE and DEFAULT_DISCLOSURE not in disclosure_full:
-        disclosure_full = f"{src_disclosure}\n{DEFAULT_DISCLOSURE}"
 
     accent, hook_rest = _split_hook(niche["hook"])
 
