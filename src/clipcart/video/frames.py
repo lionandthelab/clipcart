@@ -15,16 +15,9 @@ from pathlib import Path
 import requests
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-W, H = 1080, 1920
+from clipcart.video.fonts import load_font as _load_font
 
-FONT_CANDIDATES_BOLD = [
-    r"C:\Windows\Fonts\malgunbd.ttf",
-    r"C:\Windows\Fonts\malgun.ttf",
-]
-FONT_CANDIDATES_REGULAR = [
-    r"C:\Windows\Fonts\malgun.ttf",
-    r"C:\Windows\Fonts\malgunbd.ttf",
-]
+W, H = 1080, 1920
 
 WHITE = "#FFFFFF"
 YELLOW = "#FFD400"
@@ -34,12 +27,7 @@ RED = "#FF3B30"
 
 
 def _font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
-    for path in FONT_CANDIDATES_BOLD if bold else FONT_CANDIDATES_REGULAR:
-        try:
-            return ImageFont.truetype(path, size)
-        except OSError:
-            continue
-    raise RuntimeError("한글 폰트(맑은 고딕)를 찾을 수 없음")
+    return _load_font(size, bold=bold)
 
 
 def fetch_image(url: str) -> Image.Image:

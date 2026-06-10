@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 from moviepy import (
     AudioFileClip, CompositeAudioClip, CompositeVideoClip, ColorClip,
@@ -27,6 +27,7 @@ from moviepy import (
 
 from clipcart.config import PROJECT_ROOT
 from clipcart.video import sfx
+from clipcart.video.fonts import load_font
 from clipcart.video.promo import sources
 
 W, H = 1080, 1920
@@ -36,8 +37,9 @@ MEDIA_Y = TOP_H
 MEDIA_H = BOTTOM_Y - MEDIA_Y
 BANNER_H = 70
 
-_FONT_BOLD = r"C:\Windows\Fonts\malgunbd.ttf"
-_FONT_REG = r"C:\Windows\Fonts\malgun.ttf"
+# 폰트는 bold 여부 플래그로 다루고 실제 해석은 크로스플랫폼 로더에 위임한다
+_FONT_BOLD = True
+_FONT_REG = False
 
 WHITE = (245, 245, 245)
 YELLOW = (255, 209, 0)
@@ -176,25 +178,25 @@ def _wrap(draw, words, font, max_w, stroke):
     return lines
 
 
-def _fit(text, font_path, box_w, box_h, max_size, min_size, stroke, max_lines):
+def _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines):
     tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
     words = text.split()
     for size in range(max_size, min_size - 1, -3):
-        font = ImageFont.truetype(font_path, size)
+        font = load_font(size, bold=bold)
         lines = _wrap(tmp, words, font, box_w, stroke)
         widest = max(tmp.textbbox((0, 0), " ".join(lw), font=font, stroke_width=stroke)[2] for lw in lines)
         if len(lines) <= max_lines and int(size * 1.2) * len(lines) <= box_h and widest <= box_w:
             return font, size, lines
-    font = ImageFont.truetype(font_path, min_size)
+    font = load_font(min_size, bold=bold)
     return font, min_size, _wrap(tmp, words, font, box_w, stroke)
 
 
-def _draw_block(text, font_path, zone_y0, zone_y1, max_size, min_size,
+def _draw_block(text, bold, zone_y0, zone_y1, max_size, min_size,
                 color=WHITE, accent=None, accent_color=YELLOW, stroke=6):
     box_w = int(W * 0.88)
     box_h = (zone_y1 - zone_y0) - 20
     max_lines = 2 if (zone_y1 - zone_y0) < 0.25 * H else 3
-    font, size, lines = _fit(text, font_path, box_w, box_h, max_size, min_size, stroke, max_lines)
+    font, size, lines = _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines)
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     line_h = int(size * 1.2)
@@ -251,7 +253,7 @@ def _ad_badge_png() -> np.ndarray:
     """최소 '광고' 뱃지 — 투명 배경에 작은 반투명 펠릿(적대감 최소화)."""
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    f = ImageFont.truetype(_FONT_BOLD, 32)
+    f = load_font(32, bold=True)
     text = "광고"
     x, y = 40, 44
     pad_x, pad_y = 22, 11
