@@ -41,8 +41,18 @@ clipcart daily --live
 * `kinetic` — 경량 Pillow 카라오케 엔진(폴백, 키 없을 때).
 * 키: `.env`의 `TYPECAST_API_KEY`, `PEXELS_API_KEY`, `GEMINI_API_KEY` (steward-lab .env에서 가져옴). 키 없거나 promo 실패 시 자동 kinetic 폴백.
 
-스케줄: 매일 아침 Windows 작업 스케줄러 07:20 (`scripts/daily_task.ps1`) + Claude 크론 07:10.
-같은 날 중복 실행은 파이프라인이 자동 스킵한다.
+스케줄:
+* **쿠팡(아침)** — Windows 작업 스케줄러 07:20 (`scripts/daily_task.ps1`) + Claude 크론 07:10. `clipcart daily --live`
+* **알리익스프레스(저녁)** — 이 맥(macOS) launchd 19:00 KST (`scripts/com.clipcart.ali-daily.plist` → `scripts/ali_daily.sh`). `clipcart daily --source aliexpress --live`
+
+같은 날 중복 실행은 파이프라인이 **소스별로** 자동 스킵한다(아침 쿠팡 게시가 저녁 알리 실행을 막지 않음). 두 소스가 같은 채널에 하루 2편(아침 쿠팡 / 저녁 알리)을 올린다.
+
+### 상품 소스 (`--source`)
+
+* `coupang`(기본) — 쿠팡 파트너스 API. 한국어 고지/로켓배송.
+* `aliexpress` — 알리익스프레스 어필리에이트 API(IOP, `api-sg.aliexpress.com/sync`, HMAC-SHA256). 한국어 키워드 검색이 동작하므로 같은 니치 풀을 공유한다. 한국 배송/원화/한국어 기준(`CLIPCART_ALI_*`로 조정). 제휴링크는 선택 제품의 `link.generate`로 제품별 딥링크 생성.
+  * 키: `.env`의 `ALIEXPRESS_APP_KEY`, `ALIEXPRESS_APP_SECRET`, `ALIEXPRESS_TRACKING_ID`(=`clipcart`).
+  * 고지: 소스별 분기(`disclosure_for`). 알리 영상엔 알리 어필리에이트 고지만 — 쿠팡 고지 혼입은 컴플라이언스 하드게이트가 차단(허위 고지 방지). 알리는 로켓배송이 아니므로 배송 과장 문구를 넣지 않는다.
 
 ### 중복 방지 (히스토리)
 
