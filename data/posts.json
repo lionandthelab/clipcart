@@ -65,10 +65,22 @@
     "platform": "youtube_shorts",
     "post_url": "https://www.youtube.com/shorts/J2tUYoArTWE",
     "published_at": "2026-06-10T09:34:27.808594+00:00",
-    "status": "PUBLISHED",
+    "status": "REPLACED_PRIVATE_MISMATCH",
     "title": "가스레인지 틈새 커버 쓰기 전에 꼭 보세요",
     "affiliate_url": "https://link.coupang.com/a/esZY87avoy",
     "thumbnail_set": true,
     "comment_id": "Ugw1z2nPOtEAL9SiK_p4AaABAg"
+  },
+  {
+    "post_id": "fn1JgbqgxfE",
+    "product_id": "CP9561307129",
+    "platform": "youtube_shorts",
+    "post_url": "https://www.youtube.com/shorts/fn1JgbqgxfE",
+    "published_at": "2026-06-10T09:53:40.958776+00:00",
+    "status": "PUBLISHED",
+    "title": "6,500원으로 끝내는 냄비 뚜껑 거치대",
+    "affiliate_url": "https://link.coupang.com/a/es1jN6doIK",
+    "thumbnail_set": true,
+    "comment_id": "Ugx650lWVTqTbEeJLO54AaABAg"
   }
 ]

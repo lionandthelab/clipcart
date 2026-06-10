@@ -491,5 +491,47 @@
     "known_downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8520017991.mp4",
     "post_url": "https://www.youtube.com/shorts/J2tUYoArTWE"
+  },
+  {
+    "product_id": "CP9561307129",
+    "coupang_product_id": "9561307129",
+    "created_at": "2026-06-10",
+    "status": "PUBLISHED",
+    "product_name": "픽앤데이 조리도구 거치대 냄비뚜겅 받치대 주방",
+    "display_name": "냄비 뚜껑 거치대",
+    "category": "주방",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=9561307129&itemId=28532967402&vendorItemId=95478418679&traceid=V0-153-e7314d669d9fbac3&requestid=20260610184655553061644159&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/es1jN6doIK",
+    "price": 6500,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/2mHmgsHkfwFskwZO2kEDWd0dfLxvChQcYwia_hWmUdSQSmemUX7i_-xfVlaTFuCESa8iuSIW9LUBRwGc6418KiXKWQ52rxsRJdFKDnUUZhYA5U9Pv-LH6Mxa2wmp5jyoASprO2WUUgECH9NN_siXxXN44Aq6timOUMTo-OEstYrLXduwZDZDu_Eg3w54lalllWw6Mt5W47NU513IGTls6ScwK3je9g4uDYAZbmqXfESvIi01h84dR7hE6MUBHPyZ5CH41gCK3t6ovBWzpBrThhNZTFMhZXkckVcYYXOU9ZoEC9toKPhpIFKDCV1gOlZ2jeCcqHV80sQ97RZQ",
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "냄비 뚜껑 거치대 주방",
+      "category": "주방",
+      "title_keyword": "냄비 뚜껑 거치대",
+      "old_way": "뜨거운 뚜껑 들고 두리번",
+      "hook": "요리하다 뜨거운 뚜껑, 어디다 두세요?",
+      "problem": "요리 중에 뚜껑을 열면 둘 곳이 없어서 싱크대에 그냥 뒤집어 두게 되죠. 물자국에 양념까지.",
+      "usage": "거치대에 세우기만 하면 됩니다. 국자도 같이 걸 수 있는 제품이 많아요.",
+      "benefit": "조리대가 지저분해질 일이 줄고 동선이 편해집니다.",
+      "downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
+      "target": "좁은 주방에서 요리하는 사람"
+    },
+    "problem": "요리 중에 뚜껑을 열면 둘 곳이 없어서 싱크대에 그냥 뒤집어 두게 되죠. 물자국에 양념까지.",
+    "video_angle": "요리하다 뜨거운 뚜껑, 어디다 두세요?",
+    "known_downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP9561307129.mp4",
+    "post_url": "https://www.youtube.com/shorts/fn1JgbqgxfE"
   }
 ]
