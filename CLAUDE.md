@@ -43,9 +43,9 @@ clipcart daily --live
 
 스케줄:
 * **쿠팡(아침)** — Windows 작업 스케줄러 07:20 (`scripts/daily_task.ps1`) + Claude 크론 07:10. `clipcart daily --live`
-* **알리익스프레스(저녁)** — 이 맥(macOS) launchd 19:00 KST (`scripts/com.clipcart.ali-daily.plist` → `scripts/ali_daily.sh`). `clipcart daily --source aliexpress --live`
+* **알리익스프레스(6시간마다)** — 이 맥(macOS) launchd 00/06/12/18시 KST (`scripts/com.clipcart.ali-daily.plist` → `scripts/ali_daily.sh`, `~/Library/LaunchAgents`에 적재됨). `clipcart daily --source aliexpress --live --force` (2026-06-11 운영자 지시: 6시간에 1편)
 
-같은 날 중복 실행은 파이프라인이 **소스별로** 자동 스킵한다(아침 쿠팡 게시가 저녁 알리 실행을 막지 않음). 두 소스가 같은 채널에 하루 2편(아침 쿠팡 / 저녁 알리)을 올린다.
+'오늘 이미 게시' 스킵은 **소스별**로 동작한다(아침 쿠팡 게시가 알리 실행을 막지 않음). 알리는 6시간 주기라 `--force`로 같은 날 다회 게시를 허용하되, 상품ID·상품명·니치 중복은 history 원장이 계속 차단한다. 채널 합산 하루 약 5편(쿠팡 1 + 알리 4).
 
 ### 상품 소스 (`--source`)
 

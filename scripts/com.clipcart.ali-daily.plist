@@ -9,14 +9,34 @@
     <string>/bin/sh</string>
     <string>/Users/mac/Workspace/lionandthelab/clipcart/scripts/ali_daily.sh</string>
   </array>
-  <!-- 시스템 로컬 타임존 기준. 맥이 KST면 19:00 = 19:00 KST -->
+  <!-- 시스템 로컬 타임존(KST) 기준, 6시간 간격 4회 -->
   <key>StartCalendarInterval</key>
-  <dict>
-    <key>Hour</key>
-    <integer>19</integer>
-    <key>Minute</key>
-    <integer>0</integer>
-  </dict>
+  <array>
+    <dict>
+      <key>Hour</key>
+      <integer>0</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>6</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>12</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>18</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+  </array>
   <key>StandardOutPath</key>
   <string>/Users/mac/Workspace/lionandthelab/clipcart/logs/launchd_ali.out.log</string>
   <key>StandardErrorPath</key>
