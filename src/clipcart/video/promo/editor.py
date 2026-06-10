@@ -58,28 +58,34 @@ def _color(name: str):
 # --------------------------------------------------------------------------- #
 # Sourcing
 # --------------------------------------------------------------------------- #
-def _source_media(pex, source: str, product_img_path: str, index: int) -> tuple[str | None, str]:
-    """source 토큰 → (path, kind). 폴백: pexels → gemini → 제품이미지."""
-    if source == "product":
-        return product_img_path, "product"
-    if source.startswith("gemini:"):
-        g = sources.gemini_still(source[7:], "cinematic", index)
-        return (g, "image") if g else (product_img_path, "product")
-    if source.startswith("pexels:"):
-        q = source[7:]
+def _try_one(pex, token: str, index: int) -> tuple[str | None, str | None]:
+    """단일 source 토큰 시도 → (path, kind) 또는 (None, None)."""
+    if token == "product":
+        return None, None  # product는 호출부에서 최종 폴백으로만
+    if token.startswith("gemini:"):
+        g = sources.gemini_still(token[7:], "cinematic", index)
+        return (g, "image") if g else (None, None)
+    if token.startswith("pexels:"):
+        q = token[7:]
         if pex and pex.enabled:
-            if index == 0:
-                v = pex.fetch_video(q, index=index)
-                if v:
-                    return v, "video"
-            p = pex.fetch_photo(q, index=index)
-            if p:
-                return p, "image"
             v = pex.fetch_video(q, index=index)
             if v:
                 return v, "video"
-        g = sources.gemini_still(q, "cinematic", index)
-        return (g, "image") if g else (product_img_path, "product")
+            p = pex.fetch_photo(q, index=index)
+            if p:
+                return p, "image"
+        return None, None
+    return None, None
+
+
+def _resolve_media(pex, tokens: list[str], product_img_path: str, index: int) -> tuple[str, str]:
+    """후보 토큰 순서대로 시도, 모두 실패 시 제품 이미지."""
+    for tok in tokens:
+        if tok == "product":
+            return product_img_path, "product"
+        p, k = _try_one(pex, tok, index)
+        if p:
+            return p, k
     return product_img_path, "product"
 
 
@@ -242,16 +248,38 @@ def _overlay(rgba, t_in, dur, fi=0.1, fo=0.1):
     return clip
 
 
-def _chrome_png() -> np.ndarray:
-    """지속 표시: 상단 광고배너 + 브랜드."""
+def _ad_badge_png() -> np.ndarray:
+    """최소 '광고' 뱃지 — 투명 배경에 작은 반투명 펠릿(적대감 최소화)."""
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    d.rectangle([0, 0, W, BANNER_H], fill=(0, 0, 0, 235))
-    bf = ImageFont.truetype(_FONT_BOLD, 34)
-    d.text((40, 16), BANNER_TEXT, font=bf, fill=WHITE)
-    bw = d.textbbox((0, 0), BRAND, font=bf)[2]
-    d.text((W - bw - 40, 16), BRAND, font=bf, fill=YELLOW)
+    f = ImageFont.truetype(_FONT_BOLD, 32)
+    text = "광고"
+    x, y = 40, 44
+    pad_x, pad_y = 22, 11
+    bb = d.textbbox((0, 0), text, font=f)
+    tw, th = bb[2] - bb[0], bb[3] - bb[1]
+    rect = (x, y, x + tw + pad_x * 2, y + th + pad_y * 2)
+    d.rounded_rectangle(rect, radius=(rect[3] - rect[1]) // 2, fill=(0, 0, 0, 110))
+    d.text((x + pad_x, y + pad_y - bb[1]), text, font=f, fill=(255, 255, 255, 235))
     return np.array(img)
+
+
+def _float_logo_overlay(t_in: float, dur: float):
+    """살림해결소 로고를 우상단에 플로팅(레이어 띠 없이)."""
+    logo_path = PROJECT_ROOT / "logo.png"
+    if not logo_path.exists():
+        return None
+    logo = Image.open(logo_path).convert("RGBA")
+    scale = 118 / max(logo.size)
+    logo = logo.resize((int(logo.width * scale), int(logo.height * scale)), Image.Resampling.LANCZOS)
+    canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    # 가벼운 그림자
+    shadow = Image.new("RGBA", logo.size, (0, 0, 0, 0))
+    shadow.paste((0, 0, 0, 120), (0, 0), logo.split()[-1])
+    px, py = W - logo.width - 38, 40
+    canvas.alpha_composite(shadow, (px + 3, py + 3))
+    canvas.alpha_composite(logo, (px, py))
+    return _overlay(np.array(canvas), t_in, dur, fi=0.25, fo=0.2)
 
 
 def _sfx_clip(path, t_in, vol):
@@ -289,8 +317,9 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
         beat_dur = adur + post
         col = _color(b.get("color", "white"))
 
-        # media (1 shot; body beats may get a 2nd subshot)
-        path, kind = _source_media(pex, b["source"], product_img_path, 0)
+        # media — source 후보 + fallback 순서로 해결
+        tokens = [b["source"]] + ([b["fallback"]] if b.get("fallback") else [])
+        path, kind = _resolve_media(pex, tokens, product_img_path, 0)
         media_segs.append(_media_clip(path, kind, beat_dur))
 
         # SFX: whoosh on cut, impact on hook/emphasis
@@ -341,9 +370,12 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     title_png = _draw_block(hook_title, _FONT_BOLD, BANNER_H + 6, TOP_H - 6,
                             max_size=66, min_size=38, stroke=5, color=WHITE)
     title_clip = _overlay(title_png, 0.0, total_narr, fi=0.2, fo=0.15)
-    chrome = _overlay(_chrome_png(), 0.0, total, fi=0.0, fo=0.0)
+    ad_badge = _overlay(_ad_badge_png(), 0.0, total, fi=0.0, fo=0.0)
 
-    layers = [ink_bg, media_track, title_clip, *overlays, chrome]
+    layers = [ink_bg, media_track, title_clip, *overlays, ad_badge]
+    flogo = _float_logo_overlay(0.0, total_narr)
+    if flogo is not None:
+        layers.append(flogo)
 
     # outro: logo
     logo = PROJECT_ROOT / "logo.png"

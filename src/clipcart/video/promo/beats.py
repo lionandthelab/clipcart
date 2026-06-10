@@ -24,13 +24,22 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
 
     rocket_line = "심지어 로켓배송이라 내일 와요." if rocket else "가격도 부담 없죠."
 
+    # 공감 극대화용 Gemini 프롬프트 — 더럽고 귀찮음이 확실히 드러나게
+    empathy = (
+        f"{br['pain']}, extreme close-up, grimy disgusting dirty grime buildup, "
+        f"unpleasant and gross, a frustrated tired person reluctantly cleaning it "
+        f"by hand, realistic Korean home, moody natural lighting"
+    )
+
     beats: list[dict[str, Any]] = [
         {
             "role": "hook",
             "tone": "hook",
             "narration": niche["hook"],
             "caption": niche["hook"],
+            # 훅: 실영상 우선(주목), 미스 시 공감 생성 이미지
             "source": f"pexels:{br['pain']}",
+            "fallback": f"gemini:{empathy}",
             "emphasis": niche["title_keyword"],
             "color": "yellow",
         },
@@ -39,7 +48,9 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "problem",
             "narration": niche["problem"],
             "caption": niche["problem"],
-            "source": f"pexels:{br['pain']}",
+            # 문제: 공감 생성 이미지 우선(더러움/귀찮음 확실히), 미스 시 실영상
+            "source": f"gemini:{empathy}",
+            "fallback": f"pexels:{br['pain']}",
             "color": "white",
         },
         {
@@ -57,6 +68,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "narration": f"쓰는 법도 쉬워요. {niche['usage']}",
             "caption": niche["usage"],
             "source": f"pexels:{br['use']}",
+            "fallback": "product",
             "color": "white",
         },
         {
@@ -65,6 +77,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "narration": f"{niche['benefit']} 이게 {price:,}원이면, 장바구니 안 담을 이유가 없죠.",
             "caption": niche["benefit"],
             "source": f"pexels:{br['clean']}",
+            "fallback": "product",
             "emphasis": "장바구니",
             "color": "yellow",
         },

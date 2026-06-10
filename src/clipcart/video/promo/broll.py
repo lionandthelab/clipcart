@@ -8,7 +8,7 @@ from __future__ import annotations
 
 BROLL: dict[str, dict[str, str]] = {
     "배수구 거름망 스테인리스": {
-        "pain": "hair clogged shower drain", "use": "cleaning bathroom sink drain", "clean": "clean shiny sink drain"},
+        "pain": "clogged drain full of hair", "use": "cleaning bathroom sink drain", "clean": "clean shiny sink drain"},
     "싱크대 물막이 실리콘": {
         "pain": "water splashing kitchen sink", "use": "washing dishes kitchen sink", "clean": "clean tidy kitchen sink"},
     "냉장고 정리 트레이 서랍형": {
