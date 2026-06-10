@@ -14,10 +14,23 @@
     "platform": "youtube_shorts",
     "post_url": "https://www.youtube.com/shorts/C9_x6RbEZuw",
     "published_at": "2026-06-10T03:25:22.572238+00:00",
-    "status": "PUBLISHED",
+    "status": "REPLACED_PRIVATE",
     "title": "아직도 배수구 머리카락 손으로 빼기? 이거 보세요",
     "affiliate_url": "https://link.coupang.com/a/esPJr3e7k4",
     "thumbnail_set": true,
     "comment_id": "UgxUT-ysS2tzvPC8pGR4AaABAg"
+  },
+  {
+    "post_id": "stBBoonyOsI",
+    "product_id": "CP8843938097",
+    "platform": "youtube_shorts",
+    "post_url": "https://www.youtube.com/shorts/stBBoonyOsI",
+    "published_at": "2026-06-10T07:36:52.867514+00:00",
+    "status": "PUBLISHED",
+    "title": "아직도 배수구 머리카락 손으로 빼기? 이거 보세요",
+    "affiliate_url": "https://link.coupang.com/a/esPJr3e7k4",
+    "thumbnail_set": true,
+    "comment_id": "UgydWL-NNDo0S5BEqt94AaABAg",
+    "engine": "v2-kinetic"
   }
 ]

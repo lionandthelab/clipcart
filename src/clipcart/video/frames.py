@@ -239,6 +239,65 @@ def compose_scene_frame(product_img: Image.Image, scene: dict, out_path: Path) -
     return out_path
 
 
+def make_photo_base(product_img: Image.Image, style: str) -> Image.Image:
+    """장면 배경 사진 레이어(WxH, 크롬/자막 없음). 줌 가능."""
+    if style == "blur_dark":
+        return _bg_blur_dark(product_img)
+    if style == "white_card":
+        return _bg_white_card_full(product_img)
+    return _bg_zoom_focus(product_img)
+
+
+def _bg_white_card_full(product_img: Image.Image) -> Image.Image:
+    """제품 카드 + 이름/가격 배지까지 정적으로 합성(줌 없음)."""
+    return _bg_white_card(product_img)
+
+
+def draw_product_card_static(canvas: Image.Image, name: str, price_text: str, rocket: bool, sub: str) -> None:
+    """white_card 위에 제품명/가격/안내를 한 번만 그림."""
+    draw = ImageDraw.Draw(canvas, "RGBA")
+    title_font = _font(72)
+    _draw_lines(draw, _wrap(draw, name, title_font, W - 160), title_font, 196, DARK, 0)
+    badge_font = _font(54)
+    price_w = draw.textlength(price_text, font=badge_font) + 64
+    rocket_w = (draw.textlength("로켓배송", font=badge_font) + 64 + 24) if rocket else 0
+    bx = int((W - price_w - rocket_w) // 2)
+    end_x, _ = _pill(draw, (bx, 1392), price_text, badge_font, WHITE, RED, pad=(32, 18))
+    if rocket:
+        _pill(draw, (end_x + 24, 1392), "로켓배송", badge_font, WHITE, "#1A73E8", pad=(32, 18))
+
+
+def draw_cta_static(canvas: Image.Image, cta: str, disclosure: str) -> None:
+    """downside_cta 장면의 고정 CTA + 고지(줌 안 됨, 매 프레임 위에 그림)."""
+    draw = ImageDraw.Draw(canvas, "RGBA")
+    cta_font = _font(64)
+    cw = draw.textlength(cta, font=cta_font)
+    draw.text(((W - cw) // 2, 1414), cta, font=cta_font, fill=YELLOW,
+              stroke_width=8, stroke_fill=BLACK)
+    disc_font = _font(32, bold=False)
+    y = 1690
+    for line in _wrap(draw, disclosure, disc_font, W - 150):
+        lw = draw.textlength(line, font=disc_font)
+        draw.text(((W - lw) // 2, y), line, font=disc_font, fill="#E6E6E6",
+                  stroke_width=3, stroke_fill=BLACK)
+        y += 44
+
+
+def zoom_crop(base: Image.Image, zf: float) -> Image.Image:
+    """base(WxH)를 zf배 확대 후 중앙 W×H 크롭."""
+    if zf <= 1.001:
+        return base
+    nw, nh = int(W * zf), int(H * zf)
+    big = base.resize((nw, nh), Image.BILINEAR)
+    left = (nw - W) // 2
+    top = (nh - H) // 2
+    return big.crop((left, top, left + W, top + H))
+
+
+def draw_chrome(canvas: Image.Image) -> None:
+    _chrome(canvas)
+
+
 def compose_thumbnail(product_img: Image.Image, line1: str, line2: str, out_path: Path) -> Path:
     """흥행 스타일 썸네일: 대형 훅 텍스트 + 제품 카드."""
     canvas = _bg_blur_dark(product_img, dark=120)

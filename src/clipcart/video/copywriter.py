@@ -62,36 +62,37 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
     price = product["price"]
     rocket = product.get("is_rocket", False)
 
-    price_line = f"가격은 {price:,}원"
-    price_line += "이고 로켓배송도 됩니다." if rocket else "입니다."
-
     disclosure_full = COUPANG_DISCLOSURE
     if DEFAULT_DISCLOSURE and DEFAULT_DISCLOSURE not in disclosure_full:
         disclosure_full = f"{COUPANG_DISCLOSURE}\n{DEFAULT_DISCLOSURE}"
 
     accent, hook_rest = _split_hook(niche["hook"])
+
+    rocket_line = "심지어 로켓배송." if rocket else "가격도 부담 없죠."
+    result_clincher = f"이게 {price:,}원이면, 장바구니 안 담을 이유가 없죠."
+
     scenes: list[dict[str, Any]] = [
         {
             "name": "hook",
             "style": "blur_dark",
             "zoom": "in",
+            # 훅: 가장 빠르고 단호하게
             "narration": niche["hook"],
-            "accent": accent,
-            "caption": hook_rest,
-            "rate": "+16%",  # 훅은 본문보다 빠르고 단호하게
+            "rate": "+34%",
         },
         {
             "name": "problem",
             "style": "zoom_focus",
             "zoom": "in",
             "narration": niche["problem"],
-            "caption": _first_sentence(niche["problem"]),
+            "rate": "+30%",
         },
         {
             "name": "product",
             "style": "white_card",
             "zoom": "out",
-            "narration": f"그래서 가져온 게 {name}. {price_line}",
+            "narration": f"해결책은 간단해요. {name}. 단돈 {price:,}원. {rocket_line}",
+            "rate": "+26%",
             "caption": name,
             "price_text": f"{price:,}원",
             "rocket": rocket,
@@ -101,22 +102,22 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
             "name": "usage",
             "style": "zoom_focus",
             "zoom": "out",
-            "narration": niche["usage"],
-            "caption": _first_sentence(niche["usage"]),
+            "narration": f"쓰는 법도 쉬워요. {niche['usage']}",
+            "rate": "+32%",
         },
         {
             "name": "result",
             "style": "zoom_focus",
             "zoom": "in",
-            "narration": niche["benefit"],
-            "caption": _first_sentence(niche["benefit"]),
+            "narration": f"{niche['benefit']} {result_clincher}",
+            "rate": "+30%",
         },
         {
             "name": "downside_cta",
             "style": "blur_dark",
             "zoom": "in",
-            "narration": f"아쉬운 점도 있어요. {niche['downside']}. 구매 링크는 설명란에 있습니다.",
-            "caption": niche["downside"],
+            "narration": f"물론 단점도 있어요. {niche['downside']}. 그래도 끌린다면, 링크는 고정 댓글에 있어요.",
+            "rate": "+24%",
             "disclosure": COUPANG_DISCLOSURE,
         },
     ]
