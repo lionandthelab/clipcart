@@ -81,6 +81,25 @@ def test_no_discount_fields_when_original_missing_or_trivial(monkeypatch):
     assert p.get("discount_pct") is None
 
 
+def test_falls_back_to_title_keyword_when_long_keyword_misses(monkeypatch):
+    # 알리 검색은 쿠팡용 긴 복합 키워드에 0건을 자주 반환한다 —
+    # title_keyword(짧은 자연어)로 폴백해야 스케줄 런이 굶지 않는다.
+    _patch_clean_history(monkeypatch)
+    kw = "배수구 거름망 스테인리스"
+    calls = []
+
+    def fake_query(keyword, **kw_):
+        calls.append(keyword)
+        if keyword == "배수구 거름망":  # title_keyword
+            return [_item(1005, "스테인리스 배수구 거름망 채반", 6900)]
+        return []
+
+    monkeypatch.setattr(sel, "query_products", fake_query)
+    p = sel.select_today_product(force_keyword=kw)
+    assert p is not None and p["product_id"] == "AE1005"
+    assert calls == ["배수구 거름망 스테인리스", "배수구 거름망"]
+
+
 def test_excluded_keyword_is_filtered(monkeypatch):
     _patch_clean_history(monkeypatch)
     kw = "배수구 거름망 스테인리스"

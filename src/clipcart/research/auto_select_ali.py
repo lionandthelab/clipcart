@@ -145,11 +145,26 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
         niche_queue = [n for n in NICHES if n["keyword"] == force_keyword] or niche_queue
 
     for niche in niche_queue[:MAX_SEARCH_CALLS_PER_RUN]:
-        try:
-            items = query_products(niche["keyword"], page_size=12, tracking_id=tracking_id)
-        except Exception as exc:  # noqa: BLE001
-            if any(t in str(exc).lower() for t in ("limit", "flow", "429", "qps")):
-                return None  # rate limit — 즉시 중단
+        # 알리 검색은 쿠팡용 긴 복합 키워드에 0건을 자주 반환한다 —
+        # 미스 시 title_keyword(짧은 자연어)로 한 번 더 시도한다.
+        queries = [niche["keyword"]]
+        if niche.get("title_keyword") and niche["title_keyword"] != niche["keyword"]:
+            queries.append(niche["title_keyword"])
+        items: list[dict[str, Any]] = []
+        rate_limited = False
+        for q in queries:
+            try:
+                items = query_products(q, page_size=12, tracking_id=tracking_id)
+            except Exception as exc:  # noqa: BLE001
+                if any(t in str(exc).lower() for t in ("limit", "flow", "429", "qps")):
+                    rate_limited = True
+                    break
+                continue
+            if items:
+                break
+        if rate_limited:
+            return None  # rate limit — 즉시 중단
+        if not items:
             continue
 
         candidates = [
