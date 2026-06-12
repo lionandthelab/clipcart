@@ -163,6 +163,14 @@ def cmd_metrics(days: int) -> None:
     _print_json(collect(days=days))
 
 
+@main.command("bio")
+def cmd_bio() -> None:
+    """링크인바이오 정적 페이지 생성 (docs/bio/index.html, 쿠팡은 bio subId 링크)."""
+    from clipcart.bio.page import build_bio_page
+
+    _print_json(build_bio_page())
+
+
 @main.command("history")
 @click.option("--limit", default=30, help="최근 N건 표시")
 def cmd_history(limit: int) -> None:
