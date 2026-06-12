@@ -1,19 +1,18 @@
-# Windows 작업 스케줄러용 데일리 실행 스크립트
-# 매 실행마다 최신 엔진을 git pull + 의존성 동기화 후 생성한다.
-# (origin/master 에 엔진을 push 하면 다음 아침 실행이 자동으로 새 엔진을 사용)
-# 파이프라인 자체가 '오늘 이미 게시' 체크를 하므로 중복 실행에 안전하다.
+# Windows 작업 스케줄러용 알리익스프레스 데일리 실행 (하루 1회).
+# 윈도우 쿠팡 데일리(daily_task.ps1, 아침 07:20)와 별개의 두 번째 파이프라인.
+# --force: 같은 날 다른 소스가 이미 게시했어도 알리를 진행. 상품/이름/니치 중복은
+# history.json 원장이 차단(실행 전 git pull 로 다른 머신 게시분까지 반영).
 Set-Location "c:\Users\ikess\Workspace\lionandthelab\clipcart"
 # 비대화형(cp949) 환경에서 유니코드 출력이 UnicodeEncodeError 로 죽는 것 방지
 $env:PYTHONUTF8 = "1"
 $env:PYTHONIOENCODING = "utf-8"
-# clipcart 의 UTF-8 stdout 을 PowerShell 이 cp949 로 오독해 로그가 깨지는 것 방지
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-$log = "logs\task_scheduler.log"
+$log = "logs\task_scheduler_ali.log"
 function Log($m) { "[$(Get-Date -Format o)] $m" | Out-File $log -Append -Encoding utf8 }
 
-Log "daily run start"
+Log "ali run start"
 
-# 1) 최신 엔진 받기 (런타임 데이터 변경은 autostash 로 보존). 실패해도 기존 코드로 진행.
+# 1) 최신 엔진 + 타 머신 게시 원장 받기 (런타임 변경은 autostash 보존). 실패해도 진행.
 try {
     git pull --rebase --autostash origin master 2>&1 | Out-File $log -Append -Encoding utf8
 } catch {
@@ -24,16 +23,14 @@ try {
 & .venv\Scripts\python.exe -m pip install -q -r requirements.txt 2>&1 | Out-File $log -Append -Encoding utf8
 & .venv\Scripts\python.exe -m pip install -q -e . 2>&1 | Out-File $log -Append -Encoding utf8
 
-# 3) 최신 엔진으로 생성·업로드 (promo 엔진, 실패 시 kinetic 자동 폴백)
-& .venv\Scripts\clipcart.exe daily --live 2>&1 | Out-File $log -Append -Encoding utf8
+# 3) 알리 소스로 생성·업로드
+& .venv\Scripts\clipcart.exe daily --source aliexpress --live --force 2>&1 | Out-File $log -Append -Encoding utf8
 Log "exit=$LASTEXITCODE"
 
-# 4) 게시 원장(history/posts/state) git 공유 — 다른 머신(Mac 알리)과 상품/니치 중복 방지.
-#    실행 전 pull 로 타 머신 게시분을 이미 반영했고, 여기선 이번 게시분을 push 한다.
-#    충돌 시 rebase 를 abort 해 저장소를 깨끗이 유지(다음 실행에서 재동기화).
+# 4) 게시 원장 git 공유 — 다른 머신과 상품/니치 중복 방지. 충돌 시 abort 로 안전 유지.
 try {
     git add data 2>&1 | Out-File $log -Append -Encoding utf8
-    git commit -m "data: scheduled coupang publish ledger sync" 2>&1 | Out-File $log -Append -Encoding utf8
+    git commit -m "data: scheduled aliexpress publish ledger sync" 2>&1 | Out-File $log -Append -Encoding utf8
     git pull --rebase --autostash origin master 2>&1 | Out-File $log -Append -Encoding utf8
     if ($LASTEXITCODE -eq 0) {
         git push origin master 2>&1 | Out-File $log -Append -Encoding utf8
