@@ -10,8 +10,10 @@ from clipcart.config import DATA_DIR
 def _read_json(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
-    with path.open(encoding="utf-8") as f:
-        data = json.load(f)
+    text = path.read_text(encoding="utf-8").strip()
+    if not text:
+        return []
+    data = json.loads(text)
     return data if isinstance(data, list) else [data]
 
 
@@ -48,6 +50,14 @@ def load_videos() -> list[dict[str, Any]]:
 
 def save_videos(videos: list[dict[str, Any]]) -> None:
     _write_json(DATA_DIR / "videos.json", videos)
+
+
+def load_metrics() -> list[dict[str, Any]]:
+    return _read_json(DATA_DIR / "metrics.json")
+
+
+def save_metrics(snapshots: list[dict[str, Any]]) -> None:
+    _write_json(DATA_DIR / "metrics.json", snapshots)
 
 
 def load_posts() -> list[dict[str, Any]]:
