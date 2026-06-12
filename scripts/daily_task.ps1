@@ -3,6 +3,11 @@
 # (origin/master 에 엔진을 push 하면 다음 아침 실행이 자동으로 새 엔진을 사용)
 # 파이프라인 자체가 '오늘 이미 게시' 체크를 하므로 중복 실행에 안전하다.
 Set-Location "c:\Users\ikess\Workspace\lionandthelab\clipcart"
+# 비대화형(cp949) 환경에서 유니코드 출력이 UnicodeEncodeError 로 죽는 것 방지
+$env:PYTHONUTF8 = "1"
+$env:PYTHONIOENCODING = "utf-8"
+# clipcart 의 UTF-8 stdout 을 PowerShell 이 cp949 로 오독해 로그가 깨지는 것 방지
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $log = "logs\task_scheduler.log"
 function Log($m) { "[$(Get-Date -Format o)] $m" | Out-File $log -Append -Encoding utf8 }
 
