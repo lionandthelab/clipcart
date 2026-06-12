@@ -203,7 +203,10 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
             continue
         # 판매량 많은 순 → 평점 순 (검증된 인기 상품 우선)
         candidates.sort(key=lambda x: (_volume_of(x), _rate_of(x)), reverse=True)
-        item = candidates[0]
+        # 셀러 제공 영상은 B-roll 소재 — 상위 5 후보 안에서는 영상 보유 우선
+        # (상위권 밖 상품을 영상 때문에 끌어올리진 않는다: 인기 검증이 먼저)
+        top = candidates[:5]
+        item = next((c for c in top if c.get("product_video_url")), top[0])
 
         score = _derive_score(item)
         if score.decision == "REJECT":
