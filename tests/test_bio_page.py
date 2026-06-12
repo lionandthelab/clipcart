@@ -74,6 +74,66 @@ def test_ensure_bio_links_falls_back_on_api_error():
     assert links["CP884"] == "https://link.coupang.com/a/V1"  # 원본 링크 폴백
 
 
+def test_live_entries_only_include_actually_public_videos():
+    # posts 원장의 PUBLISHED가 실제 공개와 어긋날 수 있다(운영자 비공개 처리 등,
+    # P001 실측) — YouTube 조회로 살아있는 영상의 제품만 페이지에 올린다.
+    from clipcart.bio.page import live_published_entries
+
+    posts = [
+        {"post_id": "live1", "product_id": "CP884", "platform": "youtube_shorts",
+         "status": "PUBLISHED", "source": "coupang", "published_at": "2026-06-10T07:20:00",
+         "title": "t1", "affiliate_url": "https://link.coupang.com/a/V1"},
+        {"post_id": "dead1", "product_id": "CP999", "platform": "youtube_shorts",
+         "status": "PUBLISHED", "source": "coupang", "published_at": "2026-06-09T07:20:00",
+         "title": "t2", "affiliate_url": "https://link.coupang.com/a/V2"},
+        {"post_id": "x", "product_id": "CP777", "platform": "youtube_shorts",
+         "status": "REPLACED_PRIVATE_MISMATCH", "source": "coupang",
+         "published_at": "2026-06-08T07:20:00", "title": "t3", "affiliate_url": "u"},
+    ]
+    products = {"CP884": {"product_name": "배수구 거름망", "coupang_product_id": "884"}}
+    entries = live_published_entries(posts, {"live1"}, products)
+    assert [e["product_id"] for e in entries] == ["CP884"]
+    assert entries[0]["coupang_product_id"] == "884"
+    assert entries[0]["date"] == "2026-06-10"
+    assert entries[0]["product_name"] == "배수구 거름망"
+
+
+def test_localize_images_downloads_once_and_soft_fails(tmp_path):
+    # CDN 핫링크는 브라우저/지역에 따라 차단될 수 있다 — 빌드 시 로컬 동봉.
+    from clipcart.bio.page import localize_images
+
+    calls = []
+
+    def fake_fetch(url, timeout=20):
+        calls.append(url)
+
+        class R:
+            ok = "bad" not in url
+            content = b"x" * 20000
+
+        return R()
+
+    entries = [{"product_id": "CP1"}, {"product_id": "CP2"}]
+    products = {
+        "CP1": {"image_url": "https://cdn/ok.jpg"},
+        "CP2": {"image_url": "https://cdn/bad.jpg"},
+    }
+    images = localize_images(entries, products, tmp_path, fetch=fake_fetch)
+    assert images == {"CP1": "img/CP1.jpg"}
+    assert (tmp_path / "img" / "CP1.jpg").exists()
+    # 재실행 시 캐시 사용(재다운로드 없음)
+    images2 = localize_images(entries, products, tmp_path, fetch=fake_fetch)
+    assert images2 == {"CP1": "img/CP1.jpg"}
+    assert calls.count("https://cdn/ok.jpg") == 1
+
+
+def test_render_page_prefers_local_image():
+    e = _entry("CP2", name="새제품")
+    html = render_page([e], {"CP2": _product("CP2")}, {"CP2": "u2"}, images={"CP2": "img/CP2.jpg"})
+    assert 'src="img/CP2.jpg"' in html
+    assert "https://img/x.jpg" not in html  # 핫링크 미사용
+
+
 def test_render_page_disclosure_first_newest_first_dedup():
     e_old = {**_entry("CP1", name="옛제품"), "date": "2026-06-01"}
     e_new = {**_entry("CP2", name="새제품"), "date": "2026-06-12"}
