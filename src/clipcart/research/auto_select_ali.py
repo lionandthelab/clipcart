@@ -72,6 +72,27 @@ def _discount_of(item: dict[str, Any], sale: int) -> tuple[int | None, int | Non
     return orig, pct
 
 
+def _gallery_urls(item: dict[str, Any]) -> list[str]:
+    """실제 리스팅 사진 갤러리(메인 + 서브). query/detail 응답이 함께 준다."""
+    urls: list[str] = []
+    main = item.get("product_main_image_url")
+    if main:
+        urls.append(main)
+    small = item.get("product_small_image_urls")
+    if isinstance(small, dict):
+        urls.extend(small.get("string") or [])
+    elif isinstance(small, str):
+        urls.extend(small.replace(",", ";").split(";"))
+    seen: set[str] = set()
+    out: list[str] = []
+    for u in urls:
+        u = (u or "").strip()
+        if u and u not in seen:
+            seen.add(u)
+            out.append(u)
+    return out
+
+
 def _volume_of(item: dict[str, Any]) -> int:
     try:
         return int(item.get("lastest_volume") or 0)
@@ -205,6 +226,8 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
             "original_price": original_price,
             "discount_pct": discount_pct,
             "image_url": item.get("product_main_image_url", ""),
+            "image_urls": _gallery_urls(item),
+            "video_url": item.get("product_video_url") or "",
             "rating": _rate_of(item),
             "review_count": _volume_of(item),
             "score": score.score,

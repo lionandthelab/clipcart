@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from clipcart.config import OUTBOX_DIR
+from clipcart.disclosure import short_disclosure_for
 from clipcart.video.copywriter import build_creative
 from clipcart.video.frames import compose_thumbnail, fetch_image
 from clipcart.video.profile import load_profile
@@ -35,12 +36,46 @@ def make_promo_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
     # 컴플라이언스는 실제 발화되는 promo 내레이션으로 검사
     creative["scenes"] = beats_to_scenes(beats)
 
-    product_img = fetch_image(product["image_url"])
+    # 실제 리스팅 사진 갤러리 다운로드 — 실사용 느낌(제품 사진 다수 노출)
+    image_urls = product.get("image_urls") or [product["image_url"]]
+    work_dir = product_png.parent
+    image_paths: list[str] = []
+    product_img = None
+    for i, url in enumerate(image_urls[:6]):
+        try:
+            im = fetch_image(url)
+        except Exception:  # noqa: BLE001
+            continue
+        p = work_dir / f"p{i}.png"
+        im.save(p, "PNG")
+        image_paths.append(str(p))
+        if product_img is None:
+            product_img = im  # 첫 성공컷 = 메인(썸네일/최종 폴백)
+    if product_img is None:
+        product_img = fetch_image(product["image_url"])
     product_img.save(product_png, "PNG")
+    if not image_paths:
+        image_paths = [str(product_png)]
+
+    # 제품 영상(있으면) — 실사용 느낌 극대화. soft-fail.
+    product_video = None
+    if product.get("video_url"):
+        try:
+            import requests as _rq
+
+            vp = work_dir / "product_vid.mp4"
+            r = _rq.get(product["video_url"], timeout=60)
+            if r.ok and len(r.content) > 10000:
+                vp.write_bytes(r.content)
+                product_video = str(vp)
+        except Exception:  # noqa: BLE001
+            product_video = None
 
     hook_title = product["niche"]["hook"]
-    render_promo(beats, str(product_png), str(video_path), hook_title=hook_title)
+    render_promo(beats, str(product_png), str(video_path), hook_title=hook_title,
+                 product_media={"images": image_paths, "video": product_video})
 
-    compose_thumbnail(product_img, creative["thumbnail_line1"], creative["thumbnail_line2"], thumb_path)
+    compose_thumbnail(product_img, creative["thumbnail_line1"], creative["thumbnail_line2"],
+                      thumb_path, badge_text=short_disclosure_for(product))
 
     return {"video_path": video_path, "thumbnail_path": thumb_path, "creative": creative}

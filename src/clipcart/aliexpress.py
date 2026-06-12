@@ -132,7 +132,8 @@ def query_products(
         "fields": (
             "product_id,product_title,target_sale_price,target_sale_price_currency,"
             "target_original_price,target_original_price_currency,"
-            "evaluate_rate,lastest_volume,product_main_image_url,product_detail_url,"
+            "evaluate_rate,lastest_volume,product_main_image_url,product_small_image_urls,"
+            "product_video_url,product_detail_url,"
             "promotion_link,first_level_category_name,original_price"
         ),
     }

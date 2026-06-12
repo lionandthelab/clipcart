@@ -19,7 +19,7 @@ TTS_CACHE = PROJECT_ROOT / "tools" / ".cache" / "tts_kr"
 
 # 진희 — 또렷한 아나운서 여성 (프로모션/광고 표준 톤). env로 교체 가능.
 DEFAULT_VOICE_ID = "tc_6731b2b2478a48710ecc9158"
-TEMPO = float(os.getenv("CLIPCART_TTS_TEMPO", "1.12"))
+TEMPO = float(os.getenv("CLIPCART_TTS_TEMPO", "1.24"))
 
 # 비트 tone → (감정 프리셋, 강도)
 _TONE_EMOTION = {

@@ -18,3 +18,16 @@ def disclosure_for(product: dict[str, Any]) -> str:
     if "ali" in source:
         return ALIEXPRESS_DISCLOSURE
     return COUPANG_DISCLOSURE
+
+
+# 썸네일/상단 배지용 짧은 고지 (보조 표기 — 전체 고지는 disclosure_for/설명란에서)
+SHORT_DISCLOSURE_COUPANG = "광고 · 쿠팡 파트너스 수수료 지급"
+SHORT_DISCLOSURE_ALIEXPRESS = "광고 · 알리익스프레스 어필리에이트"
+
+
+def short_disclosure_for(product: dict[str, Any]) -> str:
+    """소스별 짧은 배지 문구. 소스와 다른 고지를 쓰면 허위 고지가 되므로 분기한다."""
+    source = (product.get("source") or "").lower()
+    if "ali" in source:
+        return SHORT_DISCLOSURE_ALIEXPRESS
+    return SHORT_DISCLOSURE_COUPANG

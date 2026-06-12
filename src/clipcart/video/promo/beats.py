@@ -96,23 +96,34 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
     if discount_pct and original_price:
         # 획기적 실측 할인: 정가→현재가를 숫자로 박는다
         product_line = (
-            f"해결책은 간단해요. {name}. 정가 {original_price:,}원인데, "
-            f"지금 {discount_pct}% 할인된 {price:,}원이에요."
+            f"{name}. 정가 {original_price:,}원이 지금 {discount_pct}% 할인, {price:,}원이에요."
         )
         product_emphasis = f"{discount_pct}% 할인"
         product_caption = f"{name} · {original_price:,}원 → {price:,}원"
     else:
-        product_line = f"해결책은 간단해요. {name}. 단돈 {price:,}원. {rocket_line}"
+        product_line = f"{name}. 단돈 {price:,}원. {rocket_line}"
         product_emphasis = f"{price:,}원"
         product_caption = f"{name} · {price:,}원"
 
     # 만족도/주문수는 충분히 인상적일 때만 대본에 얹는다
     if rating >= 90 and orders >= 100:
-        result_stats_line = f" 이미 {orders:,}명이 시켰고, 구매자 만족도 {rating:g}%예요."
+        result_stats_line = f" 이미 {orders:,}명이 시켰고, 만족도 {rating:g}%예요."
         result_emphasis = f"만족도 {rating:g}%"
     else:
         result_stats_line = ""
         result_emphasis = name  # 제품명 유지(썸네일 프레임 노출 대비)
+
+    # 실제 제품 사진(알리 갤러리)이 충분하면 화보샷/모션샷 대신 실사진 → 실사용 느낌.
+    gallery_n = len(product.get("image_urls") or [])
+    has_gallery = gallery_n >= 2
+    if has_gallery:
+        product_shots: list[str] | None = ["productimg:0", "productimg:1"]
+        usage_shots = [f"pexels:{br['use']}", "productimg:2", "productimg:3"]
+        result_shots = [f"pexels:{br['clean']}", "productimg:4"]
+    else:
+        product_shots = None
+        usage_shots = [f"pexels:{br['use']}", f"motionshot:{in_use_scene}", f"pexels:{br['use']}"]
+        result_shots = [f"pexels:{br['clean']}", f"productshot:{scenes[1 % len(scenes)]}"]
 
     beats: list[dict[str, Any]] = [
         {
@@ -141,8 +152,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "switch",
             # 기존 방식 실패 공감 → 차별화 전환 (구매의욕 자극, 보장 표현 금지)
             "narration": (
-                f"{niche['old_way']}… 이미 해보셨잖아요. 그때마다 실망하셨다면, "
-                f"이번엔 다릅니다."
+                f"{niche['old_way']}, 해보셨죠? 실망했다면 이번엔 다릅니다."
             ),
             "caption": "써봤는데 실망했던 사람, 주목",
             "source": f"gemini:{switch_scene}",
@@ -155,9 +165,8 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "product",
             "narration": product_line,
             "caption": product_caption,
-            # 제품 추출 → 화보샷 → Kling 모션 클립(미세 카메라 무빙).
-            # kling 실패 시 정지 화보샷, 그것도 실패 시 원본 제품컷.
-            "source": f"motionshot:{scenes[0]}",
+            # 실제 리스팅 사진 우선(실사용 느낌). 갤러리 없으면 화보샷→Kling 모션.
+            **({"shots": product_shots} if product_shots else {"source": f"motionshot:{scenes[0]}"}),
             "fallback": "product",
             "emphasis": product_emphasis,
             "color": "red",
@@ -167,12 +176,8 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "usage",
             "narration": f"쓰는 법도 쉬워요. {niche['usage']}",
             "caption": niche["usage"],
-            # 실사용 느낌 — 짧게 여러 구도 퀵컷 (실영상 2컷 + 실사용 자리 모션샷)
-            "shots": [
-                f"pexels:{br['use']}",
-                f"motionshot:{in_use_scene}",
-                f"pexels:{br['use']}",
-            ],
+            # 실사용 느낌 — 실영상 + 실제 제품 사진 퀵컷 (갤러리 없으면 모션샷)
+            "shots": usage_shots,
             "fallback": "product",
             "color": "white",
         },
@@ -184,11 +189,8 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
                 f"이게 {price:,}원이면, 장바구니 안 담을 이유가 없죠."
             ),
             "caption": niche["benefit"],
-            # 결과도 2컷 퀵컷: 깨끗해진 실영상 + 제품 화보샷
-            "shots": [
-                f"pexels:{br['clean']}",
-                f"productshot:{scenes[1 % len(scenes)]}",
-            ],
+            # 결과 2컷 퀵컷: 깨끗해진 실영상 + 실제 제품 사진(없으면 화보샷)
+            "shots": result_shots,
             "fallback": "product",
             # 수치가 인상적이면 만족도 슬램, 아니면 제품명(썸네일 프레임 대비)
             "emphasis": result_emphasis,
@@ -197,7 +199,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         {
             "role": "cta",
             "tone": "cta",
-            "narration": f"단점도 솔직히 말할게요. {niche['downside']}. 그래도 끌린다면, 링크는 고정 댓글에 있어요.",
+            "narration": f"단점도 솔직히, {niche['downside']}. 링크는 고정 댓글에 있어요.",
             "caption": "링크는 고정 댓글에 ▼",
             # 실데이터(평점/주문수) 리뷰 요약 카드 — 신빙성. 없으면 제품컷.
             "source": f"file:{review_card}" if review_card else "product",

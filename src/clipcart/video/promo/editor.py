@@ -59,10 +59,25 @@ def _color(name: str):
 # --------------------------------------------------------------------------- #
 # Sourcing
 # --------------------------------------------------------------------------- #
-def _try_one(pex, token: str, index: int, product_img_path: str = "") -> tuple[str | None, str | None]:
+def _try_one(pex, token: str, index: int, product_img_path: str = "",
+             images: list[str] | None = None, video: str | None = None) -> tuple[str | None, str | None]:
     """단일 source 토큰 시도 → (path, kind) 또는 (None, None)."""
     if token == "product":
         return None, None  # product는 호출부에서 최종 폴백으로만
+    if token.startswith("productimg:"):
+        # 실제 리스팅 사진 갤러리의 N번째. 없으면 None(다음 폴백으로).
+        try:
+            idx = int(token[len("productimg:"):] or 0)
+        except ValueError:
+            idx = 0
+        imgs = images or []
+        if 0 <= idx < len(imgs) and imgs[idx] and Path(imgs[idx]).exists():
+            return imgs[idx], "image"
+        return None, None
+    if token == "productvideo":
+        if video and Path(video).exists():
+            return video, "video"
+        return None, None
     if token.startswith("file:"):
         p = token[5:]
         return (p, "image") if p and Path(p).exists() else (None, None)
@@ -104,12 +119,13 @@ def _try_one(pex, token: str, index: int, product_img_path: str = "") -> tuple[s
     return None, None
 
 
-def _resolve_media(pex, tokens: list[str], product_img_path: str, index: int) -> tuple[str, str]:
+def _resolve_media(pex, tokens: list[str], product_img_path: str, index: int,
+                   images: list[str] | None = None, video: str | None = None) -> tuple[str, str]:
     """후보 토큰 순서대로 시도, 모두 실패 시 제품 이미지."""
     for tok in tokens:
         if tok == "product":
             return product_img_path, "product"
-        p, k = _try_one(pex, tok, index, product_img_path)
+        p, k = _try_one(pex, tok, index, product_img_path, images, video)
         if p:
             return p, k
     return product_img_path, "product"
@@ -203,25 +219,25 @@ def _wrap(draw, words, font, max_w, stroke):
     return lines
 
 
-def _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines):
+def _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines, display=False):
     tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
     words = text.split()
     for size in range(max_size, min_size - 1, -3):
-        font = load_font(size, bold=bold)
+        font = load_font(size, bold=bold, display=display)
         lines = _wrap(tmp, words, font, box_w, stroke)
         widest = max(tmp.textbbox((0, 0), " ".join(lw), font=font, stroke_width=stroke)[2] for lw in lines)
         if len(lines) <= max_lines and int(size * 1.2) * len(lines) <= box_h and widest <= box_w:
             return font, size, lines
-    font = load_font(min_size, bold=bold)
+    font = load_font(min_size, bold=bold, display=display)
     return font, min_size, _wrap(tmp, words, font, box_w, stroke)
 
 
 def _draw_block(text, bold, zone_y0, zone_y1, max_size, min_size,
-                color=WHITE, accent=None, accent_color=YELLOW, stroke=6):
+                color=WHITE, accent=None, accent_color=YELLOW, stroke=6, display=False):
     box_w = int(W * 0.88)
     box_h = (zone_y1 - zone_y0) - 20
     max_lines = 2 if (zone_y1 - zone_y0) < 0.25 * H else 3
-    font, size, lines = _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines)
+    font, size, lines = _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines, display)
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     line_h = int(size * 1.2)
@@ -261,6 +277,55 @@ def _meaning_units(text: str, max_eojeol: int = 5) -> list[str]:
         if cur:
             units.append(" ".join(cur))
     return units or [text]
+
+
+def _korlen(s: str) -> int:
+    """공백 제외 글자수 — 한국어 발화시간 근사(자막 타이밍 비례용)."""
+    return len(s.replace(" ", "")) or 1
+
+
+# 하단 자막: 또렷한 배경 칩(검정 띠 위에서도 보이게 밝은 차콜) + 디스플레이 폰트, 가능하면 한 줄.
+SUB_MAX_SIZE, SUB_MIN_SIZE = 78, 42
+SUB_BG = (44, 47, 60, 235)
+SUB_BORDER = (255, 255, 255, 60)
+
+
+def _subtitle_png(text: str) -> np.ndarray:
+    text = text.strip()
+    box_w = int(W * 0.90)
+    stroke = 5
+    tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
+    font = None
+    size = SUB_MIN_SIZE
+    lines = [text]
+    # 한 줄 우선: 큰 사이즈부터 줄여가며 한 줄에 맞으면 채택
+    for s in range(SUB_MAX_SIZE, SUB_MIN_SIZE - 1, -2):
+        f = load_font(s, bold=True, display=True)
+        if tmp.textbbox((0, 0), text, font=f, stroke_width=stroke)[2] <= box_w:
+            font, size, lines = f, s, [text]
+            break
+    if font is None:  # 한 줄 불가 → 최소 사이즈 2줄
+        font = load_font(SUB_MIN_SIZE, bold=True, display=True)
+        size = SUB_MIN_SIZE
+        lines = [" ".join(w) for w in _wrap(tmp, text.split(), font, box_w, stroke)][:2]
+
+    line_h = int(size * 1.16)
+    widths = [tmp.textbbox((0, 0), ln, font=font, stroke_width=stroke)[2] for ln in lines]
+    text_w, text_h = max(widths), line_h * len(lines)
+    pad_x, pad_y = 52, 26
+    bw, bh = text_w + pad_x * 2, text_h + pad_y * 2
+    bx0 = (W - bw) // 2
+    by0 = (BOTTOM_Y + H) // 2 - bh // 2
+
+    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle((bx0, by0, bx0 + bw, by0 + bh), radius=28, fill=SUB_BG,
+                        outline=SUB_BORDER, width=3)
+    ty = by0 + pad_y
+    for ln, lw in zip(lines, widths):
+        d.text(((W - lw) // 2, ty), ln, font=font, fill=WHITE, stroke_width=stroke, stroke_fill=(0, 0, 0))
+        ty += line_h
+    return np.array(img)
 
 
 # --------------------------------------------------------------------------- #
@@ -324,9 +389,13 @@ def _sfx_clip(path, t_in, vol):
 # Main
 # --------------------------------------------------------------------------- #
 def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: str,
-                 *, hook_title: str, fps: int = 30, end_card_dur: float = 2.0) -> Path:
+                 *, hook_title: str, fps: int = 30, end_card_dur: float = 1.0,
+                 product_media: dict[str, Any] | None = None) -> Path:
     from clipcart.video.promo import tts_typecast
 
+    pm = product_media or {}
+    images = [p for p in (pm.get("images") or []) if p] or [product_img_path]
+    video = pm.get("video")
     pex = sources.Pexels()
     print(f"  [promo] pexels={'on' if pex.enabled else 'off'} typecast={'on' if tts_typecast.available() else 'edge-fallback'}")
 
@@ -339,7 +408,7 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     media_segs, overlays, audio_segs, sfx_cues = [], [], [], []
     t = 0.0
     for i, (b, (apath, adur)) in enumerate(zip(beats, tts)):
-        post = 0.12 if b["role"] == "hook" else 0.2
+        post = 0.08 if b["role"] == "hook" else 0.12
         beat_dur = adur + post
         col = _color(b.get("color", "white"))
 
@@ -352,14 +421,14 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             sub_clips = []
             for si in range(n):
                 tokens = [shots[si]] + ([b["fallback"]] if b.get("fallback") else [])
-                path, kind = _resolve_media(pex, tokens, product_img_path, si)
+                path, kind = _resolve_media(pex, tokens, product_img_path, si, images, video)
                 sub_clips.append(_media_clip(path, kind, sub_dur))
                 if si > 0:
                     sfx_cues.append((sfx.whoosh(), t + si * sub_dur, 0.35))
             media_segs.append(concatenate_videoclips(sub_clips, method="chain").with_duration(beat_dur))
         else:
             tokens = [b["source"]] + ([b["fallback"]] if b.get("fallback") else [])
-            path, kind = _resolve_media(pex, tokens, product_img_path, 0)
+            path, kind = _resolve_media(pex, tokens, product_img_path, 0, images, video)
             media_segs.append(_media_clip(path, kind, beat_dur))
 
         # SFX: whoosh on cut, impact on hook/emphasis
@@ -368,26 +437,29 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
         if b["role"] == "hook":
             sfx_cues.append((sfx.riser(), t + 0.02, 0.45))
 
-        # bottom narration — meaning-unit chunks
-        units = _meaning_units(b.get("caption") or b["narration"])
-        wsum = sum(len(u.split()) for u in units) or 1
+        # bottom narration — 실제 나레이션을 의미단위로, 음성에 맞춰(글자수 비례) 노출
+        units = _meaning_units(b["narration"], max_eojeol=4)
+        csum = sum(_korlen(u) for u in units)
         ut = t
         for u in units:
-            ud = beat_dur * (len(u.split()) / wsum)
-            png = _draw_block(u, _FONT_BOLD, BOTTOM_Y + 16, H - 26, max_size=80, min_size=44,
-                              stroke=6, color=WHITE)
-            overlays.append(_overlay(png, ut, ud + 0.05, fi=0.05, fo=0.05))
+            ud = beat_dur * (_korlen(u) / csum)
+            png = _subtitle_png(u)
+            overlays.append(_overlay(png, ut, ud + 0.04, fi=0.03, fo=0.03))
             ut += ud
 
-        # emphasis slam in media band (rare → impact)
+        # emphasis slam — 강조어가 실제 발화되는 시점(글자 위치 비례)에 크게 꽝
         emp = b.get("emphasis")
         if emp:
-            png = _draw_block(emp, _FONT_BOLD, MEDIA_Y + int(MEDIA_H * 0.30),
-                              MEDIA_Y + int(MEDIA_H * 0.70), max_size=190, min_size=80,
-                              stroke=8, color=col)
-            est = t + min(0.4, beat_dur * 0.2)
-            overlays.append(_overlay(png, est, min(1.1, beat_dur * 0.5), fi=0.05, fo=0.16))
-            sfx_cues.append((sfx.pop(), est, 0.5))
+            narr = b["narration"]
+            pos = narr.find(emp)
+            frac = (_korlen(narr[:pos]) / _korlen(narr)) if pos >= 0 else 0.35
+            hold = min(1.1, max(0.7, beat_dur * 0.4))
+            est = max(t + 0.1, min(t + beat_dur * frac, t + beat_dur - hold))
+            png = _draw_block(emp, _FONT_BOLD, MEDIA_Y + int(MEDIA_H * 0.28),
+                              MEDIA_Y + int(MEDIA_H * 0.72), max_size=220, min_size=96,
+                              stroke=12, color=col, display=True)
+            overlays.append(_overlay(png, est, hold, fi=0.05, fo=0.12))
+            sfx_cues.append((sfx.pop(), est, 0.55))
 
         # CTA disclosure (baked, bottom) — 비트가 들고 있는 소스별 고지를 그린다
         if b.get("disclosure"):
@@ -408,7 +480,7 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
                    .with_position((0, MEDIA_Y)).with_start(0))
 
     title_png = _draw_block(hook_title, _FONT_BOLD, BANNER_H + 6, TOP_H - 6,
-                            max_size=66, min_size=38, stroke=5, color=WHITE)
+                            max_size=64, min_size=36, stroke=5, color=WHITE, display=True)
     title_clip = _overlay(title_png, 0.0, total_narr, fi=0.2, fo=0.15)
     ad_badge = _overlay(_ad_badge_png(), 0.0, total, fi=0.0, fo=0.0)
 

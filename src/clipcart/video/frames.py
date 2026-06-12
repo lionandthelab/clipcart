@@ -118,10 +118,16 @@ def _pill(draw: ImageDraw.ImageDraw, xy: tuple[int, int], text: str, font: Image
     return rect[2], rect[3]
 
 
-def _chrome(canvas: Image.Image) -> None:
-    """전 장면 공통: 광고 표시 + 브랜드 (줌 크롭에도 안 잘리는 안전 영역)."""
+_DEFAULT_BADGE = "광고 · 쿠팡 파트너스 수수료 지급"
+
+
+def _chrome(canvas: Image.Image, badge_text: str = _DEFAULT_BADGE) -> None:
+    """전 장면 공통: 광고 표시 + 브랜드 (줌 크롭에도 안 잘리는 안전 영역).
+
+    badge_text는 소스별 고지(쿠팡/알리)를 받는다 — 소스와 다른 고지는 허위 고지.
+    """
     draw = ImageDraw.Draw(canvas, "RGBA")
-    _pill(draw, (44, 152), "광고 · 쿠팡 파트너스 수수료 지급", _font(34), WHITE, (0, 0, 0, 150))
+    _pill(draw, (44, 152), badge_text, _font(34), WHITE, (0, 0, 0, 150))
     brand_font = _font(36)
     brand = "살림해결소"
     bw = draw.textlength(brand, font=brand_font)
@@ -286,7 +292,8 @@ def draw_chrome(canvas: Image.Image) -> None:
     _chrome(canvas)
 
 
-def compose_thumbnail(product_img: Image.Image, line1: str, line2: str, out_path: Path) -> Path:
+def compose_thumbnail(product_img: Image.Image, line1: str, line2: str, out_path: Path,
+                      badge_text: str = _DEFAULT_BADGE) -> Path:
     """흥행 스타일 썸네일: 대형 훅 텍스트 + 제품 카드."""
     canvas = _bg_blur_dark(product_img, dark=120)
     card = _fit_within(product_img, 760, 760)
@@ -300,7 +307,7 @@ def compose_thumbnail(product_img: Image.Image, line1: str, line2: str, out_path
     f2 = _font(96)
     y = _draw_lines(draw, _wrap(draw, line1, f1, W - 100), f1, 260, YELLOW, 10)
     _draw_lines(draw, _wrap(draw, line2, f2, W - 100), f2, y + 6, WHITE, 9)
-    _chrome(canvas)
+    _chrome(canvas, badge_text)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     canvas.convert("RGB").save(out_path, "JPEG", quality=90)
     return out_path

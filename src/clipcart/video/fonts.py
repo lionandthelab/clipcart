@@ -28,15 +28,26 @@ _REGULAR_CANDIDATES: list[tuple[str, int]] = [
     ("/Library/Fonts/NanumGothic.ttf", 0),
 ]
 
+# 디스플레이(팬시·초굵은 검은고딕) — 강조 슬램/제목/자막용. 레포 번들 우선, 없으면 볼드 폴백.
+# 레포에 동봉(assets/fonts)하므로 윈도우/맥 데일리가 동일하게 사용한다.
+_REPO_FONTS = Path(__file__).resolve().parents[3] / "assets" / "fonts"
+_DISPLAY_CANDIDATES: list[tuple[str, int]] = [
+    (str(_REPO_FONTS / "BlackHanSans-Regular.ttf"), 0),
+    *_BOLD_CANDIDATES,
+]
 
-@lru_cache(maxsize=2)
-def _resolve(bold: bool) -> tuple[str, int]:
-    for path, index in (_BOLD_CANDIDATES if bold else _REGULAR_CANDIDATES):
+_CANDIDATES = {"bold": _BOLD_CANDIDATES, "regular": _REGULAR_CANDIDATES, "display": _DISPLAY_CANDIDATES}
+
+
+@lru_cache(maxsize=4)
+def _resolve(kind: str) -> tuple[str, int]:
+    for path, index in _CANDIDATES.get(kind, _REGULAR_CANDIDATES):
         if Path(path).exists():
             return path, index
     raise RuntimeError("한글 폰트를 찾을 수 없음 (맑은 고딕 / Apple SD Gothic Neo / 나눔고딕)")
 
 
-def load_font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
-    path, index = _resolve(bold)
+def load_font(size: int, bold: bool = True, display: bool = False) -> ImageFont.FreeTypeFont:
+    kind = "display" if display else ("bold" if bold else "regular")
+    path, index = _resolve(kind)
     return ImageFont.truetype(path, size, index=index)
