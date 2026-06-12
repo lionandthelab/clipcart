@@ -6,6 +6,7 @@ import hashlib
 import hmac
 import json
 import os
+import re
 import time
 from typing import Any
 from urllib.parse import quote, urlencode
@@ -101,6 +102,17 @@ def goldbox_products(sub_id: str | None = None) -> list[dict[str, Any]]:
         params["subId"] = sub_id
     data = _request("GET", f"{API_PREFIX}/products/goldbox", params or None)
     return data or []
+
+
+def make_sub_id(base: str | None, product_id: str | int) -> str:
+    """상품(영상)별 리포트 귀속용 subId. 정산은 trackingCode 기준이라 값은 자유.
+
+    리포트 칼럼에서 사람이 읽을 수 있도록 `채널접두사 + 상품ID` 형태로 만들고,
+    포맷 리스크를 피해 소문자 영숫자만 남긴다.
+    """
+    base_clean = re.sub(r"[^a-z0-9]", "", (base or "").lower()) or "clipcart"
+    pid = re.sub(r"[^0-9]", "", str(product_id))
+    return base_clean[: 50 - len(pid)][:20] + pid
 
 
 def create_deeplinks(urls: list[str], sub_id: str | None = None) -> list[dict[str, Any]]:

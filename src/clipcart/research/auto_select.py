@@ -14,7 +14,7 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 from clipcart.config import DATA_DIR
-from clipcart.coupang import create_deeplinks, search_products
+from clipcart.coupang import create_deeplinks, make_sub_id, search_products
 from clipcart.research import history
 from clipcart.research.niches import NICHES, PRODUCT_EXCLUDE_KEYWORDS, product_type_ok
 from clipcart.research.scoring import ScoreInput, score_product
@@ -81,7 +81,8 @@ MAX_SEARCH_CALLS_PER_RUN = 5  # 쿠팡 검색 API 실측 rate limit(시간당 ~1
 
 def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | None:
     """오늘의 상품 1개 선정. 실패 시 None."""
-    # subId는 파트너스에 등록된 채널 ID만 정산 인정 — 미등록 임의값은 전달하지 않는다
+    # 정산은 계정 trackingCode 기준, subId는 리포트 분류용 (2026-06-12 reports API 실측).
+    # 검색 단계는 채널 subId, 최종 딥링크는 상품별 subId로 영상 단위 귀속.
     sub_id = os.getenv("COUPANG_SUB_ID", "") or None
     state = _load_state()
     used_keywords = set(state.get("used_keywords", []))
@@ -127,10 +128,12 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
         if score.decision == "REJECT":
             continue
 
-        affiliate_url = _shorten_link(item, sub_id)
+        product_sub_id = make_sub_id(sub_id, item["productId"])
+        affiliate_url = _shorten_link(item, product_sub_id)
         product = {
             "product_id": f"CP{item['productId']}",
             "coupang_product_id": str(item["productId"]),
+            "sub_id": product_sub_id,
             "created_at": date.today().isoformat(),
             "status": "AUTO_SELECTED",
             "product_name": item.get("productName", ""),

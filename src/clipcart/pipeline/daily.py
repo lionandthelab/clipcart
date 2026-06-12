@@ -157,6 +157,7 @@ def run_daily(
             "status": "PUBLISHED",
             "title": creative["title"],
             "affiliate_url": product["affiliate_url"],
+            "sub_id": product.get("sub_id"),
             "thumbnail_set": thumbnail_set,
             "comment_id": comment_id,
         }
@@ -181,6 +182,7 @@ def run_daily(
             "title": creative["title"],
             "post_url": publish_result.post_url,
             "affiliate_url": product["affiliate_url"],
+            "sub_id": product.get("sub_id"),
         }
     )
 
