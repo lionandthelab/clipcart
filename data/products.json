@@ -623,13 +623,13 @@
     "product_id": "AE1005008660272512",
     "aliexpress_product_id": "1005008660272512",
     "created_at": "2026-06-12",
-    "status": "AUTO_SELECTED",
+    "status": "PUBLISHED",
     "product_name": "드릴 없이 설치하는 흡착식 욕실 선반, 화장실 공간 알루미늄 걸이형 선반, 욕실 정리함, 벽걸이형",
     "display_name": "욕실 흡착 선반",
     "category": "욕실",
     "source": "aliexpress",
     "product_url": "https://ko.aliexpress.com/item/1005008660272512.html?pdp_npi=6%40dis%21KRW%2112292%215900%21%21%2153.12%2125.50%21%402151fca717812423555257965e0ec5%2112000046135783769%21affd%21%21%21%211%210%21",
-    "affiliate_url": "https://s.click.aliexpress.com/e/_c3LR41RR",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3AEyao5",
     "price": 5900,
     "original_price": 12292,
     "discount_pct": 52,
@@ -661,7 +661,8 @@
     "problem": "샴푸통을 바닥에 두면 통 밑에 물때가 끼고 욕실이 좁아 보이죠.",
     "video_angle": "욕실 바닥 샴푸통, 바닥 물때의 주범이에요",
     "known_downside": "타일 외 울퉁불퉁한 벽면에서는 흡착력이 떨어질 수 있습니다",
-    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\AE1005008660272512.mp4"
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005008660272512.mp4",
+    "post_url": "https://www.youtube.com/shorts/T2urg4tH7C0"
   },
   {
     "product_id": "AE1005007822477913",
