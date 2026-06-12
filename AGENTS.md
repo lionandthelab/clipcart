@@ -33,6 +33,37 @@ AI Agent는 아래 작업을 담당한다.
 
 ---
 
+## 0.5 멀티 머신 운영 · 동기화 (실전 런북, 2026-06-12)
+
+> 실제 구현·운영 규칙의 **권위 문서는 루트 `CLAUDE.md`** 다. 아래 4장 이하의 개념 스펙과 충돌하면 CLAUDE.md/코드를 따른다.
+> 이 절은 **여러 머신(예: Windows + macOS)에서 같은 채널을 중복·충돌 없이 돌리기 위한** 운영 런북이다.
+
+### 단일 진실원천 = git 저장소
+- **git 추적(모든 머신 공유):** 코드 `src/`, 스케줄 스크립트 `scripts/`, 폰트 `assets/`(Black Han Sans), **게시 원장 `data/*.json`(history/posts/products/niche_state…)**.
+- **git 미추적(머신마다 따로 준비):** `.env`(키/비밀), `.venv/`, `tools/ffmpeg/`, `outbox/`, `logs/`.
+
+### 새 머신 셋업 순서
+1. `git clone` → `python -m venv .venv` → `.venv`에서 `pip install -e .`
+2. `.env` 준비(steward-lab .env에서 복사). 필수 키: `COUPANG_ACCESS_KEY/COUPANG_SECRET_KEY/COUPANG_SUB_ID`, `ALIEXPRESS_APP_KEY/ALIEXPRESS_APP_SECRET/ALIEXPRESS_TRACKING_ID`, `YOUTUBE_CLIENT_ID/SECRET/REFRESH_TOKEN`, `TYPECAST_API_KEY`, `PEXELS_API_KEY`, `GEMINI_API_KEY`, `OPENROUTER_API_KEY`(Kling), `ELEVENLABS_API_KEY`(선택). META/TIKTOK/PINTEREST는 해당 게시 시.
+3. ffmpeg: `tools/ffmpeg` 없으면 `imageio-ffmpeg` 폴백이 자동 사용됨.
+4. 스케줄 등록(**OS 레벨이라 git에 없음 → 머신마다 직접 등록**):
+   - **Windows 작업 스케줄러:** `ClipcartDaily`(쿠팡, 매일 07:20 → `scripts/daily_task.ps1`), `ClipcartAli`(알리, 매일 13:00 1회 → `scripts/ali_daily.ps1`). 작업 인자는 `-NoProfile -ExecutionPolicy Bypass -File "<절대경로>\scripts\xxx.ps1"`(앞 공백/끝 백슬래시 금지 — 깨지면 즉시 실패).
+   - **macOS launchd:** `com.clipcart.ali-daily`(알리, 6시간 00/06/12/18 → `scripts/ali_daily.sh`, `~/Library/LaunchAgents`).
+5. ⚠️ **스크립트 내 절대경로를 자기 머신에 맞게 수정**: `daily_task.ps1`/`ali_daily.ps1`는 `c:\Users\ikess\...`, `ali_daily.sh`는 `/Users/mac/...`로 하드코딩돼 있다. 새 머신은 자기 프로젝트 경로로 바꿔야 동작한다.
+
+### 머신 간 중복 방지 = `data/history.json` + git 동기화 (핵심)
+- **`data/history.json`**(append-only)이 dedup 권위 원장. 차단 키: 쿠팡상품ID / 알리상품ID / 정규화 상품명(타 판매자 동일상품 포함) / 니치 키워드 갭(`CLIPCART_KEYWORD_GAP_DAYS`, 기본 10일).
+- **모든 스케줄 스크립트는** ① 실행 **전 `git pull --rebase --autostash`**(다른 머신 게시분을 history에 반영 → 같은 상품/니치 회피) ② 게시 **후 `data` commit → pull → push**(이번 게시분을 다른 머신에 공유). 충돌 시 `git rebase --abort`로 저장소를 깨끗이 유지(다음 실행에서 재동기화).
+- 결과: 각 머신이 상대 게시분을 보고 중복을 피한다. **양쪽 머신이 자주 pull/push할수록 안전.**
+
+### 주의 / 한계
+- history.json은 pretty JSON 배열이라 **두 머신이 거의 동시에 게시하면 rebase 충돌** 가능. 스케줄 시각을 겹치지 않게 둘 것(현재 Windows 07:20·13:00 / Mac 00·06·12·18). 충돌이 잦아지면 **JSONL(레코드=한 줄) 전환**이 근본 해결책.
+- 충돌로 push가 막히면 게시분은 로컬에만 남는다 → 수동 `git pull --rebase` 후 history.json의 **양쪽 항목을 모두 살려** 머지하고 push.
+- `*.sh`는 `.gitattributes`로 LF 고정(Windows에서 저장돼도 macOS 셸이 깨지지 않게).
+- 의무 고지는 **확정형만** 인정("…수수료를 제공받습니다"), 소스별 분기(쿠팡/알리). `compliance.py`가 하드게이트 + `sanitize_text`로 생성 문구의 금지어 정화. (아래 4.3의 옛 '받을 수 있습니다' 표현은 공정위 2024-12 개정으로 **폐기**.)
+
+---
+
 ## 1. 사업 컨셉
 
 ### 브랜드명
