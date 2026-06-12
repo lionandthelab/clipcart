@@ -14,6 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
+import requests
+
 from clipcart.aliexpress import ALIEXPRESS_DISCLOSURE
 from clipcart.config import DATA_DIR
 from clipcart.coupang import COUPANG_DISCLOSURE
@@ -62,6 +64,70 @@ def ensure_bio_links(
     return links
 
 
+def live_published_entries(
+    posts: list[dict[str, Any]],
+    live_video_ids: set[str],
+    products_by_id: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """현재 실제 공개 중인 영상의 제품만. posts 원장의 PUBLISHED는 실제 공개와
+    어긋날 수 있어(운영자 비공개 처리 등, P001 실측) YouTube 조회 결과로 거른다."""
+    out = []
+    for p in posts:
+        if p.get("platform") != "youtube_shorts" or p.get("status") != "PUBLISHED":
+            continue
+        if p.get("post_id") not in live_video_ids:
+            continue
+        pid = p.get("product_id", "")
+        prod = products_by_id.get(pid) or {}
+        cp_id = prod.get("coupang_product_id") or (
+            pid.removeprefix("CP") if pid.startswith("CP") else None
+        )
+        out.append(
+            {
+                "product_id": pid,
+                "coupang_product_id": cp_id,
+                "source": p.get("source", "coupang"),
+                "product_name": prod.get("product_name") or p.get("title", ""),
+                "date": str(p.get("published_at", ""))[:10],
+                "affiliate_url": p.get("affiliate_url", ""),
+            }
+        )
+    return out
+
+
+def localize_images(
+    entries: list[dict[str, Any]],
+    products_by_id: dict[str, dict[str, Any]],
+    out_dir: Path,
+    fetch: Callable[..., Any] | None = None,
+) -> dict[str, str]:
+    """제품 이미지를 빌드 시 내려받아 페이지에 동봉. CDN 핫링크는 브라우저/지역에
+    따라 차단될 수 있다(멀티탭 정리함 실측). 실패는 항목 단위 soft-fail."""
+    if fetch is None:
+        fetch = requests.get
+    images: dict[str, str] = {}
+    img_dir = out_dir / "img"
+    for entry in entries:
+        pid = entry.get("product_id", "")
+        rel = f"img/{pid}.jpg"
+        dest = img_dir / f"{pid}.jpg"
+        if dest.exists():
+            images[pid] = rel
+            continue
+        url = (products_by_id.get(pid) or {}).get("image_url")
+        if not url:
+            continue
+        try:
+            r = fetch(url, timeout=20)
+            if r.ok and len(r.content) > 1000:
+                img_dir.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes(r.content)
+                images[pid] = rel
+        except Exception:  # noqa: BLE001
+            continue
+    return images
+
+
 def _dedupe_newest_first(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ordered = sorted(entries, key=lambda e: e.get("date", ""), reverse=True)
     seen: set[str] = set()
@@ -78,6 +144,7 @@ def render_page(
     entries: list[dict[str, Any]],
     products_by_id: dict[str, dict[str, Any]],
     links: dict[str, str],
+    images: dict[str, str] | None = None,
 ) -> str:
     """모바일 우선 단일 HTML. 고지는 첫 부분(공정위), 최신 게시 순."""
     items = _dedupe_newest_first(entries)
@@ -94,11 +161,9 @@ def render_page(
         price = p.get("price")
         price_txt = f"{int(price):,}원" if price else ""
         badge = "알리익스프레스" if "ali" in (e.get("source") or "") else "쿠팡"
-        img = (
-            f'<img src="{esc(p["image_url"])}" alt="{name}" loading="lazy">'
-            if p.get("image_url")
-            else ""
-        )
+        # 로컬 동봉 이미지 우선 — CDN 핫링크는 환경에 따라 차단될 수 있다
+        img_src = (images or {}).get(pid) or p.get("image_url", "")
+        img = f'<img src="{esc(img_src)}" alt="{name}" loading="lazy">' if img_src else ""
         cards.append(
             f'<a class="card" href="{esc(url)}" target="_blank" rel="sponsored nofollow">'
             f"{img}<div class='meta'><strong>{name}</strong>"
@@ -138,24 +203,44 @@ footer{{font-size:11px;color:#999;text-align:center;margin-top:28px}}
 
 
 def build_bio_page(output_path: Path | None = None) -> dict[str, Any]:
-    """history + products로 bio 페이지 생성, bio 링크 캐시 갱신."""
+    """현재 공개 중인 게시물 기준으로 bio 페이지 생성. 이미지 동봉, 링크 캐시 갱신."""
     from clipcart.coupang import create_deeplinks
-    from clipcart.research.history import load_history
-    from clipcart.storage import load_products
+    from clipcart.storage import load_posts, load_products
 
-    entries = load_history()
+    posts = load_posts()
     products_by_id = {p.get("product_id"): p for p in load_products()}
+
+    # 실제 공개 상태 검증 — 원장이 PUBLISHED여도 비공개 처리된 영상이 있다(P001 실측).
+    # 조회 실패 시(키 없음 등) 원장 그대로 폴백: 페이지가 비는 것보다 낫다.
+    video_ids = [
+        p["post_id"]
+        for p in posts
+        if p.get("post_id") and p.get("platform") == "youtube_shorts" and p.get("status") == "PUBLISHED"
+    ]
+    try:
+        from clipcart.analytics.collector import fetch_video_stats
+
+        live_ids = set(fetch_video_stats(video_ids).keys())
+    except Exception:  # noqa: BLE001
+        live_ids = set(video_ids)
+
+    entries = live_published_entries(posts, live_ids, products_by_id)
+
     cache: dict[str, str] = {}
     if BIO_LINKS_FILE.exists():
         text = BIO_LINKS_FILE.read_text(encoding="utf-8").strip()
         cache = json.loads(text) if text else {}
-
     links = ensure_bio_links(entries, cache, create_deeplinks)
     BIO_LINKS_FILE.parent.mkdir(parents=True, exist_ok=True)
     BIO_LINKS_FILE.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    html = render_page(entries, products_by_id, links)
     out = output_path or (Path(__file__).resolve().parents[3] / "docs" / "bio" / "index.html")
     out.parent.mkdir(parents=True, exist_ok=True)
+    images = localize_images(entries, products_by_id, out.parent)
+    html = render_page(entries, products_by_id, links, images=images)
     out.write_text(html, encoding="utf-8")
-    return {"output": str(out), "items": len({e.get('product_id') for e in entries})}
+    return {
+        "output": str(out),
+        "items": len({e.get("product_id") for e in entries}),
+        "excluded_not_live": len(video_ids) - len(live_ids & set(video_ids)),
+    }
