@@ -154,6 +154,15 @@ def cmd_daily(live: bool, force: bool, keyword: str | None, source: str) -> None
         sys.exit(1)
 
 
+@main.command("metrics")
+@click.option("--days", default=7, help="쿠팡 리포트 조회 기간(일)")
+def cmd_metrics(days: int) -> None:
+    """영상별 성과 수집(YouTube 통계 + 쿠팡 리포트) → metrics.json 누적 + 요약 출력."""
+    from clipcart.analytics.collector import collect
+
+    _print_json(collect(days=days))
+
+
 @main.command("history")
 @click.option("--limit", default=30, help="최근 N건 표시")
 def cmd_history(limit: int) -> None:
