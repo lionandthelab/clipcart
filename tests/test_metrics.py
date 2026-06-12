@@ -21,6 +21,7 @@ def _post(video_id, product_id, sub_id=None, title="t"):
         "status": "PUBLISHED",
         "published_at": "2026-06-10T07:20:00+00:00",
         "title": title,
+        "title_template": "{hook}",
         "sub_id": sub_id,
     }
 
@@ -48,6 +49,7 @@ def test_build_snapshot_joins_reports_by_sub_id():
     assert a["clicks"] == 6
     assert a["commission"] == 299.0
     assert a["orders"] == 1
+    assert a["title_template"] == "{hook}"  # 템플릿별 성적 집계 키
     b = next(v for v in snap["videos"] if v["video_id"] == "vidB")
     assert b["clicks"] == 1
     assert b["commission"] == 0.0
