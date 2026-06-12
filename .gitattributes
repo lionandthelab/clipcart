@@ -1,0 +1,2 @@
+# 셸 스크립트는 항상 LF — Windows(autocrlf)에서 저장돼도 macOS launchd 가 깨지지 않게.
+*.sh text eol=lf
