@@ -52,22 +52,42 @@ def record(entry: dict[str, Any]) -> None:
     _save(items)
 
 
+def _live_entries() -> list[dict[str, Any]]:
+    """실제로 살아 있는 업로드만. 비공개/삭제된 영상(live=False)은 '업로드됨'이
+    아니므로 중복 차단·니치 잠금 계산에서 제외한다(기록 자체는 보존)."""
+    return [e for e in load_history() if e.get("live") is not False]
+
+
+def mark_not_live(post_ids: set[str]) -> int:
+    """비공개/삭제 확인된 게시를 live=False로 마킹. 마킹한 개수 반환."""
+    items = load_history()
+    changed = 0
+    for e in items:
+        if e.get("post_id") in post_ids and e.get("live") is not False:
+            e["live"] = False
+            e["not_live_at"] = date.today().isoformat()
+            changed += 1
+    if changed:
+        _save(items)
+    return changed
+
+
 def used_coupang_ids() -> set[str]:
-    return {str(e["coupang_product_id"]) for e in load_history() if e.get("coupang_product_id")}
+    return {str(e["coupang_product_id"]) for e in _live_entries() if e.get("coupang_product_id")}
 
 
 def used_aliexpress_ids() -> set[str]:
-    return {str(e["aliexpress_product_id"]) for e in load_history() if e.get("aliexpress_product_id")}
+    return {str(e["aliexpress_product_id"]) for e in _live_entries() if e.get("aliexpress_product_id")}
 
 
 def used_name_keys() -> set[str]:
-    return {name_key(e["product_name"]) for e in load_history() if e.get("product_name")}
+    return {name_key(e["product_name"]) for e in _live_entries() if e.get("product_name")}
 
 
 def keyword_last_used() -> dict[str, str]:
     """니치 키워드 → 마지막 사용 날짜(ISO)."""
     out: dict[str, str] = {}
-    for e in load_history():
+    for e in _live_entries():
         k = e.get("niche_keyword")
         d = e.get("date", "")
         if k and d > out.get(k, ""):
