@@ -29,7 +29,7 @@ Notion 또는 GitHub Gist에 붙여넣고 **Publish** → URL 복사.
 
 5. Data Retention & Deletion
 - Access tokens stored locally in the operator's .env file
-- Deletion request: email (YOUR_EMAIL@example.com) — processed within 7 days
+- Deletion request: email (contact@lionandthelab.com) — processed within 7 days
 
 6. Effective Date
 - 2026-06-09
@@ -45,7 +45,7 @@ Notion 또는 GitHub Gist에 붙여넣고 **Publish** → URL 복사.
 - This app publishes content only after explicit user approval.
 - Affiliate relationships are disclosed in all posts.
 - We comply with platform terms and applicable advertising disclosure rules.
-- Contact: YOUR_EMAIL@example.com
+- Contact: contact@lionandthelab.com
 ```
 
 ---
@@ -56,7 +56,7 @@ Notion 또는 GitHub Gist에 붙여넣고 **Publish** → URL 복사.
 Data Deletion Instructions
 
 1. Revoke app access in Instagram / TikTok / Pinterest account settings, OR
-2. Email YOUR_EMAIL@example.com with subject "Clipcart data deletion"
+2. Email contact@lionandthelab.com with subject "Clipcart data deletion"
 3. We will delete stored access tokens and account IDs within 7 days
 ```
 
@@ -79,10 +79,10 @@ Data Deletion Instructions
 - 각 플랫폼 API 게시 목적으로만 사용, 재판매 없음
 
 4. 삭제
-- 문의: YOUR_EMAIL@example.com
+- 문의: contact@lionandthelab.com
 - 7일 이내 토큰 삭제
 
 5. 시행일: 2026-06-09
 ```
 
-`YOUR_EMAIL@example.com`을 본인 이메일로 바꾸세요.
+`contact@lionandthelab.com`을 본인 이메일로 바꾸세요.
