@@ -35,7 +35,8 @@ class _SafeDict(dict):
         return "{" + key + "}"
 
 
-def _pick_title(product: dict[str, Any], profile: dict[str, Any]) -> str:
+def _pick_title(product: dict[str, Any], profile: dict[str, Any]) -> tuple[str, str]:
+    """(제목, 사용한 템플릿) 반환 — 템플릿 키는 posts/metrics 조인용 라벨."""
     niche = product["niche"]
     values = _SafeDict(
         hook=niche["hook"],
@@ -44,15 +45,22 @@ def _pick_title(product: dict[str, Any], profile: dict[str, Any]) -> str:
         problem_short=niche["old_way"],
         price_won=f"{product['price']:,}",
     )
+    # 값이 없으면 해당 플레이스홀더가 남아 템플릿이 자동 탈락하도록, 있는 것만 넣는다
+    if niche.get("target"):
+        values["target"] = niche["target"]
+    # 사회적 증거형 재료: 알리 판매량(없으면 {sold_count} 템플릿이 자동 탈락)
+    sold = int(product.get("review_count") or 0)
+    if sold > 0:
+        values["sold_count"] = f"{sold:,}"
     templates = profile.get("title_templates") or []
     seed = int(hashlib.md5(f"{date.today()}{product['product_id']}".encode()).hexdigest(), 16)
     usable = []
     for tpl in templates:
         rendered = tpl.format_map(values)
-        if "{" not in rendered and len(rendered) <= 90:
-            usable.append(rendered)
+        if "{" not in rendered and rendered and len(rendered) <= 90:
+            usable.append((rendered, tpl))
     if not usable:
-        usable = [niche["hook"]]
+        usable = [(niche["hook"], "{hook}")]
     return usable[seed % len(usable)]
 
 
@@ -123,7 +131,8 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
         },
     ]
 
-    title = sanitize_text(_pick_title(product, profile))
+    title_raw, title_template = _pick_title(product, profile)
+    title = sanitize_text(title_raw)
     hashtags = " ".join(profile.get("hashtags") or [])
     description = (profile.get("description_template") or "").format_map(
         _SafeDict(
@@ -147,6 +156,7 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
 
     return {
         "title": title,
+        "title_template": title_template,
         "description": description,
         "disclosure": src_disclosure,
         "tags": list(profile.get("tags") or []),

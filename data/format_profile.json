@@ -6,7 +6,8 @@
     "{target}만 보세요",
     "{title_keyword}, 단점까지 보고 결정하세요",
     "{price_won}원으로 끝내는 {title_keyword}",
-    "{title_keyword} 쓰기 전에 꼭 보세요"
+    "{title_keyword} 쓰기 전에 꼭 보세요",
+    "{sold_count}개 팔린 {title_keyword}, 단점까지 보세요"
   ],
   "description_template": "{hook}\n{disclosure}\n\n이런 분께 추천해요: {target}\n\n좋은 점: {benefit_short}\n아쉬운 점: {downside}\n\n제품 링크: {affiliate_url}\n(같은 링크를 고정댓글에도 정리해뒀습니다)\n\n{hashtags}",
   "hashtags": ["#살림템", "#생활꿀템", "#살림꿀템", "#자취템", "#가성비템", "#shorts"],
