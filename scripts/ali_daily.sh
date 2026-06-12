@@ -23,8 +23,12 @@ echo "[$(date -u +%FT%TZ)] exit=$?" >> "$LOG"
 # 3.5) 성과 스냅샷 수집 (YouTube+쿠팡 → data/metrics.json). 실패해도 게시와 무관.
 "$PROJ/.venv/bin/clipcart" metrics --days 7 >> "$LOG" 2>&1 || true
 
+# 3.6) 링크인바이오 페이지 갱신 (docs/bio/index.html — GitHub Pages가 서빙)
+"$PROJ/.venv/bin/clipcart" bio >> "$LOG" 2>&1 || true
+
 # 4) 게시 원장 git 공유 — 다른 머신과 중복 방지. 충돌 시 abort 로 안전 유지.
-git add data >> "$LOG" 2>&1
+#    docs/bio 포함: 링크 페이지가 push 돼야 GitHub Pages 에 반영된다.
+git add data docs/bio >> "$LOG" 2>&1
 git commit -m "data: scheduled aliexpress publish ledger sync" >> "$LOG" 2>&1
 if git pull --rebase --autostash origin master >> "$LOG" 2>&1; then
     git push origin master >> "$LOG" 2>&1

@@ -28,11 +28,15 @@ try {
 & .venv\Scripts\clipcart.exe daily --live 2>&1 | Out-File $log -Append -Encoding utf8
 Log "exit=$LASTEXITCODE"
 
+# 3.5) 성과 스냅샷 수집 + 링크인바이오 페이지 갱신 (실패해도 게시와 무관)
+try { & .venv\Scripts\clipcart.exe metrics --days 7 2>&1 | Out-File $log -Append -Encoding utf8 } catch { Log "metrics failed: $_" }
+try { & .venv\Scripts\clipcart.exe bio 2>&1 | Out-File $log -Append -Encoding utf8 } catch { Log "bio failed: $_" }
+
 # 4) 게시 원장(history/posts/state) git 공유 — 다른 머신(Mac 알리)과 상품/니치 중복 방지.
 #    실행 전 pull 로 타 머신 게시분을 이미 반영했고, 여기선 이번 게시분을 push 한다.
 #    충돌 시 rebase 를 abort 해 저장소를 깨끗이 유지(다음 실행에서 재동기화).
 try {
-    git add data 2>&1 | Out-File $log -Append -Encoding utf8
+    git add data docs/bio 2>&1 | Out-File $log -Append -Encoding utf8
     git commit -m "data: scheduled coupang publish ledger sync" 2>&1 | Out-File $log -Append -Encoding utf8
     git pull --rebase --autostash origin master 2>&1 | Out-File $log -Append -Encoding utf8
     if ($LASTEXITCODE -eq 0) {
