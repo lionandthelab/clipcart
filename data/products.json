@@ -932,5 +932,59 @@
     "known_downside": "굳은 때는 욕실 세제를 뿌려두고 닦아야 합니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\AE1005010487469036.mp4",
     "post_url": "https://www.youtube.com/shorts/rTYeAZ1DSbY"
+  },
+  {
+    "product_id": "AE1005009295611634",
+    "aliexpress_product_id": "1005009295611634",
+    "created_at": "2026-06-13",
+    "status": "PUBLISHED",
+    "product_name": "3칸 분리수거함, 냄새 차단 재활용 쓰레기통, 가정용 실내 병 보관함",
+    "display_name": "가정용 분리수거함",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009295611634.html?pdp_npi=6%40dis%21KRW%2113860%2111863%21%21%2159.90%2151.27%21%40214114e317812764135051443e1277%2112000055918258816%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4rr8EL3",
+    "price": 11863,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S9f2b401b36d14fd2a5f1a19c772dcc65S.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9f2b401b36d14fd2a5f1a19c772dcc65S.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa5d570b4a510447db4b8807251c7aa3ec.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sffcd60556be848009cc67267518cf4d27.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7a3ddf286c3643e797a837c34e87a33e2.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S57130374afd6441992c03e7571be4c2f3.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sbf97a1fda2d64452bf7b8fbe28bd67460.jpg"
+    ],
+    "video_url": "",
+    "rating": 93.1,
+    "review_count": 331,
+    "score": 92,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "분리수거함 가정용 분리형",
+      "category": "정리/수납",
+      "title_keyword": "가정용 분리수거함",
+      "old_way": "베란다에 봉투 늘어놓기",
+      "hook": "베란다에 쓰레기 봉투 줄 세워두셨죠?",
+      "problem": "재활용 쓰레기를 봉투째 늘어놓으면 지저분하고, 버리러 갈 때마다 봉투가 터지죠.",
+      "usage": "칸별로 분류해 모았다가, 안쪽 봉투만 들어 그대로 버리러 가면 됩니다.",
+      "benefit": "베란다가 정돈되고 분리수거 가는 길이 한 번에 끝나요.",
+      "downside": "설치 공간이 필요하니 놓을 자리 치수를 먼저 재야 합니다",
+      "target": "분리수거 날마다 봉투와 씨름하는 사람"
+    },
+    "problem": "재활용 쓰레기를 봉투째 늘어놓으면 지저분하고, 버리러 갈 때마다 봉투가 터지죠.",
+    "video_angle": "베란다에 쓰레기 봉투 줄 세워두셨죠?",
+    "known_downside": "설치 공간이 필요하니 놓을 자리 치수를 먼저 재야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009295611634.mp4",
+    "post_url": "https://www.youtube.com/shorts/14167pa6ULU"
   }
 ]
