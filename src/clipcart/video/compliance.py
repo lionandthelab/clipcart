@@ -32,6 +32,39 @@ BANNED_EXPRESSIONS = [
 ]
 
 
+# 금지어 → 중립 표현 치환. 우리가 생성하는 문구(상품명/니치/카피)에 섞인 과장어를
+# 게시 차단(하드게이트) 대신 정화한다. 실데이터·고지·수치는 건드리지 않는다.
+# 더 구체적인 표현을 먼저 둬서 부분치환 충돌을 피한다.
+_SANITIZE_REPLACEMENTS: list[tuple[str, str]] = [
+    ("곰팡이 완전 제거", "곰팡이 관리"),
+    ("세균 박멸", "세균 관리"),
+    ("효과 보장", "도움"),
+    ("수수료를 받을 수 있습니다", "수수료를 제공받습니다"),
+    ("제공받을 수 있습니다", "제공받습니다"),
+    ("품절 전에", ""),
+    ("직접 써봤", "써본 사람들은"),
+    ("평생", "계속"),
+    ("무조건", ""),
+    ("100%", ""),
+    ("완벽", "깔끔"),
+    ("박멸", "제거"),
+    ("최저가", "가성비"),
+    ("인생템", "추천템"),
+    ("역대급", "인기"),
+]
+
+
+def sanitize_text(text: str) -> str:
+    """우리가 만든 문구에서 금지 표현만 중립 표현으로 정화(차단 예방). 빈자리 공백 정리."""
+    if not text:
+        return text
+    import re
+
+    for bad, good in _SANITIZE_REPLACEMENTS:
+        text = text.replace(bad, good)
+    return re.sub(r"\s{2,}", " ", text).strip()
+
+
 def check_texts(creative: dict[str, Any]) -> list[str]:
     issues: list[str] = []
     texts = [creative.get("title", ""), creative.get("description", "")]

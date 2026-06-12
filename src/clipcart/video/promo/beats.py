@@ -12,6 +12,7 @@ from typing import Any
 
 from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
+from clipcart.video.compliance import sanitize_text
 from clipcart.video.promo.broll import get_broll
 
 
@@ -208,6 +209,13 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "disclosure": disclosure_for(product),
         },
     ]
+    # 금지어 정화 — 상품명/니치에 섞인 과장어로 게시 차단되는 것 방지(고지는 보존)
+    for b in beats:
+        b["narration"] = sanitize_text(b["narration"])
+        if b.get("caption"):
+            b["caption"] = sanitize_text(b["caption"])
+        if b.get("emphasis"):
+            b["emphasis"] = sanitize_text(b["emphasis"])
     return beats
 
 

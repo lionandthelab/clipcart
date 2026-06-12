@@ -8,6 +8,7 @@ from typing import Any
 
 from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
+from clipcart.video.compliance import sanitize_text
 
 
 def _first_sentence(text: str, limit: int = 46) -> str:
@@ -122,7 +123,7 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
         },
     ]
 
-    title = _pick_title(product, profile)
+    title = sanitize_text(_pick_title(product, profile))
     hashtags = " ".join(profile.get("hashtags") or [])
     description = (profile.get("description_template") or "").format_map(
         _SafeDict(
@@ -135,6 +136,14 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
             hashtags=hashtags,
         )
     )
+    # 금지어 정화 — 단, 의무 고지는 보존(고지 문구는 정화 대상 아님)
+    description = sanitize_text(description)
+    if disclosure_full not in description:  # 정화가 고지를 건드렸다면 원복 보장
+        description = description + "\n" + disclosure_full
+    for sc in scenes:
+        sc["narration"] = sanitize_text(sc["narration"])
+        if sc.get("caption"):
+            sc["caption"] = sanitize_text(sc["caption"])
 
     return {
         "title": title,
