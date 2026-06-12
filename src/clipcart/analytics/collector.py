@@ -43,6 +43,37 @@ def fetch_video_stats(video_ids: list[str]) -> dict[str, dict[str, int]]:
     return stats
 
 
+def dead_video_ids(queried_ids: list[str], live_ids: set[str]) -> set[str]:
+    """조회한 ID 중 살아있지 않은 것. live가 비면 API 이상으로 보고 빈 집합."""
+    if not live_ids:
+        return set()
+    return set(queried_ids) - set(live_ids)
+
+
+def sync_not_live(
+    posts: list[dict[str, Any]], live_ids: set[str]
+) -> tuple[list[dict[str, Any]], set[str]]:
+    """PUBLISHED인데 실제론 비공개/삭제된 게시를 NOT_LIVE로 정정.
+
+    live_ids가 비어 있으면 동기화를 건너뛴다 — API 이상을 '전부 비공개'로
+    오판해 원장을 대량 해제하면 중복 업로드 사고로 이어진다.
+    """
+    if not live_ids:
+        return posts, set()
+    not_live: set[str] = set()
+    for p in posts:
+        if (
+            p.get("platform") == "youtube_shorts"
+            and p.get("status") == "PUBLISHED"
+            and p.get("post_id")
+            and p["post_id"] not in live_ids
+        ):
+            p["status"] = "NOT_LIVE"
+            p["not_live_at"] = date.today().isoformat()
+            not_live.add(p["post_id"])
+    return posts, not_live
+
+
 def _sum_by_sub_id(rows: list[dict[str, Any]], field: str) -> dict[str, float]:
     out: dict[str, float] = {}
     for row in rows:
@@ -142,16 +173,38 @@ def summarize(snapshot: dict[str, Any]) -> dict[str, Any]:
 
 
 def collect(days: int = 7) -> dict[str, Any]:
-    """게시된 영상의 성과를 수집해 metrics.json에 스냅샷 누적, 요약 반환."""
+    """게시된 영상의 성과를 수집해 metrics.json에 스냅샷 누적, 요약 반환.
+
+    수집 과정에서 확인된 실공개 상태로 posts/history 원장도 동기화한다
+    (비공개·삭제된 영상은 NOT_LIVE 정정 + 중복 차단에서 제외).
+    """
+    all_posts = load_posts()
     posts = [
         p
-        for p in load_posts()
+        for p in all_posts
         if p.get("platform") == "youtube_shorts" and p.get("status") == "PUBLISHED"
     ]
     if not posts:
         return {"status": "EMPTY", "reason": "게시된 영상 없음"}
 
-    stats = fetch_video_stats([p["post_id"] for p in posts if p.get("post_id")])
+    # 비공개 계열(REPLACED_*) 게시의 history 잠금까지 풀 수 있도록 전체 ID 조회
+    queried_ids = sorted(
+        {p["post_id"] for p in all_posts if p.get("post_id") and p.get("platform") == "youtube_shorts"}
+    )
+    stats = fetch_video_stats(queried_ids)
+    live_ids = set(stats.keys())
+
+    all_posts, not_live = sync_not_live(all_posts, live_ids)
+    if not_live:
+        from clipcart.storage import save_posts
+
+        save_posts(all_posts)
+        posts = [p for p in posts if p.get("post_id") not in not_live]
+    dead = dead_video_ids(queried_ids, live_ids)
+    if dead:
+        from clipcart.research import history
+
+        history.mark_not_live(dead)
 
     end = date.today()
     start = end - timedelta(days=days)
