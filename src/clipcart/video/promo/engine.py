@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from clipcart.config import OUTBOX_DIR
-from clipcart.disclosure import short_disclosure_for
+from clipcart.disclosure import AD_BADGE
 from clipcart.video.copywriter import build_creative
 from clipcart.video.frames import compose_thumbnail, fetch_image
 from clipcart.video.profile import load_profile
@@ -76,6 +76,6 @@ def make_promo_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
                  product_media={"images": image_paths, "video": product_video})
 
     compose_thumbnail(product_img, creative["thumbnail_line1"], creative["thumbnail_line2"],
-                      thumb_path, badge_text=short_disclosure_for(product))
+                      thumb_path, badge_text=AD_BADGE)
 
     return {"video_path": video_path, "thumbnail_path": thumb_path, "creative": creative}

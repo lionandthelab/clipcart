@@ -20,7 +20,9 @@ def disclosure_for(product: dict[str, Any]) -> str:
     return COUPANG_DISCLOSURE
 
 
-# 썸네일/상단 배지용 짧은 고지 (보조 표기 — 전체 고지는 disclosure_for/설명란에서)
+# 썸네일/상단 배지용 표기 (2026-06-13 운영자 지시: 길게 쓰지 않고 '광고'만).
+# 전체 고지는 설명란 첫 부분 + 영상 끝 자막(disclosure_for)에서 — 뱃지는 보조 표기.
+AD_BADGE = "광고"
 SHORT_DISCLOSURE_COUPANG = "광고 · 쿠팡 파트너스 수수료 지급"
 SHORT_DISCLOSURE_ALIEXPRESS = "광고 · 알리익스프레스 어필리에이트"
 

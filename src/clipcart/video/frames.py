@@ -118,14 +118,11 @@ def _pill(draw: ImageDraw.ImageDraw, xy: tuple[int, int], text: str, font: Image
     return rect[2], rect[3]
 
 
-_DEFAULT_BADGE = "광고 · 쿠팡 파트너스 수수료 지급"
+_DEFAULT_BADGE = "광고"  # 운영자 지시: 뱃지는 '광고'만 — 전체 고지는 설명란+끝 자막
 
 
 def _chrome(canvas: Image.Image, badge_text: str = _DEFAULT_BADGE) -> None:
-    """전 장면 공통: 광고 표시 + 브랜드 (줌 크롭에도 안 잘리는 안전 영역).
-
-    badge_text는 소스별 고지(쿠팡/알리)를 받는다 — 소스와 다른 고지는 허위 고지.
-    """
+    """전 장면 공통: 광고 표시 + 브랜드 (줌 크롭에도 안 잘리는 안전 영역)."""
     draw = ImageDraw.Draw(canvas, "RGBA")
     _pill(draw, (44, 152), badge_text, _font(34), WHITE, (0, 0, 0, 150))
     brand_font = _font(36)
