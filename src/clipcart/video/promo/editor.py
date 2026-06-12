@@ -69,6 +69,24 @@ def _try_one(pex, token: str, index: int, product_img_path: str = "") -> tuple[s
     if token.startswith("productshot:"):
         g = sources.gemini_product_shot(product_img_path, token[12:], index)
         return (g, "image") if g else (None, None)
+    if token.startswith("motionshot:"):
+        # 화보샷 정지 이미지 → Kling I2V로 미세 무빙 클립. 실패 시 정지 화보샷.
+        from clipcart.video.promo import kling
+
+        scene = token[11:]
+        still = sources.gemini_product_shot(product_img_path, scene, index)
+        if not still:
+            return None, None
+        if kling.enabled():
+            motion_prompt = (
+                "subtle slow camera push-in with gentle parallax, the product stays "
+                "perfectly still and completely identical, soft natural light, "
+                "photorealistic, no text, no people"
+            )
+            v = kling.animate(still, motion_prompt, duration=5)
+            if v:
+                return v, "video"
+        return still, "image"
     if token.startswith("gemini:"):
         # candid: 사람/손 없는 실사 폰카풍 (AI티 방지)
         g = sources.gemini_still(token[7:], "candid", index)

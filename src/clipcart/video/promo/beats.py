@@ -155,8 +155,9 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "product",
             "narration": product_line,
             "caption": product_caption,
-            # 제품 추출 → 예쁜 배경/구도 화보샷. 생성 실패 시 원본 제품컷.
-            "source": f"productshot:{scenes[0]}",
+            # 제품 추출 → 화보샷 → Kling 모션 클립(미세 카메라 무빙).
+            # kling 실패 시 정지 화보샷, 그것도 실패 시 원본 제품컷.
+            "source": f"motionshot:{scenes[0]}",
             "fallback": "product",
             "emphasis": product_emphasis,
             "color": "red",
@@ -166,10 +167,10 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "usage",
             "narration": f"쓰는 법도 쉬워요. {niche['usage']}",
             "caption": niche["usage"],
-            # 실사용 느낌 — 짧게 여러 구도 퀵컷 (실영상 2컷 + 실사용 자리 화보샷)
+            # 실사용 느낌 — 짧게 여러 구도 퀵컷 (실영상 2컷 + 실사용 자리 모션샷)
             "shots": [
                 f"pexels:{br['use']}",
-                f"productshot:{in_use_scene}",
+                f"motionshot:{in_use_scene}",
                 f"pexels:{br['use']}",
             ],
             "fallback": "product",

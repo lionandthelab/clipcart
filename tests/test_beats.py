@@ -52,12 +52,18 @@ def test_usage_beat_has_multi_shots():
     assert any(s.startswith("pexels:") for s in shots)
 
 
-def test_product_beat_uses_styled_product_shot():
-    # 제품 추출 → 예쁜 배경/구도 화보샷 토큰, 실패 폴백은 원본 제품컷
+def test_product_beat_uses_motion_product_shot():
+    # 제품 추출 → 화보샷 → Kling 모션 클립. 실패 폴백 체인은 화보샷 → 원본 제품컷
     beats = build_beats(_product())
     product_beat = next(b for b in beats if b["role"] == "product")
-    assert product_beat["source"].startswith("productshot:")
+    assert product_beat["source"].startswith("motionshot:")
     assert product_beat.get("fallback") == "product"
+
+
+def test_usage_includes_motion_shot():
+    beats = build_beats(_product())
+    usage = next(b for b in beats if b["role"] == "usage")
+    assert any(s.startswith("motionshot:") for s in usage["shots"])
 
 
 def test_cta_uses_review_card_when_available():
