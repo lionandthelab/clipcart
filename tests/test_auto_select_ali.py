@@ -8,7 +8,7 @@ from __future__ import annotations
 import clipcart.research.auto_select_ali as sel
 
 
-def _item(pid, title, price, *, volume=500, rate="95.0%", promo=True, img=True, original=None):
+def _item(pid, title, price, *, volume=500, rate="95.0%", promo=True, img=True, original=None, video=False):
     return {
         "product_id": str(pid),
         "product_title": title,
@@ -21,6 +21,7 @@ def _item(pid, title, price, *, volume=500, rate="95.0%", promo=True, img=True, 
         "product_main_image_url": "https://img/x.jpg" if img else "",
         "product_detail_url": f"https://www.aliexpress.com/item/{pid}.html",
         "promotion_link": f"https://s.click.aliexpress.com/e/_{pid}" if promo else "",
+        "product_video_url": f"https://video.aliexpress-media.com/{pid}.mp4" if video else "",
     }
 
 
@@ -140,3 +141,31 @@ def test_product_type_mismatch_is_skipped(monkeypatch):
         lambda keyword, **kw_: [_item(1, "주방 청소 브러쉬", 6900)],
     )
     assert sel.select_today_product(force_keyword=kw) is None
+
+
+def test_prefers_video_bearing_product_within_top5(monkeypatch):
+    # 셀러 영상은 B-roll 소재 — 판매량 상위 5 후보 안에서는 영상 보유 상품 우선.
+    _patch_clean_history(monkeypatch)
+    kw = "배수구 거름망 스테인리스"
+    items = [
+        _item(1, "스테인리스 배수구 거름망 A", 6900, volume=900),
+        _item(2, "스테인리스 배수구 거름망 B", 6900, volume=800, video=True),
+        _item(3, "스테인리스 배수구 거름망 C", 6900, volume=700),
+    ]
+    monkeypatch.setattr(sel, "query_products", lambda keyword, **kw_: items if keyword == kw else [])
+    p = sel.select_today_product(force_keyword=kw)
+    assert p["aliexpress_product_id"] == "2"
+    assert p["video_url"].endswith("2.mp4")
+
+
+def test_video_outside_top5_not_promoted(monkeypatch):
+    # 상위 5 밖의 영상 보유 상품 때문에 검증된 인기 상품을 버리지 않는다.
+    _patch_clean_history(monkeypatch)
+    kw = "배수구 거름망 스테인리스"
+    items = [
+        _item(i, f"스테인리스 배수구 거름망 {i}", 6900, volume=1000 - i * 100)
+        for i in range(1, 6)
+    ] + [_item(6, "스테인리스 배수구 거름망 6", 6900, volume=100, video=True)]
+    monkeypatch.setattr(sel, "query_products", lambda keyword, **kw_: items if keyword == kw else [])
+    p = sel.select_today_product(force_keyword=kw)
+    assert p["aliexpress_product_id"] == "1"
