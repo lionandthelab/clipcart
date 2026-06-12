@@ -104,6 +104,30 @@ def goldbox_products(sub_id: str | None = None) -> list[dict[str, Any]]:
     return data or []
 
 
+def _report(kind: str, start_date: str, end_date: str) -> list[dict[str, Any]]:
+    params = {
+        "startDate": start_date.replace("-", ""),
+        "endDate": end_date.replace("-", ""),
+    }
+    data = _request("GET", f"{API_PREFIX}/reports/{kind}", params)
+    return data or []
+
+
+def report_clicks(start_date: str, end_date: str) -> list[dict[str, Any]]:
+    """일자·subId별 클릭 수 (date/trackingCode/subId/click)."""
+    return _report("clicks", start_date, end_date)
+
+
+def report_orders(start_date: str, end_date: str) -> list[dict[str, Any]]:
+    """주문 내역 (subId/productName/gmv/commission 등). 24시간 쿠키로 타 상품 주문 포함."""
+    return _report("orders", start_date, end_date)
+
+
+def report_commission(start_date: str, end_date: str) -> list[dict[str, Any]]:
+    """일자·subId별 커미션 합계 (commission/gmv/order/click)."""
+    return _report("commission", start_date, end_date)
+
+
 def make_sub_id(base: str | None, product_id: str | int) -> str:
     """상품(영상)별 리포트 귀속용 subId. 정산은 trackingCode 기준이라 값은 자유.
 
