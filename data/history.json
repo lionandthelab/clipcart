@@ -9,7 +9,9 @@
     "category": "청소",
     "title": null,
     "post_url": "https://www.youtube.com/shorts/B12nGWnGPDI",
-    "affiliate_url": null
+    "affiliate_url": null,
+    "live": false,
+    "not_live_at": "2026-06-13"
   },
   {
     "date": "2026-06-10",
@@ -33,7 +35,9 @@
     "category": "주방",
     "title": "가스레인지 틈새 커버 쓰기 전에 꼭 보세요",
     "post_url": "https://www.youtube.com/shorts/J2tUYoArTWE",
-    "affiliate_url": "https://link.coupang.com/a/esZY87avoy"
+    "affiliate_url": "https://link.coupang.com/a/esZY87avoy",
+    "live": false,
+    "not_live_at": "2026-06-13"
   },
   {
     "date": "2026-06-10",
@@ -71,7 +75,9 @@
     "category": "욕실",
     "title": "아직도 바닥에 샴푸통 늘어놓기? 이거 보세요",
     "post_url": "https://www.youtube.com/shorts/T2urg4tH7C0",
-    "affiliate_url": "https://s.click.aliexpress.com/e/_c3AEyao5"
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3AEyao5",
+    "live": false,
+    "not_live_at": "2026-06-13"
   },
   {
     "date": "2026-06-11",
@@ -128,6 +134,22 @@
     "title": "11,863원으로 끝내는 가정용 분리수거함",
     "post_url": "https://www.youtube.com/shorts/14167pa6ULU",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4rr8EL3",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-13",
+    "post_id": "9bSp68aCftE",
+    "product_id": "AE1005005594201049",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005005594201049",
+    "product_name": "실리콘 배수 패드, 욕실 주방 수도꼭지, 드립 매트, 세면대 싱크대, 물튀김 방지 배수 패드, 테이블 단열 보호대",
+    "niche_keyword": "싱크대 물막이 실리콘",
+    "category": "주방",
+    "title": "4,380원으로 끝내는 싱크대 물막이",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "post_url": "https://www.youtube.com/shorts/9bSp68aCftE",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3SYdRBX",
     "sub_id": null
   }
 ]

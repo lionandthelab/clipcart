@@ -5,8 +5,9 @@
     "platform": "youtube_shorts",
     "post_url": "https://www.youtube.com/shorts/B12nGWnGPDI",
     "published_at": "2026-06-09T11:42:00+00:00",
-    "status": "PUBLISHED",
-    "note": "pipeline test - logo placeholder, unlisted"
+    "status": "NOT_LIVE",
+    "note": "pipeline test - logo placeholder, unlisted",
+    "not_live_at": "2026-06-13"
   },
   {
     "post_id": "C9_x6RbEZuw",
@@ -115,11 +116,12 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/T2urg4tH7C0",
     "published_at": "2026-06-12T03:54:01.554356+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "아직도 바닥에 샴푸통 늘어놓기? 이거 보세요",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3AEyao5",
     "thumbnail_set": true,
-    "comment_id": "UgxdCs6qgf6r0YjpugZ4AaABAg"
+    "comment_id": "UgxdCs6qgf6r0YjpugZ4AaABAg",
+    "not_live_at": "2026-06-13"
   },
   {
     "post_id": "ISh6OQRpryQ",
@@ -160,5 +162,20 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgwzovGzqhPUmTe8Ia14AaABAg"
+  },
+  {
+    "post_id": "9bSp68aCftE",
+    "product_id": "AE1005005594201049",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/9bSp68aCftE",
+    "published_at": "2026-06-12T19:46:22.669885+00:00",
+    "status": "PUBLISHED",
+    "title": "4,380원으로 끝내는 싱크대 물막이",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3SYdRBX",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgxHk4MqUCeMinvjyCh4AaABAg"
   }
 ]
