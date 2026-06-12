@@ -20,6 +20,9 @@ git pull --rebase --autostash origin master >> "$LOG" 2>&1
 "$PROJ/.venv/bin/clipcart" daily --source aliexpress --live --force >> "$LOG" 2>&1
 echo "[$(date -u +%FT%TZ)] exit=$?" >> "$LOG"
 
+# 3.5) 성과 스냅샷 수집 (YouTube+쿠팡 → data/metrics.json). 실패해도 게시와 무관.
+"$PROJ/.venv/bin/clipcart" metrics --days 7 >> "$LOG" 2>&1 || true
+
 # 4) 게시 원장 git 공유 — 다른 머신과 중복 방지. 충돌 시 abort 로 안전 유지.
 git add data >> "$LOG" 2>&1
 git commit -m "data: scheduled aliexpress publish ledger sync" >> "$LOG" 2>&1
