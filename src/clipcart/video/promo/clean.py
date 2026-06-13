@@ -12,8 +12,13 @@ from typing import Callable
 import numpy as np
 
 
+# 셀러영상에서 크롭으로 지울 수 없는 중앙 영역 — 여기 글자가 있으면 그 시점은 버린다.
+# 하단(0.75~)의 자막은 _seller_subclip 크롭이 처리하므로 점수에서 제외한다.
+CENTER_BAND = (0.42, 0.74)
+
+
 def text_band_score(frame: np.ndarray, band: tuple[float, float] = (0.78, 0.98)) -> float:
-    """프레임 하단 띠의 엣지 밀도. 글자가 많을수록 높다."""
+    """프레임 특정 띠의 엣지 밀도. 글자가 많을수록 높다."""
     if frame.ndim == 3:
         gray = frame.mean(axis=2)
     else:
@@ -30,7 +35,10 @@ def text_band_score(frame: np.ndarray, band: tuple[float, float] = (0.78, 0.98))
 
 
 def score_timeline(
-    sample_fn: Callable[[float], np.ndarray], duration: float, n: int = 12
+    sample_fn: Callable[[float], np.ndarray],
+    duration: float,
+    n: int = 12,
+    band: tuple[float, float] = (0.78, 0.98),
 ) -> list[tuple[float, float]]:
     """[0, duration]을 n등분해 각 시점 프레임의 텍스트 점수를 매긴다."""
     n = max(1, n)
@@ -38,7 +46,7 @@ def score_timeline(
     for i in range(n):
         t = duration * (i + 0.5) / n
         try:
-            out.append((t, text_band_score(sample_fn(t))))
+            out.append((t, text_band_score(sample_fn(t), band)))
         except Exception:  # noqa: BLE001 — 프레임 디코드 실패는 최악 점수로
             out.append((t, float("inf")))
     return out

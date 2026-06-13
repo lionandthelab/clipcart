@@ -181,19 +181,31 @@ class SellerVideo:
     돌려줘 반복 인상을 줄인다. 렌더가 끝날 때까지 열어둔다(지연 디코드).
     """
 
+    # 중앙 영역(크롭으로 못 지움) 점수가 이 값을 넘으면 자막투성이로 보고 셀러영상을 안 쓴다
+    SKIP_SCORE = 6.0
+
     def __init__(self, path: str, n: int = 14):
-        from clipcart.video.promo.clean import score_timeline
+        from clipcart.video.promo.clean import CENTER_BAND, score_timeline
 
         self.clip = VideoFileClip(path).without_audio()
         self.dur = float(self.clip.duration or 0.0)
         safe = max(self.dur - 0.05, 0.0)
         try:
+            # 하단 자막은 크롭이 처리하므로, 크롭으로 못 지우는 '중앙' 영역만 점수화한다.
             self.scored = score_timeline(
-                lambda t: np.asarray(self.clip.get_frame(min(t, safe))), self.dur, n=n
+                lambda t: np.asarray(self.clip.get_frame(min(t, safe))),
+                self.dur, n=n, band=CENTER_BAND,
             )
         except Exception:  # noqa: BLE001
             self.scored = []
         self._occ = 0
+
+    @property
+    def usable(self) -> bool:
+        """중앙에 글자 없는 깨끗한 순간이 하나도 없으면(전체 자막) 쓰지 않는다."""
+        if not self.scored:
+            return False
+        return min(s for _, s in self.scored) < self.SKIP_SCORE
 
     def next_segment(self, dur: float):
         from clipcart.video.promo.clean import pick_clean_windows
@@ -476,9 +488,15 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     if video and Path(video).exists():
         try:
             seller = SellerVideo(video)
+            if not seller.usable:
+                # 자막투성이 영상 — 쓰지 않는다. video=None이면 productvideo 토큰이
+                # None을 반환해 자연히 다음 소스(모션샷/실영상)로 폴백된다.
+                print("  [promo] seller video too subtitled — fallback to other media")
+                seller.close()
+                seller, video = None, None
         except Exception as exc:  # noqa: BLE001 — 셀러영상 실패는 다른 소스로 폴백
             print(f"  [promo] seller video skipped ({str(exc)[:80]})")
-            seller = None
+            seller, video = None, None
     pex = sources.Pexels()
     print(f"  [promo] pexels={'on' if pex.enabled else 'off'} typecast={'on' if tts_typecast.available() else 'edge-fallback'}")
 
