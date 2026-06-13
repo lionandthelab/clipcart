@@ -1191,5 +1191,59 @@
     "known_downside": "두꺼운 수건 같은 큰 빨래에는 맞지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005005495976094.mp4",
     "post_url": "https://www.youtube.com/shorts/CmZ7lxqiKk4"
+  },
+  {
+    "product_id": "AE1005006504326423",
+    "aliexpress_product_id": "1005006504326423",
+    "created_at": "2026-06-13",
+    "status": "PUBLISHED",
+    "product_name": "무타공 건조대 32MM 스테인리스강 커튼대 신축 옷장 걸이대 발코니 장대 신축 욕실 커튼대 다용도 길이조절 강력봉 폴대 압축봉 커튼봉 장대 옷걸이봉 샤워커튼 철봉 샤워커튼봉세트",
+    "display_name": "압축봉",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005006504326423.html?pdp_npi=6%40dis%21KRW%2126107%2126100%21%21%21112.83%21112.80%21%40212a7b8d17813216799566232e0f74%2112000037489685852%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3vAxPDx",
+    "price": 26100,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sdee45e6a6cf5433695adb6488f29cda8H.jpeg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sdee45e6a6cf5433695adb6488f29cda8H.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6899ff88ece848e0b83cebac629dd266x.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2a78afc05fc8446cb3ca159f945d93f78.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Scb1dd6082c614da2af6a4c00747d47c9P.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9bdcc6d47304447aac5f6aada0e37255L.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2d97b453c3084aa0a8cc166693e1f78ds.jpg"
+    ],
+    "video_url": "",
+    "rating": 88.8,
+    "review_count": 170,
+    "score": 83,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 12,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "압축봉 커튼 설치 못없이",
+      "category": "정리/수납",
+      "title_keyword": "압축봉",
+      "old_way": "못 박고 벽 망가뜨리기",
+      "hook": "못 없이 커튼 다는 법, 아직 모르세요?",
+      "problem": "커튼이나 가림막을 달고 싶어도 벽에 못을 박기는 부담스럽죠. 자취방이면 더더욱.",
+      "usage": "양쪽 벽 사이에 돌려서 고정하기만 하면 끝. 못도 드릴도 필요 없어요.",
+      "benefit": "벽 손상 없이 커튼, 가림막, 행거까지 해결됩니다.",
+      "downside": "무거운 커튼을 걸면 흘러내릴 수 있어 하중 표기를 확인해야 합니다",
+      "target": "벽에 못 못 박는 자취인"
+    },
+    "problem": "커튼이나 가림막을 달고 싶어도 벽에 못을 박기는 부담스럽죠. 자취방이면 더더욱.",
+    "video_angle": "못 없이 커튼 다는 법, 아직 모르세요?",
+    "known_downside": "무거운 커튼을 걸면 흘러내릴 수 있어 하중 표기를 확인해야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005006504326423.mp4",
+    "post_url": "https://www.youtube.com/shorts/h16WJC7K0Ak"
   }
 ]
