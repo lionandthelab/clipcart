@@ -1450,5 +1450,48 @@
     "known_downside": "접착식이라 한 번 떼면 다시 붙이기 어렵습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009384662260.mp4",
     "post_url": "https://www.youtube.com/shorts/gWaS_D1gqR4"
+  },
+  {
+    "product_id": "CP5007857221",
+    "coupang_product_id": "5007857221",
+    "sub_id": "salrimshorts5007857221",
+    "created_at": "2026-06-14",
+    "status": "PUBLISHED",
+    "product_name": "반영구 돌돌이 고양이 털 먼지 제거 롤 클리너, 1개",
+    "display_name": "펫 털 제거 롤러",
+    "category": "반려동물",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=5007857221&itemId=6701742922&vendorItemId=88824254123&traceid=V0-153-38bde7c11b901f5f&clickBeacon=1b3ab470-6776-11f1-b6e0-ba88d2ea1ad6%7E3&requestid=20260614072038516075578329&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eyRTkrDwPs",
+    "price": 6580,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/TnX0qulW3Nxq47yATqU8v9qjLCSdfIQzYnNtyUUBrnxz_8zPffKvQrNLYZz1ysc38fRL4YBl6M3HAlUPDqB0HJDLJY90p5iHgNMZ-0iOc9fRUJ4iJFIuFkC-roijxdmHR9OSiWo8zY9gM0tbh1CxrgJa4h6mdMU157XkwWDeec31iu1TpWlydugg-ht5C4ahPW7N1kkTnL9rCZ9RU3VTqxksMYBW-1L06JgOpvCNu0RVJXv5yE9OtNRJPr02-KDCTUOnK0IJHh-WrdP0QrM1jD-_m1Qs01E4jC_xwXRUGGS-JBlKX9pmuDieLxz1K7H6fKMb3oGpFZHMBg==",
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "반려동물 털제거 롤러 침구",
+      "category": "반려동물",
+      "title_keyword": "펫 털 제거 롤러",
+      "old_way": "테이프 클리너 무한 소비",
+      "hook": "이불 위 고양이 털, 테이프로 계속 떼실 건가요?",
+      "problem": "반려동물 털은 테이프 클리너로 떼도 떼도 끝이 없고, 리필 값도 만만치 않죠.",
+      "usage": "이불 위를 앞뒤로 밀기만 하면 털이 안쪽 통에 모입니다. 통만 비우면 계속 재사용.",
+      "benefit": "리필 걱정 없이 침구 털 관리가 됩니다. 비우는 것도 버튼 하나.",
+      "downside": "옷처럼 곡면이 많은 곳보다는 이불 같은 평면에서 잘 됩니다",
+      "target": "반려동물 털과 전쟁 중인 집사"
+    },
+    "problem": "반려동물 털은 테이프 클리너로 떼도 떼도 끝이 없고, 리필 값도 만만치 않죠.",
+    "video_angle": "이불 위 고양이 털, 테이프로 계속 떼실 건가요?",
+    "known_downside": "옷처럼 곡면이 많은 곳보다는 이불 같은 평면에서 잘 됩니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP5007857221.mp4",
+    "post_url": "https://www.youtube.com/shorts/4rLp-qEEASg"
   }
 ]
