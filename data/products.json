@@ -1396,5 +1396,59 @@
     "known_downside": "지름이 큰 접시는 다 덮이지 않을 수 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011820867517.mp4",
     "post_url": "https://www.youtube.com/shorts/1Qf3MrkK9MM"
+  },
+  {
+    "product_id": "AE1005009384662260",
+    "aliexpress_product_id": "1005009384662260",
+    "created_at": "2026-06-14",
+    "status": "PUBLISHED",
+    "product_name": "50개 접착식 케이블 와이어 클립 투명 케이블 야외 케이블 정리 와이어 정리대 책상 아래 차량 벽 TV 케이블 홀더",
+    "display_name": "케이블 정리 클립",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009384662260.html?pdp_npi=6%40dis%21KRW%217500%213600%21%21%2132.41%2115.55%21%40212a7b8d17813844218393737e0f53%2112000048937933934%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3kV5ob3",
+    "price": 3600,
+    "original_price": 7500,
+    "discount_pct": 52,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S75375c7df60849e7966a676cd99d49fcp.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S75375c7df60849e7966a676cd99d49fcp.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S1220323aba504f9fbd59c8584406cac3l.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5e5e2de335d14677a8cda9bc13379154C.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sbfc2309bebd14500aa2a15ddae6d9ebep.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Saf18c189eb534d6fa5658d5372f4b6a5n.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S4c05b3762a1548bd9c2e2ec47f2fde5c1.jpg"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 18272,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "케이블 정리 클립 책상",
+      "category": "정리/수납",
+      "title_keyword": "케이블 정리 클립",
+      "old_way": "책상 밑 선 뭉치 방치",
+      "hook": "책상 밑 선 뭉치, 그냥 두실 건가요?",
+      "problem": "충전선, 모니터선이 뒤엉켜서 청소할 때마다 스트레스죠. 필요한 선은 꼭 바닥에 떨어져 있고요.",
+      "usage": "책상 모서리에 붙이고 선을 끼우기만 하면 됩니다. 선마다 자리가 생겨요.",
+      "benefit": "선이 흘러내리지 않으니 책상이 훨씬 깔끔해 보입니다.",
+      "downside": "접착식이라 한 번 떼면 다시 붙이기 어렵습니다",
+      "target": "책상 위아래 선 정리를 미뤄온 사람"
+    },
+    "problem": "충전선, 모니터선이 뒤엉켜서 청소할 때마다 스트레스죠. 필요한 선은 꼭 바닥에 떨어져 있고요.",
+    "video_angle": "책상 밑 선 뭉치, 그냥 두실 건가요?",
+    "known_downside": "접착식이라 한 번 떼면 다시 붙이기 어렵습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009384662260.mp4",
+    "post_url": "https://www.youtube.com/shorts/gWaS_D1gqR4"
   }
 ]
