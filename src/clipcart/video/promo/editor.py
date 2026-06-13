@@ -31,8 +31,11 @@ from clipcart.video.fonts import load_font
 from clipcart.video.promo import sources
 
 W, H = 1080, 1920
-TOP_H = int(0.17 * H)
-BOTTOM_Y = int(0.80 * H)
+# 상단=자막(이전 제목 자리), 하단=브랜드바(살림해결소+로고). 미디어 밴드를 키워
+# 제품 영상을 더 메인으로(운영자 지시 2026-06-13).
+TOP_H = int(0.165 * H)       # 상단 자막 밴드
+BRAND_H = int(0.115 * H)     # 하단 브랜드 바
+BOTTOM_Y = H - BRAND_H
 MEDIA_Y = TOP_H
 MEDIA_H = BOTTOM_Y - MEDIA_Y
 BANNER_H = 70
@@ -75,8 +78,9 @@ def _try_one(pex, token: str, index: int, product_img_path: str = "",
             return imgs[idx], "image"
         return None, None
     if token == "productvideo":
+        # 셀러 제공 영상 — 중국어 자막 회피 편집을 위해 전용 kind로 분기
         if video and Path(video).exists():
-            return video, "video"
+            return video, "sellervideo"
         return None, None
     if token.startswith("file:"):
         p = token[5:]
@@ -150,6 +154,64 @@ def _media_video(path: str, dur: float):
     else:
         clip = clip.with_effects([vfx.Loop(duration=dur)])
     return clip.with_duration(dur)
+
+
+def _seller_subclip(clip, s: float, e: float, dur: float):
+    """셀러 영상 구간 [s,e]를 미디어 밴드로 — 줌으로 여유를 주고 상단을 남겨
+    하단 자막(중국어)을 프레임 밖으로 밀어낸다."""
+    end = min(clip.duration, max(s + dur, e))
+    sub = clip.subclipped(max(0.0, s), end)
+    nw, nh = _cover(sub.w, sub.h)
+    nw, nh = int(nw * 1.18), int(nh * 1.18)  # 크롭 여유(하단을 더 잘라낼 공간)
+    sub = sub.with_effects([vfx.Resize(new_size=(nw, nh))])
+    # y_center를 위로 당겨 상단 위주로 크롭(하단 자막 띠 제거)
+    y_center = min(max(int(nh * 0.42), MEDIA_H // 2), nh - MEDIA_H // 2)
+    sub = sub.with_effects([vfx.Crop(x_center=nw // 2, y_center=y_center, width=W, height=MEDIA_H)])
+    if sub.duration >= dur:
+        sub = sub.subclipped(0, dur)
+    else:
+        sub = sub.with_effects([vfx.Loop(duration=dur)])
+    return sub.with_duration(dur)
+
+
+class SellerVideo:
+    """셀러 제품 영상 — 한 번 열어 텍스트 점수를 매기고 깨끗한 구간을 순서대로 제공.
+
+    같은 영상을 product·usage 장면에 쓰되, 매 호출마다 다른 깨끗한 구간을
+    돌려줘 반복 인상을 줄인다. 렌더가 끝날 때까지 열어둔다(지연 디코드).
+    """
+
+    def __init__(self, path: str, n: int = 14):
+        from clipcart.video.promo.clean import score_timeline
+
+        self.clip = VideoFileClip(path).without_audio()
+        self.dur = float(self.clip.duration or 0.0)
+        safe = max(self.dur - 0.05, 0.0)
+        try:
+            self.scored = score_timeline(
+                lambda t: np.asarray(self.clip.get_frame(min(t, safe))), self.dur, n=n
+            )
+        except Exception:  # noqa: BLE001
+            self.scored = []
+        self._occ = 0
+
+    def next_segment(self, dur: float):
+        from clipcart.video.promo.clean import pick_clean_windows
+
+        wins = (
+            pick_clean_windows(self.scored, want=min(dur, self.dur), k=2, total=self.dur)
+            if self.scored
+            else [(0.0, self.dur)]
+        )
+        s, e = wins[self._occ % len(wins)]
+        self._occ += 1
+        return _seller_subclip(self.clip, s, e, dur)
+
+    def close(self) -> None:
+        try:
+            self.clip.close()
+        except Exception:  # noqa: BLE001
+            pass
 
 
 def _media_image(path: str, dur: float, z0=1.04, z1=1.13):
@@ -315,7 +377,8 @@ def _subtitle_png(text: str) -> np.ndarray:
     pad_x, pad_y = 52, 26
     bw, bh = text_w + pad_x * 2, text_h + pad_y * 2
     bx0 = (W - bw) // 2
-    by0 = (BOTTOM_Y + H) // 2 - bh // 2
+    # 자막은 상단 밴드(이전 제목 자리). 좌상단 '광고' 뱃지(y~110)는 피해 아래 정렬.
+    by0 = 120 + ((TOP_H - 120) - bh) // 2
 
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
@@ -355,22 +418,35 @@ def _ad_badge_png() -> np.ndarray:
     return np.array(img)
 
 
-def _float_logo_overlay(t_in: float, dur: float):
-    """살림해결소 로고를 우상단에 플로팅(레이어 띠 없이)."""
-    logo_path = PROJECT_ROOT / "logo.png"
-    if not logo_path.exists():
-        return None
-    logo = Image.open(logo_path).convert("RGBA")
-    scale = 118 / max(logo.size)
-    logo = logo.resize((int(logo.width * scale), int(logo.height * scale)), Image.Resampling.LANCZOS)
+def _brand_bar_overlay(t_in: float, dur: float):
+    """하단 브랜드 바: 살림해결소 로고 + 글자(운영자 지시 — 자막은 상단으로 이동)."""
     canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    # 가벼운 그림자
-    shadow = Image.new("RGBA", logo.size, (0, 0, 0, 0))
-    shadow.paste((0, 0, 0, 120), (0, 0), logo.split()[-1])
-    px, py = W - logo.width - 38, 40
-    canvas.alpha_composite(shadow, (px + 3, py + 3))
-    canvas.alpha_composite(logo, (px, py))
-    return _overlay(np.array(canvas), t_in, dur, fi=0.25, fo=0.2)
+    d = ImageDraw.Draw(canvas)
+    band_cy = (BOTTOM_Y + H) // 2
+    font = load_font(56, bold=True, display=True)
+    brand = BRAND
+    tw = d.textlength(brand, font=font)
+
+    logo_path = PROJECT_ROOT / "logo.png"
+    logo_w = 0
+    logo_img = None
+    if logo_path.exists():
+        logo_img = Image.open(logo_path).convert("RGBA")
+        scale = int(BRAND_H * 0.56) / max(logo_img.size)
+        logo_img = logo_img.resize(
+            (int(logo_img.width * scale), int(logo_img.height * scale)), Image.Resampling.LANCZOS
+        )
+        logo_w = logo_img.width + 22
+
+    total_w = logo_w + int(tw)
+    x = (W - total_w) // 2
+    if logo_img is not None:
+        canvas.alpha_composite(logo_img, (x, band_cy - logo_img.height // 2))
+        x += logo_w
+    bb = d.textbbox((0, 0), brand, font=font)
+    d.text((x, band_cy - (bb[3] - bb[1]) // 2 - bb[1]), brand, font=font, fill=WHITE,
+           stroke_width=4, stroke_fill=(0, 0, 0))
+    return _overlay(np.array(canvas), t_in, dur, fi=0.2, fo=0.2)
 
 
 def _sfx_clip(path, t_in, vol):
@@ -396,6 +472,13 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     pm = product_media or {}
     images = [p for p in (pm.get("images") or []) if p] or [product_img_path]
     video = pm.get("video")
+    seller = None
+    if video and Path(video).exists():
+        try:
+            seller = SellerVideo(video)
+        except Exception as exc:  # noqa: BLE001 — 셀러영상 실패는 다른 소스로 폴백
+            print(f"  [promo] seller video skipped ({str(exc)[:80]})")
+            seller = None
     pex = sources.Pexels()
     print(f"  [promo] pexels={'on' if pex.enabled else 'off'} typecast={'on' if tts_typecast.available() else 'edge-fallback'}")
 
@@ -404,6 +487,16 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     for b in beats:
         path, dur = tts_typecast.synth_or_edge(b["narration"].strip(), b.get("tone", "neutral"))
         tts.append((str(path), dur))
+
+    def make_clip(path, kind, dur):
+        # 셀러영상은 깨끗한(자막 적은) 구간을 매번 다르게 뽑아 쓴다
+        if kind == "sellervideo" and seller is not None:
+            try:
+                return seller.next_segment(dur)
+            except Exception as exc:  # noqa: BLE001
+                print(f"  [promo] seller segment failed ({str(exc)[:80]})")
+                return _media_clip(path, "video", dur)
+        return _media_clip(path, kind, dur)
 
     media_segs, overlays, audio_segs, sfx_cues = [], [], [], []
     t = 0.0
@@ -422,14 +515,14 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             for si in range(n):
                 tokens = [shots[si]] + ([b["fallback"]] if b.get("fallback") else [])
                 path, kind = _resolve_media(pex, tokens, product_img_path, si, images, video)
-                sub_clips.append(_media_clip(path, kind, sub_dur))
+                sub_clips.append(make_clip(path, kind, sub_dur))
                 if si > 0:
                     sfx_cues.append((sfx.whoosh(), t + si * sub_dur, 0.35))
             media_segs.append(concatenate_videoclips(sub_clips, method="chain").with_duration(beat_dur))
         else:
             tokens = [b["source"]] + ([b["fallback"]] if b.get("fallback") else [])
             path, kind = _resolve_media(pex, tokens, product_img_path, 0, images, video)
-            media_segs.append(_media_clip(path, kind, beat_dur))
+            media_segs.append(make_clip(path, kind, beat_dur))
 
         # SFX: whoosh on cut, impact on hook/emphasis
         if i > 0:
@@ -479,15 +572,11 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     media_track = (concatenate_videoclips(media_segs, method="chain")
                    .with_position((0, MEDIA_Y)).with_start(0))
 
-    title_png = _draw_block(hook_title, _FONT_BOLD, BANNER_H + 6, TOP_H - 6,
-                            max_size=64, min_size=36, stroke=5, color=WHITE, display=True)
-    title_clip = _overlay(title_png, 0.0, total_narr, fi=0.2, fo=0.15)
+    # 상단=자막(overlays), 하단=브랜드 바. 지속 훅 타이틀은 제거(첫 자막이 훅을 그대로 노출).
     ad_badge = _overlay(_ad_badge_png(), 0.0, total, fi=0.0, fo=0.0)
+    brand_bar = _brand_bar_overlay(0.0, total_narr)
 
-    layers = [ink_bg, media_track, title_clip, *overlays, ad_badge]
-    flogo = _float_logo_overlay(0.0, total_narr)
-    if flogo is not None:
-        layers.append(flogo)
+    layers = [ink_bg, media_track, brand_bar, *overlays, ad_badge]
 
     # outro: logo
     logo = PROJECT_ROOT / "logo.png"
@@ -513,6 +602,8 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     sfx_cues.append((sfx.thud(), end_start + 0.05, 0.5))
     _mix_sfx(tmp, sfx_cues, out)
     tmp.unlink(missing_ok=True)
+    if seller is not None:
+        seller.close()
     return out
 
 
