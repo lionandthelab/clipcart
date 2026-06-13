@@ -1137,5 +1137,59 @@
     "known_downside": "옷처럼 곡면이 많은 곳보다는 이불 같은 평면에서 잘 됩니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8946584559.mp4",
     "post_url": "https://www.youtube.com/shorts/72pdMvwjnk0"
+  },
+  {
+    "product_id": "AE1005005495976094",
+    "aliexpress_product_id": "1005005495976094",
+    "created_at": "2026-06-13",
+    "status": "PUBLISHED",
+    "product_name": "접힌 메쉬 옷 건조 네트 랙 실내 옥외 섬세한 수건 양말 수영복을위한 플랫 드라이 행거 누워",
+    "display_name": "양말 건조 행거",
+    "category": "세탁",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005005495976094.html?pdp_npi=6%40dis%21KRW%2111972%214100%21%21%2151.74%2117.72%21%402151fca717813196101662735e10e7%2112000033306794882%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c33DqtQ5",
+    "price": 4100,
+    "original_price": 11972,
+    "discount_pct": 66,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S0733873b68dc4a6380ab1f1f016ca9cej.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0733873b68dc4a6380ab1f1f016ca9cej.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sae9f6aee63d941ea88b63d5ffa52fd5dz.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S60c3a17ff04a4f4c908007ac7e77b5b8b.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S455ae0809886446c99ae57613e086377g.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc8344587c22f4abbadaa66f6c61181b5U.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa98f3655024143d0b00b5759e3cf48989.jpg"
+    ],
+    "video_url": "https://video.aliexpress-media.com/play/u/ae_sg_item/228005636/p/1/e/6/t/10301/1100102245295.mp4",
+    "rating": 97.0,
+    "review_count": 280,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "빨래 양말 건조 클립 행거",
+      "category": "세탁",
+      "title_keyword": "양말 건조 행거",
+      "old_way": "빨래집게 하나씩 집기",
+      "hook": "양말 널 때 집게 20번 집는 사람?",
+      "problem": "양말이랑 속옷 널 때 집게를 하나하나 집다 보면 시간이 훌쩍 가죠.",
+      "usage": "클립이 줄줄이 달려 있어서 한 자리에서 쭉 걸면 됩니다. 걷을 때는 한 번에 잡아당기면 우수수 떨어져요.",
+      "benefit": "너는 시간도 걷는 시간도 절반으로 줄어듭니다.",
+      "downside": "두꺼운 수건 같은 큰 빨래에는 맞지 않습니다",
+      "target": "빨래 널기가 세상 귀찮은 자취인"
+    },
+    "problem": "양말이랑 속옷 널 때 집게를 하나하나 집다 보면 시간이 훌쩍 가죠.",
+    "video_angle": "양말 널 때 집게 20번 집는 사람?",
+    "known_downside": "두꺼운 수건 같은 큰 빨래에는 맞지 않습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005005495976094.mp4",
+    "post_url": "https://www.youtube.com/shorts/CmZ7lxqiKk4"
   }
 ]
