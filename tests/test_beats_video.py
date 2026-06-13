@@ -1,9 +1,8 @@
 """셀러 제공 제품 영상(B-roll) 비트 배선 테스트.
 
-알리 어필리에이트 API의 product_video_url(mp4)은 엔진이 이미 다운로드하고
-editor가 productvideo 토큰(음원 제거·크롭 포함)을 지원하지만, beats가
-토큰을 내보내지 않아 사장돼 있었다. 사용(usage) 장면 선두에 단일 배치한다
-— 같은 클립이 여러 장면에 반복되면 어색하므로 한 장면만 쓴다.
+알리 어필리에이트 API의 product_video_url(mp4)을 제품 영상의 메인 소재로
+쓴다(운영자 지시 2026-06-13): 제품·사용 두 장면을 셀러영상으로 연다.
+editor가 장면마다 중국어 자막이 적은 '다른' 구간을 뽑아 반복 인상을 줄인다.
 """
 
 from __future__ import annotations
@@ -30,8 +29,13 @@ def _usage(beats):
     return next(b for b in beats if b["role"] == "usage")
 
 
-def test_seller_video_leads_usage_scene():
+def _product_beat(beats):
+    return next(b for b in beats if b["role"] == "product")
+
+
+def test_seller_video_leads_product_and_usage_scenes():
     beats = build_beats(_product(video_url="https://video.aliexpress-media.com/x.mp4"))
+    assert _product_beat(beats)["shots"][0] == "productvideo"
     assert _usage(beats)["shots"][0] == "productvideo"
 
 
@@ -44,14 +48,16 @@ def test_without_video_no_productvideo_token():
     assert "productvideo" not in tokens
 
 
-def test_seller_video_used_in_single_scene_only():
+def test_seller_video_leads_exactly_two_scenes():
+    # 제품·사용 두 장면에만 — result/hook 등 다른 장면엔 넣지 않는다(반복 과다 방지)
     beats = build_beats(
         _product(
             video_url="https://video.aliexpress-media.com/x.mp4",
-            image_urls=["a.jpg", "b.jpg", "c.jpg"],  # 갤러리 있는 경로도 동일
+            image_urls=["a.jpg", "b.jpg", "c.jpg"],
         )
     )
     count = sum((b.get("shots") or []).count("productvideo") for b in beats)
     count += sum(1 for b in beats if b.get("source") == "productvideo")
-    assert count == 1
+    assert count == 2
+    assert _product_beat(beats)["shots"][0] == "productvideo"
     assert _usage(beats)["shots"][0] == "productvideo"

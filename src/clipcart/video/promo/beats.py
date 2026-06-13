@@ -126,10 +126,12 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         usage_shots = [f"pexels:{br['use']}", f"motionshot:{in_use_scene}", f"pexels:{br['use']}"]
         result_shots = [f"pexels:{br['clean']}", f"productshot:{scenes[1 % len(scenes)]}"]
 
-    # 셀러 제공 제품 영상(알리 product_video_url) — 실사용 데모라 사용 장면에
-    # 가장 잘 맞는다. 같은 클립이 여러 장면에 반복되면 어색하므로 여기 한 곳만.
-    # (editor가 음원 제거·중앙 밴드 크롭 처리, 실패 시 뒤 토큰으로 폴백)
-    if product.get("video_url"):
+    # 셀러 제공 제품 영상(알리 product_video_url)을 메인으로(운영자 지시 2026-06-13):
+    # 제품·사용 두 장면 모두 셀러영상으로 연다. editor가 중국어 자막이 적은 구간을
+    # 장면마다 다르게 뽑아 반복 인상을 줄이고, 음원 제거·하단 크롭으로 자막을 밀어낸다.
+    has_seller_video = bool(product.get("video_url"))
+    if has_seller_video:
+        product_shots = ["productvideo", *(product_shots or [f"motionshot:{scenes[0]}"])]
         usage_shots = ["productvideo", *usage_shots]
 
     beats: list[dict[str, Any]] = [
