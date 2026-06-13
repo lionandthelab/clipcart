@@ -1299,5 +1299,48 @@
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012298818296.mp4",
     "post_url": "https://www.youtube.com/shorts/I-Y7lGMss9E"
+  },
+  {
+    "product_id": "CP8832504508",
+    "coupang_product_id": "8832504508",
+    "sub_id": "salrimshorts8832504508",
+    "created_at": "2026-06-13",
+    "status": "PUBLISHED",
+    "product_name": "센스팡 잘라쓰는 틈새 실리콘 커버 2p, 블랙, 2개",
+    "display_name": "가스레인지 틈새 커버",
+    "category": "주방",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=8832504508&itemId=25689129128&vendorItemId=92678367920&traceid=V0-153-f48f808d228aeb50&clickBeacon=deb4ffc0-6729-11f1-b36d-baf730cf201b%7E3&requestid=20260613221455229080589785&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eyeTrVJXjw",
+    "price": 7700,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/fapVTh2_tLU0gzmUfWmyS97Q5QA3kpQgyEq3XtUydByCkZFsQ2DQ-ahpnTdOEGGeLz4d7Z9R21MXQvuyLcA6Z0ymHMky7w5nenxvftMyXEj_PSEdJZBPCBZWr4uQCX4TaSneLpLBdLPHzSkamdMTRwvtVZe8gTv5of5EFroejFxv6ZopCp3ehPihc75ZDLEatUxRzqdxqzZfRwbLfczv9eZ1v-Ost3KoRJM0nSTc1LuLyv2hxus60wSLLBsMrsXqfFPF23RsKpxJuZurupXrDuaAc2_gaCs9XL4GKYddsPIh-A==",
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "가스레인지 틈새 커버 실리콘",
+      "category": "주방",
+      "title_keyword": "가스레인지 틈새 커버",
+      "old_way": "틈에 낀 음식물 이쑤시개로 파기",
+      "hook": "가스레인지 옆 틈, 그 사이로 다 떨어져요",
+      "problem": "가스레인지와 싱크대 사이 틈으로 국물이며 부스러기가 떨어져서 닦을 수도 없죠.",
+      "usage": "틈 위에 올려 길이에 맞게 잘라 덮기만 하면 이물질이 못 들어갑니다.",
+      "benefit": "틈새 대청소를 할 일이 없어져요. 더러워지면 커버만 닦으면 끝.",
+      "downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
+      "target": "주방 틈새 청소를 포기한 사람"
+    },
+    "problem": "가스레인지와 싱크대 사이 틈으로 국물이며 부스러기가 떨어져서 닦을 수도 없죠.",
+    "video_angle": "가스레인지 옆 틈, 그 사이로 다 떨어져요",
+    "known_downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/CP8832504508.mp4",
+    "post_url": "https://www.youtube.com/shorts/7pswOYOoiTA"
   }
 ]
