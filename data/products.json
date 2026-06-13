@@ -1342,5 +1342,59 @@
     "known_downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/CP8832504508.mp4",
     "post_url": "https://www.youtube.com/shorts/7pswOYOoiTA"
+  },
+  {
+    "product_id": "AE1005011820867517",
+    "aliexpress_product_id": "1005011820867517",
+    "created_at": "2026-06-14",
+    "status": "PUBLISHED",
+    "product_name": "주방 전자레인지 음식 덮개 그릇 뚜껑 탄성 실리콘 뚜껑 범용 적응형 뚜껑 실리콘 커버 스트레치 뚜껑",
+    "display_name": "전자레인지 덮개",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005011820867517.html?pdp_npi=6%40dis%21KRW%213841%213193%21%21%2116.60%2113.80%21%402101611117813628168134057e0f66%2112000056694490935%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4odOl65",
+    "price": 3193,
+    "original_price": 3841,
+    "discount_pct": 17,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S67a29f0c88ab48cd9bc479d0f26e52b79.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S67a29f0c88ab48cd9bc479d0f26e52b79.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S95dae5dfee94454ea27dda76e62f7b05P.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S39b50fff968b49c9a27e107c508138a2T.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd79dca3fd7594302b64c91aa55f47c5fJ.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sb0015e0f00d44c2797e422553103d2b1L.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S694573cb4f754f31859fa93822cbdbafr.jpg"
+    ],
+    "video_url": "",
+    "rating": 89.3,
+    "review_count": 420,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "전자레인지 음식 덮개",
+      "category": "주방",
+      "title_keyword": "전자레인지 덮개",
+      "old_way": "랩 씌웠다 버리기 반복",
+      "hook": "전자레인지 안, 음식 튄 자국 그대로죠?",
+      "problem": "데울 때마다 음식물이 튀어서 전자레인지 안이 금방 더러워져요. 랩은 매번 버리니 아깝고요.",
+      "usage": "그릇 위에 덮고 돌리기만 하면 튐을 막아줍니다. 다 쓰면 물로 헹궈서 재사용.",
+      "benefit": "전자레인지 청소 횟수가 확 줄고 랩 쓰레기도 안 나와요.",
+      "downside": "지름이 큰 접시는 다 덮이지 않을 수 있습니다",
+      "target": "전자레인지 청소가 귀찮은 사람"
+    },
+    "problem": "데울 때마다 음식물이 튀어서 전자레인지 안이 금방 더러워져요. 랩은 매번 버리니 아깝고요.",
+    "video_angle": "전자레인지 안, 음식 튄 자국 그대로죠?",
+    "known_downside": "지름이 큰 접시는 다 덮이지 않을 수 있습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011820867517.mp4",
+    "post_url": "https://www.youtube.com/shorts/1Qf3MrkK9MM"
   }
 ]
