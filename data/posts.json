@@ -185,13 +185,14 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/3zjv7WtfD6c",
     "published_at": "2026-06-12T21:03:52.997758+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "아직도 틈에 낀 음식물 이쑤시개로 파기? 이거 보세요",
     "title_template": "아직도 {old_way}? 이거 보세요",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3NKLQRx",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "Ugy3BT2VZfGdqngYZq14AaABAg"
+    "comment_id": "Ugy3BT2VZfGdqngYZq14AaABAg",
+    "not_live_at": "2026-06-13"
   },
   {
     "post_id": "72pdMvwjnk0",
@@ -200,13 +201,14 @@
     "source": "coupang",
     "post_url": "https://www.youtube.com/shorts/72pdMvwjnk0",
     "published_at": "2026-06-12T22:39:07.490222+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "이불 위 고양이 털, 테이프로 계속 떼실 건가요?",
     "title_template": "{hook}",
     "affiliate_url": "https://link.coupang.com/a/excZpu1Mia",
     "sub_id": "salrimshorts8946584559",
     "thumbnail_set": true,
-    "comment_id": "UgwFsYPn8bCIZWKTphJ4AaABAg"
+    "comment_id": "UgwFsYPn8bCIZWKTphJ4AaABAg",
+    "not_live_at": "2026-06-13"
   },
   {
     "post_id": "CmZ7lxqiKk4",
@@ -237,5 +239,20 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgzA70_1BBkiavRyPdJ4AaABAg"
+  },
+  {
+    "post_id": "I-Y7lGMss9E",
+    "product_id": "AE1005012298818296",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/I-Y7lGMss9E",
+    "published_at": "2026-06-13T09:03:40.470461+00:00",
+    "status": "PUBLISHED",
+    "title": "음식물 쓰레기통 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3uIjr25",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "Ugw83eis97qyKJLUjIR4AaABAg"
   }
 ]

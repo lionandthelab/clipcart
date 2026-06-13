@@ -166,7 +166,9 @@
     "title_template": "아직도 {old_way}? 이거 보세요",
     "post_url": "https://www.youtube.com/shorts/3zjv7WtfD6c",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3NKLQRx",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-13"
   },
   {
     "date": "2026-06-13",
@@ -182,7 +184,9 @@
     "title_template": "{hook}",
     "post_url": "https://www.youtube.com/shorts/72pdMvwjnk0",
     "affiliate_url": "https://link.coupang.com/a/excZpu1Mia",
-    "sub_id": "salrimshorts8946584559"
+    "sub_id": "salrimshorts8946584559",
+    "live": false,
+    "not_live_at": "2026-06-13"
   },
   {
     "date": "2026-06-13",
@@ -214,6 +218,22 @@
     "title_template": "{sold_count}개 팔린 {title_keyword}, 단점까지 보세요",
     "post_url": "https://www.youtube.com/shorts/h16WJC7K0Ak",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3vAxPDx",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-13",
+    "post_id": "I-Y7lGMss9E",
+    "product_id": "AE1005012298818296",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005012298818296",
+    "product_name": "벽걸이형 뚜껑있는 쓰레기통 주방 욕실 가정용 음식물 쓰레기통 밀폐형 음식물 쓰레기통 화장실 가정용 정리함",
+    "niche_keyword": "음식물 쓰레기통 밀폐 뚜껑",
+    "category": "주방",
+    "title": "음식물 쓰레기통 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "post_url": "https://www.youtube.com/shorts/I-Y7lGMss9E",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3uIjr25",
     "sub_id": null
   }
 ]
