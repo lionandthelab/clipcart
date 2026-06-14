@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import os
 from datetime import date
 from typing import Any
 
@@ -53,6 +54,12 @@ def _pick_title(product: dict[str, Any], profile: dict[str, Any]) -> tuple[str, 
     if sold > 0:
         values["sold_count"] = f"{sold:,}"
     templates = profile.get("title_templates") or []
+    # A/B 테스트: 특정 훅 템플릿을 강제(env). 못 그리면 일반 선택으로 폴백.
+    forced = os.getenv("CLIPCART_TITLE_TEMPLATE", "").strip()
+    if forced:
+        rendered = forced.format_map(values)
+        if "{" not in rendered and rendered and len(rendered) <= 90:
+            return rendered, forced
     seed = int(hashlib.md5(f"{date.today()}{product['product_id']}".encode()).hexdigest(), 16)
     usable = []
     for tpl in templates:

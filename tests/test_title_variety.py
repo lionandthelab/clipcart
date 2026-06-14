@@ -59,6 +59,22 @@ def test_sold_count_template_used_when_volume_exists():
     assert creative["title"] == "1,284개 팔린 배수구 거름망, 단점까지 보세요"
 
 
+def test_force_template_via_env_for_ab_test(monkeypatch):
+    # A/B용: 특정 훅 템플릿을 강제해 같은 배치에서 서로 다른 훅으로 올린다.
+    monkeypatch.setenv("CLIPCART_TITLE_TEMPLATE", "{target}만 보세요")
+    creative = build_creative(_product(), _profile(["아직도 {old_way}? 이거 보세요", "{target}만 보세요"]))
+    assert creative["title"] == "배수구 머리카락 치우는 게 곤욕인 사람만 보세요"
+    assert creative["title_template"] == "{target}만 보세요"
+
+
+def test_force_template_falls_back_when_unrenderable(monkeypatch):
+    # 강제한 템플릿이 값 부족으로 못 그리면(예: 쿠팡에 sold_count 없음) 일반 선택으로 폴백
+    monkeypatch.setenv("CLIPCART_TITLE_TEMPLATE", "{sold_count}개 팔린 {title_keyword}")
+    creative = build_creative(_product(), _profile(["{hook}"]))
+    assert creative["title"] == "배수구 청소, 아직 손으로 하세요?"
+    assert creative["title_template"] == "{hook}"
+
+
 def test_sold_count_template_skipped_without_volume():
     # 쿠팡 API엔 판매량/리뷰 수가 없다 — 값 없으면 해당 템플릿은 자동 탈락하고 폴백
     creative = build_creative(
