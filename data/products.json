@@ -1773,5 +1773,48 @@
     "known_downside": "틈 폭이 아주 넓으면 맞는 사이즈를 찾기 어렵습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/CP8616590700.mp4",
     "post_url": "https://www.youtube.com/shorts/7pjNHarPDUo"
+  },
+  {
+    "product_id": "CP8665259852",
+    "coupang_product_id": "8665259852",
+    "sub_id": "salrimshorts8665259852",
+    "created_at": "2026-06-15",
+    "status": "PUBLISHED",
+    "product_name": "확장형 접이식 높이조절 스텐 빨래건조대 이불 건조대",
+    "display_name": "스텐 건조대",
+    "category": "세탁",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=8665259852&itemId=25150022696&vendorItemId=91576052010&traceid=V0-153-b3d7e6b5636b8a41&clickBeacon=16dcabe0-6802-11f1-a17b-d9c1bb593e8b%7E3&requestid=20260615000240640054040185&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/ez1uUpgJPg",
+    "price": 53960,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/6RjmE2yi-4kGiBWB6capJh6vQcxXx1HLXueTjXk3x4iXcQNBWXD0_RPbw-UtVL-YlXYW2XhdwGnk442u1Yw9BG4qfShH-3y90Yq2EUxXI7ZCwwZOiwvdqKchMQPjZEcCaxDdvDZYXbKJuqNO5LQURdNGCixU0AuuvycpBrmhKrzuUPvpJmW616At4p2yX_6BN-1Bo0C5EMdyxNnA9_nxsU3K97KWcv6q2NHgKtDExFCwGz4tZrxUTaqjaamCuYXGaJe7x5hBxLaS_qMmLWr2mQHrm7upRo4eASUDEUHije0P_0A8hEJ4XZfkXymRXeo0UL4=",
+    "score": 83,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 12,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "스텐 빨래 건조대 대형",
+      "category": "세탁",
+      "title_keyword": "스텐 건조대",
+      "old_way": "좁고 휘청대는 건조대에 빨래 욱여넣기",
+      "hook": "빨래 건조대, 자꾸 휘청거리고 모자라죠?",
+      "problem": "빨래 많은 날엔 좁은 건조대에 다 못 널고, 약한 프레임은 무게에 휘청거리죠.",
+      "usage": "넓게 펼쳐 한 번에 많이 널고, 안 쓸 땐 접어서 세워두면 됩니다.",
+      "benefit": "한 번에 넉넉히 널 수 있어서 빨래가 잘 마르고 공간도 깔끔해져요.",
+      "downside": "기본 건조대보다 무겁고 부피가 있어 보관 공간은 좀 필요해요",
+      "target": "빨래 널 곳이 늘 부족한 사람"
+    },
+    "problem": "빨래 많은 날엔 좁은 건조대에 다 못 널고, 약한 프레임은 무게에 휘청거리죠.",
+    "video_angle": "빨래 건조대, 자꾸 휘청거리고 모자라죠?",
+    "known_downside": "기본 건조대보다 무겁고 부피가 있어 보관 공간은 좀 필요해요",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/CP8665259852.mp4",
+    "post_url": "https://www.youtube.com/shorts/b9V9dcbO9rg"
   }
 ]
