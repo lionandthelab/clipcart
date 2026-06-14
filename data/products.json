@@ -1816,5 +1816,48 @@
     "known_downside": "기본 건조대보다 무겁고 부피가 있어 보관 공간은 좀 필요해요",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/CP8665259852.mp4",
     "post_url": "https://www.youtube.com/shorts/b9V9dcbO9rg"
+  },
+  {
+    "product_id": "CP7506230380",
+    "coupang_product_id": "7506230380",
+    "sub_id": "salrimshorts7506230380",
+    "created_at": "2026-06-15",
+    "status": "PUBLISHED",
+    "product_name": "Raon 3단 롱 욕실스퀴지 바닥 물기제거, 2개",
+    "display_name": "욕실 물때 스크래퍼",
+    "category": "욕실",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=7506230380&itemId=27127299169&vendorItemId=94095316285&traceid=V0-153-d57ab20fffa917cd&clickBeacon=4b2c2a50-683f-11f1-a985-7864c0b7c759%7E3&requestid=20260615072047762069913950&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eAwN3IREyq",
+    "price": 17700,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/rnN6WJygJxIjgXOWrkAUnxC7D0ZwdrvKPydl8vnDaGCBKaiAMwpwpu75sdNmzCoq0jHvL3fk0FpDhNpxGApM6YkQ0fQAoXWJQcpvwFtPm15kUFHYOTP7Iet0yDSIkfXO4M18tQgGTNkDjkC1z2crMRbUWEMrswaJBKMxP5E2Xapaigc-DDK1xDBIQdFHd6qv8amnLquu3w2tmGIUl7ovqa3tcoe5_DcqY_L7UrBpKlMDEYCu8s2R5bjMzCm_8Rfs-fnKdG-4hfhfWdkBp79-7GBdcE3sj_S01W4KeNf_GBZFTMSiM99uQkxBT1tu_8k=",
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "욕실 물때 스크래퍼",
+      "category": "욕실",
+      "title_keyword": "욕실 물때 스크래퍼",
+      "old_way": "수세미로 빡빡 문지르기",
+      "hook": "샤워부스 물때, 수세미로 빡빡 미세요?",
+      "problem": "유리문에 낀 물때는 수세미로 아무리 문질러도 잘 안 지워지죠.",
+      "usage": "물 뿌리고 위에서 아래로 쓱 긁어내리면 물때와 물기가 같이 밀려 내려갑니다.",
+      "benefit": "샤워 후 30초 습관으로 물때가 쌓이는 속도가 눈에 띄게 느려져요.",
+      "downside": "오래 묵은 물때는 세제와 같이 써야 효과가 있습니다",
+      "target": "샤워부스 유리 물때가 신경 쓰이는 사람"
+    },
+    "problem": "유리문에 낀 물때는 수세미로 아무리 문질러도 잘 안 지워지죠.",
+    "video_angle": "샤워부스 물때, 수세미로 빡빡 미세요?",
+    "known_downside": "오래 묵은 물때는 세제와 같이 써야 효과가 있습니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7506230380.mp4",
+    "post_url": "https://www.youtube.com/shorts/UMBxt6r3eSA"
   }
 ]
