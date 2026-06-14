@@ -1622,5 +1622,59 @@
     "known_downside": "옷장 선반 높이에 따라 접이식 높이가 안 맞을 수 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/CP8506784244.mp4",
     "post_url": "https://www.youtube.com/shorts/q2Iuts2uII0"
+  },
+  {
+    "product_id": "AE1005011828728279",
+    "aliexpress_product_id": "1005011828728279",
+    "created_at": "2026-06-14",
+    "status": "PUBLISHED",
+    "product_name": "손잡이가 있는 병솔, 내구성 있는 나일론 솔, 미끄럼 방지 그립, 텀블러, 와인병, 주방 청소 도구용 물병 세척기",
+    "display_name": "텀블러 세척솔",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005011828728279.html?pdp_npi=6%40dis%21KRW%216393%213200%21%21%2127.63%2113.83%21%402141315917814060148358645e1205%2112000056706137530%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3PeNuuv",
+    "price": 3200,
+    "original_price": 6393,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S5acbfb1f668b4131b29d55e6a607eda1L.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5acbfb1f668b4131b29d55e6a607eda1L.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S306cf4cb78be489f9122b331babf6d6dO.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S487e6862c5d14890b5d457988ea07e7en.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S856298b623fa43ac92887f3692e0bc2eD.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S38fb5aab26064f1ab65aa500d55bdef8u.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9f9e440371c4421491bc8d0e91cd1a71K.jpg"
+    ],
+    "video_url": "",
+    "rating": 100.0,
+    "review_count": 17,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "텀블러 세척솔 스펀지",
+      "category": "주방",
+      "title_keyword": "텀블러 세척솔",
+      "old_way": "손 안 닿는 바닥 포기",
+      "hook": "텀블러 바닥, 사실 못 닦고 계시죠?",
+      "problem": "텀블러는 입구가 좁아서 손이 바닥까지 안 닿아요. 냄새가 나도 헹구기만 하게 되죠.",
+      "usage": "긴 손잡이 솔이 바닥과 모서리까지 닿아서 구석을 닦아냅니다.",
+      "benefit": "바닥까지 닦이니 커피 냄새가 남는 일이 줄어요.",
+      "downside": "솔도 소모품이라 몇 달에 한 번은 교체해야 합니다",
+      "target": "매일 텀블러 쓰는데 제대로 못 닦는 사람"
+    },
+    "problem": "텀블러는 입구가 좁아서 손이 바닥까지 안 닿아요. 냄새가 나도 헹구기만 하게 되죠.",
+    "video_angle": "텀블러 바닥, 사실 못 닦고 계시죠?",
+    "known_downside": "솔도 소모품이라 몇 달에 한 번은 교체해야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011828728279.mp4",
+    "post_url": "https://www.youtube.com/shorts/ZQ7891LsINM"
   }
 ]
