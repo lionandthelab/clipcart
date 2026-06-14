@@ -16,36 +16,39 @@ from clipcart.video.compliance import sanitize_text
 from clipcart.video.promo.broll import get_broll
 
 
-# 카테고리별 제품 화보샷 배경 (제품은 그대로, 배경/구도만 촬영한 듯하게)
+# 카테고리별 제품 화보샷 배경 (제품은 그대로, 배경/구도만 촬영한 듯하게).
+# 2020년대 신축 한국 아파트 마감으로 명시 — 그냥 'Korean ~'이면 낡은 인테리어가 나온다.
 _SHOT_SCENES: dict[str, list[str]] = {
     "주방": [
-        "a bright marble kitchen counter in a sunlit Korean kitchen",
-        "a warm wooden dining table near a window, morning light",
+        "a sleek white quartz countertop with handleless cabinets in a modern 2020s "
+        "Korean apartment kitchen, bright daylight",
+        "a contemporary kitchen island near a large window in a modern Korean apartment, morning light",
     ],
     "욕실": [
-        "a clean white bathroom shelf with soft daylight and a small green plant",
-        "light gray bathroom tiles with gentle window light",
+        "a wall-hung vanity with large-format gray porcelain tiles and a frameless glass "
+        "shower in a modern 2020s Korean apartment bathroom, soft daylight",
+        "matte-black fixtures and clean minimalist tiling in a contemporary Korean bathroom, gentle window light",
     ],
     "정리/수납": [
-        "a neat wooden shelf in a cozy minimal Korean apartment",
-        "a tidy white desk near a bright window",
+        "a clean built-in shelf in a modern minimal 2020s Korean apartment, contemporary styling, bright daylight",
+        "a tidy contemporary white desk near a large window in a modern Korean apartment",
     ],
     "세탁": [
-        "a bright laundry room counter with neatly folded towels",
-        "a clean white shelf beside a modern washing machine",
+        "a modern Korean apartment laundry area with a contemporary front-load washer and neatly folded towels, bright light",
+        "a clean contemporary utility shelf beside a modern front-load washing machine",
     ],
     "청소": [
-        "a bright clean living room floor with warm morning light",
-        "a sunlit windowsill in a tidy Korean apartment",
+        "a bright modern 2020s Korean apartment living room with light wood flooring and contemporary furniture, warm daylight",
+        "a sunlit windowsill in a tidy modern Korean apartment",
     ],
     "반려동물": [
-        "a cozy living room rug in warm afternoon light",
-        "a soft neutral sofa corner with gentle daylight",
+        "a contemporary rug in a cozy modern Korean apartment living room, warm afternoon light",
+        "a soft neutral sofa corner in a modern Korean apartment, gentle daylight",
     ],
 }
 _DEFAULT_SCENES = [
-    "a bright clean table in a cozy Korean apartment, soft window light",
-    "a neat white shelf with warm natural light",
+    "a bright clean table in a modern 2020s Korean apartment, contemporary interior, soft window light",
+    "a neat contemporary shelf in a modern Korean apartment with warm natural light",
 ]
 
 
@@ -64,22 +67,22 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
     rocket_line = "심지어 로켓배송이라 내일 와요." if rocket else "가격도 부담 없죠."
 
     # 공감용 문제 장면 — AI티 방지: 사람/손 없이 배경·상황만 실사 폰카풍.
-    # (생성 인물은 부자연스러워 공감을 깨므로 상황의 지저분함/귀찮음만 보여준다)
+    # 2020년대 신축 한국 아파트 배경으로 고정해 '요즘 우리 집' 공감을 만든다.
     empathy = (
-        f"{br['pain']}, close-up of the messy frustrating situation itself, "
-        f"grimy buildup and clutter clearly visible, no people, no hands"
+        f"{br['pain']}, close-up of the messy frustrating situation itself in a modern "
+        f"2020s Korean apartment, grimy buildup and clutter clearly visible, no people, no hands"
     )
 
     # 실사용 컨텍스트 화보샷 — 실제 쓰이는 자리에 놓인 모습
     in_use_scene = (
-        f"placed where it is actually used in a real Korean home ({scenes[0]}), "
+        f"placed where it is actually used in a modern 2020s Korean home ({scenes[0]}), "
         f"natural daily-life context"
     )
 
     # 전환 장면: 기존 방식의 도구들이 방치된 모습 (실망의 흔적, 사람 없음)
     switch_scene = (
-        f"worn-out old cleaning tools and failed makeshift solutions related to "
-        f"'{br['pain']}', abandoned on the floor, the problem still unsolved, "
+        f"worn-out old tools and failed makeshift solutions related to "
+        f"'{br['pain']}', abandoned in a modern 2020s Korean apartment, the problem still unsolved, "
         f"no people, no hands"
     )
 

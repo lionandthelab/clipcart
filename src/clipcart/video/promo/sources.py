@@ -111,16 +111,22 @@ class Pexels:
 # --------------------------------------------------------------------------- #
 # Gemini still (candid / cinematic / simple)
 # --------------------------------------------------------------------------- #
+# 모던 단서를 명시: 그냥 'Korean home'이면 20년 전 낡은 인테리어가 나온다.
+# 2020년대 신축 아파트(현대식 마감/가전)로 고정해 시청자 공감도를 높인다.
+_MODERN_KR = (
+    "a modern 2020s South Korean apartment, contemporary newly-built interior with "
+    "recent fixtures and appliances (not old or dated)"
+)
 _GEMINI_CINEMATIC = (
-    "Cinematic dramatic film still, real Korean home interior, atmospheric natural "
+    f"Cinematic dramatic film still inside {_MODERN_KR}, atmospheric natural "
     "lighting, shallow depth of field, photoreal, vertical 9:16, no text. Subject: "
 )
 _GEMINI_SIMPLE = (
-    "Clean realistic lifestyle photo, Korean household, bright, vertical 9:16, no text. Subject: "
+    f"Clean realistic lifestyle photo inside {_MODERN_KR}, bright, vertical 9:16, no text. Subject: "
 )
 # AI티 제거용: 사람/손 없이 배경·상황만, 일상 폰카 스냅풍 (문제 장면 공감용)
 _GEMINI_CANDID = (
-    "Candid amateur smartphone snapshot, ordinary lived-in Korean apartment, natural "
+    f"Candid amateur smartphone snapshot inside {_MODERN_KR}, natural "
     "unstaged daylight, slightly imperfect casual framing, realistic textures and "
     "clutter, photorealistic, vertical 9:16. Absolutely no people, no hands, no faces, "
     "no text, no watermark. Scene: "
