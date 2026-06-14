@@ -35,15 +35,17 @@ def test_mark_not_live_flags_and_is_idempotent(monkeypatch):
     assert history.mark_not_live({"dead1"}) == 0
 
 
-def test_dedup_helpers_exclude_not_live(monkeypatch):
+def test_dedup_still_blocks_not_live(monkeypatch):
+    # 비공개됐어도 '이미 다룬 것'이므로 중복 차단은 유지한다(운영자 피드백 2026-06-14):
+    # 같은 상품/이름/주제를 다시 올리면 운영자에겐 중복으로 보인다.
     items = _entries()
     items[1]["live"] = False
     monkeypatch.setattr(history, "load_history", lambda: items)
 
-    assert history.used_coupang_ids() == {"1"}
-    assert history.name_key("가스레인지 틈새커버") not in history.used_name_keys()
-    assert "가스레인지" not in history.keyword_last_used()  # 니치 잠금 해제
-    assert history.keyword_last_used() == {"배수구": "2026-06-10"}
+    assert history.used_coupang_ids() == {"1", "2"}
+    assert history.name_key("가스레인지 틈새커버") in history.used_name_keys()
+    assert "가스레인지" in history.keyword_last_used()  # 주제 재선정 회피
+    assert history.keyword_last_used() == {"배수구": "2026-06-10", "가스레인지": "2026-06-11"}
 
 
 def test_sync_not_live_corrects_posts_status():

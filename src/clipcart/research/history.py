@@ -52,14 +52,14 @@ def record(entry: dict[str, Any]) -> None:
     _save(items)
 
 
-def _live_entries() -> list[dict[str, Any]]:
-    """실제로 살아 있는 업로드만. 비공개/삭제된 영상(live=False)은 '업로드됨'이
-    아니므로 중복 차단·니치 잠금 계산에서 제외한다(기록 자체는 보존)."""
-    return [e for e in load_history() if e.get("live") is not False]
-
-
 def mark_not_live(post_ids: set[str]) -> int:
-    """비공개/삭제 확인된 게시를 live=False로 마킹. 마킹한 개수 반환."""
+    """비공개/삭제 확인된 게시를 live=False로 마킹(감사 기록). 마킹한 개수 반환.
+
+    주의: 중복 차단은 live 여부와 무관하게 '한 번이라도 올린 것'을 기준으로 한다.
+    비공개됐다고 같은 상품/이름/주제를 다시 올리면 운영자에겐 중복으로 보이기
+    때문이다(2026-06-14 운영자 피드백). live 플래그는 bio 페이지 노출 판정과
+    '언제 내려갔는지' 감사용으로만 쓴다.
+    """
     items = load_history()
     changed = 0
     for e in items:
@@ -73,21 +73,22 @@ def mark_not_live(post_ids: set[str]) -> int:
 
 
 def used_coupang_ids() -> set[str]:
-    return {str(e["coupang_product_id"]) for e in _live_entries() if e.get("coupang_product_id")}
+    return {str(e["coupang_product_id"]) for e in load_history() if e.get("coupang_product_id")}
 
 
 def used_aliexpress_ids() -> set[str]:
-    return {str(e["aliexpress_product_id"]) for e in _live_entries() if e.get("aliexpress_product_id")}
+    return {str(e["aliexpress_product_id"]) for e in load_history() if e.get("aliexpress_product_id")}
 
 
 def used_name_keys() -> set[str]:
-    return {name_key(e["product_name"]) for e in _live_entries() if e.get("product_name")}
+    return {name_key(e["product_name"]) for e in load_history() if e.get("product_name")}
 
 
 def keyword_last_used() -> dict[str, str]:
-    """니치 키워드 → 마지막 사용 날짜(ISO)."""
+    """니치 키워드 → 마지막 사용 날짜(ISO). 비공개분도 포함해 이미 다룬 주제의
+    재선정을 막는다(gap_days 동안 회피)."""
     out: dict[str, str] = {}
-    for e in _live_entries():
+    for e in load_history():
         k = e.get("niche_keyword")
         d = e.get("date", "")
         if k and d > out.get(k, ""):
