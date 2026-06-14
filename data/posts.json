@@ -53,12 +53,13 @@
     "platform": "youtube_shorts",
     "post_url": "https://www.youtube.com/shorts/-UcAOFZZIjI",
     "published_at": "2026-06-10T08:58:16.831731+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "아직도 배수구 머리카락 손으로 빼기? 이거 보세요",
     "affiliate_url": "https://link.coupang.com/a/esPJr3e7k4",
     "thumbnail_set": true,
     "comment_id": "UgwosMdJJApCnNgPKe14AaABAg",
-    "engine": "v2-kinetic"
+    "engine": "v2-kinetic",
+    "not_live_at": "2026-06-15"
   },
   {
     "post_id": "J2tUYoArTWE",
