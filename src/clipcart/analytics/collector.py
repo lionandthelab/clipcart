@@ -112,6 +112,7 @@ def build_snapshot(
                 "sub_id": sub_id,
                 "title": post.get("title"),
                 "title_template": post.get("title_template"),
+                "script_style": post.get("script_style"),
                 "published_at": post.get("published_at"),
                 "views": st.get("views", 0),
                 "likes": st.get("likes", 0),

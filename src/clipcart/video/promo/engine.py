@@ -35,6 +35,10 @@ def make_promo_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
     beats = build_beats(product)
     # 컴플라이언스는 실제 발화되는 promo 내레이션으로 검사
     creative["scenes"] = beats_to_scenes(beats)
+    # 사용된 대본 말투 라벨(beats의 pick과 동일 — 상품ID 해시라 재호출해도 일치)
+    from clipcart.video.promo.script import pick_script_style
+
+    creative["script_style"] = pick_script_style(product)[0]
 
     # 실제 리스팅 사진 갤러리 다운로드 — 실사용 느낌(제품 사진 다수 노출)
     image_urls = product.get("image_urls") or [product["image_url"]]

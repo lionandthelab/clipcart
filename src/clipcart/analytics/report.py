@@ -65,6 +65,7 @@ def build_report(snapshot: dict[str, Any], history: list[dict[str, Any]]) -> dic
         },
         "by_source": _group(videos, lambda v: v.get("source", "coupang")),
         "by_hook": _group(videos, lambda v: v.get("title_template") or "(미기록)"),
+        "by_script": _group(videos, lambda v: v.get("script_style") or "(미기록)"),
         "by_category": _group(videos, lambda v: v["_category"]),
         "by_niche": _group(videos, lambda v: v["_niche"]),
         "leaderboard": {
@@ -109,6 +110,7 @@ def render_text(report: dict[str, Any]) -> str:
     ]
     lines += _render_groups("소스", report["by_source"]) + [""]
     lines += _render_groups("훅 템플릿", report["by_hook"]) + [""]
+    lines += _render_groups("대본 말투", report["by_script"]) + [""]
     lines += _render_groups("카테고리", report["by_category"]) + [""]
     lines.append("### 조회 상위")
     for v in report["leaderboard"]["top"]:

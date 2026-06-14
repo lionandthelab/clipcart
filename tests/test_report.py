@@ -15,6 +15,7 @@ def _snapshot():
         "window": {"start": "20260605", "end": "20260614"},
         "videos": [
             {"video_id": "a", "source": "coupang", "title_template": "{hook}",
+             "script_style": "direct",
              "title": "A", "views": 2000, "likes": 10, "comments": 1,
              "sub_id": "s_a", "clicks": 5, "orders": 1, "commission": 300.0},
             {"video_id": "b", "source": "coupang", "title_template": "{hook}",
@@ -68,6 +69,13 @@ def test_by_hook_and_category_present():
     cats = {g["key"]: g for g in r["by_category"]}
     assert cats["정리/수납"]["n"] == 2  # a,c
     assert cats["욕실"]["n"] == 1
+
+
+def test_by_script_groups_style_and_missing():
+    r = build_report(_snapshot(), _history())
+    scripts = {g["key"]: g for g in r["by_script"]}
+    assert scripts["direct"]["n"] == 1  # a
+    assert scripts["(미기록)"]["n"] == 2  # b,c (script_style 없음)
 
 
 def test_leaderboard_top_and_bottom():
