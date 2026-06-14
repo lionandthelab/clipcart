@@ -1730,5 +1730,48 @@
     "known_downside": "사이즈가 현관보다 작으면 효과가 떨어지니 치수를 재고 골라야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010717726561.mp4",
     "post_url": "https://www.youtube.com/shorts/LQyjBQRMuPo"
+  },
+  {
+    "product_id": "CP8616590700",
+    "coupang_product_id": "8616590700",
+    "sub_id": "salrimshorts8616590700",
+    "created_at": "2026-06-14",
+    "status": "PUBLISHED",
+    "product_name": "YF 만능 침대사이 틈새쿠션 틈새막이, 그레이",
+    "display_name": "침대 틈새 막이",
+    "category": "정리/수납",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=8616590700&itemId=25184781296&vendorItemId=92181607294&traceid=V0-153-e08df9e2cfe13b6f&clickBeacon=3baf3240-67f2-11f1-9f08-211d18faabbb%7E3&requestid=20260614220910499236837927&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/ezTn1NRt3Q",
+    "price": 32900,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/emSMpzbn4yorCWj3er2USg3cdjG7hXCmnkJ_-NCPP7p_hWhKwYMw6P7-u4JDHDu60YtIVATT53t76CZC1CrLcI6gXGOUFAK-PXg7DIBz_8OfiQLb4qRw-JIPYHgJe-WZuspHImarLvPVPfuM6iBb8C4BIRCWocWfWJy4w8MPFOyEsB948uYbuTfqGEp82nDELfUgNYlw5Rfcp4gh407r3iR0iHG_wHN2TLshgFUGeVnokW60Z9jugVePxgQTKsRnzXWsre4m44TfHrtIvsxhoaEFLF5raw5L98iD82QgnDPmDVtrfyVlV2HbKQ52difN-w==",
+    "score": 83,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 12,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "침대 틈새 막이 패드",
+      "category": "정리/수납",
+      "title_keyword": "침대 틈새 막이",
+      "old_way": "침대 밑 떨어진 물건 포기",
+      "hook": "침대와 벽 사이로 폰 빠뜨려본 사람?",
+      "problem": "침대 틈으로 폰, 리모컨, 머리끈이 빠지면 침대를 밀어야 꺼낼 수 있죠.",
+      "usage": "틈에 끼워 넣기만 하면 물건이 빠지지 않게 막아줍니다.",
+      "benefit": "침대 밀어서 물건 꺼내는 일이 사라져요.",
+      "downside": "틈 폭이 아주 넓으면 맞는 사이즈를 찾기 어렵습니다",
+      "target": "침대 틈으로 물건을 자주 빠뜨리는 사람"
+    },
+    "problem": "침대 틈으로 폰, 리모컨, 머리끈이 빠지면 침대를 밀어야 꺼낼 수 있죠.",
+    "video_angle": "침대와 벽 사이로 폰 빠뜨려본 사람?",
+    "known_downside": "틈 폭이 아주 넓으면 맞는 사이즈를 찾기 어렵습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/CP8616590700.mp4",
+    "post_url": "https://www.youtube.com/shorts/7pjNHarPDUo"
   }
 ]
