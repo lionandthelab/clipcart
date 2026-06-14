@@ -171,6 +171,31 @@ def cmd_bio() -> None:
     _print_json(build_bio_page())
 
 
+@main.command("analyze")
+@click.option("--json", "as_json", is_flag=True, help="구조화 JSON 출력")
+@click.option("--collect", is_flag=True, help="분석 전에 metrics 최신 수집")
+def cmd_analyze(as_json: bool, collect: bool) -> None:
+    """최신 성과 스냅샷을 소스·훅·카테고리별로 집계해 표시."""
+    from clipcart.analytics.report import build_report, render_text
+    from clipcart.research.history import load_history
+    from clipcart.storage import load_metrics
+
+    if collect:
+        from clipcart.analytics.collector import collect as run_collect
+
+        run_collect(days=10)
+
+    snaps = load_metrics()
+    if not snaps:
+        _print_json({"status": "EMPTY", "reason": "metrics.json 비어있음 — clipcart metrics 먼저 실행"})
+        return
+    report = build_report(snaps[-1], load_history())
+    if as_json:
+        _print_json(report)
+    else:
+        click.echo(render_text(report))
+
+
 @main.command("history")
 @click.option("--limit", default=30, help="최근 N건 표시")
 def cmd_history(limit: int) -> None:
