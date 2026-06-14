@@ -25,6 +25,14 @@ PRICE_MIN = 4000
 PRICE_MAX = 35000
 
 
+def price_band() -> tuple[int, int]:
+    """가격 하·상한. 프리미엄 아이템은 env로 상향(실행 단위)."""
+    return (
+        int(os.getenv("CLIPCART_PRICE_MIN", str(PRICE_MIN))),
+        int(os.getenv("CLIPCART_PRICE_MAX", str(PRICE_MAX))),
+    )
+
+
 def _load_state() -> dict[str, Any]:
     if NICHE_STATE_FILE.exists():
         return json.loads(NICHE_STATE_FILE.read_text(encoding="utf-8"))
@@ -99,6 +107,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
     if force_keyword:
         niche_queue = [n for n in NICHES if n["keyword"] == force_keyword] or niche_queue
 
+    pmin, pmax = price_band()
     for niche in niche_queue[:MAX_SEARCH_CALLS_PER_RUN]:
         try:
             items = search_products(niche["keyword"], limit=10, sub_id=sub_id)
@@ -110,7 +119,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
         candidates = [
             it
             for it in items
-            if PRICE_MIN <= int(it.get("productPrice") or 0) <= PRICE_MAX
+            if pmin <= int(it.get("productPrice") or 0) <= pmax
             and not _is_excluded(it.get("productName", ""))
             and product_type_ok(it.get("productName", ""), niche["keyword"])
             and str(it.get("productId")) not in used_product_ids
