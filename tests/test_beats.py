@@ -88,12 +88,13 @@ def test_switch_beat_between_problem_and_product():
     assert roles.index("problem") < roles.index("switch") < roles.index("product")
 
 
-def test_switch_narration_references_old_way_and_difference():
+def test_switch_narration_references_old_way_naturally():
     beats = build_beats(_product())
     switch = next(b for b in beats if b["role"] == "switch")
     niche_old_way = "바닥 멀티탭 먼지 방치"
     assert niche_old_way in switch["narration"]
-    assert "이번엔 다릅니다" in switch["narration"]
+    # 명사구 old_way에 어색하게 '해보셨죠?'를 붙이지 않는다(2026-06-14 피드백)
+    assert "해보셨죠" not in switch["narration"]
     # 과장/보장 금지 표현이 들어가면 안 된다
     for banned in ("무조건", "100%", "완벽", "효과 보장"):
         assert banned not in switch["narration"]

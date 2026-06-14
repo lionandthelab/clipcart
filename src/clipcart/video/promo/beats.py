@@ -14,6 +14,7 @@ from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
 from clipcart.video.compliance import sanitize_text
 from clipcart.video.promo.broll import get_broll
+from clipcart.video.promo.script import pick_script_style, render_line
 
 
 # 카테고리별 제품 화보샷 배경 (제품은 그대로, 배경/구도만 촬영한 듯하게).
@@ -63,6 +64,9 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
     rocket = product.get("is_rocket", False)
     br = get_broll(niche)
     scenes = _shot_scenes(product.get("category", ""))
+    # 대본 말투(레퍼토리) — 매번 같은 문장 방지. pick은 상품ID 해시라 engine에서
+    # 다시 호출해도 같은 스타일이 나온다(라벨 기록용).
+    _, style = pick_script_style(product)
 
     rocket_line = "심지어 로켓배송이라 내일 와요." if rocket else "가격도 부담 없죠."
 
@@ -162,14 +166,12 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         {
             "role": "switch",
             "tone": "switch",
-            # 기존 방식 실패 공감 → 차별화 전환 (구매의욕 자극, 보장 표현 금지)
-            "narration": (
-                f"{niche['old_way']}, 해보셨죠? 실망했다면 이번엔 다릅니다."
-            ),
-            "caption": "써봤는데 실망했던 사람, 주목",
+            # 기존 방식의 불편 → 차별화 전환 (스타일별 말투, 보장 표현 금지)
+            "narration": render_line(style["switch"], old_way=niche["old_way"]),
+            "caption": style["switch_caption"],
             "source": f"gemini:{switch_scene}",
             "fallback": f"pexels:{br['pain']}",
-            "emphasis": "이번엔 다릅니다",
+            "emphasis": style["switch_emphasis"],
             "color": "yellow",
         },
         {
@@ -186,7 +188,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         {
             "role": "usage",
             "tone": "usage",
-            "narration": f"쓰는 법도 쉬워요. {niche['usage']}",
+            "narration": render_line(style["usage"], usage=niche["usage"]),
             "caption": niche["usage"],
             # 실사용 느낌 — 실영상 + 실제 제품 사진 퀵컷 (갤러리 없으면 모션샷)
             "shots": usage_shots,
@@ -198,7 +200,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "result",
             "narration": (
                 f"{niche['benefit']}{result_stats_line} "
-                f"이게 {price:,}원이면, 장바구니 안 담을 이유가 없죠."
+                f"{render_line(style['result_tail'], price=price)}"
             ),
             "caption": niche["benefit"],
             # 결과 2컷 퀵컷: 깨끗해진 실영상 + 실제 제품 사진(없으면 화보샷)
@@ -211,7 +213,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         {
             "role": "cta",
             "tone": "cta",
-            "narration": f"단점도 솔직히, {niche['downside']}. 링크는 고정 댓글에 있어요.",
+            "narration": render_line(style["cta"], downside=niche["downside"]),
             "caption": "링크는 고정 댓글에 ▼",
             # 실데이터(평점/주문수) 리뷰 요약 카드 — 신빙성. 없으면 제품컷.
             "source": f"file:{review_card}" if review_card else "product",
