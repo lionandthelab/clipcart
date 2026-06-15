@@ -64,6 +64,42 @@ AI Agent는 아래 작업을 담당한다.
 
 ---
 
+## 0.6 링크 퍼널 · 전환 측정 (실전 런북, 2026-06-15)
+
+> 조회수가 아니라 **클릭·구매**가 목표(CLAUDE.md §14). 이 절은 "영상 → 링크 → 구매" 퍼널을 어떻게 잇고 측정하는지의 권위 런북이다.
+
+### 단일 링크 퍼널 = bio 페이지
+
+- **bio 페이지**가 모든 제품 링크의 단일 모음. 공개 URL: **`https://lionandthelab.github.io/clipcart/bio/`** (GitHub Pages, master `/docs`에서 서빙).
+- **운영자 필수 1회 작업:** YouTube 채널 '링크'(프로필)에 위 URL을 등록. 영상 CTA가 "프로필 링크"를 가리키므로 이게 없으면 퍼널이 끊긴다. `.env`의 `LINK_IN_BIO_URL`도 같은 값.
+- 생성기: `src/clipcart/bio/page.py` (`clipcart bio`). 현재 **실공개 중인** YouTube 영상의 제품만 최신순으로 — '오늘의 제품' 강조 + 카테고리 그룹 + (알리) 할인율·판매량·만족도. 쿠팡은 검색 API가 평점/리뷰를 안 줘서 가격만.
+
+### CTA 컨벤션 (영상 설명문)
+
+- 설명문 템플릿: **`data/format_profile.json`의 `description_template`**. 순서: ① 훅 → ② **의무 고지(공정위: 첫 부분, 250자 이내)** → ③ 직접 제품링크(상품별 subId) → ④ bio/프로필 링크 → 추천대상/장점/단점 → 해시태그.
+- **"고정 댓글" 의존 금지.** YouTube Data API는 댓글 핀을 지원하지 않아(`daily.py` manual_steps, 수동) AUTO 모드에서 누락되면 막다른 길이 된다. 링크 유도는 **직접 링크 + 프로필(bio)** 로만.
+- in-video 자막/내레이션 CTA는 영상 엔진(`src/clipcart/video/**`, 외부 머지 대기)이라 머지 후 동일 방향으로 정렬.
+
+### 자동 동기화 (앞으로 만들 때마다 자동 반영)
+
+- 스케줄러(`scripts/daily_task.ps1`, `scripts/ali_daily.sh`)가 **매 게시 후** `clipcart metrics`(실공개 상태 정정) → `clipcart bio`(페이지 재생성) → `git add data docs/bio` → commit/pull/push 한다. **신규 업로드·운영자 삭제가 bio에 자동 반영**된다.
+- 수동 동기화도 동일: `clipcart bio` (삭제·비공개 영상은 자동 제외).
+
+### 측정 (subId)
+
+- 정산은 계정 trackingCode 기준, **subId는 리포트 분류용 자유값**(`coupang.py` `make_sub_id`, 2026-06-12 실측). 영상별 `salrimshorts{상품ID}`, bio는 `bio{상품ID}`로 분리 측정. 알리는 subId 미지원.
+- 확인: `clipcart analyze` (소스·훅·카테고리·subId 귀속 집계).
+- **2026-06-15 진단:** 30일간 영상/bio per-product subId 클릭 0(딥링크의 `subid=` 임베드는 정상 검증 → 측정 버그 아닌 실제 미클릭). 빈 subId 매출은 채널 외 유입(레거시·운영자 본인 쿠팡 사용). → 조회→클릭이 병목. CTA를 bio로 통일한 효과는 영상 subId에 클릭이 잡히기 시작하는지로 확인.
+
+### 과거 영상 백필
+
+- 설명문 템플릿을 바꾸면 **이미 올라간 영상**은 옛 설명문 그대로다. 맞추려면:
+  `python scripts/retrofit_descriptions.py --live` (제목·태그 보존, description만 현재 템플릿으로, 게시 전 컴플라이언스 게이트 동일 적용. dry-run은 플래그 없이 실행).
+
+자세한 배경·진단은 [docs/conversion-funnel.md](docs/conversion-funnel.md).
+
+---
+
 ## 1. 사업 컨셉
 
 ### 브랜드명
