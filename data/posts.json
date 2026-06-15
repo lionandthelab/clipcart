@@ -455,5 +455,21 @@
     "sub_id": "salrimshorts8000620331",
     "thumbnail_set": true,
     "comment_id": "Ugw3keZXZg8D76LhT6Z4AaABAg"
+  },
+  {
+    "post_id": "2fCg43RjZr8",
+    "product_id": "AE1005010106541661",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/2fCg43RjZr8",
+    "published_at": "2026-06-15T15:03:35.175431+00:00",
+    "status": "PUBLISHED",
+    "title": "9,160원으로 끝내는 식기건조대",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3ZUWnkV",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "Ugy-8_uH6b8Tb2O9q-h4AaABAg"
   }
 ]

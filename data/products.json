@@ -1902,5 +1902,59 @@
     "known_downside": "자석식이라 표면이 자석에 안 붙는 냉장고에는 쓸 수 없습니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8000620331.mp4",
     "post_url": "https://www.youtube.com/shorts/gRz6tYNuHHU"
+  },
+  {
+    "product_id": "AE1005010106541661",
+    "aliexpress_product_id": "1005010106541661",
+    "created_at": "2026-06-16",
+    "status": "PUBLISHED",
+    "product_name": "롤업 삼각형 식기 건조대 주방 싱크대 정리대 코너 싱크대 위 스펀지 걸이 접이식 스테인리스 스틸 배수대",
+    "display_name": "식기건조대",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005010106541661.html?pdp_npi=6%40dis%21KRW%2119083%219160%21%21%2182.78%2139.74%21%402151fce817815356102441408e0dee%2112000052849953570%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3ZUWnkV",
+    "price": 9160,
+    "original_price": 19083,
+    "discount_pct": 52,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sa10d5dd0c13143cfb5b29d60dda3b549A.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa10d5dd0c13143cfb5b29d60dda3b549A.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7c8a950ddba945c4a351ed9be482659bb.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S915c39f093994faa83a64aa5c5baaa9eS.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S69cc0589bfab457d90b7c32cb11c261e4.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf700b6cb5a164430a9f5a4abd0716a72T.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sb4b9de4d7139481a9ab877bdaaddceb2k.jpg"
+    ],
+    "video_url": "",
+    "rating": 90.9,
+    "review_count": 2523,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "싱크대 식기건조대",
+      "category": "주방",
+      "title_keyword": "식기건조대",
+      "old_way": "그릇 행주 위에 쌓아 말리기",
+      "hook": "좁은 싱크대, 그릇 말릴 데가 없죠?",
+      "problem": "설거지한 그릇을 행주 위에 쌓아두면 잘 안 마르고 물이 흥건하게 고이죠.",
+      "usage": "싱크대 위나 개수대에 올려 그릇을 세워두면 물이 아래로 빠져나갑니다. 안 쓸 땐 접어두는 제품도 있어요.",
+      "benefit": "그릇이 빨리 마르고 조리대 물기도 한곳으로 모여 정리돼요.",
+      "downside": "자동 배수가 안 되는 제품은 받침 물을 가끔 비워줘야 합니다",
+      "target": "싱크대가 좁아 그릇 말릴 곳이 마땅찮은 사람"
+    },
+    "problem": "설거지한 그릇을 행주 위에 쌓아두면 잘 안 마르고 물이 흥건하게 고이죠.",
+    "video_angle": "좁은 싱크대, 그릇 말릴 데가 없죠?",
+    "known_downside": "자동 배수가 안 되는 제품은 받침 물을 가끔 비워줘야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010106541661.mp4",
+    "post_url": "https://www.youtube.com/shorts/2fCg43RjZr8"
   }
 ]
