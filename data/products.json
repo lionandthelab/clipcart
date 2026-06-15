@@ -1956,5 +1956,48 @@
     "known_downside": "자동 배수가 안 되는 제품은 받침 물을 가끔 비워줘야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010106541661.mp4",
     "post_url": "https://www.youtube.com/shorts/2fCg43RjZr8"
+  },
+  {
+    "product_id": "CP9512169265",
+    "coupang_product_id": "9512169265",
+    "sub_id": "salrimshorts9512169265",
+    "created_at": "2026-06-16",
+    "status": "PUBLISHED",
+    "product_name": "무루어 초강력 다용도 방수 테이프, 2개",
+    "display_name": "곰팡이 방지 테이프",
+    "category": "욕실",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=9512169265&itemId=28346822435&vendorItemId=95303948329&traceid=V0-153-6a62019aca9e26ac&clickBeacon=70af7d80-6908-11f1-8eda-cc8db8d8bc21%7E3&requestid=20260616072039575176131636&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eCbHtPyFEq",
+    "price": 12000,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/Wbj-S9VGaPojqdAUWXTPoT91gfliN3gkPumeVMYr1Kehcv3onkESjlGyndOsJLKNF1HZF_17ySAoNkktD3pdoDZ6Lzr0BIcXhMVZkv-whZdEC5q0_gbJoZSLmU_IFK-gy-Kcq8wONk89gWtUF1WCylA6Tl-25QOUJRqapzF5LoGJNACfiG-jyZP7rrX3uBwe9IiDEskiumCcQr5SNm2SFEQdRYPPaLfBRX8h681GVPrRpjAykqGT7TMERglFMCEv6fDSEe6pZ21nuUTvanSD1xB4EbK7bp_dnhEa59Ciy5a0DkDheetTUwII33zLEEpfFQ==",
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "욕실 곰팡이 방지 테이프",
+      "category": "욕실",
+      "title_keyword": "곰팡이 방지 테이프",
+      "old_way": "실리콘 틈 거뭇한 자국 방치",
+      "hook": "욕실 실리콘 틈, 까맣게 올라온 자국 보이죠?",
+      "problem": "장마철 습한 욕실은 실리콘 이음새가 한 번 거뭇해지면 닦아도 잘 안 지워져요.",
+      "usage": "닦아서 말린 이음새 위에 붙여두면 물과 습기가 실리콘 틈으로 스미는 걸 막아줍니다. 더러워지면 떼고 새로 붙이면 돼요.",
+      "benefit": "이음새가 깔끔하게 가려지고 다시 거뭇해지는 속도를 늦춰줘요.",
+      "downside": "이미 올라온 자국 위에 그냥 붙이면 효과가 떨어져서, 닦아낸 뒤 마른 상태에서 붙여야 합니다",
+      "target": "장마철 욕실 실리콘 틈이 신경 쓰이는 사람"
+    },
+    "problem": "장마철 습한 욕실은 실리콘 이음새가 한 번 거뭇해지면 닦아도 잘 안 지워져요.",
+    "video_angle": "욕실 실리콘 틈, 까맣게 올라온 자국 보이죠?",
+    "known_downside": "이미 올라온 자국 위에 그냥 붙이면 효과가 떨어져서, 닦아낸 뒤 마른 상태에서 붙여야 합니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP9512169265.mp4",
+    "post_url": "https://www.youtube.com/shorts/ddtiTcbbZrQ"
   }
 ]
