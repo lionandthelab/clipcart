@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clipcart OAuth Callback</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; background:#0a0b0e; color:#e8e9ec; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic",sans-serif; line-height:1.6; }
+  .wrap { max-width:680px; margin:0 auto; padding:56px 22px; }
+  h1 { font-size:22px; } .sub { color:#9aa0a8; margin-bottom:24px; }
+  .box { background:#171a20; border:1px solid #2a2e36; border-radius:12px; padding:16px; margin:14px 0; word-break:break-all; }
+  .label { color:#9aa0a8; font-size:13px; margin-bottom:6px; }
+  .val { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:15px; }
+  button { background:#2b6fff; color:#fff; border:0; border-radius:9px; padding:11px 18px; font-size:15px; cursor:pointer; }
+  button:active { transform:translateY(1px); }
+  .ok { color:#46d369; } .err { color:#ff6b6b; }
+  .hint { color:#6b7079; font-size:13px; margin-top:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Clipcart OAuth Callback</h1>
+  <p class="sub">아래 <b>code</b> 값을 복사해 터미널의 <code>clipcart auth</code> 프롬프트에 붙여넣으세요.</p>
+
+  <div class="box">
+    <div class="label">authorization code</div>
+    <div class="val" id="code">—</div>
+  </div>
+  <button id="copy">code 복사</button>
+  <span id="copied" class="ok" style="margin-left:10px"></span>
+
+  <div class="box" style="margin-top:22px">
+    <div class="label">전체 리다이렉트 URL (이 줄 전체를 붙여넣어도 됩니다)</div>
+    <div class="val" id="full">—</div>
+  </div>
+
+  <p class="hint" id="hint"></p>
+</div>
+<script>
+  var q = new URLSearchParams(window.location.search);
+  var code = q.get("code") || "";
+  var err = q.get("error");
+  var codeEl = document.getElementById("code");
+  var fullEl = document.getElementById("full");
+  var hintEl = document.getElementById("hint");
+  fullEl.textContent = window.location.href;
+  if (err) {
+    codeEl.textContent = "오류: " + err + (q.get("error_description") ? " — " + q.get("error_description") : "");
+    codeEl.className = "val err";
+  } else if (code) {
+    codeEl.textContent = code;
+  } else {
+    codeEl.textContent = "code 파라미터가 없습니다. 인증 후 리다이렉트된 페이지에서 열어주세요.";
+    codeEl.className = "val err";
+  }
+  document.getElementById("copy").addEventListener("click", function () {
+    navigator.clipboard.writeText(code || window.location.href).then(function () {
+      document.getElementById("copied").textContent = "복사됨 ✓";
+    });
+  });
+  hintEl.textContent = "이 페이지는 정적 페이지로, 입력값을 어디에도 전송하지 않습니다(브라우저에서만 표시).";
+</script>
+</body>
+</html>

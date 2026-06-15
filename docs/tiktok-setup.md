@@ -1,7 +1,7 @@
 # TikTok Developer 앱 설정 — 복붙용
 
 clipcart OAuth: `clipcart auth tiktok`  
-Redirect URI: `http://localhost:8401/callback`  
+Redirect URI: `https://lionandthelab.github.io/clipcart/callback/` (TikTok 은 localhost 미지원 → 공개 HTTPS 콜백 + code 붙여넣기)  
 Scopes: `user.info.basic`, `video.upload`, `video.publish`
 
 ---
@@ -15,9 +15,9 @@ Scopes: `user.info.basic`, `video.upload`, `video.publish`
 | App name | `살림해결소 Clipcart` |
 | App description | `Affiliate lifestyle short-form content publishing tool. Users manually approve each video before posting to TikTok.` |
 | Category | `Utilities` 또는 `Shopping` |
-| Website URL | `http://localhost:8401` (또는 Notion 공개 URL) |
-| Privacy Policy URL | [privacy-policy-template.md](./privacy-policy-template.md) |
-| Terms of Service URL | Privacy와 동일 OK |
+| Website URL | `https://lionandthelab.github.io/clipcart/` |
+| Privacy Policy URL | `https://lionandthelab.github.io/clipcart/privacy.html` |
+| Terms of Service URL | `https://lionandthelab.github.io/clipcart/terms.html` |
 
 ## 2. Products
 
@@ -36,7 +36,7 @@ Scopes: `user.info.basic`, `video.upload`, `video.publish`
 
 | 필드 | 복붙 |
 |------|------|
-| Redirect URI | `http://localhost:8401/callback` |
+| Redirect URI | `https://lionandthelab.github.io/clipcart/callback/` (localhost 미지원 — 공개 HTTPS 필수) |
 
 ## 5. URL Properties (Content Posting API)
 
@@ -51,6 +51,8 @@ TIKTOK_CLIENT_SECRET=
 TIKTOK_ACCESS_TOKEN=
 TIKTOK_REFRESH_TOKEN=
 TIKTOK_PRIVACY_LEVEL=SELF_ONLY
+# redirect URI (TikTok 등록값과 글자까지 동일해야 함). 기본값이 아래라 보통 생략 가능.
+TIKTOK_REDIRECT_URI=https://lionandthelab.github.io/clipcart/callback/
 ```
 
 **미승인 앱**: 공개 게시 불가 → `SELF_ONLY`로 본인만 보기 테스트.
@@ -61,6 +63,9 @@ TIKTOK_PRIVACY_LEVEL=SELF_ONLY
 .venv\Scripts\clipcart auth tiktok
 .venv\Scripts\clipcart verify
 ```
+
+TikTok 은 localhost redirect 를 막아서 loopback 자동수신이 안 된다. 대신:
+승인 후 `https://lionandthelab.github.io/clipcart/callback/` 페이지에 뜨는 **code 를 복사해 터미널 프롬프트에 붙여넣으면** 토큰이 발급된다.
 
 ---
 
@@ -122,7 +127,8 @@ No. Each user authorizes their own account. No multi-user SaaS at launch.
 
 | 증상 | 해결 |
 |------|------|
-| redirect_uri mismatch | `http://localhost:8401/callback` |
+| redirect_uri mismatch | TikTok 등록값과 `TIKTOK_REDIRECT_URI`(.env, 기본 `…/clipcart/callback/`)가 글자(슬래시 포함)까지 동일해야 함 |
+| localhost is not supported | redirect 에 localhost 금지 — 공개 HTTPS 콜백(`…/clipcart/callback/`) 사용 |
 | scope_not_authorized | `video.publish` 추가 + OAuth 재실행 |
 | privacy_level_option_mismatch | `TIKTOK_PRIVACY_LEVEL=SELF_ONLY` |
 | 공개 게시 안 됨 | App Review 전에는 private만 (정상) |
