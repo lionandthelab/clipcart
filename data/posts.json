@@ -248,13 +248,14 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/I-Y7lGMss9E",
     "published_at": "2026-06-13T09:03:40.470461+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "음식물 쓰레기통 쓰기 전에 꼭 보세요",
     "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3uIjr25",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "Ugw83eis97qyKJLUjIR4AaABAg"
+    "comment_id": "Ugw83eis97qyKJLUjIR4AaABAg",
+    "not_live_at": "2026-06-15"
   },
   {
     "post_id": "7pswOYOoiTA",
@@ -413,14 +414,15 @@
     "source": "coupang",
     "post_url": "https://www.youtube.com/shorts/b9V9dcbO9rg",
     "published_at": "2026-06-14T15:12:32.369766+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "스텐 건조대, 단점까지 보고 결정하세요",
     "title_template": "{title_keyword}, 단점까지 보고 결정하세요",
     "script_style": "casual",
     "affiliate_url": "https://link.coupang.com/a/ez1uUpgJPg",
     "sub_id": "salrimshorts8665259852",
     "thumbnail_set": true,
-    "comment_id": "Ugwqbyqxr6vT8CPZm2l4AaABAg"
+    "comment_id": "Ugwqbyqxr6vT8CPZm2l4AaABAg",
+    "not_live_at": "2026-06-15"
   },
   {
     "post_id": "UMBxt6r3eSA",

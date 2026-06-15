@@ -236,7 +236,9 @@
     "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
     "post_url": "https://www.youtube.com/shorts/I-Y7lGMss9E",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3uIjr25",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-15"
   },
   {
     "date": "2026-06-13",
@@ -413,7 +415,9 @@
     "script_style": "casual",
     "post_url": "https://www.youtube.com/shorts/b9V9dcbO9rg",
     "affiliate_url": "https://link.coupang.com/a/ez1uUpgJPg",
-    "sub_id": "salrimshorts8665259852"
+    "sub_id": "salrimshorts8665259852",
+    "live": false,
+    "not_live_at": "2026-06-15"
   },
   {
     "date": "2026-06-15",
