@@ -140,35 +140,112 @@ def _dedupe_newest_first(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
+def _price_html(p: dict[str, Any], esc: Callable[[str], str]) -> str:
+    """가격 줄. 원가·할인%가 있으면(알리 API) 정가 취소선 + 할인 배지."""
+    price = p.get("price")
+    if not price:
+        return ""
+    orig = p.get("original_price")
+    disc = p.get("discount_pct")
+    if orig and disc:
+        return (
+            f"<s>{int(orig):,}원</s> <b>{int(price):,}원</b> "
+            f"<em>{int(disc)}%↓</em>"
+        )
+    return f"{int(price):,}원"
+
+
+def _proof_html(p: dict[str, Any], is_ali: bool) -> str:
+    """사회적 증거. 알리는 만족도%(evaluate_rate)·판매량, 쿠팡은 별점·리뷰수."""
+    try:
+        rating = float(p.get("rating") or 0)
+    except (TypeError, ValueError):
+        rating = 0.0
+    reviews = int(p.get("review_count") or 0)
+    bits: list[str] = []
+    if is_ali:
+        if rating:
+            bits.append(f"만족도 {rating:g}%")
+        if reviews:
+            bits.append(f"{reviews:,}개 판매")
+    else:
+        if rating:
+            bits.append(f"★{rating:g}")
+        if reviews:
+            bits.append(f"리뷰 {reviews:,}")
+    return " · ".join(bits)
+
+
+def _card_html(
+    e: dict[str, Any],
+    products_by_id: dict[str, dict[str, Any]],
+    links: dict[str, str],
+    images: dict[str, str] | None,
+    esc: Callable[[str], str],
+    *,
+    highlight: bool = False,
+) -> str:
+    pid = e.get("product_id", "")
+    p = products_by_id.get(pid) or {}
+    url = links.get(pid) or e.get("affiliate_url", "")
+    if not url:
+        return ""
+    name = esc(p.get("display_name") or e.get("product_name", ""))
+    is_ali = "ali" in (e.get("source") or "")
+    badge = "알리익스프레스" if is_ali else "쿠팡"
+    price_txt = _price_html(p, esc)
+    proof = _proof_html(p, is_ali)
+    # 로컬 동봉 이미지 우선 — CDN 핫링크는 환경에 따라 차단될 수 있다
+    img_src = (images or {}).get(pid) or p.get("image_url", "")
+    img = f'<img src="{esc(img_src)}" alt="{name}" loading="lazy">' if img_src else ""
+    proof_span = f"<span class='proof'>{esc(proof)}</span>" if proof else ""
+    cls = "card hot" if highlight else "card"
+    return (
+        f'<a class="{cls}" href="{esc(url)}" target="_blank" rel="sponsored nofollow">'
+        f"{img}<div class='meta'><strong>{name}</strong>"
+        f"<span>{price_txt} · {badge}</span>{proof_span}</div></a>"
+    )
+
+
 def render_page(
     entries: list[dict[str, Any]],
     products_by_id: dict[str, dict[str, Any]],
     links: dict[str, str],
     images: dict[str, str] | None = None,
 ) -> str:
-    """모바일 우선 단일 HTML. 고지는 첫 부분(공정위), 최신 게시 순."""
+    """모바일 우선 단일 HTML. 고지는 첫 부분(공정위), 최신 게시 순.
+
+    맨 위 '오늘의 제품'(최신 1건)을 강조하고, 나머지는 카테고리로 묶는다 —
+    대다수 유입이 최신 영상이라 방금 본 제품을 바로 찾게 하고, 과거 영상
+    시청자는 카테고리로 탐색하게 한다.
+    """
     items = _dedupe_newest_first(entries)
     esc = html_mod.escape
 
-    cards = []
-    for e in items:
-        pid = e.get("product_id", "")
-        p = products_by_id.get(pid) or {}
-        url = links.get(pid) or e.get("affiliate_url", "")
-        if not url:
-            continue
-        name = esc(p.get("display_name") or e.get("product_name", ""))
-        price = p.get("price")
-        price_txt = f"{int(price):,}원" if price else ""
-        badge = "알리익스프레스" if "ali" in (e.get("source") or "") else "쿠팡"
-        # 로컬 동봉 이미지 우선 — CDN 핫링크는 환경에 따라 차단될 수 있다
-        img_src = (images or {}).get(pid) or p.get("image_url", "")
-        img = f'<img src="{esc(img_src)}" alt="{name}" loading="lazy">' if img_src else ""
-        cards.append(
-            f'<a class="card" href="{esc(url)}" target="_blank" rel="sponsored nofollow">'
-            f"{img}<div class='meta'><strong>{name}</strong>"
-            f"<span>{price_txt} · {badge}</span></div></a>"
-        )
+    sections: list[str] = []
+    if items:
+        top = _card_html(items[0], products_by_id, links, images, esc, highlight=True)
+        if top:
+            sections.append('<div class="label">오늘의 제품</div>')
+            sections.append(top)
+        # 나머지를 카테고리별로(첫 등장=최신 순서 보존)
+        groups: dict[str, list[dict[str, Any]]] = {}
+        order: list[str] = []
+        for e in items[1:]:
+            cat = (products_by_id.get(e.get("product_id", "")) or {}).get("category") or "기타"
+            if cat not in groups:
+                groups[cat] = []
+                order.append(cat)
+            groups[cat].append(e)
+        for cat in order:
+            rendered = [
+                _card_html(e, products_by_id, links, images, esc) for e in groups[cat]
+            ]
+            rendered = [c for c in rendered if c]
+            if rendered:
+                sections.append(f'<div class="label">{esc(cat)}</div>')
+                sections.extend(rendered)
+    cards = sections
 
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     return f"""<!doctype html>
@@ -186,6 +263,13 @@ h1{{font-size:22px;margin:8px 0 4px}}
 .card img{{width:72px;height:72px;object-fit:cover;border-radius:10px;flex:none}}
 .card .meta{{display:flex;flex-direction:column;gap:4px;font-size:14px}}
 .card .meta span{{color:#888;font-size:12px}}
+.card.hot{{border-color:#FFD400;border-width:2px}}
+.label{{font-size:13px;font-weight:700;color:#666;margin:20px 4px 8px}}
+.label:first-of-type{{margin-top:4px}}
+.card .meta span.proof{{color:#aaa;font-size:11px}}
+.card .meta s{{color:#bbb;font-size:12px}}
+.card .meta b{{font-size:14px}}
+.card .meta em{{color:#FF3B30;font-style:normal;font-weight:700;font-size:12px}}
 footer{{font-size:11px;color:#999;text-align:center;margin-top:28px}}
 </style>
 </head>
