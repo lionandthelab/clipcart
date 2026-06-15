@@ -12,3 +12,4 @@ moviepy>=2.0
 typecast-python>=0.1
 google-genai>=1.0
 numpy>=1.26
+boto3>=1.34

@@ -62,6 +62,12 @@ class InstagramPublisher(PlatformPublisher):
                 error="Instagram/Meta API 미설정 (clipcart auth instagram)",
             )
 
+        # 공개 video_url 자동 확보: 미지정 시 S3 호환 스토리지(R2 등)에 자동 업로드
+        if not video_url:
+            from clipcart.publishing import media_host
+
+            video_url = media_host.host_video(video_path)
+
         if video_url:
             return self.publish_reel(video_url, caption, dry_run=False)
 
@@ -70,7 +76,8 @@ class InstagramPublisher(PlatformPublisher):
             success=False,
             error=(
                 "Instagram Reels API는 공개 video_url이 필요합니다. "
-                "S3/CDN 업로드 후 clipcart publish --video-url URL 사용"
+                "CLIPCART_S3_*(R2 등) 설정 시 자동 업로드되며, 아니면 "
+                "clipcart publish --video-url URL 로 직접 지정하세요."
             ),
         )
 
