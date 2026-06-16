@@ -503,5 +503,21 @@
     "sub_id": "salrimshorts9544419725",
     "thumbnail_set": true,
     "comment_id": "UgxFiEUhjvjDRws5dHV4AaABAg"
+  },
+  {
+    "post_id": "hVsW6Y3CC60",
+    "product_id": "CP9507939860",
+    "platform": "youtube_shorts",
+    "source": "coupang",
+    "post_url": "https://www.youtube.com/shorts/hVsW6Y3CC60",
+    "published_at": "2026-06-16T09:55:51.790005+00:00",
+    "status": "PUBLISHED",
+    "title": "13,900원으로 달라지는 청소도구 걸이",
+    "title_template": "{price_won}원으로 달라지는 {title_keyword}",
+    "script_style": "story",
+    "affiliate_url": "https://link.coupang.com/a/eCXCUfIug8",
+    "sub_id": "salrimshorts9507939860",
+    "thumbnail_set": true,
+    "comment_id": "UgwvJf_PFmBCxMtDRRx4AaABAg"
   }
 ]
