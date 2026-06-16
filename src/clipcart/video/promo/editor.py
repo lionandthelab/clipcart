@@ -550,7 +550,9 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     # TTS per beat
     tts = []
     for b in beats:
-        path, dur = tts_typecast.synth_or_edge(b["narration"].strip(), b.get("tone", "neutral"))
+        path, dur = tts_typecast.synth_or_edge(
+            b["narration"].strip(), b.get("tone", "neutral"), voice=b.get("voice", "main")
+        )
         tts.append((str(path), dur))
 
     def make_clip(path, kind, dur):

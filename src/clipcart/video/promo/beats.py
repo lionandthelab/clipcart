@@ -229,6 +229,13 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
     if is_story() and beats:
         beats[-1]["narration"] = beats[-1]["narration"].rstrip() + " 광고예요."
 
+    # story 멀티보이스: 공감·체감 라인(problem 불편 / result 변화)을 증언 보이스로.
+    # 일반·관찰 화법 그대로라 허위후기 아님 — 가짜 후기 표현은 컴플라이언스가 차단.
+    if is_story():
+        for b in beats:
+            if b["role"] in ("problem", "result"):
+                b["voice"] = "testimony"
+
     # 금지어 정화 — 상품명/니치에 섞인 과장어로 게시 차단되는 것 방지(고지는 보존)
     for b in beats:
         b["narration"] = sanitize_text(b["narration"])

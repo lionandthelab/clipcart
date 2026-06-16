@@ -23,11 +23,11 @@ DEFAULT_VOICE_ID = "tc_6731b2b2478a48710ecc9158"
 
 
 def _tempo() -> float:
-    """말 속도. env 우선 → story는 잔잔(1.03), promo는 급박(1.24)."""
+    """말 속도. env 우선 → story는 자연스럽게 빠른 1.13(운영자 선택), promo는 1.24."""
     env = (os.getenv("CLIPCART_TTS_TEMPO", "") or "").strip()
     if env:
         return float(env)
-    return 1.03 if is_story() else 1.24
+    return 1.13 if is_story() else 1.24
 
 
 # 비트 tone → (감정 프리셋, 강도). promo=광고 톤(강), story=잔잔한 이야기 톤.
@@ -62,38 +62,56 @@ def _key() -> str:
     return (os.getenv("TYPECAST_API_KEY", "") or "").split("#")[0].strip()
 
 
-def _voice_id() -> str:
+def _voice_id_main() -> str:
     return (os.getenv("CLIPCART_TTS_VOICE_ID", "") or "").strip() or DEFAULT_VOICE_ID
 
 
+def _voice_id_testimony() -> str:
+    return (os.getenv("CLIPCART_TTS_VOICE_ID_TESTIMONY", "") or "").strip()
+
+
+def _resolve_voice(voice: str) -> str:
+    """대사 역할 → 실제 voice_id. 'testimony'는 증언용 보이스(설정 시), 아니면 메인."""
+    if voice == "testimony":
+        t = _voice_id_testimony()
+        if t:
+            return t
+    return _voice_id_main()
+
+
 @lru_cache(maxsize=1)
-def _client_and_voice():
-    """(client, voice_meta) 또는 (None, None)."""
+def _client():
     key = _key()
     if not key:
-        return None, None
+        return None
     try:
         from typecast import Typecast
 
-        client = Typecast(api_key=key)
-        vid = _voice_id()
-        meta = {"voice_id": vid, "model": "ssfm-v30", "emotions": []}
-        try:
-            for v in client.voices():
-                if v.voice_id == vid:
-                    meta = {"voice_id": vid, "model": v.model, "emotions": list(v.emotions)}
-                    break
-        except Exception:  # noqa: BLE001
-            pass
-        return client, meta
+        return Typecast(api_key=key)
     except Exception as e:  # noqa: BLE001
         print(f"  [typecast] init failed: {str(e)[:120]}")
-        return None, None
+        return None
+
+
+@lru_cache(maxsize=16)
+def _voice_meta(vid: str) -> dict:
+    """voice_id의 (model, emotions) 메타. voices() 1회 조회 후 보이스별 캐시."""
+    meta = {"voice_id": vid, "model": "ssfm-v30", "emotions": []}
+    client = _client()
+    if client is None:
+        return meta
+    try:
+        for v in client.voices():
+            if v.voice_id == vid:
+                meta = {"voice_id": vid, "model": v.model, "emotions": list(v.emotions)}
+                break
+    except Exception:  # noqa: BLE001
+        pass
+    return meta
 
 
 def available() -> bool:
-    client, _ = _client_and_voice()
-    return client is not None
+    return _client() is not None
 
 
 def _normalize(path: Path) -> None:
@@ -112,24 +130,26 @@ def _normalize(path: Path) -> None:
         print(f"  [typecast] normalize failed: {str(e)[:80]}")
 
 
-def _cache_path(text: str, tone: str) -> Path:
-    h = hashlib.md5(f"{text}|{_voice_id()}|{tone}|{_tempo()}".encode("utf-8")).hexdigest()[:16]
+def _cache_path(text: str, tone: str, vid: str) -> Path:
+    h = hashlib.md5(f"{text}|{vid}|{tone}|{_tempo()}".encode("utf-8")).hexdigest()[:16]
     return TTS_CACHE / f"tc_{h}.mp3"
 
 
-def synth(text: str, tone: str, out: Path | None = None) -> tuple[Path, float] | None:
-    """Typecast 합성 → (path, duration). 실패 시 None."""
+def synth(text: str, tone: str, voice: str = "main", out: Path | None = None) -> tuple[Path, float] | None:
+    """Typecast 합성 → (path, duration). 실패 시 None. voice: 'main'|'testimony'."""
     TTS_CACHE.mkdir(parents=True, exist_ok=True)
-    cache = _cache_path(text, tone)
+    vid = _resolve_voice(voice)
+    cache = _cache_path(text, tone, vid)
     if cache.exists() and cache.stat().st_size > 1000:
         try:
             return cache, media_duration(cache)
         except Exception:  # noqa: BLE001
             cache.unlink(missing_ok=True)
 
-    client, meta = _client_and_voice()
+    client = _client()
     if client is None:
         return None
+    meta = _voice_meta(vid)
     emotion, intensity = _tone_emotion(tone)
     if emotion not in (meta.get("emotions") or []) and emotion != "normal":
         emotion = "happy" if "happy" in (meta.get("emotions") or []) else "normal"
@@ -158,9 +178,9 @@ def synth(text: str, tone: str, out: Path | None = None) -> tuple[Path, float] |
         return None
 
 
-def synth_or_edge(text: str, tone: str) -> tuple[Path, float]:
+def synth_or_edge(text: str, tone: str, voice: str = "main") -> tuple[Path, float]:
     """Typecast 우선, 실패 시 edge-tts 폴백. (path, duration) 보장."""
-    res = synth(text, tone)
+    res = synth(text, tone, voice=voice)
     if res is not None:
         return res
     # edge-tts 폴백
