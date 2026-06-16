@@ -10,6 +10,7 @@ from typing import Any
 from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
 from clipcart.video.compliance import sanitize_text
+from clipcart.video.promo.template import is_story
 
 
 def _first_sentence(text: str, limit: int = 46) -> str:
@@ -53,7 +54,11 @@ def _pick_title(product: dict[str, Any], profile: dict[str, Any]) -> tuple[str, 
     sold = int(product.get("review_count") or 0)
     if sold > 0:
         values["sold_count"] = f"{sold:,}"
-    templates = profile.get("title_templates") or []
+    templates = (
+        (profile.get("title_templates_story") if is_story() else None)
+        or profile.get("title_templates")
+        or []
+    )
     # A/B 테스트: 특정 훅 템플릿을 강제(env). 못 그리면 일반 선택으로 폴백.
     forced = os.getenv("CLIPCART_TITLE_TEMPLATE", "").strip()
     if forced:
@@ -95,6 +100,8 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
             # 훅: 가장 빠르고 단호하게
             "narration": niche["hook"],
             "rate": "+34%",
+            # 공정위 시작 고지 — 영상 '시작'에도 소스별 확정형 고지(끝부분만 표기 불인정)
+            "disclosure": src_disclosure,
         },
         {
             "name": "problem",

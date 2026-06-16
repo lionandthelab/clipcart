@@ -29,6 +29,7 @@ from clipcart.config import PROJECT_ROOT
 from clipcart.video import sfx
 from clipcart.video.fonts import load_font
 from clipcart.video.promo import sources
+from clipcart.video.promo.template import is_story
 
 W, H = 1080, 1920
 # 상단=자막(이전 제목 자리), 하단=브랜드바(살림해결소+로고). 미디어 밴드를 키워
@@ -50,6 +51,13 @@ RED = (232, 38, 38)
 INK = (10, 11, 14)
 DIM = (200, 200, 205)
 _COLORS = {"red": RED, "yellow": YELLOW, "white": WHITE}
+
+# story 템플릿 팔레트 — 밝고 화사한 크림 톤(검정 광고 톤과 대비)
+CREAM = (247, 243, 236)
+CHARCOAL = (44, 46, 51)
+SAGE = (126, 155, 122)
+# story에서 강조어 색(promo 노랑/빨강)을 차콜/세이지로 순화
+_STORY_COLOR = {"red": SAGE, "yellow": SAGE, "white": CHARCOAL}
 
 BANNER_TEXT = "광고 · 쿠팡 파트너스 수수료 지급"
 BRAND = "살림해결소"
@@ -107,8 +115,8 @@ def _try_one(pex, token: str, index: int, product_img_path: str = "",
                 return v, "video"
         return still, "image"
     if token.startswith("gemini:"):
-        # candid: 사람/손 없는 실사 폰카풍 (AI티 방지)
-        g = sources.gemini_still(token[7:], "candid", index)
+        # candid: 사람/손 없는 실사 폰카풍 (AI티 방지). story: 밝고 화사한 모던 톤.
+        g = sources.gemini_still(token[7:], "story" if is_story() else "candid", index)
         return (g, "image") if g else (None, None)
     if token.startswith("pexels:"):
         q = token[7:]
@@ -293,25 +301,25 @@ def _wrap(draw, words, font, max_w, stroke):
     return lines
 
 
-def _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines, display=False):
+def _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines, display=False, modern=False):
     tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
     words = text.split()
     for size in range(max_size, min_size - 1, -3):
-        font = load_font(size, bold=bold, display=display)
+        font = load_font(size, bold=bold, display=display, modern=modern)
         lines = _wrap(tmp, words, font, box_w, stroke)
         widest = max(tmp.textbbox((0, 0), " ".join(lw), font=font, stroke_width=stroke)[2] for lw in lines)
         if len(lines) <= max_lines and int(size * 1.2) * len(lines) <= box_h and widest <= box_w:
             return font, size, lines
-    font = load_font(min_size, bold=bold, display=display)
+    font = load_font(min_size, bold=bold, display=display, modern=modern)
     return font, min_size, _wrap(tmp, words, font, box_w, stroke)
 
 
 def _draw_block(text, bold, zone_y0, zone_y1, max_size, min_size,
-                color=WHITE, accent=None, accent_color=YELLOW, stroke=6, display=False):
+                color=WHITE, accent=None, accent_color=YELLOW, stroke=6, display=False, modern=False):
     box_w = int(W * 0.88)
     box_h = (zone_y1 - zone_y0) - 20
     max_lines = 2 if (zone_y1 - zone_y0) < 0.25 * H else 3
-    font, size, lines = _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines, display)
+    font, size, lines = _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines, display, modern)
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     line_h = int(size * 1.2)
@@ -366,20 +374,26 @@ SUB_BORDER = (255, 255, 255, 60)
 
 def _subtitle_png(text: str) -> np.ndarray:
     text = text.strip()
+    story = is_story()
     box_w = int(W * 0.90)
-    stroke = 5
+    # story: 차콜 텍스트 + 부드러운 오프화이트 칩(검정 외곽선 없이), 모던 폰트
+    stroke = 0 if story else 5
+    chip_bg = (250, 248, 244, 232) if story else SUB_BG
+    chip_border = (44, 46, 51, 55) if story else SUB_BORDER
+    txt_fill = CHARCOAL if story else WHITE
+    stroke_fill = (255, 255, 255, 0) if story else (0, 0, 0)
     tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
     font = None
     size = SUB_MIN_SIZE
     lines = [text]
     # 한 줄 우선: 큰 사이즈부터 줄여가며 한 줄에 맞으면 채택
     for s in range(SUB_MAX_SIZE, SUB_MIN_SIZE - 1, -2):
-        f = load_font(s, bold=True, display=True)
+        f = load_font(s, bold=True, display=not story, modern=story)
         if tmp.textbbox((0, 0), text, font=f, stroke_width=stroke)[2] <= box_w:
             font, size, lines = f, s, [text]
             break
     if font is None:  # 한 줄 불가 → 최소 사이즈 2줄
-        font = load_font(SUB_MIN_SIZE, bold=True, display=True)
+        font = load_font(SUB_MIN_SIZE, bold=True, display=not story, modern=story)
         size = SUB_MIN_SIZE
         lines = [" ".join(w) for w in _wrap(tmp, text.split(), font, box_w, stroke)][:2]
 
@@ -394,11 +408,11 @@ def _subtitle_png(text: str) -> np.ndarray:
 
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    d.rounded_rectangle((bx0, by0, bx0 + bw, by0 + bh), radius=28, fill=SUB_BG,
-                        outline=SUB_BORDER, width=3)
+    d.rounded_rectangle((bx0, by0, bx0 + bw, by0 + bh), radius=28, fill=chip_bg,
+                        outline=chip_border, width=3)
     ty = by0 + pad_y
     for ln, lw in zip(lines, widths):
-        d.text(((W - lw) // 2, ty), ln, font=font, fill=WHITE, stroke_width=stroke, stroke_fill=(0, 0, 0))
+        d.text(((W - lw) // 2, ty), ln, font=font, fill=txt_fill, stroke_width=stroke, stroke_fill=stroke_fill)
         ty += line_h
     return np.array(img)
 
@@ -516,12 +530,17 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
                 return _media_clip(path, "video", dur)
         return _media_clip(path, kind, dur)
 
+    STORY = is_story()
     media_segs, overlays, audio_segs, sfx_cues = [], [], [], []
     t = 0.0
     for i, (b, (apath, adur)) in enumerate(zip(beats, tts)):
-        post = 0.08 if b["role"] == "hook" else 0.12
+        if STORY:
+            post = 0.30 if b["role"] == "hook" else 0.42  # 잔잔한 호흡 여백
+        else:
+            post = 0.08 if b["role"] == "hook" else 0.12
         beat_dur = adur + post
-        col = _color(b.get("color", "white"))
+        col = (_STORY_COLOR.get(b.get("color", "white"), CHARCOAL) if STORY
+               else _color(b.get("color", "white")))
 
         # media — 멀티샷(shots)이면 비트 시간을 나눠 퀵컷, 아니면 단일 소스
         shots = b.get("shots")
@@ -534,7 +553,7 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
                 tokens = [shots[si]] + ([b["fallback"]] if b.get("fallback") else [])
                 path, kind = _resolve_media(pex, tokens, product_img_path, si, images, video)
                 sub_clips.append(make_clip(path, kind, sub_dur))
-                if si > 0:
+                if si > 0 and not STORY:
                     sfx_cues.append((sfx.whoosh(), t + si * sub_dur, 0.35))
             media_segs.append(concatenate_videoclips(sub_clips, method="chain").with_duration(beat_dur))
         else:
@@ -542,10 +561,10 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             path, kind = _resolve_media(pex, tokens, product_img_path, 0, images, video)
             media_segs.append(make_clip(path, kind, beat_dur))
 
-        # SFX: whoosh on cut, impact on hook/emphasis
-        if i > 0:
+        # SFX: whoosh on cut, impact on hook/emphasis (story는 부드러운 톤 — 생략)
+        if i > 0 and not STORY:
             sfx_cues.append((sfx.whoosh(), t, 0.5))
-        if b["role"] == "hook":
+        if b["role"] == "hook" and not STORY:
             sfx_cues.append((sfx.riser(), t + 0.02, 0.45))
 
         # bottom narration — 실제 나레이션을 의미단위로, 음성에 맞춰(글자수 비례) 노출
@@ -566,16 +585,28 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             frac = (_korlen(narr[:pos]) / _korlen(narr)) if pos >= 0 else 0.35
             hold = min(1.1, max(0.7, beat_dur * 0.4))
             est = max(t + 0.1, min(t + beat_dur * frac, t + beat_dur - hold))
-            png = _draw_block(emp, _FONT_BOLD, MEDIA_Y + int(MEDIA_H * 0.28),
-                              MEDIA_Y + int(MEDIA_H * 0.72), max_size=220, min_size=96,
-                              stroke=12, color=col, display=True)
-            overlays.append(_overlay(png, est, hold, fi=0.05, fo=0.12))
-            sfx_cues.append((sfx.pop(), est, 0.55))
+            if STORY:
+                # 슬램 대신 작은 scale-up 팝(모던 폰트, 차콜/세이지, 부드러운 페이드)
+                png = _draw_block(emp, _FONT_BOLD, MEDIA_Y + int(MEDIA_H * 0.30),
+                                  MEDIA_Y + int(MEDIA_H * 0.70), max_size=124, min_size=76,
+                                  stroke=0, color=col, modern=True)
+                overlays.append(_overlay(png, est, hold, fi=0.25, fo=0.2))
+                sfx_cues.append((sfx.pop(), est, 0.16))
+            else:
+                png = _draw_block(emp, _FONT_BOLD, MEDIA_Y + int(MEDIA_H * 0.28),
+                                  MEDIA_Y + int(MEDIA_H * 0.72), max_size=220, min_size=96,
+                                  stroke=12, color=col, display=True)
+                overlays.append(_overlay(png, est, hold, fi=0.05, fo=0.12))
+                sfx_cues.append((sfx.pop(), est, 0.55))
 
-        # CTA disclosure (baked, bottom) — 비트가 들고 있는 소스별 고지를 그린다
+        # 고지(baked, bottom) — 훅(시작)·cta(끝) 비트의 소스별 고지를 그린다
         if b.get("disclosure"):
-            disc = _draw_block(b["disclosure"], _FONT_REG, int(0.70 * H), int(0.78 * H),
-                               max_size=34, min_size=24, stroke=3, color=DIM)
+            if STORY:
+                disc = _draw_block(b["disclosure"], _FONT_REG, int(0.70 * H), int(0.78 * H),
+                                   max_size=32, min_size=22, stroke=2, color=CHARCOAL, modern=True)
+            else:
+                disc = _draw_block(b["disclosure"], _FONT_REG, int(0.70 * H), int(0.78 * H),
+                                   max_size=34, min_size=24, stroke=3, color=DIM)
             overlays.append(_overlay(disc, t + 0.1, beat_dur - 0.15, fi=0.1, fo=0.1))
 
         audio_segs.append(AudioFileClip(apath).with_start(t))
@@ -585,16 +616,37 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     end_start = t
     total = t + end_card_dur
 
-    # compose
-    ink_bg = ColorClip((W, H), color=INK, duration=total)
-    media_track = (concatenate_videoclips(media_segs, method="chain")
-                   .with_position((0, MEDIA_Y)).with_start(0))
+    # compose — story는 크림 배경, promo는 검정(ink)
+    ink_bg = ColorClip((W, H), color=(CREAM if STORY else INK), duration=total)
 
     # 상단=자막(overlays), 하단=브랜드 바. 지속 훅 타이틀은 제거(첫 자막이 훅을 그대로 노출).
     ad_badge = _overlay(_ad_badge_png(), 0.0, total, fi=0.0, fo=0.0)
     brand_bar = _brand_bar_overlay(0.0, total_narr)
 
-    layers = [ink_bg, media_track, brand_bar, *overlays, ad_badge]
+    # story: 하드컷+휘익 대신 부드러운 크로스디졸브(미디어 세그먼트를 개별 레이어로 배치,
+    # 각 세그 CrossFadeIn/Out → 배경 크림으로 살짝 녹았다 나오는 소프트 전환). 오디오
+    # 타임라인은 비트 경계 t 그대로라 A/V 싱크·총길이 보존. 실패 시 하드컷 폴백.
+    media_layers = None
+    if STORY:
+        try:
+            ov = 0.22
+            media_layers = []
+            tcur = 0.0
+            for seg in media_segs:
+                clip = (seg.with_position((0, MEDIA_Y)).with_start(tcur)
+                        .with_effects([vfx.CrossFadeIn(ov), vfx.CrossFadeOut(ov)]))
+                media_layers.append(clip)
+                tcur += float(seg.duration)
+        except Exception as exc:  # noqa: BLE001 — 크로스페이드 실패 시 하드컷 폴백
+            print(f"  [promo] story crossfade failed ({str(exc)[:80]}); hard-cut fallback")
+            media_layers = None
+
+    if media_layers is not None:
+        layers = [ink_bg, *media_layers, brand_bar, *overlays, ad_badge]
+    else:
+        media_track = (concatenate_videoclips(media_segs, method="chain")
+                       .with_position((0, MEDIA_Y)).with_start(0))
+        layers = [ink_bg, media_track, brand_bar, *overlays, ad_badge]
 
     # outro: logo
     logo = PROJECT_ROOT / "logo.png"
@@ -617,7 +669,8 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
                           temp_audiofile=str(out.with_suffix(".tmpaudio.m4a")),
                           ffmpeg_params=["-movflags", "+faststart"], threads=4, logger=None)
 
-    sfx_cues.append((sfx.thud(), end_start + 0.05, 0.5))
+    if not STORY:
+        sfx_cues.append((sfx.thud(), end_start + 0.05, 0.5))
     _mix_sfx(tmp, sfx_cues, out)
     tmp.unlink(missing_ok=True)
     if seller is not None:

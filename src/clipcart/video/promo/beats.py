@@ -15,6 +15,7 @@ from clipcart.research.auto_select import short_product_name
 from clipcart.video.compliance import sanitize_text
 from clipcart.video.promo.broll import get_broll
 from clipcart.video.promo.script import pick_script_style, render_line
+from clipcart.video.promo.template import is_story
 
 
 # 카테고리별 제품 화보샷 배경 (제품은 그대로, 배경/구도만 촬영한 듯하게).
@@ -152,6 +153,8 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "fallback": f"gemini:{empathy}",
             "emphasis": niche["title_keyword"],
             "color": "yellow",
+            # 공정위 시작 고지 — 영상 '시작'에도 소스별 확정형 고지를 베이크인(끝부분만 표기 불인정)
+            "disclosure": disclosure_for(product),
         },
         {
             "role": "problem",
@@ -222,6 +225,10 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "disclosure": disclosure_for(product),
         },
     ]
+    # story: cta 끝에 짧은 구두 고지('광고예요'). 전문 고지는 시작·끝 자막 베이크인으로 충족.
+    if is_story() and beats:
+        beats[-1]["narration"] = beats[-1]["narration"].rstrip() + " 광고예요."
+
     # 금지어 정화 — 상품명/니치에 섞인 과장어로 게시 차단되는 것 방지(고지는 보존)
     for b in beats:
         b["narration"] = sanitize_text(b["narration"])

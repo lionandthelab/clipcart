@@ -13,6 +13,7 @@ import urllib.parse
 import urllib.request
 
 from clipcart.config import PROJECT_ROOT
+from clipcart.video.promo.template import is_story
 
 CACHE = PROJECT_ROOT / "tools" / ".cache"
 PEXELS_CACHE = CACHE / "pexels"
@@ -131,7 +132,21 @@ _GEMINI_CANDID = (
     "clutter, photorealistic, vertical 9:16. Absolutely no people, no hands, no faces, "
     "no text, no watermark. Scene: "
 )
-_GEMINI_STYLES = {"cinematic": _GEMINI_CINEMATIC, "simple": _GEMINI_SIMPLE, "candid": _GEMINI_CANDID}
+# story 템플릿용 — 밝고 화사한 모던 릴스 미감(하이키·파스텔·소프트 블룸). 사람/손 없음.
+_GEMINI_STORY = (
+    f"Soft bright airy lifestyle photo inside {_MODERN_KR}. High-key soft diffused "
+    "natural window light, gently overexposed background, low contrast, pastel cream and "
+    "off-white palette, subtle bloom and halation glow on highlights, soft shadows, "
+    "shallow depth of field, film-like pastel color grade, clean minimal modern styling, "
+    "lots of negative space, warm cozy slow-morning mood. Absolutely no people, no hands, "
+    "no faces, no text, no watermark. Vertical 9:16. Scene: "
+)
+_GEMINI_STYLES = {
+    "cinematic": _GEMINI_CINEMATIC,
+    "simple": _GEMINI_SIMPLE,
+    "candid": _GEMINI_CANDID,
+    "story": _GEMINI_STORY,
+}
 
 
 def _gemini_client():
@@ -195,6 +210,16 @@ _PRODUCT_SHOT_PROMPT = (
     "same logos and printing, do not redesign or beautify the product itself. "
     "Vertical 9:16. No people, no hands, no text, no watermark."
 )
+# story 템플릿용 — 밝고 화사한 라이프스타일 화보(제품은 그대로).
+_PRODUCT_SHOT_PROMPT_STORY = (
+    "Take the exact product from the input photo and place it in this setting: {scene}. "
+    "Looks like a soft bright lifestyle product photo: high-key diffused natural window "
+    "light, airy pastel cream background, gentle bloom, low contrast, shallow depth of "
+    "field, minimal tasteful cream-toned props, lots of negative space. "
+    "Keep the product COMPLETELY IDENTICAL to the input — same shape, same colors, "
+    "same logos and printing, do not redesign or beautify the product itself. "
+    "Vertical 9:16. No people, no hands, no text, no watermark."
+)
 
 
 def gemini_product_shot(product_image_path: str, scene: str, index: int = 0) -> str | None:
@@ -207,10 +232,15 @@ def gemini_product_shot(product_image_path: str, scene: str, index: int = 0) -> 
         src_bytes = open(product_image_path, "rb").read()
     except OSError:
         return None
-    h = hashlib.md5(b"pshot|" + src_bytes[:4096] + f"|{scene}|{index}".encode()).hexdigest()[:14]
+    story = is_story()
+    tkey = "story" if story else "promo"
+    h = hashlib.md5(
+        b"pshot|" + src_bytes[:4096] + f"|{scene}|{index}|{tkey}".encode()
+    ).hexdigest()[:14]
     dest = GEMINI_CACHE / f"pshot_{h}.png"
     if dest.exists() and dest.stat().st_size > 1024:
         return str(dest)
+    prompt = _PRODUCT_SHOT_PROMPT_STORY if story else _PRODUCT_SHOT_PROMPT
     try:
         from google.genai import types
         from PIL import Image
@@ -219,7 +249,7 @@ def gemini_product_shot(product_image_path: str, scene: str, index: int = 0) -> 
             model="gemini-3.1-flash-image-preview",
             contents=[
                 types.Part.from_bytes(data=src_bytes, mime_type="image/png"),
-                _PRODUCT_SHOT_PROMPT.format(scene=scene),
+                prompt.format(scene=scene),
             ],
             config=types.GenerateContentConfig(
                 response_modalities=["IMAGE"],

@@ -8,6 +8,14 @@
     "{price_won}원으로 끝내는 {title_keyword}",
     "{title_keyword} 쓰기 전에 꼭 보세요"
   ],
+  "title_templates_story": [
+    "{hook}",
+    "자취하면 이거 한 번씩 겪죠",
+    "{target}이라면 공감할걸요",
+    "요즘은 {old_way} 대신 이렇게들 두더라고요",
+    "{price_won}원으로 달라지는 {title_keyword}",
+    "{title_keyword} 쓰기 전에 이 이야기 보세요"
+  ],
   "description_template": "{hook}\n{disclosure}\n\n👉 영상 속 제품 바로가기: {affiliate_url}\n🔗 영상에 나온 모든 제품: 프로필 링크 또는 https://lionandthelab.github.io/clipcart/bio/\n\n이런 분께 추천해요: {target}\n좋은 점: {benefit_short}\n아쉬운 점: {downside}\n\n{hashtags}",
   "hashtags": ["#살림템", "#생활꿀템", "#살림꿀템", "#자취템", "#가성비템", "#shorts"],
   "tags": [

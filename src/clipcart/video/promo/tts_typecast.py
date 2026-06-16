@@ -14,14 +14,23 @@ from pathlib import Path
 
 from clipcart.config import PROJECT_ROOT
 from clipcart.video.ff import ffmpeg_exe, media_duration
+from clipcart.video.promo.template import is_story
 
 TTS_CACHE = PROJECT_ROOT / "tools" / ".cache" / "tts_kr"
 
 # 진희 — 또렷한 아나운서 여성 (프로모션/광고 표준 톤). env로 교체 가능.
 DEFAULT_VOICE_ID = "tc_6731b2b2478a48710ecc9158"
-TEMPO = float(os.getenv("CLIPCART_TTS_TEMPO", "1.24"))
 
-# 비트 tone → (감정 프리셋, 강도)
+
+def _tempo() -> float:
+    """말 속도. env 우선 → story는 잔잔(1.03), promo는 급박(1.24)."""
+    env = (os.getenv("CLIPCART_TTS_TEMPO", "") or "").strip()
+    if env:
+        return float(env)
+    return 1.03 if is_story() else 1.24
+
+
+# 비트 tone → (감정 프리셋, 강도). promo=광고 톤(강), story=잔잔한 이야기 톤.
 _TONE_EMOTION = {
     "hook": ("happy", 1.3),
     "problem": ("sad", 1.1),
@@ -32,6 +41,21 @@ _TONE_EMOTION = {
     "cta": ("happy", 1.2),
     "neutral": ("normal", 1.0),
 }
+_TONE_EMOTION_STORY = {
+    "hook": ("happy", 1.0),  # 친구가 말 거는 톤(들뜸 X)
+    "problem": ("normal", 1.0),  # 담담한 관찰(우는 공감 X)
+    "switch": ("normal", 1.0),
+    "product": ("happy", 1.0),
+    "usage": ("happy", 1.0),
+    "result": ("happy", 1.05),  # 소소한 만족
+    "cta": ("normal", 1.0),  # 나직한 권유
+    "neutral": ("normal", 1.0),
+}
+
+
+def _tone_emotion(tone: str) -> tuple[str, float]:
+    m = _TONE_EMOTION_STORY if is_story() else _TONE_EMOTION
+    return m.get(tone, m["neutral"])
 
 
 def _key() -> str:
@@ -76,7 +100,7 @@ def _normalize(path: Path) -> None:
     """라우드니스 정규화 + atempo(급박한 템포)."""
     try:
         tmp = path.with_suffix(".norm.mp3")
-        af = f"atempo={TEMPO:.3f},loudnorm=I=-16:TP=-1.5:LRA=11"
+        af = f"atempo={_tempo():.3f},loudnorm=I=-16:TP=-1.5:LRA=11"
         subprocess.run(
             [ffmpeg_exe(), "-y", "-hide_banner", "-loglevel", "error", "-i", str(path),
              "-filter:a", af, "-ar", "44100", "-b:a", "160k", str(tmp)],
@@ -89,7 +113,7 @@ def _normalize(path: Path) -> None:
 
 
 def _cache_path(text: str, tone: str) -> Path:
-    h = hashlib.md5(f"{text}|{_voice_id()}|{tone}|{TEMPO}".encode("utf-8")).hexdigest()[:16]
+    h = hashlib.md5(f"{text}|{_voice_id()}|{tone}|{_tempo()}".encode("utf-8")).hexdigest()[:16]
     return TTS_CACHE / f"tc_{h}.mp3"
 
 
@@ -106,7 +130,7 @@ def synth(text: str, tone: str, out: Path | None = None) -> tuple[Path, float] |
     client, meta = _client_and_voice()
     if client is None:
         return None
-    emotion, intensity = _TONE_EMOTION.get(tone, _TONE_EMOTION["neutral"])
+    emotion, intensity = _tone_emotion(tone)
     if emotion not in (meta.get("emotions") or []) and emotion != "normal":
         emotion = "happy" if "happy" in (meta.get("emotions") or []) else "normal"
     try:
