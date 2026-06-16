@@ -115,10 +115,19 @@ def available() -> bool:
 
 
 def _normalize(path: Path) -> None:
-    """라우드니스 정규화 + atempo(급박한 템포)."""
+    """라우드니스 정규화 + atempo. story는 앞뒤 무음을 제거해 더 컴팩트·박진감 있게."""
     try:
         tmp = path.with_suffix(".norm.mp3")
         af = f"atempo={_tempo():.3f},loudnorm=I=-16:TP=-1.5:LRA=11"
+        if is_story():
+            # 클립 앞뒤 무음 제거(20ms만 남김) — 비트 전환을 바짝 붙여 간격을 줄인다
+            trim = (
+                "silenceremove=start_periods=1:start_silence=0.02:start_threshold=-45dB:detection=peak,"
+                "areverse,"
+                "silenceremove=start_periods=1:start_silence=0.02:start_threshold=-45dB:detection=peak,"
+                "areverse"
+            )
+            af = f"{af},{trim}"
         subprocess.run(
             [ffmpeg_exe(), "-y", "-hide_banner", "-loglevel", "error", "-i", str(path),
              "-filter:a", af, "-ar", "44100", "-b:a", "160k", str(tmp)],
@@ -131,7 +140,9 @@ def _normalize(path: Path) -> None:
 
 
 def _cache_path(text: str, tone: str, vid: str) -> Path:
-    h = hashlib.md5(f"{text}|{vid}|{tone}|{_tempo()}".encode("utf-8")).hexdigest()[:16]
+    # story는 무음 제거가 출력을 바꾸므로 캐시 키를 분리한다(promo 키는 불변)
+    suffix = "|story-trim" if is_story() else ""
+    h = hashlib.md5(f"{text}|{vid}|{tone}|{_tempo()}{suffix}".encode("utf-8")).hexdigest()[:16]
     return TTS_CACHE / f"tc_{h}.mp3"
 
 

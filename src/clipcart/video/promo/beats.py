@@ -225,9 +225,7 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "disclosure": disclosure_for(product),
         },
     ]
-    # story: cta 끝에 짧은 구두 고지('광고예요'). 전문 고지는 시작·끝 자막 베이크인으로 충족.
-    if is_story() and beats:
-        beats[-1]["narration"] = beats[-1]["narration"].rstrip() + " 광고예요."
+    # 고지는 시작·끝 화면 자막 + 설명란으로 충족 — cta에 구두 '광고예요'는 넣지 않는다.
 
     # story 멀티보이스: 공감·체감 라인(problem 불편 / result 변화)을 증언 보이스로.
     # 일반·관찰 화법 그대로라 허위후기 아님 — 가짜 후기 표현은 컴플라이언스가 차단.

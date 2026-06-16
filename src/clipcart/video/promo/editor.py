@@ -570,7 +570,8 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     t = 0.0
     for i, (b, (apath, adur)) in enumerate(zip(beats, tts)):
         if STORY:
-            post = 0.30 if b["role"] == "hook" else 0.42  # 잔잔한 호흡 여백
+            # 컴팩트·박진감 — 증언↔메인 간격을 바짝 좁힌다(이전 0.30/0.42에서 축소)
+            post = 0.10 if b["role"] == "hook" else 0.13
         else:
             post = 0.08 if b["role"] == "hook" else 0.12
         beat_dur = adur + post
