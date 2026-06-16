@@ -94,14 +94,14 @@ def _try_one(pex, token: str, index: int, product_img_path: str = "",
         p = token[5:]
         return (p, "image") if p and Path(p).exists() else (None, None)
     if token.startswith("productshot:"):
-        g = sources.gemini_product_shot(product_img_path, token[12:], index)
+        g = sources.generate_product_shot(product_img_path, token[12:], index)
         return (g, "image") if g else (None, None)
     if token.startswith("motionshot:"):
         # 화보샷 정지 이미지 → Kling I2V로 미세 무빙 클립. 실패 시 정지 화보샷.
         from clipcart.video.promo import kling
 
         scene = token[11:]
-        still = sources.gemini_product_shot(product_img_path, scene, index)
+        still = sources.generate_product_shot(product_img_path, scene, index)
         if not still:
             return None, None
         if kling.enabled():
@@ -116,7 +116,8 @@ def _try_one(pex, token: str, index: int, product_img_path: str = "",
         return still, "image"
     if token.startswith("gemini:"):
         # candid: 사람/손 없는 실사 폰카풍 (AI티 방지). story: 밝고 화사한 모던 톤.
-        g = sources.gemini_still(token[7:], "story" if is_story() else "candid", index)
+        # OpenRouter 이미지 모델이 켜져 있으면 그쪽(실사 품질), 아니면 Gemini.
+        g = sources.generate_still(token[7:], "story" if is_story() else "candid", index)
         return (g, "image") if g else (None, None)
     if token.startswith("pexels:"):
         q = token[7:]
@@ -417,6 +418,38 @@ def _subtitle_png(text: str) -> np.ndarray:
     return np.array(img)
 
 
+def _story_emph_png(text: str, max_size: int = 120, min_size: int = 72) -> np.ndarray:
+    """story 중앙 강조 — 흰 배경 라운드 칩 + 검정 글씨(모던 폰트)."""
+    text = text.strip()
+    box_w = int(W * 0.84)
+    tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
+    font = load_font(min_size, bold=True, modern=True)
+    size = min_size
+    lines = [text]
+    for s in range(max_size, min_size - 1, -3):
+        f = load_font(s, bold=True, modern=True)
+        if tmp.textbbox((0, 0), text, font=f)[2] <= box_w:
+            font, size, lines = f, s, [text]
+            break
+    else:
+        lines = [" ".join(w) for w in _wrap(tmp, text.split(), font, box_w, 0)][:2]
+    line_h = int(size * 1.18)
+    widths = [tmp.textbbox((0, 0), ln, font=font)[2] for ln in lines]
+    tw, th = max(widths), line_h * len(lines)
+    pad_x, pad_y = 48, 26
+    bw, bh = tw + pad_x * 2, th + pad_y * 2
+    bx0 = (W - bw) // 2
+    by0 = MEDIA_Y + (MEDIA_H - bh) // 2
+    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle((bx0, by0, bx0 + bw, by0 + bh), radius=28, fill=(255, 255, 255, 245))
+    ty = by0 + pad_y
+    for ln, lw in zip(lines, widths):
+        d.text(((W - lw) // 2, ty), ln, font=font, fill=(18, 18, 20))
+        ty += line_h
+    return np.array(img)
+
+
 # --------------------------------------------------------------------------- #
 # Overlay
 # --------------------------------------------------------------------------- #
@@ -586,11 +619,9 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             hold = min(1.1, max(0.7, beat_dur * 0.4))
             est = max(t + 0.1, min(t + beat_dur * frac, t + beat_dur - hold))
             if STORY:
-                # 슬램 대신 작은 scale-up 팝(모던 폰트, 차콜/세이지, 부드러운 페이드)
-                png = _draw_block(emp, _FONT_BOLD, MEDIA_Y + int(MEDIA_H * 0.30),
-                                  MEDIA_Y + int(MEDIA_H * 0.70), max_size=124, min_size=76,
-                                  stroke=0, color=col, modern=True)
-                overlays.append(_overlay(png, est, hold, fi=0.25, fo=0.2))
+                # 중앙 강조 — 흰 배경 칩 + 검정 글씨(모던), 부드러운 페이드 + 약한 팝
+                png = _story_emph_png(emp, max_size=120, min_size=72)
+                overlays.append(_overlay(png, est, hold, fi=0.2, fo=0.18))
                 sfx_cues.append((sfx.pop(), est, 0.16))
             else:
                 png = _draw_block(emp, _FONT_BOLD, MEDIA_Y + int(MEDIA_H * 0.28),

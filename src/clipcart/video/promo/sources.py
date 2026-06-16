@@ -6,8 +6,10 @@ steward-lab role_models/shorts/pexels.py + gemini_image.py 를 clipcart로 포�
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import io
+import json
 import os
 import urllib.parse
 import urllib.request
@@ -18,6 +20,7 @@ from clipcart.video.promo.template import is_story
 CACHE = PROJECT_ROOT / "tools" / ".cache"
 PEXELS_CACHE = CACHE / "pexels"
 GEMINI_CACHE = CACHE / "gemini"
+OPENROUTER_CACHE = CACHE / "openrouter"
 _UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) clipcart/1.0"
 _API_VIDEO = "https://api.pexels.com/videos/search"
 _API_PHOTO = "https://api.pexels.com/v1/search"
@@ -273,3 +276,102 @@ def gemini_product_shot(product_image_path: str, scene: str, index: int = 0) -> 
     except Exception as e:  # noqa: BLE001
         print(f"  [gemini] product shot failed: {str(e)[:120]}")
         return None
+
+
+# --------------------------------------------------------------------------- #
+# OpenRouter 이미지 모델 (실사 품질 업그레이드) — env CLIPCART_IMAGE_MODEL로 켠다.
+# 예: openai/gpt-5.4-image-2 (실사·지시따름 최상), google/gemini-3-pro-image-preview.
+# 미설정이면 기존 Gemini를 그대로 쓴다(동작·비용 불변).
+# --------------------------------------------------------------------------- #
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+
+def image_model() -> str:
+    return (os.getenv("CLIPCART_IMAGE_MODEL", "") or "").split("#")[0].strip()
+
+
+def image_size() -> str:
+    """비용 절감용 출력 해상도. 가장 낮게 — GPT-image-2는 0.5K 미지원(HTTP 400)이라
+    1K가 최저. 9:16과 함께 720x1280(최소 면적, 세로 영상과 일치)."""
+    return (os.getenv("CLIPCART_IMAGE_SIZE", "") or "1K").split("#")[0].strip()
+
+
+def _openrouter_image(content, cache_tag: str) -> str | None:
+    """OpenRouter 이미지 모델 호출(modalities=image,text) → png 경로. soft-fail(None)."""
+    key = _key("OPENROUTER_API_KEY")
+    model = image_model()
+    if not key or not model:
+        return None
+    OPENROUTER_CACHE.mkdir(parents=True, exist_ok=True)
+    h = hashlib.md5(f"{model}|{image_size()}|{cache_tag}".encode()).hexdigest()[:16]
+    dest = OPENROUTER_CACHE / f"or_{h}.png"
+    if dest.exists() and dest.stat().st_size > 1024:
+        return str(dest)
+    body = json.dumps(
+        {"model": model, "messages": [{"role": "user", "content": content}],
+         "modalities": ["image", "text"],
+         # 비용 절감: 최저 해상도 + 세로(9:16). 면적이 가장 작아 토큰/비용 최소.
+         "image_config": {"image_size": image_size(), "aspect_ratio": "9:16"}}
+    ).encode()
+    req = urllib.request.Request(
+        OPENROUTER_URL, data=body,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json",
+                 "User-Agent": _UA},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=180) as r:
+            data = json.load(r)
+        imgs = (data.get("choices") or [{}])[0].get("message", {}).get("images") or []
+        if not imgs:
+            return None
+        url = imgs[0].get("image_url", {}).get("url", "")
+        if not url.startswith("data:"):
+            return None
+        raw = base64.b64decode(url.split(",", 1)[1])
+        from PIL import Image
+
+        Image.open(io.BytesIO(raw)).convert("RGB").save(dest, "PNG")
+        return str(dest) if dest.stat().st_size > 1024 else None
+    except Exception as e:  # noqa: BLE001
+        print(f"  [openrouter] image failed ({model}): {str(e)[:120]}")
+        return None
+
+
+def openrouter_still(subject: str, style: str = "story", index: int = 0) -> str | None:
+    prefix = _GEMINI_STYLES.get(style, _GEMINI_SIMPLE)
+    return _openrouter_image(prefix + subject, f"still|{style}|{subject}|{index}")
+
+
+def openrouter_product_shot(product_image_path: str, scene: str, index: int = 0) -> str | None:
+    try:
+        src_bytes = open(product_image_path, "rb").read()
+    except OSError:
+        return None
+    prompt = (_PRODUCT_SHOT_PROMPT_STORY if is_story() else _PRODUCT_SHOT_PROMPT).format(scene=scene)
+    b64 = base64.b64encode(src_bytes).decode()
+    content = [
+        {"type": "text", "text": prompt},
+        {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
+    ]
+    tag = hashlib.md5(
+        b"pshot|" + src_bytes[:4096] + f"|{scene}|{index}|{'story' if is_story() else 'promo'}".encode()
+    ).hexdigest()[:14]
+    return _openrouter_image(content, f"pshot|{tag}")
+
+
+def generate_still(subject: str, style: str = "candid", index: int = 0) -> str | None:
+    """텍스트→이미지. OpenRouter 모델이 켜져 있으면 우선(실사 품질), 실패 시 Gemini."""
+    if image_model():
+        p = openrouter_still(subject, style, index)
+        if p:
+            return p
+    return gemini_still(subject, style, index)
+
+
+def generate_product_shot(product_image_path: str, scene: str, index: int = 0) -> str | None:
+    """제품 화보샷(image-to-image). OpenRouter 우선(실사), 실패 시 Gemini."""
+    if image_model():
+        p = openrouter_product_shot(product_image_path, scene, index)
+        if p:
+            return p
+    return gemini_product_shot(product_image_path, scene, index)
