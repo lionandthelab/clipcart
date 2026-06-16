@@ -36,11 +36,14 @@ _DISPLAY_CANDIDATES: list[tuple[str, int]] = [
     *_BOLD_CANDIDATES,
 ]
 
-# 모던(깔끔·요즘 앱) 산세리프 — story 템플릿용. Pretendard(있으면) 우선, 없으면
-# 시스템 볼드(맑은고딕/AppleSD)로 폴백한다. 강렬한 검은고딕(display)은 배제한다.
+# 모던(깔끔·요즘 앱) 산세리프 — story 템플릿용. Pretendard(레포 동봉, OTF) 우선.
+# SemiBold가 깔끔·모던 인상에 가장 잘 맞아 1순위. 없으면 시스템 볼드로 폴백,
+# 강렬한 검은고딕(display)은 배제한다. (PIL은 .otf/.ttf 모두 로드)
 _MODERN_CANDIDATES: list[tuple[str, int]] = [
-    (str(_REPO_FONTS / "Pretendard-Bold.ttf"), 0),
-    (str(_REPO_FONTS / "Pretendard-Regular.ttf"), 0),
+    (str(_REPO_FONTS / "Pretendard-SemiBold.otf"), 0),
+    (str(_REPO_FONTS / "Pretendard-Bold.otf"), 0),
+    (str(_REPO_FONTS / "Pretendard-Medium.otf"), 0),
+    (str(_REPO_FONTS / "Pretendard-Regular.otf"), 0),
     *_BOLD_CANDIDATES,
 ]
 
