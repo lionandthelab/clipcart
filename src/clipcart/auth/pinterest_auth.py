@@ -5,7 +5,7 @@ import urllib.parse
 
 import requests
 
-from clipcart.auth.common import run_oauth_callback
+from clipcart.auth.common import collect_oauth, resolve_redirect_uri
 
 API = "https://api.pinterest.com/v5"
 SCOPES = ["boards:read", "pins:read", "pins:write", "user_accounts:read"]
@@ -58,8 +58,9 @@ def list_boards(access_token: str) -> list[dict]:
 
 
 def setup_pinterest_oauth(app_id: str, app_secret: str, port: int = 8402) -> dict[str, str]:
-    redirect_uri = f"http://localhost:{port}/callback"
-    params = run_oauth_callback(build_auth_url(app_id, redirect_uri), port=port)
+    redirect_uri = resolve_redirect_uri(port)
+    auth_url = build_auth_url(app_id, redirect_uri)
+    params = collect_oauth(auth_url, redirect_uri, port=port, label="Pinterest")
     code = params.get("code")
     if not code:
         raise RuntimeError("authorization code 없음")
