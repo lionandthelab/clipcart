@@ -28,6 +28,17 @@ def _log(entry: dict[str, Any]) -> None:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 
+def _refresh_bio() -> None:
+    """게시 직후 링크인바이오 페이지 갱신. 실패해도 게시 흐름에 영향 없음
+    (게시는 이미 완료). 직접 clipcart daily 실행 시에도 bio가 따라오게 한다."""
+    try:
+        from clipcart.bio.page import build_bio_page
+
+        build_bio_page()
+    except Exception as exc:  # noqa: BLE001
+        _log({"status": "BIO_REFRESH_FAILED", "reason": str(exc)[:200]})
+
+
 def _already_posted_today(source: str = "coupang") -> dict[str, Any] | None:
     today = date.today().isoformat()
     for post in load_posts():
@@ -190,6 +201,9 @@ def run_daily(
         }
     )
 
+    # 게시 직후 bio 갱신 — 직접 실행 시에도 링크 페이지가 따라오게(소프트페일)
+    _refresh_bio()
+
     result = {
         "status": "PUBLISHED",
         "product_id": product["product_id"],
@@ -200,6 +214,7 @@ def run_daily(
         "affiliate_url": product["affiliate_url"],
         "thumbnail_set": thumbnail_set,
         "comment_id": comment_id,
+        "bio_refreshed": True,
         "manual_steps": [
             "YouTube Studio에서 '유료 프로모션 포함' 체크 (API 설정 불가)",
             "자동 등록된 링크 댓글을 고정(핀)으로 설정 (핀 고정은 API 미지원)",
