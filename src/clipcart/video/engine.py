@@ -21,9 +21,16 @@ from clipcart.video.render import render_video
 
 def make_video(product: dict[str, Any], keep_workdir: bool = False) -> dict[str, Any]:
     if os.getenv("CLIPCART_ENGINE", "promo").lower() == "promo":
-        from clipcart.video.promo.engine import make_promo_video
+        from clipcart.video.promo.template import is_model
 
         try:
+            if is_model():
+                # 미모 여성 광고 템플릿 — GPT-image-2 인물+제품 → Kling 모션(풀블리드)
+                from clipcart.video.promo.model import make_model_video
+
+                return make_model_video(product, keep_workdir=keep_workdir)
+            from clipcart.video.promo.engine import make_promo_video
+
             return make_promo_video(product, keep_workdir=keep_workdir)
         except Exception as exc:  # noqa: BLE001
             # promo 엔진 실패(네트워크/키/moviepy) 시 경량 kinetic 엔진으로 폴백 — 데일리 무중단

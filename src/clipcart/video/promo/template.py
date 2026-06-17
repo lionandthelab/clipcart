@@ -19,3 +19,8 @@ def current_template() -> str:
 
 def is_story() -> bool:
     return current_template() == "story"
+
+
+def is_model() -> bool:
+    """미모 여성 광고 템플릿(GPT-image-2 인물+제품 → Kling 모션, 풀블리드)."""
+    return current_template() == "model"
