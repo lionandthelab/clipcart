@@ -2240,7 +2240,7 @@
     "product_id": "AE1005007822634211",
     "aliexpress_product_id": "1005007822634211",
     "created_at": "2026-06-18",
-    "status": "VIDEO_READY",
+    "status": "PUBLISHED",
     "product_name": "5/10M 일회용 후드 오일 필터 종이 부직포 쿠커 후드 추출기 팬 필터 주방 후드 그리스 안티 오일 코튼",
     "display_name": "주방 후드 필터",
     "category": "주방",
@@ -2287,6 +2287,7 @@
     "problem": "후드 필터에 기름때가 끼면 분해해서 닦아야 하는데, 엄두가 안 나서 미루게 되죠.",
     "video_angle": "주방 후드, 마지막으로 닦은 게 언제예요?",
     "known_downside": "후드 모양에 따라 재단이 필요하고, 시트는 주기 교체 소모품입니다",
-    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007822634211.mp4"
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007822634211.mp4",
+    "post_url": "https://www.youtube.com/shorts/WwuSZNiNQP8"
   }
 ]
