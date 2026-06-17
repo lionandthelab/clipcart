@@ -13,7 +13,8 @@ def _creative(disclosure: str) -> dict:
         "description": f"{disclosure}\n\n배수구 머리카락 치우기 곤욕인 사람에게.",
         "disclosure": disclosure,
         "scenes": [
-            {"narration": "배수구 청소 아직도 손으로 하세요?", "caption": "", "disclosure": None},
+            # 공정위 시작·끝 표시: 첫 장면(훅)과 마지막 장면 모두 고지 (실제 beats 동작)
+            {"narration": "배수구 청소 아직도 손으로 하세요?", "caption": "", "disclosure": disclosure},
             {"narration": "링크는 고정 댓글에", "caption": "", "disclosure": disclosure},
         ],
     }
