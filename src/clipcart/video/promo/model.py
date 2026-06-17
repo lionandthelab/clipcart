@@ -278,6 +278,10 @@ def make_model_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
 
     creative = build_creative(product, load_profile())
     scenes = model_scenes(product)
+    # 비용 절감 노브: 2면 hero+closing만(가격·CTA·끝고지 보존). 기본 3(풀 광고).
+    budget = int((os.getenv("CLIPCART_MODEL_SCENES", "") or "3").split("#")[0])
+    if budget <= 2:
+        scenes = [scenes[0], scenes[-1]]
     creative["scenes"] = model_compliance_scenes(product, scenes)
     creative["script_style"] = "model"
 
