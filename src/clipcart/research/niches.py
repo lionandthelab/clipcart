@@ -325,7 +325,7 @@ NICHES: list[dict[str, str]] = [
     {
         "keyword": "하수구 냄새 차단 트랩",
         "category": "주방",
-        "title_keyword": "하수구 냄새 차단 트랩",
+        "title_keyword": "하수구 트랩",
         "old_way": "하수구에 컵 엎어두기",
         "hook": "여름만 되면 싱크대에서 냄새 올라오죠?",
         "problem": "날이 더워지면 하수구를 타고 악취가 올라오고, 작은 날벌레까지 꼬이기 쉬워요.",
