@@ -14,6 +14,7 @@ from clipcart.disclosure import disclosure_for
 from clipcart.research.auto_select import short_product_name
 from clipcart.video.compliance import sanitize_text
 from clipcart.video.promo.broll import get_broll
+from clipcart.video.promo.pricing import parse_pack, unit_phrase
 from clipcart.video.promo.script import pick_script_style, render_line
 from clipcart.video.promo.template import is_story
 
@@ -102,7 +103,16 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         rating = 0.0
     orders = int(product.get("review_count") or 0)
 
-    if discount_pct and original_price:
+    # 묶음이면 개당 가격을 어필 (압도적으로 싼 가격 강조). 상품명에서 수량 파싱.
+    pack_count, pack_unit = parse_pack(product.get("product_name", ""))
+    unit = unit_phrase(price, pack_count)  # '개당 약 130원' 또는 None
+
+    if unit:
+        # 개당 가격이 핵심 어필 — 총액과 함께, 슬램은 개당가
+        product_line = f"{name}. {pack_count}{pack_unit}에 {price:,}원, {unit}꼴이에요."
+        product_emphasis = unit
+        product_caption = f"{name} · {price:,}원 ({unit})"
+    elif discount_pct and original_price:
         # 획기적 실측 할인: 정가→현재가를 숫자로 박는다
         product_line = (
             f"{name}. 정가 {original_price:,}원이 지금 {discount_pct}% 할인, {price:,}원이에요."
