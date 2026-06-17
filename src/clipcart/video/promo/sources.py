@@ -359,6 +359,27 @@ def openrouter_product_shot(product_image_path: str, scene: str, index: int = 0)
     return _openrouter_image(content, f"pshot|{tag}")
 
 
+def openrouter_compose(prompt: str, image_paths: list[str], cache_tag: str) -> str | None:
+    """여러 레퍼런스 이미지(제품 + 직전 컷 등)를 함께 주고 합성. 인물·제품 일관성용.
+
+    image_paths 순서대로 레퍼런스로 전달된다(보통 [제품, 이전컷]). soft-fail(None).
+    """
+    content: list = [{"type": "text", "text": prompt}]
+    ref_sig = b""
+    for p in image_paths:
+        try:
+            raw = open(p, "rb").read()
+        except OSError:
+            continue
+        ref_sig += raw[:2048]
+        b64 = base64.b64encode(raw).decode()
+        content.append({"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}})
+    if len(content) == 1:  # 레퍼런스 이미지가 하나도 없으면 의미 없음
+        return None
+    tag = hashlib.md5(b"compose|" + ref_sig + f"|{cache_tag}".encode()).hexdigest()[:16]
+    return _openrouter_image(content, f"compose|{tag}")
+
+
 def generate_still(subject: str, style: str = "candid", index: int = 0) -> str | None:
     """텍스트→이미지. OpenRouter 모델이 켜져 있으면 우선(실사 품질), 실패 시 Gemini."""
     if image_model():
