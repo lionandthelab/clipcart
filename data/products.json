@@ -2452,5 +2452,59 @@
     "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어 주문 전에 사이즈 확인이 필요합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007072695299.mp4",
     "post_url": "https://www.youtube.com/shorts/tSV1UENh1M0"
+  },
+  {
+    "product_id": "AE1005007173650980",
+    "aliexpress_product_id": "1005007173650980",
+    "created_at": "2026-06-18",
+    "status": "PUBLISHED",
+    "product_name": "냄비 뚜껑 선반, 카운터 탑 삽 스푼 선반, 수프 스푼 패드, 수프 스푼 젓가락 거치대 넣기, 인기 판매, 1 개",
+    "display_name": "냄비 뚜껑 거치대",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005007173650980.html?pdp_npi=6%40dis%21KRW%215760%212880%21%21%2124.98%2112.49%21%402151fd2c17817300109972890e0e4a%2112000042253953998%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3RBBKpj",
+    "price": 2880,
+    "original_price": 5760,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Se0759fc25625401d98719651876f27e3F.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Se0759fc25625401d98719651876f27e3F.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S4c244a9b70054743afbecf3776dc41edD.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5ea7c615f19e41b9ab78827e10d83823R.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S05ed278683824e7c8051587a73ada24aG.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S78a5753e72a14d8fab779ab0f8a3d0a8i.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S722adcffb10c463c849a4408b9aa929cE.png"
+    ],
+    "video_url": "",
+    "rating": 91.2,
+    "review_count": 7401,
+    "score": 94,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "냄비 뚜껑 거치대 주방",
+      "category": "주방",
+      "title_keyword": "냄비 뚜껑 거치대",
+      "old_way": "뜨거운 뚜껑 들고 두리번",
+      "hook": "요리하다 뜨거운 뚜껑, 어디다 두세요?",
+      "problem": "요리 중에 뚜껑을 열면 둘 곳이 없어서 싱크대에 그냥 뒤집어 두게 되죠. 물자국에 양념까지.",
+      "usage": "거치대에 세우기만 하면 됩니다. 국자도 같이 걸 수 있는 제품이 많아요.",
+      "benefit": "조리대가 지저분해질 일이 줄고 동선이 편해집니다.",
+      "downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
+      "target": "좁은 주방에서 요리하는 사람"
+    },
+    "problem": "요리 중에 뚜껑을 열면 둘 곳이 없어서 싱크대에 그냥 뒤집어 두게 되죠. 물자국에 양념까지.",
+    "video_angle": "요리하다 뜨거운 뚜껑, 어디다 두세요?",
+    "known_downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007173650980.mp4",
+    "post_url": "https://www.youtube.com/shorts/W39hQuX4-3o"
   }
 ]
