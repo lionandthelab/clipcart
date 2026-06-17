@@ -1,3 +1,14 @@
+"""Instagram API with Instagram Login (2024+).
+
+구 방식(Facebook Login + Page 연결, scope=instagram_basic/instagram_content_publish)은
+Meta 가 2025-01-27 자로 폐기했다. 현재는 Instagram 전용 앱 자격증명으로 인스타에 직접
+로그인하고 graph.instagram.com 으로 게시한다. 페이스북 페이지 연결이 필요 없다.
+
+자격증명: App Dashboard > Instagram > API setup with Instagram business login >
+Business login settings 의 **Instagram App ID / Instagram App Secret**(= META_APP_ID/SECRET
+과 별개). 같은 화면의 OAuth redirect URIs 에 콜백을 등록한다.
+"""
+
 from __future__ import annotations
 
 import urllib.parse
@@ -6,12 +17,12 @@ import requests
 
 from clipcart.auth.common import collect_oauth, resolve_redirect_uri
 
-GRAPH = "https://graph.facebook.com/v21.0"
+AUTH_URL = "https://www.instagram.com/oauth/authorize"
+TOKEN_URL = "https://api.instagram.com/oauth/access_token"
+GRAPH = "https://graph.instagram.com"
 SCOPES = [
-    "instagram_basic",
-    "instagram_content_publish",
-    "pages_show_list",
-    "pages_read_engagement",
+    "instagram_business_basic",
+    "instagram_business_content_publish",
 ]
 
 
@@ -20,36 +31,38 @@ def build_auth_url(app_id: str, redirect_uri: str) -> str:
         {
             "client_id": app_id,
             "redirect_uri": redirect_uri,
-            "scope": ",".join(SCOPES),
             "response_type": "code",
+            "scope": ",".join(SCOPES),
         }
     )
-    return f"https://www.facebook.com/v21.0/dialog/oauth?{params}"
+    return f"{AUTH_URL}?{params}"
 
 
-def exchange_code(app_id: str, app_secret: str, code: str, redirect_uri: str) -> str:
-    resp = requests.get(
-        f"{GRAPH}/oauth/access_token",
-        params={
+def exchange_code(app_id: str, app_secret: str, code: str, redirect_uri: str) -> dict:
+    """authorization code → 단기 토큰. 응답에 access_token, user_id 포함."""
+    resp = requests.post(
+        TOKEN_URL,
+        data={
             "client_id": app_id,
             "client_secret": app_secret,
+            "grant_type": "authorization_code",
             "redirect_uri": redirect_uri,
             "code": code,
         },
         timeout=30,
     )
     resp.raise_for_status()
-    return resp.json()["access_token"]
+    return resp.json()
 
 
-def to_long_lived_token(app_id: str, app_secret: str, short_token: str) -> str:
+def to_long_lived_token(app_secret: str, short_token: str) -> str:
+    """단기 토큰 → 60일 장기 토큰(graph.instagram.com)."""
     resp = requests.get(
-        f"{GRAPH}/oauth/access_token",
+        f"{GRAPH}/access_token",
         params={
-            "grant_type": "fb_exchange_token",
-            "client_id": app_id,
+            "grant_type": "ig_exchange_token",
             "client_secret": app_secret,
-            "fb_exchange_token": short_token,
+            "access_token": short_token,
         },
         timeout=30,
     )
@@ -57,32 +70,16 @@ def to_long_lived_token(app_id: str, app_secret: str, short_token: str) -> str:
     return resp.json()["access_token"]
 
 
-def discover_instagram_account(access_token: str) -> tuple[str, str]:
-    pages = requests.get(
-        f"{GRAPH}/me/accounts",
-        params={"access_token": access_token},
+def fetch_account(access_token: str) -> tuple[str, str]:
+    """(user_id, username) — 게시에 쓸 IG 비즈니스 계정 ID 와 핸들."""
+    resp = requests.get(
+        f"{GRAPH}/me",
+        params={"fields": "user_id,username", "access_token": access_token},
         timeout=30,
     )
-    pages.raise_for_status()
-    data = pages.json().get("data", [])
-    for page in data:
-        page_id = page["id"]
-        detail = requests.get(
-            f"{GRAPH}/{page_id}",
-            params={
-                "fields": "instagram_business_account,name",
-                "access_token": access_token,
-            },
-            timeout=30,
-        )
-        detail.raise_for_status()
-        ig = detail.json().get("instagram_business_account")
-        if ig:
-            return str(ig["id"]), page.get("name", "")
-    raise RuntimeError(
-        "Instagram Business/Creator 계정을 찾지 못했습니다. "
-        "Facebook 페이지와 IG 프로페셔널 계정 연결을 확인하세요."
-    )
+    resp.raise_for_status()
+    data = resp.json()
+    return str(data.get("user_id", "")), data.get("username", "")
 
 
 def setup_instagram_oauth(app_id: str, app_secret: str, port: int = 8400) -> dict[str, str]:
@@ -92,14 +89,20 @@ def setup_instagram_oauth(app_id: str, app_secret: str, port: int = 8400) -> dic
     code = params.get("code")
     if not code:
         raise RuntimeError("authorization code 없음")
+    code = code.split("#")[0]  # Instagram 은 code 끝에 '#_' 를 붙이기도 함
 
     short = exchange_code(app_id, app_secret, code, redirect_uri)
-    token = to_long_lived_token(app_id, app_secret, short)
-    ig_id, page_name = discover_instagram_account(token)
+    short_token = short.get("access_token")
+    if not short_token:
+        raise RuntimeError(f"토큰 교환 실패: {short}")
+    user_id = str(short.get("user_id", ""))
+    token = to_long_lived_token(app_secret, short_token)
+
+    me_id, username = fetch_account(token)
     return {
-        "META_APP_ID": app_id,
-        "META_APP_SECRET": app_secret,
-        "META_ACCESS_TOKEN": token,
-        "INSTAGRAM_BUSINESS_ACCOUNT_ID": ig_id,
-        "instagram_page": page_name,
+        "INSTAGRAM_APP_ID": app_id,
+        "INSTAGRAM_APP_SECRET": app_secret,
+        "INSTAGRAM_ACCESS_TOKEN": token,
+        "INSTAGRAM_BUSINESS_ACCOUNT_ID": me_id or user_id,
+        "instagram_page": username,  # CLI 표시용(자동 .env 저장 제외)
     }

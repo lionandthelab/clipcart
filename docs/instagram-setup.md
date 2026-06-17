@@ -7,8 +7,7 @@ Redirect URI: `https://acts.run/callback/`
 ## 사전 조건
 
 - Instagram **프로페셔널**(Business/Creator) 계정
-- **Facebook 페이지** 1개 + IG 연결  
-  (IG → 프로필 → 계정 센터 → Linked accounts)
+- (Facebook 페이지 연결은 **불필요** — Instagram 비즈니스 로그인 직접 인증 방식)
 
 ---
 
@@ -59,10 +58,13 @@ CLIPCART_OAUTH_REDIRECT=https://acts.run/callback/
 | App name | `살림해결소 Clipcart` |
 | App contact email | `contact@lionandthelab.com` |
 
-## 2. Product 추가
+## 2. Product 추가 — Instagram
 
-1. **Facebook Login for Business** → Set up  
-2. **Instagram** → Set up (Instagram API)
+좌측 **Products** → **Instagram** → **Set up**.
+
+> ⚠️ 구 방식(**Facebook Login for Business** + `instagram_basic`/`instagram_content_publish`)은
+> Meta 가 **2025-01-27** 자로 폐기했다. 지금은 **Instagram 비즈니스 로그인**으로 인스타에
+> 직접 인증하고 `graph.instagram.com` 으로 게시한다(페이스북 페이지 연결 불필요).
 
 ## 3. Settings → Basic
 
@@ -75,47 +77,44 @@ CLIPCART_OAUTH_REDIRECT=https://acts.run/callback/
 | User data deletion | `https://acts.run/privacy.html` (5. Data Retention & Deletion) |
 | Category | `Shopping` 또는 `Utilities` |
 
-## 4. Facebook Login → Settings
+## 4. Instagram → API setup with Instagram business login
+
+좌측 **Instagram → API setup with Instagram business login** →
+**3. Set up Instagram business login → Business login settings**:
 
 | 필드 | 복붙 값 |
 |------|---------|
-| Valid OAuth Redirect URIs | `https://acts.run/callback/` |
-| Client OAuth login | **Yes** |
-| Web OAuth login | **Yes** |
-| Enforce HTTPS | **No** (localhost) |
-| Use Strict Mode for redirect URIs | **Yes** |
+| OAuth redirect URIs | `https://acts.run/callback/` (끝 슬래시 포함) |
 
-Deauthorize callback (있으면): `https://acts.run/callback/`
+같은 화면에 **Instagram App ID / Instagram App Secret** 이 있다.
+→ 이게 **Settings → Basic 의 Meta App ID/Secret 과는 다른 값**이다. 이걸 `.env` 에 쓴다.
 
-## 5. Instagram → API setup
+## 5. App roles — 테스터 등록
 
-Redirect URI: `https://acts.run/callback/`
+**App roles → Roles** 에서 본인을 **Instagram Tester** 로 추가 →
+인스타 앱(프로필 → 설정 → 비즈니스 도구 및 컨트롤 → 앱 및 웹사이트 → 테스터 초대)에서 **수락**.
+(개발 모드에선 Admin/Tester 계정만 인증·게시 가능 — 본인 계정이면 App Review 불필요.)
 
-## 6. App roles
+## 6. .env
 
-본인 Facebook 계정을 **Administrator**로 추가 (본인 앱이면 기본 Admin).
-
-Development 모드: Admin/Developer/Tester만 OAuth 가능.
-
-## 7. .env
-
-Meta **Settings → Basic**에서:
+위 **Business login settings** 의 값:
 
 ```env
-META_APP_ID=
-META_APP_SECRET=
+INSTAGRAM_APP_ID=
+INSTAGRAM_APP_SECRET=
 ```
 
-## 8. 토큰 발급
+## 7. 토큰 발급
 
 ```powershell
 .venv\Scripts\clipcart auth instagram
 .venv\Scripts\clipcart verify
 ```
 
-자동 저장: `META_ACCESS_TOKEN`, `INSTAGRAM_BUSINESS_ACCOUNT_ID`
+브라우저 인스타 승인 → `acts.run/callback/` 페이지의 **code 복사 → 터미널 붙여넣기**.
+자동 저장: `INSTAGRAM_ACCESS_TOKEN`, `INSTAGRAM_BUSINESS_ACCOUNT_ID`.
 
-> 본인 계정만 게시하면 **개발 모드로 충분**(App Review 불필요). Admin/Tester 인 본인 IG에 게시 가능.
+> 본인 계정만 게시하면 **개발 모드로 충분**(App Review 불필요).
 
 ---
 
@@ -151,16 +150,14 @@ CLIPCART_S3_PUBLIC_BASE=https://media.acts.run
 
 | Permission | 복붙 설명 |
 |------------|-----------|
-| `instagram_basic` | `Our app reads the connected Instagram Business account profile to verify publishing setup.` |
-| `instagram_content_publish` | `Our app publishes Reels only after the user manually approves each video. Used for affiliate lifestyle product content.` |
-| `pages_show_list` | `Required to list Facebook Pages linked to the user's Instagram Business account.` |
-| `pages_read_engagement` | `Required by Meta for Instagram API publishing integration.` |
+| `instagram_business_basic` | `Our app reads the Instagram Business account profile (username, account type) to verify publishing setup.` |
+| `instagram_business_content_publish` | `Our app publishes Reels only after the user manually approves each video. Used for affiliate lifestyle product content.` |
 
 **Screencast 설명 (영문):**
 
 ```text
-User logs in via Facebook OAuth, selects a Page linked to Instagram Business account,
-uploads a pre-approved vertical video, and publishes a Reel with affiliate disclosure in caption.
+User logs in via Instagram business login, authorizes the app, then uploads a pre-approved
+vertical video and publishes a Reel with affiliate disclosure in the caption.
 No automatic posting without user approval.
 ```
 
@@ -170,8 +167,9 @@ No automatic posting without user approval.
 
 | 에러 | 해결 |
 |------|------|
-| IG 계정 못 찾음 | IG 프로페셔널 + Facebook 페이지 연결 |
-| Redirect URI mismatch | `https://acts.run/callback/` (https 아님) |
-| 권한 거부 | Development 모드 + 본인 Admin |
-| Privacy Policy 필수 | `https://lionandthelab.github.io/clipcart/privacy.html` (이미 배포됨) |
+| `Invalid Scopes: instagram_basic...` | 구 스코프 폐기. 코드는 `instagram_business_basic/_content_publish` 사용 — Instagram 비즈니스 로그인 제품으로 셋업했는지 확인 |
+| 앱 도메인 미포함 | Settings→Basic **App Domains** 에 `acts.run` + Website 플랫폼 `https://acts.run/` 저장 |
+| Redirect URI mismatch | Business login settings 의 OAuth redirect URIs 에 `https://acts.run/callback/` (끝 슬래시) |
+| 권한 거부 / 인증 안 됨 | Development 모드 + 본인이 **Instagram Tester** 수락했는지 |
+| Privacy Policy 필수 | `https://acts.run/privacy.html` (이미 배포됨) |
 | IG 게시 실패: video_url | `CLIPCART_S3_*`(R2) 설정 또는 `--video-url` 직접 지정 (공개 mp4 URL 필요) |

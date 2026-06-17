@@ -32,7 +32,7 @@ def verify_all() -> dict[str, Any]:
         result["instagram_reels"] = {
             "ok": False,
             "configured": False,
-            "missing": _missing(ig_cfg, ["META_ACCESS_TOKEN", "INSTAGRAM_BUSINESS_ACCOUNT_ID"]),
+            "missing": _missing(ig_cfg, ["INSTAGRAM_ACCESS_TOKEN", "INSTAGRAM_BUSINESS_ACCOUNT_ID"]),
         }
 
     if tt_cfg.configured:

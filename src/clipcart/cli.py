@@ -238,7 +238,7 @@ def cmd_status() -> None:
             "instagram_reels": {
                 "configured": ig.configured,
                 "missing": [k for k, v in {
-                    "META_ACCESS_TOKEN": ig.access_token,
+                    "INSTAGRAM_ACCESS_TOKEN": ig.access_token,
                     "INSTAGRAM_BUSINESS_ACCOUNT_ID": ig.business_account_id,
                 }.items() if not v],
                 "setup": "clipcart auth instagram",
@@ -280,8 +280,8 @@ def cmd_verify() -> None:
     type=click.Choice(["instagram", "tiktok", "pinterest", "youtube"]),
 )
 @click.option("--credentials", default=None, help="YouTube: root의 JSON (SA 또는 client_secret)")
-@click.option("--app-id", envvar="META_APP_ID", help="Instagram: Meta App ID / Pinterest: App ID")
-@click.option("--app-secret", envvar="META_APP_SECRET", help="Instagram: Meta App Secret")
+@click.option("--app-id", envvar="INSTAGRAM_APP_ID", help="Instagram App ID (Instagram 로그인용, Meta App ID 아님)")
+@click.option("--app-secret", envvar="INSTAGRAM_APP_SECRET", help="Instagram App Secret")
 @click.option("--client-key", envvar="TIKTOK_CLIENT_KEY")
 @click.option("--client-secret", envvar="TIKTOK_CLIENT_SECRET")
 @click.option("--pinterest-app-id", envvar="PINTEREST_APP_ID")
@@ -308,7 +308,12 @@ def cmd_auth(
 
     if platform == "instagram":
         if not app_id or not app_secret:
-            click.echo("META_APP_ID, META_APP_SECRET 필요 (.env 또는 --app-id/--app-secret)", err=True)
+            click.echo(
+                "INSTAGRAM_APP_ID, INSTAGRAM_APP_SECRET 필요 (.env 또는 --app-id/--app-secret)\n"
+                "  → App Dashboard > Instagram > API setup with Instagram business login\n"
+                "    > 3. Set up Instagram business login > Business login settings",
+                err=True,
+            )
             sys.exit(1)
         from clipcart.auth.meta import setup_instagram_oauth
 

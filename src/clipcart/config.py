@@ -99,10 +99,11 @@ def load_youtube_config() -> YouTubeConfig:
 
 
 def load_instagram_config() -> InstagramConfig:
+    # Instagram 로그인 전용 자격증명(INSTAGRAM_*) 우선, 레거시 META_* 는 폴백.
     return InstagramConfig(
-        app_id=os.getenv("META_APP_ID", ""),
-        app_secret=os.getenv("META_APP_SECRET", ""),
-        access_token=os.getenv("META_ACCESS_TOKEN", ""),
+        app_id=os.getenv("INSTAGRAM_APP_ID", "") or os.getenv("META_APP_ID", ""),
+        app_secret=os.getenv("INSTAGRAM_APP_SECRET", "") or os.getenv("META_APP_SECRET", ""),
+        access_token=os.getenv("INSTAGRAM_ACCESS_TOKEN", "") or os.getenv("META_ACCESS_TOKEN", ""),
         business_account_id=os.getenv("INSTAGRAM_BUSINESS_ACCOUNT_ID", ""),
     )
 

@@ -8,7 +8,8 @@ import requests
 from clipcart.config import InstagramConfig, load_instagram_config
 from clipcart.publishing.base import PlatformPublisher, PublishResult
 
-GRAPH_BASE = "https://graph.facebook.com/v21.0"
+# Instagram API with Instagram Login: graph.instagram.com (graph.facebook.com 아님)
+GRAPH_BASE = "https://graph.instagram.com/v21.0"
 
 
 class InstagramPublisher(PlatformPublisher):
@@ -26,14 +27,18 @@ class InstagramPublisher(PlatformPublisher):
         resp = requests.get(
             f"{GRAPH_BASE}/{self.config.business_account_id}",
             params={
-                "fields": "username,name,profile_picture_url",
+                "fields": "username,account_type",
                 "access_token": self.config.access_token,
             },
             timeout=30,
         )
         if resp.ok:
             data = resp.json()
-            return {"ok": True, "username": data.get("username"), "name": data.get("name")}
+            return {
+                "ok": True,
+                "username": data.get("username"),
+                "account_type": data.get("account_type"),
+            }
         return {"ok": False, "error": resp.text[:300]}
 
     def publish(
