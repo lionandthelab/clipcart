@@ -583,5 +583,21 @@
     "sub_id": null,
     "thumbnail_set": false,
     "comment_id": "Ugx5HA_AaxzY9RMvyEV4AaABAg"
+  },
+  {
+    "post_id": "tSV1UENh1M0",
+    "product_id": "AE1005007072695299",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/tSV1UENh1M0",
+    "published_at": "2026-06-17T17:01:50.360228+00:00",
+    "status": "PUBLISHED",
+    "title": "아직도 하수구에 컵 엎어두기? 이거 보세요",
+    "title_template": "아직도 {old_way}? 이거 보세요",
+    "script_style": "model",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c35j3SD3",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgwfHKHoMGKOWCSUOlh4AaABAg"
   }
 ]
