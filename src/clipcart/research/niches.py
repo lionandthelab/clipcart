@@ -239,7 +239,7 @@ NICHES: list[dict[str, str]] = [
     {
         "keyword": "후드 필터 기름때 시트",
         "category": "주방",
-        "title_keyword": "후드 기름때 필터 시트",
+        "title_keyword": "주방 후드 필터",
         "old_way": "기름 낀 후드 분해 세척",
         "hook": "주방 후드, 마지막으로 닦은 게 언제예요?",
         "problem": "후드 필터에 기름때가 끼면 분해해서 닦아야 하는데, 엄두가 안 나서 미루게 되죠.",
