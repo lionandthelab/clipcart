@@ -26,6 +26,13 @@ BANNED_EXPRESSIONS = [
     "인생템",
     "역대급",
     "품절 전에",
+    # 허위 사용 후기 차단(CLAUDE.md 1.2) — 실제 안 써본 제품을 써본 듯 단정하는 표현.
+    # story 템플릿이 1인칭 화법을 늘리므로 하드게이트로 강제한다.
+    "제가 써보니",
+    "한 달 써본",
+    "내돈내산",
+    "효과 봤어요",
+    "직접 사용",
     # 공정위 2024-12 개정: 조건부 고지 표현 금지 (확정형 '제공받습니다'만 인정)
     "수수료를 받을 수 있습니다",
     "제공받을 수 있습니다",
@@ -42,7 +49,8 @@ _SANITIZE_REPLACEMENTS: list[tuple[str, str]] = [
     ("수수료를 받을 수 있습니다", "수수료를 제공받습니다"),
     ("제공받을 수 있습니다", "제공받습니다"),
     ("품절 전에", ""),
-    ("직접 써봤", "써본 사람들은"),
+    # '직접 써봤'은 정화하지 않는다 — 무근거 전언('써본 사람들은')으로 바꿔 게이트를
+    #  우회시키던 구멍을 닫는다. 그대로 두면 BANNED_EXPRESSIONS가 차단(허위후기 방지).
     ("평생", "계속"),
     ("무조건", ""),
     ("100%", ""),
@@ -83,8 +91,13 @@ def check_texts(creative: dict[str, Any]) -> list[str]:
     for foreign in _ALL_DISCLOSURES - {required}:
         if foreign and foreign in description:
             issues.append("다른 소스의 어필리에이트 고지 혼입 — 허위 고지")
-    if not any(s.get("disclosure") for s in creative.get("scenes", [])):
+    scenes = creative.get("scenes", [])
+    if not any(s.get("disclosure") for s in scenes):
         issues.append("영상 내 고지 장면 누락")
+    # 공정위: 동영상은 시작·끝에 표시 — '끝부분만 표기는 불인정'. 첫 장면(훅)에
+    # 고지가 없으면 시작 고지 누락으로 차단(과거엔 '아무 장면이든 보유'만 검사했음).
+    elif not (scenes and scenes[0].get("disclosure")):
+        issues.append("영상 시작 부분 고지 누락 — 공정위 시작·끝 표시 요건('끝부분만 표기 불인정')")
     if len(creative.get("title", "")) > 100:
         issues.append("제목 100자 초과")
     return issues

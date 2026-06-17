@@ -473,6 +473,22 @@
     "comment_id": "Ugy-8_uH6b8Tb2O9q-h4AaABAg"
   },
   {
+    "post_id": "ddtiTcbbZrQ",
+    "product_id": "CP9512169265",
+    "platform": "youtube_shorts",
+    "source": "coupang",
+    "post_url": "https://www.youtube.com/shorts/ddtiTcbbZrQ",
+    "published_at": "2026-06-15T22:32:02.469007+00:00",
+    "status": "PUBLISHED",
+    "title": "장마철 욕실 실리콘 틈이 신경 쓰이는 사람만 보세요",
+    "title_template": "{target}만 보세요",
+    "script_style": "empathetic",
+    "affiliate_url": "https://link.coupang.com/a/eCbHtPyFEq",
+    "sub_id": "salrimshorts9512169265",
+    "thumbnail_set": true,
+    "comment_id": "UgwDUf5UZZVer3znjeN4AaABAg"
+  },
+  {
     "post_id": "NIy8K2A6oZc",
     "product_id": "AE1005008248056709",
     "platform": "youtube_shorts",
@@ -487,5 +503,53 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgzrIF8y0UJKH45U9jt4AaABAg"
+  },
+  {
+    "post_id": "N4eqrB-oJS4",
+    "product_id": "CP9544419725",
+    "platform": "youtube_shorts",
+    "source": "coupang",
+    "post_url": "https://www.youtube.com/shorts/N4eqrB-oJS4",
+    "published_at": "2026-06-16T06:19:14.832986+00:00",
+    "status": "PUBLISHED",
+    "title": "창틀 레일 청소솔 쓰기 전에 이 이야기 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 이 이야기 보세요",
+    "script_style": "story",
+    "affiliate_url": "https://link.coupang.com/a/eCIqhY2TBY",
+    "sub_id": "salrimshorts9544419725",
+    "thumbnail_set": true,
+    "comment_id": "UgxFiEUhjvjDRws5dHV4AaABAg"
+  },
+  {
+    "post_id": "hVsW6Y3CC60",
+    "product_id": "CP9507939860",
+    "platform": "youtube_shorts",
+    "source": "coupang",
+    "post_url": "https://www.youtube.com/shorts/hVsW6Y3CC60",
+    "published_at": "2026-06-16T09:55:51.790005+00:00",
+    "status": "PUBLISHED",
+    "title": "13,900원으로 달라지는 청소도구 걸이",
+    "title_template": "{price_won}원으로 달라지는 {title_keyword}",
+    "script_style": "story",
+    "affiliate_url": "https://link.coupang.com/a/eCXCUfIug8",
+    "sub_id": "salrimshorts9507939860",
+    "thumbnail_set": true,
+    "comment_id": "UgwvJf_PFmBCxMtDRRx4AaABAg"
+  },
+  {
+    "post_id": "zKfPWaz3JE8",
+    "product_id": "CP8306238975",
+    "platform": "youtube_shorts",
+    "source": "coupang",
+    "post_url": "https://www.youtube.com/shorts/zKfPWaz3JE8",
+    "published_at": "2026-06-16T22:41:33.932164+00:00",
+    "status": "PUBLISHED",
+    "title": "자취하면 이거 한 번씩 겪죠",
+    "title_template": "자취하면 이거 한 번씩 겪죠",
+    "script_style": "story",
+    "affiliate_url": "https://link.coupang.com/a/eDQCq1eKD6",
+    "sub_id": "salrimshorts8306238975",
+    "thumbnail_set": true,
+    "comment_id": "UgwT-HzRstGdFQpG55p4AaABAg"
   }
 ]

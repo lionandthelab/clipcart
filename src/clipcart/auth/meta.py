@@ -4,7 +4,7 @@ import urllib.parse
 
 import requests
 
-from clipcart.auth.common import run_oauth_callback
+from clipcart.auth.common import collect_oauth, resolve_redirect_uri
 
 GRAPH = "https://graph.facebook.com/v21.0"
 SCOPES = [
@@ -86,8 +86,9 @@ def discover_instagram_account(access_token: str) -> tuple[str, str]:
 
 
 def setup_instagram_oauth(app_id: str, app_secret: str, port: int = 8400) -> dict[str, str]:
-    redirect_uri = f"http://localhost:{port}/callback"
-    params = run_oauth_callback(build_auth_url(app_id, redirect_uri), port=port)
+    redirect_uri = resolve_redirect_uri(port)
+    auth_url = build_auth_url(app_id, redirect_uri)
+    params = collect_oauth(auth_url, redirect_uri, port=port, label="Instagram")
     code = params.get("code")
     if not code:
         raise RuntimeError("authorization code 없음")

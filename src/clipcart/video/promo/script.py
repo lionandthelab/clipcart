@@ -16,6 +16,8 @@ import os
 from datetime import date
 from typing import Any
 
+from clipcart.video.promo.template import current_template
+
 
 class _SafeDict(dict):
     def __missing__(self, key: str) -> str:
@@ -57,16 +59,33 @@ SCRIPT_STYLES: list[dict[str, str]] = [
         "result_tail": "그 정도 값이면 충분히 합리적이죠.",
         "cta": "아쉬운 점도 하나, {downside}. 구매 링크는 고정 댓글에 있어요.",
     },
+    {
+        # story 템플릿 전용 — '옆자리 친구가 들려주는 이야기'. 발견 화법('그러다
+        # 이런 걸 봤어요')으로 1인칭 실사용 단정을 구조적으로 회피(허위후기 금지).
+        "name": "story",
+        "switch": "{old_way}, 다들 한 번쯤 그러잖아요. 그러다 이런 걸 봤어요.",
+        "switch_caption": "그러다 이런 걸 봤어요",
+        "switch_emphasis": "이런 걸 봤어요",
+        "usage": "쓰는 것도 어렵지 않더라고요. {usage}",
+        "result_tail": "그 작은 게 생각보다 편해요.",
+        # {downside}가 명사구든 완결 문장이든 자연스럽게 — '~는 좀 아쉬워요' 충돌 회피
+        "cta": "근데 솔직히 아쉬운 점도 있어요. {downside}. 그래도 궁금하면 링크는 고정 댓글에 둘게요.",
+    },
 ]
 
 _BY_NAME = {s["name"]: s for s in SCRIPT_STYLES}
 
 
 def pick_script_style(product: dict[str, Any]) -> tuple[str, dict[str, str]]:
-    """(스타일명, 스타일) 반환. env 강제 우선, 아니면 상품ID 해시로 안정 선택."""
+    """(스타일명, 스타일) 반환. env 강제 우선 → story 템플릿이면 story 고정 →
+    아니면 상품ID 해시로 안정 선택(단, story 말투는 promo 무작위 풀에서 제외)."""
     forced = os.getenv("CLIPCART_SCRIPT_STYLE", "").strip()
     if forced in _BY_NAME:
         return forced, _BY_NAME[forced]
+    if current_template() == "story":
+        return "story", _BY_NAME["story"]
+    # promo는 story 말투를 무작위로 섞지 않는다(시각 톤과 불일치 방지)
+    pool = [s for s in SCRIPT_STYLES if s["name"] != "story"]
     seed = int(hashlib.md5(f"{date.today()}{product.get('product_id','')}".encode()).hexdigest(), 16)
-    style = SCRIPT_STYLES[seed % len(SCRIPT_STYLES)]
+    style = pool[seed % len(pool)]
     return style["name"], style

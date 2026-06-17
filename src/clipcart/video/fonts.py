@@ -36,7 +36,23 @@ _DISPLAY_CANDIDATES: list[tuple[str, int]] = [
     *_BOLD_CANDIDATES,
 ]
 
-_CANDIDATES = {"bold": _BOLD_CANDIDATES, "regular": _REGULAR_CANDIDATES, "display": _DISPLAY_CANDIDATES}
+# 모던(깔끔·요즘 앱) 산세리프 — story 템플릿용. Pretendard(레포 동봉, OTF) 우선.
+# SemiBold가 깔끔·모던 인상에 가장 잘 맞아 1순위. 없으면 시스템 볼드로 폴백,
+# 강렬한 검은고딕(display)은 배제한다. (PIL은 .otf/.ttf 모두 로드)
+_MODERN_CANDIDATES: list[tuple[str, int]] = [
+    (str(_REPO_FONTS / "Pretendard-SemiBold.otf"), 0),
+    (str(_REPO_FONTS / "Pretendard-Bold.otf"), 0),
+    (str(_REPO_FONTS / "Pretendard-Medium.otf"), 0),
+    (str(_REPO_FONTS / "Pretendard-Regular.otf"), 0),
+    *_BOLD_CANDIDATES,
+]
+
+_CANDIDATES = {
+    "bold": _BOLD_CANDIDATES,
+    "regular": _REGULAR_CANDIDATES,
+    "display": _DISPLAY_CANDIDATES,
+    "modern": _MODERN_CANDIDATES,
+}
 
 
 @lru_cache(maxsize=4)
@@ -47,7 +63,16 @@ def _resolve(kind: str) -> tuple[str, int]:
     raise RuntimeError("한글 폰트를 찾을 수 없음 (맑은 고딕 / Apple SD Gothic Neo / 나눔고딕)")
 
 
-def load_font(size: int, bold: bool = True, display: bool = False) -> ImageFont.FreeTypeFont:
-    kind = "display" if display else ("bold" if bold else "regular")
+def load_font(
+    size: int, bold: bool = True, display: bool = False, modern: bool = False
+) -> ImageFont.FreeTypeFont:
+    if modern:
+        kind = "modern"
+    elif display:
+        kind = "display"
+    elif bold:
+        kind = "bold"
+    else:
+        kind = "regular"
     path, index = _resolve(kind)
     return ImageFont.truetype(path, size, index=index)
