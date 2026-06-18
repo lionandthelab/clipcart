@@ -142,3 +142,15 @@ def test_weak_stats_are_not_woven_into_script():
     assert "78%" not in result["narration"]
     assert "만족도" not in result["narration"]
     assert result["emphasis"] == "멀티탭 정리함"  # 제품명 유지(썸네일 프레임)
+
+
+def test_two_voice_pattern_applies_to_promo_not_only_story():
+    # 운영자 지시(2026-06-19): 나레이션+증언 두 보이스 패턴을 일반(promo)에도 적용
+    # (이제 템플릿 무관 — story 게이트 제거)
+    beats = build_beats(_product())
+    voices = {b["role"]: b.get("voice") for b in beats}
+    assert voices["problem"] == "testimony"
+    assert voices["result"] == "testimony"
+    # 훅/제품/CTA는 메인 나레이션(증언 아님)
+    assert voices.get("hook") in (None, "main")
+    assert voices.get("cta") in (None, "main")

@@ -16,7 +16,6 @@ from clipcart.video.compliance import sanitize_text
 from clipcart.video.promo.broll import get_broll
 from clipcart.video.promo.pricing import parse_pack, unit_phrase
 from clipcart.video.promo.script import pick_script_style, render_line
-from clipcart.video.promo.template import is_story
 
 
 # 카테고리별 제품 화보샷 배경 (제품은 그대로, 배경/구도만 촬영한 듯하게).
@@ -235,12 +234,13 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
     ]
     # 고지는 시작·끝 화면 자막 + 설명란으로 충족 — cta에 구두 '광고예요'는 넣지 않는다.
 
-    # story 멀티보이스: 공감·체감 라인(problem 불편 / result 변화)을 증언 보이스로.
-    # 일반·관찰 화법 그대로라 허위후기 아님 — 가짜 후기 표현은 컴플라이언스가 차단.
-    if is_story():
-        for b in beats:
-            if b["role"] in ("problem", "result"):
-                b["voice"] = "testimony"
+    # 두 여성 목소리(나레이션 + 증언) — 공감·체감 라인(problem 불편 / result 변화)을
+    # 증언 보이스로(운영자 지시 2026-06-19: 일반 promo에도 적용). 일반·관찰 화법
+    # 그대로라 허위후기 아님 — 가짜 후기 표현은 컴플라이언스가 차단. 증언 보이스가
+    # 미설정(env)이면 메인으로 폴백돼 단일 보이스로 동작한다.
+    for b in beats:
+        if b["role"] in ("problem", "result"):
+            b["voice"] = "testimony"
 
     # 금지어 정화 — 상품명/니치에 섞인 과장어로 게시 차단되는 것 방지(고지는 보존)
     for b in beats:
