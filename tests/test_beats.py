@@ -100,11 +100,12 @@ def test_switch_narration_references_old_way_naturally():
         assert banned not in switch["narration"]
 
 
-def test_switch_scene_is_candid_without_people():
+def test_switch_scene_shows_product_or_usage():
+    # 전환은 거부감 대신 제품/사용 모습으로(운영자 지시 2026-06-19)
     beats = build_beats(_product())
     switch = next(b for b in beats if b["role"] == "switch")
-    assert switch["source"].startswith("gemini:")
-    assert "no people" in switch["source"]
+    blob = (switch.get("source", "") + " " + " ".join(switch.get("shots") or [])).lower()
+    assert any(k in blob for k in ("product", "use"))
 
 
 def test_big_discount_pops_in_product_beat():

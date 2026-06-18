@@ -55,3 +55,22 @@ def test_all_styles_render_every_variable_line():
             assert "{" not in out and out.strip()
         # 강조어는 전환 내레이션 안에 실제로 등장해야 슬램 타이밍이 맞는다
         assert style["switch_emphasis"] in render_line(style["switch"], **ctx)
+
+
+def test_cta_no_longer_points_out_downside():
+    # 운영자 지시(2026-06-19): 단점 짚는 부분은 앞으로의 패턴에서 제거
+    for style in SCRIPT_STYLES:
+        assert "{downside}" not in style["cta"]
+        assert "단점" not in style["cta"]
+
+
+def test_beats_cta_drops_downside_text():
+    from clipcart.research.niches import NICHES
+    from clipcart.video.promo.beats import build_beats
+
+    niche = next(n for n in NICHES if n["keyword"] == "배수구 거름망 스테인리스")
+    product = {"product_id": "CPX", "price": 8900, "niche": niche, "product_name": "x",
+               "display_name": niche["title_keyword"], "source": "coupang", "is_rocket": True}
+    cta = next(b for b in build_beats(product) if b["role"] == "cta")
+    assert niche["downside"] not in cta["narration"]
+    assert "단점" not in cta["narration"]
