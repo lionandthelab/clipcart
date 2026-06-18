@@ -2560,5 +2560,59 @@
     "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010520552273.mp4",
     "post_url": "https://www.youtube.com/shorts/tEydXf9Cw0A"
+  },
+  {
+    "product_id": "AE1005011799916197",
+    "aliexpress_product_id": "1005011799916197",
+    "created_at": "2026-06-18",
+    "status": "PUBLISHED",
+    "product_name": "벽걸이형 와이파이 공유기 선반 무타공 TV 박스 거치대 멀티탭 정리함 모뎀 브래킷 수납 선반 홈용 후크 포함",
+    "display_name": "멀티탭 정리함",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005011799916197.html?pdp_npi=6%40dis%21KRW%215920%212960%21%21%2125.52%2112.76%21%402140d36217817732101225264e100a%2112000056600556361%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3prOtHn",
+    "price": 2960,
+    "original_price": 5920,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S2ee35e01b0a34978a3444a85ca1911fbd.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2ee35e01b0a34978a3444a85ca1911fbd.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S661d6887a44c480a9ba7b1f6d2b53966U.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S44f02d25762a408188cd8ef48ee2e3a0q.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S97cfd98a1fa844beb616c126bb28434fk.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc2856e085aca4e0ebe4e6bf094c7bcefk.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7ec1435a05f64d0eb4ad23f56f0617e1g.jpg"
+    ],
+    "video_url": "",
+    "rating": 78.0,
+    "review_count": 96,
+    "score": 88,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "멀티탭 정리함",
+      "category": "정리/수납",
+      "title_keyword": "멀티탭 정리함",
+      "old_way": "바닥 멀티탭 먼지 방치",
+      "hook": "바닥에 굴러다니는 멀티탭, 위험해 보이지 않나요?",
+      "problem": "멀티탭이 바닥에 그대로 있으면 먼지가 쌓이고 발에 걸리고, 보기에도 지저분하죠.",
+      "usage": "멀티탭을 통째로 넣고 선만 빼면 됩니다. 뚜껑을 덮으면 먼지도 차단.",
+      "benefit": "바닥이 깔끔해지고 먼지 쌓임도 줄어듭니다.",
+      "downside": "대형 멀티탭은 안 들어갈 수 있어 내부 치수 확인이 필요합니다",
+      "target": "책상 밑 멀티탭이 거슬리는 사람"
+    },
+    "problem": "멀티탭이 바닥에 그대로 있으면 먼지가 쌓이고 발에 걸리고, 보기에도 지저분하죠.",
+    "video_angle": "바닥에 굴러다니는 멀티탭, 위험해 보이지 않나요?",
+    "known_downside": "대형 멀티탭은 안 들어갈 수 있어 내부 치수 확인이 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011799916197.mp4",
+    "post_url": "https://www.youtube.com/shorts/xLLbPhJHgLc"
   }
 ]

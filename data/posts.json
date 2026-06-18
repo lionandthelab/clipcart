@@ -632,5 +632,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgwFMeCSEcRg7t4Apml4AaABAg"
+  },
+  {
+    "post_id": "xLLbPhJHgLc",
+    "product_id": "AE1005011799916197",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/xLLbPhJHgLc",
+    "published_at": "2026-06-18T09:03:23.136407+00:00",
+    "status": "PUBLISHED",
+    "title": "2,960원으로 끝내는 멀티탭 정리함",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3prOtHn",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgytdX0d3b2GQatB2El4AaABAg"
   }
 ]
