@@ -144,13 +144,32 @@ def test_weak_stats_are_not_woven_into_script():
     assert result["emphasis"] == "멀티탭 정리함"  # 제품명 유지(썸네일 프레임)
 
 
-def test_two_voice_pattern_applies_to_promo_not_only_story():
-    # 운영자 지시(2026-06-19): 나레이션+증언 두 보이스 패턴을 일반(promo)에도 적용
-    # (이제 템플릿 무관 — story 게이트 제거)
+def test_testimony_voice_on_review_scenes_not_problem():
+    # 운영자 지시(2026-06-19): 증언 목소리는 '리뷰 관련 씬'(체감 결과·리뷰카드 CTA)에서.
+    # 문제 장면은 메인 나레이션.
     beats = build_beats(_product())
     voices = {b["role"]: b.get("voice") for b in beats}
-    assert voices["problem"] == "testimony"
     assert voices["result"] == "testimony"
-    # 훅/제품/CTA는 메인 나레이션(증언 아님)
+    assert voices["cta"] == "testimony"
+    assert voices.get("problem") in (None, "main")
     assert voices.get("hook") in (None, "main")
-    assert voices.get("cta") in (None, "main")
+
+
+def test_model_template_injects_model_clips_at_start_and_middle(monkeypatch):
+    # 운영자 지시(2026-06-19): 깜빡이는 몽타주 대신 기존 promo 구성에 모델 영상을
+    # 처음(hook)·중간(usage)에만 끼워넣는다.
+    import clipcart.video.promo.beats as bmod
+    monkeypatch.setattr(bmod, "is_model", lambda: True)
+    beats = build_beats(_product())
+    hook = next(b for b in beats if b["role"] == "hook")
+    usage = next(b for b in beats if b["role"] == "usage")
+    assert hook["source"] == "modelclip:0"
+    assert (usage.get("shots") or [])[0] == "modelclip:1"
+
+
+def test_promo_has_no_model_clip_tokens(monkeypatch):
+    import clipcart.video.promo.beats as bmod
+    monkeypatch.setattr(bmod, "is_model", lambda: False)
+    beats = build_beats(_product())
+    blob = " ".join((b.get("source", "") + " " + " ".join(b.get("shots") or [])) for b in beats)
+    assert "modelclip" not in blob
