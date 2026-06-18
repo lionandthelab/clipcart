@@ -27,64 +27,70 @@ from clipcart.video.profile import load_profile
 from clipcart.research.auto_select import short_product_name
 from clipcart.video.promo.pricing import parse_pack, unit_phrase
 
-# 일관된 광고 모델 페르소나 — 매 컷 동일 인물이 나오도록 고정 묘사.
+# 페르소나 — 30대 후반의 우아한 여성이 '가정일을 우아하게' 하는 모습(운영자 지시
+# 2026-06-19: 생활용품에 어울리게). 매 컷 동일 인물이 나오도록 고정 묘사.
 PERSONA = (
-    "a strikingly elegant Korean woman in her late twenties, clean natural glam makeup, "
-    "soft modern beauty-commercial aesthetic, tasteful minimalist outfit"
+    "an elegant, graceful Korean woman in her late thirties, refined and classy, warm "
+    "tasteful styling, doing household chores beautifully and effortlessly"
 )
 
 
 def _gen_prompt(scene_desc: str) -> str:
-    """인물+제품 생성 프롬프트. 제품은 입력 사진과 동일하게, 인물은 페르소나 고정."""
+    """인물+제품 생성 프롬프트. 제품은 입력 사진과 동일하게, 인물은 '사용하는 모습'."""
     return (
-        f"High-end vertical beauty/product commercial still. {PERSONA}, {scene_desc}. "
-        "She presents the product shown in the reference photo. Keep the product "
-        "COMPLETELY IDENTICAL to the reference — same shape, colors, logos and printing; "
-        "do not redesign or beautify the product itself. Modern cool editorial lighting, "
-        "a beautiful flattering camera angle, shallow depth of field, premium minimalist "
-        "set, photorealistic. Vertical 9:16. No text, no captions, no watermark."
+        f"High-end vertical lifestyle commercial still. {PERSONA}, {scene_desc}. "
+        "She uses the product shown in the reference photo as a natural part of the scene. "
+        "Keep the product COMPLETELY IDENTICAL to the reference — same shape, colors, logos "
+        "and printing; do not redesign or beautify the product itself. Warm modern elegant "
+        "editorial lighting, a beautiful flattering camera angle, shallow depth of field, "
+        "premium tasteful Korean home, photorealistic. Vertical 9:16. No text, no captions, "
+        "no watermark."
     )
 
 
 def model_scenes(product: dict[str, Any]) -> list[dict[str, str]]:
-    """3개 장면(hero/lifestyle/closing) 계획. 순수 함수(생성 호출 없음)."""
+    """3개 장면(hero/explain/closing) 계획. 인물이 제품을 '쓰는 모습' 위주 + 제품 설명
+    유지. 순수 함수(생성 호출 없음)."""
     niche = product["niche"]
     name = short_product_name(product)
     price = int(product.get("price") or 0)
     cnt, _unit = parse_pack(product.get("product_name", ""))
     up = unit_phrase(price, cnt)
     price_line = f"{name}, {up}." if up else f"{name}, {price:,}원."
+    benefit = sanitize_text(niche.get("benefit", ""))
+    if len(benefit) > 62:
+        benefit = benefit[:60].rstrip() + "…"
 
     return [
         {
             "role": "hero",
             "gen": _gen_prompt(
-                "holding and presenting the product toward the camera, confident soft "
-                "smile, looking at camera"
+                "gracefully using the product to do a household task, hands and product in "
+                "focus, candid editorial side angle, not looking at the camera"
             ),
             "motion": (
-                "slow elegant push-in, she gently turns the product toward camera, hair "
-                "and fabric move softly, the product stays identical, no text"
+                "natural mid-action motion of her hands using the product, soft slow "
+                "camera move, the product stays identical, no text"
             ),
             "narration": sanitize_text(niche["hook"]),
         },
         {
-            "role": "lifestyle",
+            "role": "explain",
             "gen": _gen_prompt(
-                "using the product naturally in a bright modern 2020s Korean apartment, "
-                "candid editorial three-quarter angle"
+                "mid-action using the product in a bright modern 2020s Korean apartment, "
+                "calm elegant three-quarter angle, the product clearly visible in use"
             ),
             "motion": (
-                "smooth slow dolly around her as she uses the product, cinematic, the "
-                "product stays identical, no text"
+                "smooth slow dolly as she keeps using the product, cinematic, the product "
+                "stays identical, no text"
             ),
-            "narration": "",  # 비주얼 순간(무음) — 말 적게
+            "narration": benefit,  # 제품 설명/가치 — 유지(운영자 지시)
         },
         {
             "role": "closing",
             "gen": _gen_prompt(
-                "presenting the product close to camera at a beautiful three-quarter "
-                "angle, the product in sharp focus"
+                "holding the product at a beautiful three-quarter angle after finishing "
+                "the task, serene satisfied mood, the product in sharp focus"
             ),
             "motion": (
                 "slow zoom toward the product in her hands, soft focus pull, the product "
@@ -195,19 +201,70 @@ def _disclosure_png(text: str) -> np.ndarray:
     return np.array(img)
 
 
+def _video_window(path: str, start: float, dur: float):
+    """모델 사용 영상에서 [start, start+dur] 구간을 풀블리드로 잘라낸다."""
+    from moviepy import VideoFileClip, vfx
+
+    clip = VideoFileClip(path).without_audio()
+    cd = float(clip.duration or dur)
+    if cd >= dur:
+        s = min(max(start, 0.0), max(cd - dur, 0.0))
+        sub = clip.subclipped(s, s + dur)
+    else:
+        sub = clip.with_effects([vfx.Loop(duration=dur)])
+    sw = max(W / sub.w, H / sub.h)
+    nw, nh = max(W, int(sub.w * sw)), max(H, int(sub.h * sw))
+    return sub.with_effects(
+        [vfx.Resize(new_size=(nw, nh)), vfx.Crop(x_center=nw // 2, y_center=nh // 2, width=W, height=H)]
+    ).with_duration(dur)
+
+
+# 몽타주 컷 길이 — '잠깐씩 1~2초'(운영자 지시 2026-06-19). 하드컷으로 리드미컬하게.
+MODEL_CUT = 1.9
+PROD_CUT = 1.6
+MONTAGE_TARGET = 15.6  # 컴플라이언스 최소 15초 + 아웃트로 여유
+
+
+def _montage_plan(model_clips: list[tuple[str, str]], product_img_path: str) -> list[tuple]:
+    """모델 사용 컷과 제품 컷을 번갈아 배치. 모델 영상은 구간을 옮겨가며 다른 부분을 쓴다."""
+    cuts: list[tuple] = []
+    t, mi = 0.0, 0
+    offsets: dict[int, float] = {}
+    use_model = bool(model_clips)
+    while t < MONTAGE_TARGET:
+        if use_model and model_clips:
+            path, kind = model_clips[mi % len(model_clips)]
+            ci = mi % len(model_clips)
+            if kind == "video":
+                off = offsets.get(ci, 0.0)
+                cuts.append(("video", path, off, MODEL_CUT))
+                offsets[ci] = off + MODEL_CUT + 0.4
+            else:
+                cuts.append(("image", path, 0.0, MODEL_CUT))
+            mi += 1
+            t += MODEL_CUT
+        else:
+            cuts.append(("image", product_img_path, 0.0, PROD_CUT))
+            t += PROD_CUT
+        use_model = not use_model
+    return cuts
+
+
 def render_model(
     scenes: list[dict[str, str]],
-    clips: list[tuple[str, str]],
+    model_clips: list[tuple[str, str]],
+    product_img_path: str,
     out_path: str,
     *,
     disclosure: str,
     fps: int = 30,
     end_card_dur: float = 1.2,
 ) -> Path:
-    """풀블리드 모델 광고 합성: 장면 클립 이어붙임 + 최소 자막 + 시작/끝 고지 + 로고."""
+    """풀블리드 모델 광고: 사용 모습 짧은 컷 + 제품 컷을 번갈아(하드컷 몽타주),
+    그 위에 최소 내레이션(훅·설명·가격) + 시작/끝 고지 + 로고 아웃트로."""
     from moviepy import (
         AudioFileClip, ColorClip, CompositeAudioClip, CompositeVideoClip,
-        concatenate_videoclips, vfx,
+        concatenate_videoclips,
     )
 
     from clipcart.config import PROJECT_ROOT
@@ -215,37 +272,41 @@ def render_model(
     from clipcart.video.promo import tts_typecast
     from clipcart.video.promo.editor import _ad_badge_png, _logo_overlay, _mix_sfx, _overlay
 
-    media_segs, overlays, audio_segs, sfx_cues = [], [], [], []
+    cuts = _montage_plan(model_clips, product_img_path)
+    media_segs, sfx_cues = [], []
     t = 0.0
-    for i, ((path, kind), scene) in enumerate(zip(clips, scenes)):
-        seg = _fullbleed_clip(path, kind, SCENE_DUR).with_effects(
-            [vfx.CrossFadeIn(0.3)] if i else []
-        )
+    for c in cuts:
+        seg = _video_window(c[1], c[2], c[3]) if c[0] == "video" else _fullbleed_clip(c[1], "image", c[3])
         media_segs.append(seg)
-        # 최소 내레이션 — 있는 장면만 TTS, 모던 하단 자막
-        narr = scene.get("narration", "").strip()
-        if narr:
-            apath, adur = tts_typecast.synth_or_edge(narr, "cta")
-            audio_segs.append(AudioFileClip(str(apath)).with_start(t + 0.2))
-            overlays.append(_overlay(_lower_third_png(narr), t + 0.2, min(SCENE_DUR - 0.2, adur + 1.2), fi=0.25, fo=0.3))
-        if i:
-            sfx_cues.append((sfx.whoosh(), t, 0.3))
-        t += SCENE_DUR
-
-    total_narr = t
-    total = t + end_card_dur
-
-    bg = ColorClip((W, H), color=(8, 8, 10), duration=total)
+        if t > 0:
+            sfx_cues.append((sfx.whoosh(), t, 0.22))  # 컷 전환 리듬
+        t += c[3]
+    montage_dur = t
     media = concatenate_videoclips(media_segs, method="chain").with_start(0)
-    # 시작·끝 고지 베이크(공정위 시작/끝 표시)
-    disc_start = _overlay(_disclosure_png(disclosure), 0.0, min(3.0, SCENE_DUR), fi=0.2, fo=0.3)
-    disc_end = _overlay(_disclosure_png(disclosure), max(0.0, total_narr - 3.0), 3.0, fi=0.3, fo=0.2)
+
+    # 내레이션(훅→설명→가격) 순차 — 인물이 '쓰는 모습' 위에 얹어 립싱크 불일치 없음
+    overlays, audio_segs = [], []
+    at = 0.4
+    for scene in scenes:
+        narr = (scene.get("narration") or "").strip()
+        if not narr or at >= montage_dur - 0.5:
+            continue
+        apath, adur = tts_typecast.synth_or_edge(narr, "cta")
+        audio_segs.append(AudioFileClip(str(apath)).with_start(at))
+        cap_dur = min(adur + 0.8, montage_dur - at)
+        overlays.append(_overlay(_lower_third_png(narr), at, max(0.6, cap_dur), fi=0.2, fo=0.3))
+        at += adur + 0.5
+
+    total = montage_dur + end_card_dur
+    bg = ColorClip((W, H), color=(8, 8, 10), duration=total)
+    disc_start = _overlay(_disclosure_png(disclosure), 0.0, 3.0, fi=0.2, fo=0.3)
+    disc_end = _overlay(_disclosure_png(disclosure), max(0.0, montage_dur - 3.0), 3.0, fi=0.3, fo=0.2)
     ad_badge = _overlay(_ad_badge_png(), 0.0, total, fi=0.0, fo=0.0)
 
     layers = [bg, media, *overlays, disc_start, disc_end, ad_badge]
     logo = PROJECT_ROOT / "logo.png"
     if logo.exists():
-        layers.append(_logo_overlay(str(logo), total_narr + 0.1, end_card_dur - 0.2))
+        layers.append(_logo_overlay(str(logo), montage_dur + 0.1, end_card_dur - 0.2))
 
     final = CompositeVideoClip(layers, size=(W, H)).with_duration(total).with_fps(fps)
     if audio_segs:
@@ -290,24 +351,26 @@ def make_model_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
     product_img = fetch_image(product["image_url"])
     product_img.save(product_png, "PNG")
 
-    # 장면별: 인물+제품 생성(제품 + 직전 hero 컷을 레퍼런스로) → Kling 모션 → 클립
-    clips: list[tuple[str, str]] = []
+    # 장면별: 인물이 제품 쓰는 모습 생성(제품 + 직전 hero 컷 레퍼런스로 일관성) →
+    # Kling 모션 → 모델 사용 클립. 이 클립들을 몽타주에서 짧게 잘라 쓴다.
+    model_clips: list[tuple[str, str]] = []
     hero_ref: str | None = None
     hero_still_img = product_img
-    for i, scene in enumerate(scenes):
+    for scene in scenes:
         refs = [str(product_png)] + ([hero_ref] if hero_ref else [])
         still = sources.openrouter_compose(scene["gen"], refs, f"model|{pid}|{scene['role']}")
         if not still:
-            # 생성 실패 — 제품컷으로라도 풀블리드(켄번스) 진행(soft-fail)
-            clips.append((str(product_png), "image"))
-            continue
+            continue  # 생성 실패분은 건너뜀(몽타주가 제품 컷으로 채움)
         if hero_ref is None:
             hero_ref = still  # 첫 인물 컷을 이후 장면 일관성 레퍼런스로
             hero_still_img = Image.open(still).convert("RGB")
         motion = kling.animate(still, scene["motion"], duration=SCENE_DUR)
-        clips.append((motion, "video") if motion else (still, "image"))
+        model_clips.append((motion, "video") if motion else (still, "image"))
 
-    render_model(scenes, clips, str(video_path), disclosure=disclosure_for(product))
+    render_model(
+        scenes, model_clips, str(product_png), str(video_path),
+        disclosure=disclosure_for(product),
+    )
 
     # 썸네일 — hero 컷(인물+제품)으로 흥행 훅 텍스트
     compose_thumbnail(
