@@ -404,8 +404,9 @@ def _subtitle_png(text: str) -> np.ndarray:
     pad_x, pad_y = 52, 26
     bw, bh = text_w + pad_x * 2, text_h + pad_y * 2
     bx0 = (W - bw) // 2
-    # 자막은 상단 밴드(이전 제목 자리). 좌상단 '광고' 뱃지(y~110)는 피해 아래 정렬.
-    by0 = 120 + ((TOP_H - 120) - bh) // 2
+    # 자막을 화면 위에서 ~20% 지점에 배치 — 맨 위는 가독성이 떨어진다(운영자 지시
+    # 2026-06-19). 미디어 위로 칩 배경이 깔려 대비가 확보된다.
+    by0 = int(0.20 * H) - bh // 2
 
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
