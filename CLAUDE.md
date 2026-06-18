@@ -121,7 +121,7 @@ API로 불가능해 사람이 해야 하는 것:
 * 과장 없이
 * 실무형
 * 광고 냄새 줄이기
-* 단점 1개 포함
+* 긍정적이고 보기 좋은 톤 — **영상에서 단점을 굳이 짚지 않는다** (2026-06-19 운영자 지시). 거부감 대신 제품·사용 모습을 더 보여준다. 단, 과장·허위·효과 보장은 여전히 금지.
 * "무조건 사세요" 금지
 
 ---
@@ -271,7 +271,6 @@ PREPARE TOPVIEW P001
     "문제 장면",
     "제품 사용 장면",
     "결과 장면",
-    "단점 1개",
     "affiliate 고지"
   ],
   "must_avoid": [
@@ -350,7 +349,7 @@ VIDEO READY P001 path=/inbox/videos/P001.mp4
     "hashtags": ["#청소템", "#생활꿀템", "#살림템", "#자취템"]
   },
   "tiktok": {
-    "caption": "창틀 청소 아직도 물티슈로 하세요? 단점까지 보고 사세요. affiliate 링크 포함 #청소템 #생활꿀템 #살림템",
+    "caption": "창틀 청소 아직도 물티슈로 하세요? 이거 하나면 끝. affiliate 링크 포함 #청소템 #생활꿀템 #살림템",
     "hashtags": ["#청소템", "#생활꿀템", "#살림템"]
   },
   "pinned_comment": "제품 링크는 프로필에 정리해뒀습니다. affiliate 링크가 포함되어 있으며 구매 시 일정 수수료를 받을 수 있습니다.",
@@ -611,14 +610,13 @@ P001 창틀 청소 브러시 성과 좋음
 
 ### 캡션
 
-항상 아래 요소를 포함한다.
+항상 아래 요소를 포함한다. (2026-06-19 운영자 지시로 '단점'은 제외 — 긍정적 톤)
 
 1. 문제 상황
 2. 추천 대상
 3. 장점
-4. 단점
-5. 링크 안내
-6. affiliate 고지
+4. 링크 안내
+5. affiliate 고지
 
 ### 필수 고지
 
@@ -658,7 +656,6 @@ P001 창틀 청소 브러시 성과 좋음
 - Before/After 구조
 - 한국어 자막
 - 한국어 자연스러운 내레이션
-- 단점 1개 포함
 - affiliate 고지 포함
 
 구성:
@@ -666,7 +663,7 @@ P001 창틀 청소 브러시 성과 좋음
 4~8초: 제품 등장
 9~20초: {usage_scene}
 21~26초: {after_scene}
-27~30초: {known_downside} + 제품 링크는 프로필
+27~30초: 제품 링크는 프로필
 
 금지:
 - 무조건
@@ -696,7 +693,6 @@ Style:
 - before and after structure
 - Korean subtitles
 - natural Korean voiceover
-- include one downside
 - include affiliate disclosure
 
 Structure:
@@ -704,7 +700,7 @@ Structure:
 4-8s: introduce the product
 9-20s: {usage_scene}
 21-26s: {after_scene}
-27-30s: {known_downside} + CTA
+27-30s: product link in profile + CTA
 
 Avoid:
 - guaranteed claims
