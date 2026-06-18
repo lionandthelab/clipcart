@@ -71,10 +71,23 @@ def _color(name: str):
 # Sourcing
 # --------------------------------------------------------------------------- #
 def _try_one(pex, token: str, index: int, product_img_path: str = "",
-             images: list[str] | None = None, video: str | None = None) -> tuple[str | None, str | None]:
+             images: list[str] | None = None, video: str | None = None,
+             model_clips: list[str] | None = None) -> tuple[str | None, str | None]:
     """단일 source 토큰 시도 → (path, kind) 또는 (None, None)."""
     if token == "product":
         return None, None  # product는 호출부에서 최종 폴백으로만
+    if token.startswith("modelclip:"):
+        # 미모 모델이 제품 쓰는 클립(N번째). 일반 영상처럼 3단 미디어 밴드에 들어간다.
+        try:
+            idx = int(token[len("modelclip:"):] or 0)
+        except ValueError:
+            idx = 0
+        mc = model_clips or []
+        if 0 <= idx < len(mc) and mc[idx] and Path(mc[idx]).exists():
+            # Kling 모션이면 영상, 정지컷(생성만 됨)이면 이미지로 켄번스
+            kind = "video" if str(mc[idx]).lower().endswith((".mp4", ".mov", ".webm")) else "image"
+            return mc[idx], kind
+        return None, None
     if token.startswith("productimg:"):
         # 실제 리스팅 사진 갤러리의 N번째. 없으면 None(다음 폴백으로).
         try:
@@ -133,12 +146,13 @@ def _try_one(pex, token: str, index: int, product_img_path: str = "",
 
 
 def _resolve_media(pex, tokens: list[str], product_img_path: str, index: int,
-                   images: list[str] | None = None, video: str | None = None) -> tuple[str, str]:
+                   images: list[str] | None = None, video: str | None = None,
+                   model_clips: list[str] | None = None) -> tuple[str, str]:
     """후보 토큰 순서대로 시도, 모두 실패 시 제품 이미지."""
     for tok in tokens:
         if tok == "product":
             return product_img_path, "product"
-        p, k = _try_one(pex, tok, index, product_img_path, images, video)
+        p, k = _try_one(pex, tok, index, product_img_path, images, video, model_clips)
         if p:
             return p, k
     return product_img_path, "product"
@@ -532,6 +546,7 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     pm = product_media or {}
     images = [p for p in (pm.get("images") or []) if p] or [product_img_path]
     video = pm.get("video")
+    model_clips = [p for p in (pm.get("model_clips") or []) if p]  # 모델 사용 클립(처음·중간)
     seller = None
     if video and Path(video).exists():
         try:
@@ -588,14 +603,14 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             sub_clips = []
             for si in range(n):
                 tokens = [shots[si]] + ([b["fallback"]] if b.get("fallback") else [])
-                path, kind = _resolve_media(pex, tokens, product_img_path, si, images, video)
+                path, kind = _resolve_media(pex, tokens, product_img_path, si, images, video, model_clips)
                 sub_clips.append(make_clip(path, kind, sub_dur))
                 if si > 0 and not STORY:
                     sfx_cues.append((sfx.whoosh(), t + si * sub_dur, 0.35))
             media_segs.append(concatenate_videoclips(sub_clips, method="chain").with_duration(beat_dur))
         else:
             tokens = [b["source"]] + ([b["fallback"]] if b.get("fallback") else [])
-            path, kind = _resolve_media(pex, tokens, product_img_path, 0, images, video)
+            path, kind = _resolve_media(pex, tokens, product_img_path, 0, images, video, model_clips)
             media_segs.append(make_clip(path, kind, beat_dur))
 
         # SFX: whoosh on cut, impact on hook/emphasis (story는 부드러운 톤 — 생략)
