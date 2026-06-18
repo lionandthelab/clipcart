@@ -31,16 +31,19 @@ def _product(name="확장형 스텐 빨래건조대", price=39000, bundle=False)
 
 def test_three_scenes_with_expected_roles():
     scenes = model_scenes(_product())
-    assert [s["role"] for s in scenes] == ["hero", "lifestyle", "closing"]
+    assert [s["role"] for s in scenes] == ["hero", "explain", "closing"]
 
 
-def test_gen_prompts_enforce_persona_and_product_consistency():
+def test_gen_prompts_show_woman_using_product_for_housework():
     for s in model_scenes(_product()):
         g = s["gen"].lower()
         assert "woman" in g                      # 미모 여성
+        assert "late thirties" in g              # 30대 후반(운영자 지시 2026-06-19)
         assert "identical" in g                  # 제품 일관성
         assert "9:16" in s["gen"]                # 세로
         assert "no text" in g                    # 자막/워터마크 금지(자막은 우리가 얹음)
+    # hero/explain은 '사용하는 모습'(정적 토킹헤드 아님)
+    assert "use" in model_scenes(_product())[0]["gen"].lower()
 
 
 def test_motion_prompt_keeps_product_identical():
@@ -48,14 +51,15 @@ def test_motion_prompt_keeps_product_identical():
         assert "identical" in s["motion"].lower()
 
 
-def test_narration_is_minimal_and_purposeful():
+def test_narration_keeps_product_explanation_and_cta():
     scenes = model_scenes(_product())
     narr = {s["role"]: s["narration"] for s in scenes}
     assert narr["hero"] == "빨래 건조대, 자꾸 휘청거리고 모자라죠?"  # 훅
-    assert narr["lifestyle"] == ""  # 비주얼 순간(무음)
+    assert narr["explain"].strip()                # 제품 설명 유지(빈 줄 아님)
     assert "프로필 링크" in narr["closing"]
-    # 말 적게: 비어있지 않은 내레이션은 2개 이하
-    assert sum(1 for v in narr.values() if v.strip()) <= 2
+    # 말 적게: 각 줄은 짧게
+    for v in narr.values():
+        assert len(v) <= 70
 
 
 def test_closing_uses_price_and_per_unit_for_bundle():
@@ -87,3 +91,25 @@ def test_compliance_scenes_pass_gate():
     assert check_texts(creative) == []
     assert creative["scenes"][0]["disclosure"] == disclosure_for(product)
     assert creative["scenes"][-1]["disclosure"] == disclosure_for(product)
+
+
+def test_montage_plan_alternates_and_fills_min_length():
+    from clipcart.video.promo.model import _montage_plan, MONTAGE_TARGET
+
+    model_clips = [("a.mp4", "video"), ("b.mp4", "video")]
+    cuts = _montage_plan(model_clips, "product.png")
+    assert sum(c[3] for c in cuts) >= 15.0  # 컴플라이언스 최소 길이 충족
+    kinds = [c[0] for c in cuts]
+    # 모델 컷과 제품 컷이 번갈아 — 같은 종류가 연속 3개 이상이면 안 됨
+    assert not any(kinds[i] == kinds[i+1] == kinds[i+2] for i in range(len(kinds)-2))
+    # 모델 영상은 구간 오프셋이 옮겨가며(같은 부분 반복 방지)
+    a_offsets = [c[2] for c in cuts if c[0] == "video" and c[1] == "a.mp4"]
+    assert a_offsets == sorted(a_offsets) and len(set(a_offsets)) == len(a_offsets)
+
+
+def test_montage_plan_product_only_when_no_model_clips():
+    from clipcart.video.promo.model import _montage_plan
+
+    cuts = _montage_plan([], "product.png")
+    assert cuts and all(c[0] == "image" and c[1] == "product.png" for c in cuts)
+    assert sum(c[3] for c in cuts) >= 15.0
