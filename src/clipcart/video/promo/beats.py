@@ -72,24 +72,17 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
 
     rocket_line = "심지어 로켓배송이라 내일 와요." if rocket else "가격도 부담 없죠."
 
-    # 공감용 문제 장면 — AI티 방지: 사람/손 없이 배경·상황만 실사 폰카풍.
-    # 2020년대 신축 한국 아파트 배경으로 고정해 '요즘 우리 집' 공감을 만든다.
+    # 공감 장면 — 거부감 대신 '요즘 우리 집'의 사소한 불편을 밝고 깔끔하게(운영자
+    # 지시 2026-06-19: 더러움 강조 금지). 사람/손 없이 상황만, 밝은 톤.
     empathy = (
-        f"{br['pain']}, close-up of the messy frustrating situation itself in a modern "
-        f"2020s Korean apartment, grimy buildup and clutter clearly visible, no people, no hands"
+        f"the everyday spot related to '{br['pain']}' in a bright tidy modern 2020s "
+        f"Korean apartment, clean and relatable, pleasant natural light, no people, no hands"
     )
 
     # 실사용 컨텍스트 화보샷 — 실제 쓰이는 자리에 놓인 모습
     in_use_scene = (
         f"placed where it is actually used in a modern 2020s Korean home ({scenes[0]}), "
         f"natural daily-life context"
-    )
-
-    # 전환 장면: 기존 방식의 도구들이 방치된 모습 (실망의 흔적, 사람 없음)
-    switch_scene = (
-        f"worn-out old tools and failed makeshift solutions related to "
-        f"'{br['pain']}', abandoned in a modern 2020s Korean apartment, the problem still unsolved, "
-        f"no people, no hands"
     )
 
     review_card = product.get("review_card_path")
@@ -171,19 +164,23 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
             "tone": "problem",
             "narration": niche["problem"],
             "caption": niche["problem"],
-            # 문제: 공감 생성 이미지 우선(더러움/귀찮음 확실히), 미스 시 실영상
+            # 문제: 밝고 깔끔한 공감 장면(거부감 X), 미스 시 실영상
             "source": f"gemini:{empathy}",
-            "fallback": f"pexels:{br['pain']}",
+            "fallback": f"pexels:{br['use']}",
             "color": "white",
         },
         {
             "role": "switch",
             "tone": "switch",
-            # 기존 방식의 불편 → 차별화 전환 (스타일별 말투, 보장 표현 금지)
+            # 전환은 긍정적으로 — 제품이 쓰이는 모습을 보여준다(운영자 지시 2026-06-19).
             "narration": render_line(style["switch"], old_way=niche["old_way"]),
             "caption": style["switch_caption"],
-            "source": f"gemini:{switch_scene}",
-            "fallback": f"pexels:{br['pain']}",
+            **(
+                {"shots": ["productimg:0", f"pexels:{br['use']}"]}
+                if has_gallery
+                else {"source": f"productshot:{in_use_scene}"}
+            ),
+            "fallback": f"pexels:{br['use']}",
             "emphasis": style["switch_emphasis"],
             "color": "yellow",
         },
@@ -226,7 +223,8 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         {
             "role": "cta",
             "tone": "cta",
-            "narration": render_line(style["cta"], downside=niche["downside"]),
+            # 단점 짚는 부분은 제거(운영자 지시 2026-06-19) — CTA는 링크 안내만
+            "narration": render_line(style["cta"]),
             "caption": "링크는 고정 댓글에 ▼",
             # 실데이터(평점/주문수) 리뷰 요약 카드 — 신빙성. 없으면 제품컷.
             "source": f"file:{review_card}" if review_card else "product",

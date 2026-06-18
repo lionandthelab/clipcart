@@ -39,7 +39,7 @@ SCRIPT_STYLES: list[dict[str, str]] = [
         "switch_emphasis": "요즘은 이렇게",
         "usage": "쓰는 것도 어렵지 않아요. {usage}",
         "result_tail": "이 가격이면 한번 써볼 만하죠.",
-        "cta": "단점도 솔직히 있어요. {downside}. 링크는 고정 댓글에 둘게요.",
+        "cta": "마음에 들면 링크는 고정 댓글에 둘게요.",
     },
     {
         "name": "direct",  # 직설·실용
@@ -48,7 +48,7 @@ SCRIPT_STYLES: list[dict[str, str]] = [
         "switch_emphasis": "이제 안 해도 돼요",
         "usage": "방법은 간단해요. {usage}",
         "result_tail": "가격도 {price:,}원이라 부담 없고요.",
-        "cta": "물론 {downside}. 자세한 건 고정 댓글 링크에서 확인하세요.",
+        "cta": "자세한 건 고정 댓글 링크에서 확인하세요.",
     },
     {
         "name": "empathetic",  # 공감·스토리
@@ -57,7 +57,7 @@ SCRIPT_STYLES: list[dict[str, str]] = [
         "switch_emphasis": "한결 편해져요",
         "usage": "사용법도 직관적이에요. {usage}",
         "result_tail": "그 정도 값이면 충분히 합리적이죠.",
-        "cta": "아쉬운 점도 하나, {downside}. 구매 링크는 고정 댓글에 있어요.",
+        "cta": "구매 링크는 고정 댓글에 정리해 뒀어요.",
     },
     {
         # story 템플릿 전용 — '옆자리 친구가 들려주는 이야기'. 발견 화법('그러다
@@ -68,8 +68,7 @@ SCRIPT_STYLES: list[dict[str, str]] = [
         "switch_emphasis": "이런 걸 봤어요",
         "usage": "쓰는 것도 어렵지 않더라고요. {usage}",
         "result_tail": "그 작은 게 생각보다 편해요.",
-        # {downside}가 명사구든 완결 문장이든 자연스럽게 — '~는 좀 아쉬워요' 충돌 회피
-        "cta": "근데 솔직히 아쉬운 점도 있어요. {downside}. 그래도 궁금하면 링크는 고정 댓글에 둘게요.",
+        "cta": "궁금하면 링크는 고정 댓글에 둘게요.",
     },
 ]
 
