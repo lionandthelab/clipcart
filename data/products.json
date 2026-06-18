@@ -2506,5 +2506,59 @@
     "known_downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007173650980.mp4",
     "post_url": "https://www.youtube.com/shorts/W39hQuX4-3o"
+  },
+  {
+    "product_id": "AE1005010520552273",
+    "aliexpress_product_id": "1005010520552273",
+    "created_at": "2026-06-18",
+    "status": "PUBLISHED",
+    "product_name": "세면대 배수구 범용 금속 필터 밸브 팝업 배수구 배수 마개 욕조 스트레이너 플러그 머리카락 거름망 욕실 액세서리",
+    "display_name": "배수구 거름망",
+    "category": "욕실",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005010520552273.html?pdp_npi=6%40dis%21KRW%216043%212840%21%21%2126.21%2112.32%21%402140d36217817516100724983e10f1%2112000052680269786%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2u37PXT",
+    "price": 2840,
+    "original_price": 6043,
+    "discount_pct": 53,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sfcd3b804d1d04a02905a47ad8d12b50aB.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sfcd3b804d1d04a02905a47ad8d12b50aB.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S64135f811197428c8d7fa4aa761f69eb3.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8eb5fcd9252d4e40b866a51adc8aa088P.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S324fe9456232476b9662fb826271da68L.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S322b5984be2c4193a8ef6d7b20b06bed4.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sac1cd018ad9b4b72a45c5f16ce2202a4x.jpg"
+    ],
+    "video_url": "",
+    "rating": 85.0,
+    "review_count": 2659,
+    "score": 91,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "배수구 거름망 스테인리스",
+      "category": "욕실",
+      "title_keyword": "배수구 거름망",
+      "old_way": "배수구 머리카락 손으로 빼기",
+      "hook": "배수구 청소, 아직 손으로 하세요?",
+      "problem": "샤워하고 나면 배수구에 머리카락이 한가득. 손으로 빼자니 매번 곤욕이죠.",
+      "usage": "배수구 위에 올려두기만 하면 머리카락과 찌꺼기를 걸러줍니다. 가득 차면 들어서 탈탈 비우면 끝.",
+      "benefit": "손 안 대고 휴지로 한 번에 비울 수 있어서 배수구 막힘 걱정이 확 줄어요.",
+      "downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
+      "target": "배수구 머리카락 치우는 게 곤욕인 사람"
+    },
+    "problem": "샤워하고 나면 배수구에 머리카락이 한가득. 손으로 빼자니 매번 곤욕이죠.",
+    "video_angle": "배수구 청소, 아직 손으로 하세요?",
+    "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010520552273.mp4",
+    "post_url": "https://www.youtube.com/shorts/tEydXf9Cw0A"
   }
 ]

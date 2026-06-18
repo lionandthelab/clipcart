@@ -591,14 +591,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/tSV1UENh1M0",
     "published_at": "2026-06-17T17:01:50.360228+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "아직도 하수구에 컵 엎어두기? 이거 보세요",
     "title_template": "아직도 {old_way}? 이거 보세요",
     "script_style": "model",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c35j3SD3",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "UgwfHKHoMGKOWCSUOlh4AaABAg"
+    "comment_id": "UgwfHKHoMGKOWCSUOlh4AaABAg",
+    "not_live_at": "2026-06-18"
   },
   {
     "post_id": "W39hQuX4-3o",
@@ -615,5 +616,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgxbwUTYyejF_W4HuwR4AaABAg"
+  },
+  {
+    "post_id": "tEydXf9Cw0A",
+    "product_id": "AE1005010520552273",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/tEydXf9Cw0A",
+    "published_at": "2026-06-18T03:03:17.548340+00:00",
+    "status": "PUBLISHED",
+    "title": "2,840원으로 끝내는 배수구 거름망",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2u37PXT",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgwFMeCSEcRg7t4Apml4AaABAg"
   }
 ]

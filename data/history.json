@@ -604,7 +604,9 @@
     "script_style": "model",
     "post_url": "https://www.youtube.com/shorts/tSV1UENh1M0",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c35j3SD3",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-18"
   },
   {
     "date": "2026-06-18",
@@ -621,6 +623,23 @@
     "script_style": "casual",
     "post_url": "https://www.youtube.com/shorts/W39hQuX4-3o",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3RBBKpj",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-18",
+    "post_id": "tEydXf9Cw0A",
+    "product_id": "AE1005010520552273",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005010520552273",
+    "product_name": "세면대 배수구 범용 금속 필터 밸브 팝업 배수구 배수 마개 욕조 스트레이너 플러그 머리카락 거름망 욕실 액세서리",
+    "niche_keyword": "배수구 거름망 스테인리스",
+    "category": "욕실",
+    "title": "2,840원으로 끝내는 배수구 거름망",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "post_url": "https://www.youtube.com/shorts/tEydXf9Cw0A",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2u37PXT",
     "sub_id": null
   }
 ]
