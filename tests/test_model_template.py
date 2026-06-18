@@ -113,3 +113,11 @@ def test_montage_plan_product_only_when_no_model_clips():
     cuts = _montage_plan([], "product.png")
     assert cuts and all(c[0] == "image" and c[1] == "product.png" for c in cuts)
     assert sum(c[3] for c in cuts) >= 15.0
+
+
+def test_model_scenes_assign_two_voices():
+    # 모델 샘플에서도 두 목소리 — explain(제품 설명/체감)은 증언 보이스, 나머지는 메인
+    scenes = {s["role"]: s for s in model_scenes(_product())}
+    assert scenes["explain"].get("voice") == "testimony"
+    assert scenes["hero"].get("voice") in (None, "main")
+    assert scenes["closing"].get("voice") in (None, "main")

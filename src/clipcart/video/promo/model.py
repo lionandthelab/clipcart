@@ -73,6 +73,7 @@ def model_scenes(product: dict[str, Any]) -> list[dict[str, str]]:
                 "camera move, the product stays identical, no text"
             ),
             "narration": sanitize_text(niche["hook"]),
+            "voice": "main",
         },
         {
             "role": "explain",
@@ -85,6 +86,7 @@ def model_scenes(product: dict[str, Any]) -> list[dict[str, str]]:
                 "stays identical, no text"
             ),
             "narration": benefit,  # 제품 설명/가치 — 유지(운영자 지시)
+            "voice": "testimony",  # 체감/설명 라인은 증언 보이스(두 목소리)
         },
         {
             "role": "closing",
@@ -97,6 +99,7 @@ def model_scenes(product: dict[str, Any]) -> list[dict[str, str]]:
                 "stays identical, no text"
             ),
             "narration": sanitize_text(f"{price_line} 자세한 건 프로필 링크에서."),
+            "voice": "main",
         },
     ]
 
@@ -291,7 +294,7 @@ def render_model(
         narr = (scene.get("narration") or "").strip()
         if not narr or at >= montage_dur - 0.5:
             continue
-        apath, adur = tts_typecast.synth_or_edge(narr, "cta")
+        apath, adur = tts_typecast.synth_or_edge(narr, "cta", scene.get("voice", "main"))
         audio_segs.append(AudioFileClip(str(apath)).with_start(at))
         cap_dur = min(adur + 0.8, montage_dur - at)
         overlays.append(_overlay(_lower_third_png(narr), at, max(0.6, cap_dur), fi=0.2, fo=0.3))
