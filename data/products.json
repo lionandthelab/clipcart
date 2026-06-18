@@ -2847,5 +2847,47 @@
     "known_downside": "타일 외 울퉁불퉁한 벽면에서는 흡착력이 떨어질 수 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005008985580329.mp4",
     "post_url": "https://www.youtube.com/shorts/hEDhzkX5-YU"
+  },
+  {
+    "product_id": "CP8680565185",
+    "coupang_product_id": "8680565185",
+    "sub_id": "salrimshorts8680565185",
+    "created_at": "2026-06-19",
+    "status": "VIDEO_READY",
+    "product_name": "월드크린 이중 브러쉬 변기솔, 그레이, 1개",
+    "display_name": "변기 틈새 청소솔",
+    "category": "욕실",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=8680565185&itemId=25199673099&vendorItemId=92196281076&traceid=V0-153-1c292c678fa27913&clickBeacon=e416cd70-6b63-11f1-9ae1-cff96741eacb%7E3&requestid=20260619072019714084101996&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eHan9IYbhA",
+    "price": 5500,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/rXNM62mVA3rtotPrrYK1TwdeRXNq-gW97_bDHpKynoDijKnSMXGYE4C4xl3fs8XCjpgSgp82MF-VKiH0wxdpAaNXqSWxBwrEiQNX7r1vNY5h9LxiQSI8wA9pGE-YF5_opDzn_8LliuITK-NTwMRg3L545UuCjPJ2L3VCzWOYwzkm98aM5TMu4qQudV42TR1X94F3eaQlJYm8zI1nrFZ8wq03E8kKpvVYDexUL6K14yqAuXK-fG5Piuo31AKjnAc88Va9JR9cyaZESjmGeRCOEUvKteggo0SEIUm01fyIhG60ZQ==",
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "변기 틈새 청소솔 좁은",
+      "category": "욕실",
+      "title_keyword": "변기 틈새 청소솔",
+      "old_way": "일반 솔로 닿는 데만 닦기",
+      "hook": "변기 뒤쪽 틈, 한 번도 못 닦아봤다면?",
+      "problem": "변기와 바닥 사이, 뚜껑 경첩 틈은 일반 변기솔로는 닿지 않아서 때가 그대로 쌓입니다.",
+      "usage": "얇고 긴 솔이 틈새에 들어가 구석의 때를 긁어냅니다.",
+      "benefit": "안 닦이던 부분이 닦이니 욕실 냄새 관리에도 도움이 돼요.",
+      "downside": "굳은 때는 욕실 세제를 뿌려두고 닦아야 합니다",
+      "target": "욕실 청소를 해도 냄새가 남는 집"
+    },
+    "problem": "변기와 바닥 사이, 뚜껑 경첩 틈은 일반 변기솔로는 닿지 않아서 때가 그대로 쌓입니다.",
+    "video_angle": "변기 뒤쪽 틈, 한 번도 못 닦아봤다면?",
+    "known_downside": "굳은 때는 욕실 세제를 뿌려두고 닦아야 합니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8680565185.mp4"
   }
 ]
