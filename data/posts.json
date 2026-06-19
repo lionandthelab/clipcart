@@ -696,5 +696,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgzyHoL0eaR2YDXp5Al4AaABAg"
+  },
+  {
+    "post_id": "D798ih5stZU",
+    "product_id": "AE1005012323362636",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/D798ih5stZU",
+    "published_at": "2026-06-19T09:02:50.227683+00:00",
+    "status": "PUBLISHED",
+    "title": "주방 틈새 청소를 포기한 사람만 보세요",
+    "title_template": "{target}만 보세요",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4MRAgJJ",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgwPBV72LOn3Ro6OqJ54AaABAg"
   }
 ]
