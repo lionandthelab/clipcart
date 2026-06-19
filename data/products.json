@@ -2997,5 +2997,59 @@
     "known_downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012323362636.mp4",
     "post_url": "https://www.youtube.com/shorts/D798ih5stZU"
+  },
+  {
+    "product_id": "AE1005009692538146",
+    "aliexpress_product_id": "1005009692538146",
+    "created_at": "2026-06-20",
+    "status": "PUBLISHED",
+    "product_name": "고급 휴지통 침실 주방 이동식 분리수거함 고급 가정용 거실 쓰레기통 구부리지 않아도 되는 선물",
+    "display_name": "가정용 분리수거함",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009692538146.html?pdp_npi=6%40dis%21KRW%2125384%2124350%21%21%21108.68%21104.25%21%40212a7b8d17818812129845690e0e6c%2112000049871883216%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3flRH4d",
+    "price": 24350,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S05ba057ca498492fbdbe7b358c72e5adP.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S05ba057ca498492fbdbe7b358c72e5adP.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa4c40578804e41429687454b72b5ed74C.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf868ba1231c74b309a2573393f37ba43R.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9815222d6df14768bcbf2b31a2ecaa411.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf1cc9b60a8d440caa78b48b34661d8c5E.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6f98ee1c1ad449198e9559f95fe67cfb7.jpg"
+    ],
+    "video_url": "https://video.aliexpress-media.com/play/u/ae_sg_item/6000369758/p/1/e/6/t/10301/4000299798500.mp4",
+    "rating": 100.0,
+    "review_count": 19,
+    "score": 83,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 12,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "분리수거함 가정용 분리형",
+      "category": "정리/수납",
+      "title_keyword": "가정용 분리수거함",
+      "old_way": "베란다에 봉투 늘어놓기",
+      "hook": "베란다에 쓰레기 봉투 줄 세워두셨죠?",
+      "problem": "재활용 쓰레기를 봉투째 늘어놓으면 지저분하고, 버리러 갈 때마다 봉투가 터지죠.",
+      "usage": "칸별로 분류해 모았다가, 안쪽 봉투만 들어 그대로 버리러 가면 됩니다.",
+      "benefit": "베란다가 정돈되고 분리수거 가는 길이 한 번에 끝나요.",
+      "downside": "설치 공간이 필요하니 놓을 자리 치수를 먼저 재야 합니다",
+      "target": "분리수거 날마다 봉투와 씨름하는 사람"
+    },
+    "problem": "재활용 쓰레기를 봉투째 늘어놓으면 지저분하고, 버리러 갈 때마다 봉투가 터지죠.",
+    "video_angle": "베란다에 쓰레기 봉투 줄 세워두셨죠?",
+    "known_downside": "설치 공간이 필요하니 놓을 자리 치수를 먼저 재야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009692538146.mp4",
+    "post_url": "https://www.youtube.com/shorts/tW7RvLuMp5Y"
   }
 ]

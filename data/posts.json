@@ -712,5 +712,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgwPBV72LOn3Ro6OqJ54AaABAg"
+  },
+  {
+    "post_id": "tW7RvLuMp5Y",
+    "product_id": "AE1005009692538146",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/tW7RvLuMp5Y",
+    "published_at": "2026-06-19T15:03:02.706292+00:00",
+    "status": "PUBLISHED",
+    "title": "24,350원으로 끝내는 가정용 분리수거함",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3flRH4d",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgwwdEeV-TEvbj-TZ1V4AaABAg"
   }
 ]
