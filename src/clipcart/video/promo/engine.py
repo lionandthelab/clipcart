@@ -77,6 +77,7 @@ def make_promo_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
 
     hook_title = product["niche"]["hook"]
     render_promo(beats, str(product_png), str(video_path), hook_title=hook_title,
+                 header_title=creative.get("header_title", ""),
                  product_media={"images": image_paths, "video": product_video})
 
     compose_thumbnail(product_img, creative["thumbnail_line1"], creative["thumbnail_line2"],

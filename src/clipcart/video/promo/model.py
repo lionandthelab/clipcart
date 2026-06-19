@@ -161,6 +161,7 @@ def make_model_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
     hook_title = product["niche"]["hook"]
     render_promo(
         beats, str(product_png), str(video_path), hook_title=hook_title,
+        header_title=creative.get("header_title", ""),
         product_media={"images": image_paths, "video": product_video, "model_clips": model_clips},
     )
 

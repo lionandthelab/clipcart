@@ -383,8 +383,9 @@ def _korlen(s: str) -> int:
 
 # 하단 자막: 또렷한 배경 칩(검정 띠 위에서도 보이게 밝은 차콜) + 디스플레이 폰트, 가능하면 한 줄.
 SUB_MAX_SIZE, SUB_MIN_SIZE = 78, 42
-SUB_BG = (44, 47, 60, 235)
-SUB_BORDER = (255, 255, 255, 60)
+# 배경 칩은 더 투명하게(운영자 지시 2026-06-20) — 글자 흰색 스트로크로 가독성 보존.
+SUB_BG = (44, 47, 60, 180)
+SUB_BORDER = (255, 255, 255, 50)
 
 
 def _subtitle_png(text: str) -> np.ndarray:
@@ -418,9 +419,9 @@ def _subtitle_png(text: str) -> np.ndarray:
     pad_x, pad_y = 52, 26
     bw, bh = text_w + pad_x * 2, text_h + pad_y * 2
     bx0 = (W - bw) // 2
-    # 자막을 화면 위에서 ~20% 지점에 배치 — 맨 위는 가독성이 떨어진다(운영자 지시
-    # 2026-06-19). 미디어 위로 칩 배경이 깔려 대비가 확보된다.
-    by0 = int(0.20 * H) - bh // 2
+    # 자막을 화면 높이 ~30% 지점에 배치 — 너무 위라 상단 헤더와 겹치던 것을 10% 더
+    # 내렸다(운영자 지시 2026-06-20). 미디어 위로 칩 배경이 깔려 대비가 확보된다.
+    by0 = int(0.30 * H) - bh // 2
 
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
@@ -539,7 +540,8 @@ def _sfx_clip(path, t_in, vol):
 # Main
 # --------------------------------------------------------------------------- #
 def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: str,
-                 *, hook_title: str, fps: int = 30, end_card_dur: float = 1.0,
+                 *, hook_title: str, header_title: str = "", fps: int = 30,
+                 end_card_dur: float = 1.0,
                  product_media: dict[str, Any] | None = None) -> Path:
     from clipcart.video.promo import tts_typecast
 
@@ -669,9 +671,24 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
     # compose — story는 크림 배경, promo는 검정(ink)
     ink_bg = ColorClip((W, H), color=(CREAM if STORY else INK), duration=total)
 
-    # 상단=자막(overlays), 하단=브랜드 바. 지속 훅 타이틀은 제거(첫 자막이 훅을 그대로 노출).
+    # 상단=헤더(가격 포함 솔루션 상시 노출) + 자막(overlays), 하단=브랜드 바.
     ad_badge = _overlay(_ad_badge_png(), 0.0, total, fi=0.0, fo=0.0)
     brand_bar = _brand_bar_overlay(0.0, total_narr)
+
+    # 상단 헤더 — 가격 포함 솔루션을 한눈에(운영자 지시 2026-06-20). story는 크림
+    # 배경이라 차콜 글씨, promo는 ink 배경이라 흰 글씨 + 가격 노랑 강조.
+    header_clip = None
+    if header_title:
+        price_m = re.search(r"[\d,]+\s*원", header_title)
+        header_png = _draw_block(
+            header_title, _FONT_BOLD, int(0.045 * H), TOP_H - 6,
+            max_size=72, min_size=40,
+            color=(CHARCOAL if STORY else WHITE),
+            accent=(price_m.group(0) if price_m else None),
+            accent_color=(SAGE if STORY else YELLOW),
+            stroke=(3 if STORY else 7), display=not STORY, modern=STORY,
+        )
+        header_clip = _overlay(header_png, 0.0, total, fi=0.0, fo=0.0)
 
     # story: 하드컷+휘익 대신 부드러운 크로스디졸브(미디어 세그먼트를 개별 레이어로 배치,
     # 각 세그 CrossFadeIn/Out → 배경 크림으로 살짝 녹았다 나오는 소프트 전환). 오디오
@@ -697,6 +714,8 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
         media_track = (concatenate_videoclips(media_segs, method="chain")
                        .with_position((0, MEDIA_Y)).with_start(0))
         layers = [ink_bg, media_track, brand_bar, *overlays, ad_badge]
+    if header_clip is not None:
+        layers.append(header_clip)
 
     # outro: logo
     logo = PROJECT_ROOT / "logo.png"
