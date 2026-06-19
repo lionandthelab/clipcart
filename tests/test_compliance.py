@@ -93,3 +93,14 @@ def test_banned_expression_in_pinned_comment_is_flagged():
     c = _creative(COUPANG_DISCLOSURE)
     c["pinned_comment"] = f"제품 보러가기 → {LINK} 무조건 사세요\n{COUPANG_DISCLOSURE}"
     assert any("금지 표현" in issue for issue in check_texts(c))
+
+
+def test_affiliate_url_with_banned_substring_not_flagged_as_banned():
+    # 폴백 raw URL에 '100%' 같은 ASCII 금지어가 부분일치해도, URL은 광고문구가
+    # 아니므로 금지표현 오탐으로 차단되면 안 된다(리뷰 발견).
+    url = "https://www.coupang.com/vp/products/x?d=100%"
+    c = _creative(COUPANG_DISCLOSURE)
+    c["affiliate_url"] = url
+    c["pinned_comment"] = f"제품 보러가기 → {url}\n{COUPANG_DISCLOSURE}"
+    c["description"] = f"{COUPANG_DISCLOSURE}\n\n👉 영상 속 제품 바로가기: {url}\n설명"
+    assert not any("금지 표현" in issue for issue in check_texts(c))
