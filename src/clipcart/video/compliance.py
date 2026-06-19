@@ -75,13 +75,27 @@ def sanitize_text(text: str) -> str:
 
 def check_texts(creative: dict[str, Any]) -> list[str]:
     issues: list[str] = []
-    texts = [creative.get("title", ""), creative.get("description", "")]
+    texts = [creative.get("title", ""), creative.get("description", ""), creative.get("pinned_comment", "")]
     texts += [s.get("narration", "") + " " + s.get("caption", "") for s in creative.get("scenes", [])]
     blob = "\n".join(texts)
     for banned in BANNED_EXPRESSIONS:
         if banned in blob:
             issues.append(f"금지 표현 포함: '{banned}'")
     description = creative.get("description", "")
+
+    # 퍼널 무결성: 클릭/구매로 이어질 제휴 링크가 실제로 박혀 있어야 한다.
+    # 쿠팡 productUrl 없음·알리 promotion_link 빈값 등으로 affiliate_url이 비면
+    # 링크 없는 영상이 게시돼 클릭 0으로 직결되므로 하드 차단한다.
+    affiliate_url = creative.get("affiliate_url", "") or ""
+    pinned = creative.get("pinned_comment", "") or ""
+    if not affiliate_url.startswith("http"):
+        issues.append("제휴 링크 누락 — 클릭/구매 귀속 불가, 게시 차단")
+    else:
+        if affiliate_url not in pinned:
+            issues.append("고정댓글에 제휴 링크 누락 — 첫 줄 링크 직노출 요건")
+        if affiliate_url not in description:
+            issues.append("설명란에 제휴 링크 누락")
+
     # creative가 선언한 소스별 고지를 기준으로 검사(쿠팡/알리 공통). 미지정이면 쿠팡 고지.
     required = creative.get("disclosure") or COUPANG_DISCLOSURE
     if required not in description:

@@ -173,6 +173,8 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
         "title_template": title_template,
         "description": description,
         "disclosure": src_disclosure,
+        # 컴플라이언스 하드게이트가 '링크 직노출' 무결성을 검사할 수 있도록 명시 노출
+        "affiliate_url": product["affiliate_url"],
         "tags": list(profile.get("tags") or []),
         "hashtags": profile.get("hashtags") or [],
         "pinned_comment": (
