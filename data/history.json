@@ -220,7 +220,9 @@
     "title_template": "{sold_count}개 팔린 {title_keyword}, 단점까지 보세요",
     "post_url": "https://www.youtube.com/shorts/h16WJC7K0Ak",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3vAxPDx",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-20"
   },
   {
     "date": "2026-06-13",
@@ -570,7 +572,9 @@
     "script_style": null,
     "post_url": "https://www.youtube.com/shorts/WwuSZNiNQP8",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c35Yo3fb",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-20"
   },
   {
     "date": "2026-06-18",
@@ -657,7 +661,9 @@
     "script_style": "direct",
     "post_url": "https://www.youtube.com/shorts/xLLbPhJHgLc",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3prOtHn",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-20"
   },
   {
     "date": "2026-06-19",
@@ -674,7 +680,9 @@
     "script_style": "empathetic",
     "post_url": "https://www.youtube.com/shorts/S4tyrOcRjj4",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3rCSTDX",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-20"
   },
   {
     "date": "2026-06-19",
@@ -742,6 +750,23 @@
     "script_style": "direct",
     "post_url": "https://www.youtube.com/shorts/tW7RvLuMp5Y",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3flRH4d",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-20",
+    "post_id": "ekUsiVNGSug",
+    "product_id": "AE1005006123066348",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005006123066348",
+    "product_name": "35/20 클립이있는 접이식 건조 랙 스테인레스 스틸 방풍 속옷 양말 클립 회전 후크 행거 공간 절약 건조 랙",
+    "niche_keyword": "빨래 양말 건조 클립 행거",
+    "category": "세탁",
+    "title": "아직도 빨래집게 하나씩 집기? 이거 보세요",
+    "title_template": "아직도 {old_way}? 이거 보세요",
+    "script_style": "direct",
+    "post_url": "https://www.youtube.com/shorts/ekUsiVNGSug",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3Y5Ouxn",
     "sub_id": null
   }
 ]

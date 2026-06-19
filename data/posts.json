@@ -233,13 +233,14 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/h16WJC7K0Ak",
     "published_at": "2026-06-13T03:37:55.277460+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "170개 팔린 압축봉, 단점까지 보세요",
     "title_template": "{sold_count}개 팔린 {title_keyword}, 단점까지 보세요",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3vAxPDx",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "UgzA70_1BBkiavRyPdJ4AaABAg"
+    "comment_id": "UgzA70_1BBkiavRyPdJ4AaABAg",
+    "not_live_at": "2026-06-20"
   },
   {
     "post_id": "I-Y7lGMss9E",
@@ -559,14 +560,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/WwuSZNiNQP8",
     "published_at": "2026-06-17T15:07:30.073047+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "주방 후드 필터, 단점까지 보고 결정하세요",
     "title_template": "{title_keyword}, 단점까지 보고 결정하세요",
     "script_style": null,
     "affiliate_url": "https://s.click.aliexpress.com/e/_c35Yo3fb",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "Ugxm0r4V9DtO8YyXE354AaABAg"
+    "comment_id": "Ugxm0r4V9DtO8YyXE354AaABAg",
+    "not_live_at": "2026-06-20"
   },
   {
     "post_id": "-_1HMMu9Unw",
@@ -640,14 +642,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/xLLbPhJHgLc",
     "published_at": "2026-06-18T09:03:23.136407+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "2,960원으로 끝내는 멀티탭 정리함",
     "title_template": "{price_won}원으로 끝내는 {title_keyword}",
     "script_style": "direct",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3prOtHn",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "UgytdX0d3b2GQatB2El4AaABAg"
+    "comment_id": "UgytdX0d3b2GQatB2El4AaABAg",
+    "not_live_at": "2026-06-20"
   },
   {
     "post_id": "S4tyrOcRjj4",
@@ -656,14 +659,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/S4tyrOcRjj4",
     "published_at": "2026-06-18T15:03:22.427964+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "냉장고 정리 트레이 쓰기 전에 꼭 보세요",
     "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
     "script_style": "empathetic",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3rCSTDX",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "Ugy0nqdgNATQaGyZe9d4AaABAg"
+    "comment_id": "Ugy0nqdgNATQaGyZe9d4AaABAg",
+    "not_live_at": "2026-06-20"
   },
   {
     "post_id": "hEDhzkX5-YU",
@@ -728,5 +732,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgwwdEeV-TEvbj-TZ1V4AaABAg"
+  },
+  {
+    "post_id": "ekUsiVNGSug",
+    "product_id": "AE1005006123066348",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/ekUsiVNGSug",
+    "published_at": "2026-06-19T21:03:18.828562+00:00",
+    "status": "PUBLISHED",
+    "title": "아직도 빨래집게 하나씩 집기? 이거 보세요",
+    "title_template": "아직도 {old_way}? 이거 보세요",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3Y5Ouxn",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgwaV9txYtH6xYsM9n94AaABAg"
   }
 ]

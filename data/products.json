@@ -3051,5 +3051,59 @@
     "known_downside": "설치 공간이 필요하니 놓을 자리 치수를 먼저 재야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009692538146.mp4",
     "post_url": "https://www.youtube.com/shorts/tW7RvLuMp5Y"
+  },
+  {
+    "product_id": "AE1005006123066348",
+    "aliexpress_product_id": "1005006123066348",
+    "created_at": "2026-06-20",
+    "status": "PUBLISHED",
+    "product_name": "35/20 클립이있는 접이식 건조 랙 스테인레스 스틸 방풍 속옷 양말 클립 회전 후크 행거 공간 절약 건조 랙",
+    "display_name": "양말 건조 행거",
+    "category": "세탁",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005006123066348.html?pdp_npi=6%40dis%21KRW%215839%215354%21%21%2125.00%2122.92%21%400b8ded7b17819028106736280e0ee7%2112000035857295884%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3Y5Ouxn",
+    "price": 5354,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S512af7fcb1324fc789157dfc1b6dc889l.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S512af7fcb1324fc789157dfc1b6dc889l.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sad6bb7da56df4d7cb482debff0811ae6R.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S54ae00a5f7174b5f8ae70a9f19d00d0dQ.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S4c65890eb6284498b547fac4627deac06.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8f59ddaa59144ba291553a82160b77a7Y.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S1b267e63b3c3478d9462157dfa5835c3g.jpg"
+    ],
+    "video_url": "",
+    "rating": 92.0,
+    "review_count": 505,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "빨래 양말 건조 클립 행거",
+      "category": "세탁",
+      "title_keyword": "양말 건조 행거",
+      "old_way": "빨래집게 하나씩 집기",
+      "hook": "양말 널 때 집게 20번 집는 사람?",
+      "problem": "양말이랑 속옷 널 때 집게를 하나하나 집다 보면 시간이 훌쩍 가죠.",
+      "usage": "클립이 줄줄이 달려 있어서 한 자리에서 쭉 걸면 됩니다. 걷을 때는 한 번에 잡아당기면 우수수 떨어져요.",
+      "benefit": "너는 시간도 걷는 시간도 절반으로 줄어듭니다.",
+      "downside": "두꺼운 수건 같은 큰 빨래에는 맞지 않습니다",
+      "target": "빨래 널기가 세상 귀찮은 자취인"
+    },
+    "problem": "양말이랑 속옷 널 때 집게를 하나하나 집다 보면 시간이 훌쩍 가죠.",
+    "video_angle": "양말 널 때 집게 20번 집는 사람?",
+    "known_downside": "두꺼운 수건 같은 큰 빨래에는 맞지 않습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005006123066348.mp4",
+    "post_url": "https://www.youtube.com/shorts/ekUsiVNGSug"
   }
 ]
