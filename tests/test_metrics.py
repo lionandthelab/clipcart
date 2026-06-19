@@ -97,6 +97,28 @@ def test_bio_subid_clicks_attributed_to_profile_funnel():
     assert ch["unattributed_clicks"] == 2           # bio는 미귀속이 아님(빈 subId만)
 
 
+def test_non_numeric_bio_prefix_not_counted_as_profile_funnel():
+    """'bio'로 시작하지만 상품ID(숫자)가 아닌 subId는 프로필 퍼널이 아님.
+    'biofilm','biopromo' 같은 임의 subId 오분류 방지(리뷰 발견)."""
+    posts = [_post("vidA", "CP884", "ss884")]
+    clicks = [
+        {"date": "d", "subId": "bio884", "click": 5},    # 진짜 프로필발(bio<상품ID>)
+        {"date": "d", "subId": "biofilm", "click": 9},   # 'bio'로 시작하나 상품ID 아님
+    ]
+    snap = build_snapshot(posts, STATS, clicks, [], "2026-06-12T09:00:00", "20260605", "20260612")
+    ch = snap["channel"]
+    assert ch["bio_clicks_total"] == 5
+    assert ch["unattributed_clicks"] == 9   # biofilm은 미귀속으로 분류
+
+
+def test_aliexpress_source_post_has_no_bio_attribution_even_with_cp_id():
+    """방어적: 소스가 알리면 CP형 product_id라도 bio subId를 만들지 않는다
+    (bio/page.py bio_sub_id와 동일 규칙)."""
+    posts = [{**_post("vidA", "CP999", "ss999"), "source": "aliexpress"}]
+    snap = build_snapshot(posts, STATS, [], [], "2026-06-12T09:00:00", "20260605", "20260612")
+    assert snap["videos"][0]["bio_clicks"] is None
+
+
 def test_aliexpress_video_has_null_bio_attribution():
     """알리는 subId 개념이 없어 bio 측정 불가 → None(0과 구분)."""
     posts = [{**_post("vidA", "AE777", "ss777"), "source": "aliexpress"}]
