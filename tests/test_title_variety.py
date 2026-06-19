@@ -47,6 +47,19 @@ def test_creative_records_which_template_was_used():
     assert creative["title"] == "아직도 배수구 머리카락 손으로 빼기? 이거 보세요"
 
 
+def test_creative_header_title_includes_solution_and_price():
+    # 헤더(상단)에 가격 포함 솔루션이 한눈에 — 영상용 짧은 이름 · 가격
+    creative = build_creative(_product(), _profile(["{hook}"]))
+    assert creative["header_title"] == "배수구 거름망 · 6,900원"
+
+
+def test_creative_header_title_uses_cleaned_name_when_no_display_name():
+    p = _product(display_name="", product_name="스테인리스 배수구 거름망 채반", price=12900)
+    creative = build_creative(p, _profile(["{hook}"]))
+    assert "12,900원" in creative["header_title"]
+    assert creative["header_title"].endswith("· 12,900원")
+
+
 def test_target_callout_template_renders():
     creative = build_creative(_product(), _profile(["{target}만 보세요"]))
     assert creative["title"] == "배수구 머리카락 치우는 게 곤욕인 사람만 보세요"
