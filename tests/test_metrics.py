@@ -71,6 +71,41 @@ def test_unattributed_rows_go_to_channel_totals():
     assert snap["channel"]["unattributed_commission"] == 617.0
 
 
+def test_bio_subid_clicks_attributed_to_profile_funnel():
+    """bio<상품ID> 클릭은 프로필(채널설명) 퍼널 — 영상 고정댓글발 클릭과
+    분리 측정하고, 진짜 미귀속(빈 subId)과도 구분한다."""
+    posts = [_post("vidA", "CP884", "ss884")]
+    clicks = [
+        {"date": "d", "subId": "ss884", "click": 3},    # 영상 고정댓글발
+        {"date": "d", "subId": "bio884", "click": 5},   # 프로필 bio 페이지발(같은 상품)
+        {"date": "d", "subId": "", "click": 2},         # 진짜 미귀속(태그 없는 옛 링크)
+    ]
+    commission = [
+        {"date": "d", "subId": "bio884", "commission": 500.0, "gmv": 16000.0, "order": 1},
+    ]
+    snap = build_snapshot(posts, STATS, clicks, commission,
+                          "2026-06-12T09:00:00", "20260605", "20260612")
+
+    a = next(v for v in snap["videos"] if v["video_id"] == "vidA")
+    assert a["clicks"] == 3            # 영상발만 (bio 미포함)
+    assert a["bio_clicks"] == 5        # 프로필발 분리 측정
+    assert a["bio_commission"] == 500.0
+    ch = snap["channel"]
+    assert ch["clicks_total"] == 10                 # 전체 합산은 그대로
+    assert ch["bio_clicks_total"] == 5              # 프로필 퍼널 채널 합
+    assert ch["bio_commission_total"] == 500.0
+    assert ch["unattributed_clicks"] == 2           # bio는 미귀속이 아님(빈 subId만)
+
+
+def test_aliexpress_video_has_null_bio_attribution():
+    """알리는 subId 개념이 없어 bio 측정 불가 → None(0과 구분)."""
+    posts = [{**_post("vidA", "AE777", "ss777"), "source": "aliexpress"}]
+    snap = build_snapshot(posts, STATS, [], [], "2026-06-12T09:00:00", "20260605", "20260612")
+    a = snap["videos"][0]
+    assert a["bio_clicks"] is None
+    assert a["bio_commission"] is None
+
+
 def test_legacy_video_without_sub_id_has_null_attribution():
     posts = [_post("vidA", "CP111", sub_id=None)]
     snap = build_snapshot(posts, STATS, [], [], "2026-06-12T09:00:00", "20260605", "20260612")

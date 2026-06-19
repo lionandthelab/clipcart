@@ -82,6 +82,15 @@ def _sum_by_sub_id(rows: list[dict[str, Any]], field: str) -> dict[str, float]:
     return out
 
 
+def _bio_sub_for_post(post: dict[str, Any]) -> str | None:
+    """이 영상 상품의 bio(프로필 페이지) subId. bio/page.py의 `bio<상품ID>`와 동일 규칙.
+    쿠팡만 지원(알리는 subId 개념 없음) → CP 접두 상품ID에서만 도출."""
+    pid = post.get("product_id", "") or ""
+    if pid.startswith("CP"):
+        return "bio" + pid.removeprefix("CP")
+    return None
+
+
 def build_snapshot(
     posts: list[dict[str, Any]],
     stats_by_video: dict[str, dict[str, int]],
@@ -101,6 +110,7 @@ def build_snapshot(
     for post in posts:
         vid = post.get("post_id", "")
         sub_id = post.get("sub_id")
+        bio_sub = _bio_sub_for_post(post)
         st = stats_by_video.get(vid, {})
         if sub_id:
             attributed_subs.add(sub_id)
@@ -121,16 +131,33 @@ def build_snapshot(
                 "clicks": int(clicks_by_sub.get(sub_id, 0)) if sub_id else None,
                 "orders": int(orders_by_sub.get(sub_id, 0)) if sub_id else None,
                 "commission": float(commission_by_sub.get(sub_id, 0.0)) if sub_id else None,
+                # 프로필(bio 페이지)발 클릭/커미션 — 영상 고정댓글발과 분리 측정.
+                # 알리는 subId 미지원이라 측정 불가(None).
+                "bio_clicks": int(clicks_by_sub.get(bio_sub, 0)) if bio_sub else None,
+                "bio_commission": float(commission_by_sub.get(bio_sub, 0.0)) if bio_sub else None,
             }
         )
 
     clicks_total = int(sum(clicks_by_sub.values()))
     commission_total = float(sum(commission_by_sub.values()))
+    # bio<상품ID>는 프로필 퍼널발 — '미귀속'이 아니라 별도 버킷으로 분리한다.
+    bio_clicks_total = int(sum(v for k, v in clicks_by_sub.items() if k.startswith("bio")))
+    bio_commission_total = float(
+        sum(v for k, v in commission_by_sub.items() if k.startswith("bio"))
+    )
     unattributed_clicks = int(
-        sum(v for k, v in clicks_by_sub.items() if k not in attributed_subs)
+        sum(
+            v
+            for k, v in clicks_by_sub.items()
+            if k not in attributed_subs and not k.startswith("bio")
+        )
     )
     unattributed_commission = float(
-        sum(v for k, v in commission_by_sub.items() if k not in attributed_subs)
+        sum(
+            v
+            for k, v in commission_by_sub.items()
+            if k not in attributed_subs and not k.startswith("bio")
+        )
     )
     return {
         "collected_at": collected_at,
@@ -140,6 +167,8 @@ def build_snapshot(
             "views": sum(v["views"] for v in videos),
             "clicks_total": clicks_total,
             "commission_total": commission_total,
+            "bio_clicks_total": bio_clicks_total,
+            "bio_commission_total": bio_commission_total,
             "unattributed_clicks": unattributed_clicks,
             "unattributed_commission": unattributed_commission,
         },
