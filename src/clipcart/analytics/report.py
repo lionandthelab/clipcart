@@ -60,6 +60,8 @@ def build_report(snapshot: dict[str, Any], history: list[dict[str, Any]]) -> dic
             "views": ch.get("views", sum(v["views"] for v in videos)),
             "clicks_attributed": _attr_sum(videos, "clicks") or 0,
             "commission_attributed": _attr_sum(videos, "commission") or 0,
+            "bio_clicks": ch.get("bio_clicks_total", 0),
+            "bio_commission": ch.get("bio_commission_total", 0),
             "unattributed_clicks": ch.get("unattributed_clicks", 0),
             "unattributed_commission": ch.get("unattributed_commission", 0),
         },
@@ -104,6 +106,8 @@ def render_text(report: dict[str, Any]) -> str:
         f"성과 분석  ({w.get('start','?')}~{w.get('end','?')})",
         f"  영상 {t['videos']}편 · 누적 {t['views']:,}뷰 · "
         f"귀속클릭 {t['clicks_attributed']:g} · 귀속커미션 {t['commission_attributed']:g}원",
+        f"  프로필발(bio): 클릭 {t['bio_clicks']:g} · 커미션 {t['bio_commission']:g}원 "
+        f"(채널설명·고정프로필 링크 경유)",
         f"  채널 미귀속: 클릭 {t['unattributed_clicks']:g} · 커미션 {t['unattributed_commission']:g}원 "
         f"(subId 이전 영상들)",
         "",

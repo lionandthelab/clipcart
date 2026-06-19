@@ -84,6 +84,31 @@ def test_leaderboard_top_and_bottom():
     assert r["leaderboard"]["bottom"][0]["video_id"] == "b"  # 1000뷰 (z 제외)
 
 
+def test_totals_include_bio_profile_funnel_clicks():
+    snap = _snapshot()
+    snap["channel"]["bio_clicks_total"] = 4
+    snap["channel"]["bio_commission_total"] = 250.0
+    r = build_report(snap, _history())
+    assert r["totals"]["bio_clicks"] == 4
+    assert r["totals"]["bio_commission"] == 250.0
+
+
+def test_totals_bio_defaults_zero_for_legacy_snapshot():
+    # bio 키 없는 옛 스냅샷도 깨지지 않는다
+    r = build_report(_snapshot(), _history())
+    assert r["totals"]["bio_clicks"] == 0
+    assert r["totals"]["bio_commission"] == 0
+
+
+def test_render_text_shows_profile_funnel_line():
+    snap = _snapshot()
+    snap["channel"]["bio_clicks_total"] = 4
+    snap["channel"]["bio_commission_total"] = 250.0
+    txt = render_text(build_report(snap, _history()))
+    assert "프로필" in txt
+    assert "4" in txt
+
+
 def test_render_text_is_readable_string():
     txt = render_text(build_report(_snapshot(), _history()))
     assert "소스" in txt and "훅" in txt and "카테고리" in txt
