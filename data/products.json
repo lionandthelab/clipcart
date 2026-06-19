@@ -2889,5 +2889,59 @@
     "video_angle": "변기 뒤쪽 틈, 한 번도 못 닦아봤다면?",
     "known_downside": "굳은 때는 욕실 세제를 뿌려두고 닦아야 합니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8680565185.mp4"
+  },
+  {
+    "product_id": "AE1005011569591031",
+    "aliexpress_product_id": "1005011569591031",
+    "created_at": "2026-06-19",
+    "status": "PUBLISHED",
+    "product_name": "벽걸이형 S형 변기솔, 사각지대 없이 청소 가능한 긴 손잡이, 코너 틈새 브러쉬, 부드러운 모, 쪼그려 앉는 변기 청소 브러쉬",
+    "display_name": "변기 틈새 청소솔",
+    "category": "욕실",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005011569591031.html?pdp_npi=6%40dis%21KRW%216245%213060%21%21%2126.92%2113.19%21%402141149b17818380099913951e1179%2112000055946384431%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4EtQTnb",
+    "price": 3060,
+    "original_price": 6245,
+    "discount_pct": 51,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sc242860872f34ddeb2d712f1f94b9d4fy.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc242860872f34ddeb2d712f1f94b9d4fy.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S58697724a29a463a8ddc719255e1f22eI.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc55fe4d89ecb45adb436e3515e409e4d4.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0b15f04f5f30458bac40ad2cbc416ccek.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf4f9028520474189901371d626823285p.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S31e751c74a624076aba5379be49ace82o.jpg"
+    ],
+    "video_url": "",
+    "rating": 87.2,
+    "review_count": 219,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "변기 틈새 청소솔 좁은",
+      "category": "욕실",
+      "title_keyword": "변기 틈새 청소솔",
+      "old_way": "일반 솔로 닿는 데만 닦기",
+      "hook": "변기 뒤쪽 틈, 한 번도 못 닦아봤다면?",
+      "problem": "변기와 바닥 사이, 뚜껑 경첩 틈은 일반 변기솔로는 닿지 않아서 때가 그대로 쌓입니다.",
+      "usage": "얇고 긴 솔이 틈새에 들어가 구석의 때를 긁어냅니다.",
+      "benefit": "안 닦이던 부분이 닦이니 욕실 냄새 관리에도 도움이 돼요.",
+      "downside": "굳은 때는 욕실 세제를 뿌려두고 닦아야 합니다",
+      "target": "욕실 청소를 해도 냄새가 남는 집"
+    },
+    "problem": "변기와 바닥 사이, 뚜껑 경첩 틈은 일반 변기솔로는 닿지 않아서 때가 그대로 쌓입니다.",
+    "video_angle": "변기 뒤쪽 틈, 한 번도 못 닦아봤다면?",
+    "known_downside": "굳은 때는 욕실 세제를 뿌려두고 닦아야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011569591031.mp4",
+    "post_url": "https://www.youtube.com/shorts/sW3Ov3e0t4Y"
   }
 ]
