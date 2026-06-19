@@ -57,6 +57,32 @@ def test_ensure_bio_links_regenerates_coupang_with_bio_sub_id():
     assert cache["CP884"] == "https://link.coupang.com/a/BIO1"  # 재호출 방지 캐시
 
 
+def test_ensure_bio_links_uses_affiliate_url_for_aliexpress_without_api():
+    """알리는 subId 미지원 — bio subId 딥링크 변환 없이 기존 제휴링크를 그대로 쓴다.
+    퍼널 핵심: 알리 제품이 bio 페이지에서 빠지면 안 된다(회귀 방지)."""
+
+    def boom(urls, sub_id=None):
+        raise AssertionError("알리는 deeplink API를 부르지 않는다")
+
+    ali = _entry("AE100", source="aliexpress", name="알리 청소솔",
+                 url="https://s.click.aliexpress.com/e/_cABC")
+    links = ensure_bio_links([ali], {}, boom)
+    assert links["AE100"] == "https://s.click.aliexpress.com/e/_cABC"
+
+
+def test_render_page_includes_aliexpress_card_with_link_and_badge():
+    """알리 제품이 bio 페이지에 제휴링크 + 알리 배지로 렌더되는지(퍼널 회귀 방지)."""
+    ali = _entry("AE100", source="aliexpress", name="알리 청소솔",
+                 url="https://s.click.aliexpress.com/e/_cABC")
+    html = render_page(
+        [ali],
+        {"AE100": _product("AE100", display_name="알리 청소솔")},
+        {"AE100": "https://s.click.aliexpress.com/e/_cABC"},
+    )
+    assert "https://s.click.aliexpress.com/e/_cABC" in html
+    assert "알리익스프레스" in html  # 배지
+
+
 def test_ensure_bio_links_uses_cache_without_api_call():
     def boom(urls, sub_id=None):
         raise AssertionError("캐시가 있으면 API를 부르지 않는다")
