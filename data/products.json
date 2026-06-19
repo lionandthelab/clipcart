@@ -3105,5 +3105,47 @@
     "known_downside": "두꺼운 수건 같은 큰 빨래에는 맞지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005006123066348.mp4",
     "post_url": "https://www.youtube.com/shorts/ekUsiVNGSug"
+  },
+  {
+    "product_id": "CP9299741477",
+    "coupang_product_id": "9299741477",
+    "sub_id": "salrimshorts9299741477",
+    "created_at": "2026-06-20",
+    "status": "VIDEO_READY",
+    "product_name": "아우리온 물튀김차단 틈새방수 주방 필수템 실리콘 싱크대 물막이, 화이트, 1개",
+    "display_name": "싱크대 물막이",
+    "category": "주방",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=9299741477&itemId=27548359919&vendorItemId=94508704075&traceid=V0-153-108dcfff916a98e6&clickBeacon=0f6b1480-6c2d-11f1-bca4-64c1b59fc137%7E3&requestid=20260620072021227174902349&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eIPiiN699M",
+    "price": 18800,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/1CzHQiVenZYdQYqD1BmWDuVph7HixEYj3GulG_AA40Kcj5fukOCAc_mh4obSgx7TT1JuFaU8A4QLPE7GhbnNAlM4_q5m2FtbZzD3uDBZih_8cuOzVr8909kkauiAmGtDhmgSTE9_jBVF4TZAvirSd_sSYdORqVDq1Stn8ddulvIXL1l4k7zXfnQltMVFJkEvTsMGRP_ztqKq1fQKb2eHo7sQWwEncVJ5RiNQBm8TEeuPGz6qTFEsKEhAmQQb7Bb5GPHKGwt7yBaLg7KwUI8ZAYXzktKVpjQwuV5dzmBAY8t_iAMtWImu7uuGYvqtVCEnjUHK",
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "싱크대 물막이 실리콘",
+      "category": "주방",
+      "title_keyword": "싱크대 물막이",
+      "old_way": "설거지할 때마다 옷 적시기",
+      "hook": "설거지하면 배부터 젖는 사람?",
+      "problem": "설거지할 때마다 물이 튀어서 옷이 젖어요. 행주로 매번 닦는 것도 일이고요.",
+      "usage": "싱크대 끝에 끼우기만 하면 튀는 물을 막아줍니다. 실리콘이라 설치도 분리도 몇 초면 돼요.",
+      "benefit": "옷이 안 젖으니까 설거지 스트레스가 줄어요. 세척도 물로 헹구면 끝.",
+      "downside": "곡면이 심한 싱크대에는 밀착이 약할 수 있습니다",
+      "target": "설거지할 때마다 옷 젖는 게 싫은 사람"
+    },
+    "problem": "설거지할 때마다 물이 튀어서 옷이 젖어요. 행주로 매번 닦는 것도 일이고요.",
+    "video_angle": "설거지하면 배부터 젖는 사람?",
+    "known_downside": "곡면이 심한 싱크대에는 밀착이 약할 수 있습니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP9299741477.mp4"
   }
 ]

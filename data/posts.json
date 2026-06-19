@@ -544,14 +544,15 @@
     "source": "coupang",
     "post_url": "https://www.youtube.com/shorts/zKfPWaz3JE8",
     "published_at": "2026-06-16T22:41:33.932164+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "자취하면 이거 한 번씩 겪죠",
     "title_template": "자취하면 이거 한 번씩 겪죠",
     "script_style": "story",
     "affiliate_url": "https://link.coupang.com/a/eDQCq1eKD6",
     "sub_id": "salrimshorts8306238975",
     "thumbnail_set": true,
-    "comment_id": "UgwT-HzRstGdFQpG55p4AaABAg"
+    "comment_id": "UgwT-HzRstGdFQpG55p4AaABAg",
+    "not_live_at": "2026-06-20"
   },
   {
     "post_id": "WwuSZNiNQP8",
