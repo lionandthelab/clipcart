@@ -3201,5 +3201,59 @@
     "known_downside": "곡면이 심한 싱크대에는 밀착이 약할 수 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010572852165.mp4",
     "post_url": "https://www.youtube.com/shorts/86NmvLU9rdU"
+  },
+  {
+    "product_id": "AE1005009465509766",
+    "aliexpress_product_id": "1005009465509766",
+    "created_at": "2026-06-20",
+    "status": "PUBLISHED",
+    "product_name": "YOUPAN 스테인레스 27mm 압축봉 커튼봉 행거",
+    "display_name": "압축봉",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009465509766.html?pdp_npi=6%40dis%21KRW%2115900%2115900%21%21%2115900%2115900%21%402101611117819460106797310e11d9%2112000049188940713%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3F2lb3X",
+    "price": 15900,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sd6f86dd6849545a1b6ebcff33a536093p.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd6f86dd6849545a1b6ebcff33a536093p.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd1f2d82ce97c43ee832c5d287d57f8c8X.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sfcf9531da2bf460c8d575ebe075a9f5c7.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S51b6ebef16df46bfa20cd53187fef6b4x.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sfb69076974e64c078afedac6f752babdO.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S66e0e727e0ab454babe7911310437926O.jpg"
+    ],
+    "video_url": "",
+    "rating": 93.1,
+    "review_count": 103,
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "압축봉 커튼 설치 못없이",
+      "category": "정리/수납",
+      "title_keyword": "압축봉",
+      "old_way": "못 박고 벽 망가뜨리기",
+      "hook": "못 없이 커튼 다는 법, 아직 모르세요?",
+      "problem": "커튼이나 가림막을 달고 싶어도 벽에 못을 박기는 부담스럽죠. 자취방이면 더더욱.",
+      "usage": "양쪽 벽 사이에 돌려서 고정하기만 하면 끝. 못도 드릴도 필요 없어요.",
+      "benefit": "벽 손상 없이 커튼, 가림막, 행거까지 해결됩니다.",
+      "downside": "무거운 커튼을 걸면 흘러내릴 수 있어 하중 표기를 확인해야 합니다",
+      "target": "벽에 못 못 박는 자취인"
+    },
+    "problem": "커튼이나 가림막을 달고 싶어도 벽에 못을 박기는 부담스럽죠. 자취방이면 더더욱.",
+    "video_angle": "못 없이 커튼 다는 법, 아직 모르세요?",
+    "known_downside": "무거운 커튼을 걸면 흘러내릴 수 있어 하중 표기를 확인해야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009465509766.mp4",
+    "post_url": "https://www.youtube.com/shorts/2uXh-Lu96ZY"
   }
 ]
