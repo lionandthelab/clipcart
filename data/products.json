@@ -3255,5 +3255,59 @@
     "known_downside": "무거운 커튼을 걸면 흘러내릴 수 있어 하중 표기를 확인해야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009465509766.mp4",
     "post_url": "https://www.youtube.com/shorts/2uXh-Lu96ZY"
+  },
+  {
+    "product_id": "AE1005010177322845",
+    "aliexpress_product_id": "1005010177322845",
+    "created_at": "2026-06-21",
+    "status": "PUBLISHED",
+    "product_name": "5개입 25cm 실리콘 음식 보관 덮개, 범용 전자레인지 그릇 덮개, 재사용 가능한 간편 진공 밀봉 스트레치 냄비 덮개, 야외 식기",
+    "display_name": "전자레인지 덮개",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005010177322845.html?pdp_npi=6%40dis%21KRW%2110272%2110100%21%21%2143.98%2143.24%21%402140d36117819676116082330e10a0%2112000051413393835%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2yrtBoh",
+    "price": 10100,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S16973edb4f3d4afbac3115ca5e0e3c82x.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S16973edb4f3d4afbac3115ca5e0e3c82x.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S268dc97f53b9449da1565bd1fec7b0e0I.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S30007db0ef4d418bb8e44e8d548e710eJ.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S75559c0f6a634b29bffb91d84c3bec28c.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8a95e718cebc402d991486f9a6a90696H.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sbdfb12de67f248ab82519df8b1608be1O.jpg"
+    ],
+    "video_url": "",
+    "rating": 89.1,
+    "review_count": 98,
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "전자레인지 음식 덮개",
+      "category": "주방",
+      "title_keyword": "전자레인지 덮개",
+      "old_way": "랩 씌웠다 버리기 반복",
+      "hook": "전자레인지 안, 음식 튄 자국 그대로죠?",
+      "problem": "데울 때마다 음식물이 튀어서 전자레인지 안이 금방 더러워져요. 랩은 매번 버리니 아깝고요.",
+      "usage": "그릇 위에 덮고 돌리기만 하면 튐을 막아줍니다. 다 쓰면 물로 헹궈서 재사용.",
+      "benefit": "전자레인지 청소 횟수가 확 줄고 랩 쓰레기도 안 나와요.",
+      "downside": "지름이 큰 접시는 다 덮이지 않을 수 있습니다",
+      "target": "전자레인지 청소가 귀찮은 사람"
+    },
+    "problem": "데울 때마다 음식물이 튀어서 전자레인지 안이 금방 더러워져요. 랩은 매번 버리니 아깝고요.",
+    "video_angle": "전자레인지 안, 음식 튄 자국 그대로죠?",
+    "known_downside": "지름이 큰 접시는 다 덮이지 않을 수 있습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010177322845.mp4",
+    "post_url": "https://www.youtube.com/shorts/LyIfZ6jKfL8"
   }
 ]
