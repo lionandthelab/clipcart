@@ -749,5 +749,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgwaV9txYtH6xYsM9n94AaABAg"
+  },
+  {
+    "post_id": "86NmvLU9rdU",
+    "product_id": "AE1005010572852165",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/86NmvLU9rdU",
+    "published_at": "2026-06-20T03:03:33.934062+00:00",
+    "status": "PUBLISHED",
+    "title": "설거지할 때마다 옷 젖는 게 싫은 사람만 보세요",
+    "title_template": "{target}만 보세요",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3Enx5k1",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgxQZgzPlnimrAAr4y14AaABAg"
   }
 ]
