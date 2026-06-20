@@ -3363,5 +3363,47 @@
     "known_downside": "접착식이라 한 번 떼면 다시 붙이기 어렵습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005006727586720.mp4",
     "post_url": "https://www.youtube.com/shorts/SnROn5WQsdU"
+  },
+  {
+    "product_id": "CP7936791669",
+    "coupang_product_id": "7936791669",
+    "sub_id": "salrimshorts7936791669",
+    "created_at": "2026-06-21",
+    "status": "VIDEO_READY",
+    "product_name": "지엔베르그 음식물 쓰레기통 3L 스텐 밀폐 진공 냄새차단 반영구적사용",
+    "display_name": "음식물 쓰레기통",
+    "category": "주방",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=7936791669&itemId=21848553327&vendorItemId=88945551412&traceid=V0-153-24ee1579b89dc238&clickBeacon=3d5bb150-6cf6-11f1-b215-619912672bde%7E3&requestid=20260621072027148268407413&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eKucMWNuDI",
+    "price": 31800,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/wKMUBqah9HINJTbkwAT5QEeEbJuZ0PVuWeRyALiyw_vFTz92_1pXNwxnpXFKUtm05-MHp670aryzBRyFvXSX5PjY9z_rEZ7qRVdBxlspbvKCLRkFb3DKtVqQYvMUe0LjsJOvIvTD6UKUNm5CnMbj8eKxb7cc9Ug6sZk_eG2KeOMrzzcR-knFx5iO1frKj0h2yefQdLW_7FaG2J_sAvZNjFeCQre9FOLfLFm6LeHMFgmxtgCYwTAlDWCOT7XrKYL0lq_AFfIuEYWRFlBgWcDqxn1XBXCakO4TlAw43omq4gjajHTSzYEKPcDF_0EKtvwvkIkIvR8EXAbsncvWABm6eVRzu8BRXybLDm7FF57UR896PNdD",
+    "score": 83,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 12,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "음식물 쓰레기통 밀폐 뚜껑",
+      "category": "주방",
+      "title_keyword": "음식물 쓰레기통",
+      "old_way": "냄새 나는 봉투 방치",
+      "hook": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+      "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+      "usage": "밀폐 뚜껑이 냄새를 잡아주고, 페달로 열어서 손도 안 대요. 통은 분리해서 통째로 세척.",
+      "benefit": "주방에 가까이 둬도 냄새 스트레스가 줄어듭니다.",
+      "downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+      "target": "음식물 쓰레기 냄새가 고민인 사람"
+    },
+    "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+    "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+    "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7936791669.mp4"
   }
 ]
