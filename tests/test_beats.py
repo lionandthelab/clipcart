@@ -144,15 +144,14 @@ def test_weak_stats_are_not_woven_into_script():
     assert result["emphasis"] == "멀티탭 정리함"  # 제품명 유지(썸네일 프레임)
 
 
-def test_testimony_voice_on_review_scenes_not_problem():
-    # 운영자 지시(2026-06-19): 증언 목소리는 '리뷰 관련 씬'(체감 결과·리뷰카드 CTA)에서.
-    # 문제 장면은 메인 나레이션.
+def test_testimony_voice_in_front_problem_not_on_cta():
+    # 운영자 지시(2026-06-22): 증언 목소리가 마지막 CTA('댓글 확인하세요')까지 하면
+    # 어색하다 → 증언은 앞부분(공감되는 문제 장면)에서, 결과·CTA는 메인 나레이션.
     beats = build_beats(_product())
     voices = {b["role"]: b.get("voice") for b in beats}
-    assert voices["result"] == "testimony"
-    assert voices["cta"] == "testimony"
-    assert voices.get("problem") in (None, "main")
-    assert voices.get("hook") in (None, "main")
+    assert voices["problem"] == "testimony"
+    assert voices.get("cta") in (None, "main")
+    assert voices.get("result") in (None, "main")
 
 
 def test_model_template_injects_model_clips_at_start_and_middle(monkeypatch):
