@@ -289,12 +289,44 @@ def draw_chrome(canvas: Image.Image) -> None:
     _chrome(canvas)
 
 
+# 썸네일 비주얼 변형 — 제품ID로 결정적 선택해 영상마다 다른 룩(색·위치·하이라이트 밴드).
+# band이 있으면 line1을 색 박스 위 흰 글씨로(하이라이터), 없으면 accent 색 글씨.
+_THUMB_STYLES = [
+    {"accent": YELLOW,    "dark": 120, "line_y": 235, "card_y": 820, "card": 720, "band": None},
+    {"accent": WHITE,     "dark": 150, "line_y": 200, "card_y": 835, "card": 690, "band": RED},
+    {"accent": "#7DE25A", "dark": 120, "line_y": 235, "card_y": 820, "card": 720, "band": None},
+    {"accent": "#3FC4FF", "dark": 150, "line_y": 200, "card_y": 835, "card": 690, "band": None},
+    {"accent": WHITE,     "dark": 130, "line_y": 235, "card_y": 820, "card": 720, "band": "#1A73E8"},
+    {"accent": "#FF8A24", "dark": 120, "line_y": 215, "card_y": 825, "card": 710, "band": None},
+]
+
+
+def _headline(draw: ImageDraw.ImageDraw, lines: list[str], font: ImageFont.FreeTypeFont,
+              y: int, accent: str, band: str | None) -> int:
+    """line1 렌더. band 색이 있으면 블록 뒤에 색 박스(하이라이터) 후 흰 글씨."""
+    stroke = 6 if band else 10
+    if band:
+        x_min, x_max, y_bot, ty = W, 0, y, y
+        for line in lines:
+            w = draw.textlength(line, font=font)
+            x = (W - w) // 2
+            bb = draw.textbbox((x, ty), line, font=font, stroke_width=stroke)
+            x_min, x_max, y_bot = min(x_min, bb[0]), max(x_max, bb[2]), bb[3]
+            ty = bb[3] + 18
+        pad = 26
+        draw.rounded_rectangle((x_min - pad, y - pad // 2, x_max + pad, y_bot + pad // 2),
+                               radius=26, fill=band)
+    return _draw_lines(draw, lines, font, y, WHITE if band else accent, stroke)
+
+
 def compose_thumbnail(product_img: Image.Image, line1: str, line2: str, out_path: Path,
-                      badge_text: str = _DEFAULT_BADGE) -> Path:
-    """흥행 스타일 썸네일: 대형 훅 텍스트 + 제품 카드."""
-    canvas = _bg_blur_dark(product_img, dark=120)
-    card = _fit_within(product_img, 760, 760)
-    px, py = (W - card.width) // 2, 760
+                      badge_text: str = _DEFAULT_BADGE, *, variant: int = 0) -> Path:
+    """흥행 스타일 썸네일: 대형 훅 텍스트 + 제품 카드. variant로 색·레이아웃을 바꿔
+    영상마다 다른 룩을 준다(제품별 결정적)."""
+    st = _THUMB_STYLES[variant % len(_THUMB_STYLES)]
+    canvas = _bg_blur_dark(product_img, dark=st["dark"])
+    card = _fit_within(product_img, st["card"], st["card"])
+    px, py = (W - card.width) // 2, st["card_y"]
     mask = Image.new("L", card.size, 0)
     ImageDraw.Draw(mask).rounded_rectangle((0, 0, *card.size), radius=40, fill=255)
     canvas.paste(card, (px, py), mask)
@@ -302,8 +334,8 @@ def compose_thumbnail(product_img: Image.Image, line1: str, line2: str, out_path
     draw = ImageDraw.Draw(canvas, "RGBA")
     f1 = _font(120)
     f2 = _font(96)
-    y = _draw_lines(draw, _wrap(draw, line1, f1, W - 100), f1, 260, YELLOW, 10)
-    _draw_lines(draw, _wrap(draw, line2, f2, W - 100), f2, y + 6, WHITE, 9)
+    y = _headline(draw, _wrap(draw, line1, f1, W - 120), f1, st["line_y"], st["accent"], st["band"])
+    _draw_lines(draw, _wrap(draw, line2, f2, W - 120), f2, y + 10, WHITE, 9)
     _chrome(canvas, badge_text)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     canvas.convert("RGB").save(out_path, "JPEG", quality=90)

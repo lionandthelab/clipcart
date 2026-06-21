@@ -167,6 +167,6 @@ def make_model_video(product: dict[str, Any], keep_workdir: bool = False) -> dic
 
     compose_thumbnail(
         hero_still_img, creative["thumbnail_line1"], creative["thumbnail_line2"],
-        thumb_path, badge_text=AD_BADGE,
+        thumb_path, badge_text=AD_BADGE, variant=creative.get("thumb_variant", 0),
     )
     return {"video_path": video_path, "thumbnail_path": thumb_path, "creative": creative}
