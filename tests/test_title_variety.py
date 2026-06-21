@@ -47,6 +47,29 @@ def test_creative_records_which_template_was_used():
     assert creative["title"] == "아직도 배수구 머리카락 손으로 빼기? 이거 보세요"
 
 
+def test_thumbnail_lines_vary_across_products():
+    # 썸네일 텍스트가 제품마다 결정적으로 달라진다(다 똑같은 훅 반복 방지)
+    combos = set()
+    for i in range(10):
+        c = build_creative(_product(product_id=f"CP{i}"), _profile(["{hook}"]))
+        combos.add((c["thumbnail_line1"], c["thumbnail_line2"]))
+    assert len(combos) >= 3
+
+
+def test_thumbnail_lines_always_nonempty():
+    for i in range(8):
+        c = build_creative(_product(product_id=f"CP{i}"), _profile(["{hook}"]))
+        assert c["thumbnail_line1"].strip()
+        assert c["thumbnail_line2"].strip()
+
+
+def test_thumb_variant_deterministic_int():
+    a = build_creative(_product(product_id="CP123"), _profile(["{hook}"]))
+    b = build_creative(_product(product_id="CP123"), _profile(["{hook}"]))
+    assert a["thumb_variant"] == b["thumb_variant"]
+    assert isinstance(a["thumb_variant"], int)
+
+
 def test_creative_header_title_includes_solution_and_price():
     # 헤더(상단)에 가격 포함 솔루션이 한눈에 — 영상용 짧은 이름 · 가격
     creative = build_creative(_product(), _profile(["{hook}"]))

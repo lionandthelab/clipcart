@@ -76,6 +76,23 @@ def _pick_title(product: dict[str, Any], profile: dict[str, Any]) -> tuple[str, 
     return usable[seed % len(usable)]
 
 
+def _thumb_lines(seed: int, accent: str, hook_rest: str,
+                 niche: dict[str, Any], price: int) -> tuple[str, str]:
+    """썸네일 (line1, line2)을 여러 앵글 중 제품별로 결정적 선택 — 영상마다 변화를 준다
+    (다 똑같은 훅 반복 방지). 빈 줄이면 훅 앵글로 폴백."""
+    tk = niche["title_keyword"]
+    angles = [
+        (accent.rstrip(","), hook_rest or tk),                  # 훅 분할
+        (f"{price:,}원", tk),                                    # 가격형
+        (tk, _first_sentence(niche.get("benefit", ""), 36)),    # 혜택형
+        (niche.get("old_way") or tk, tk),                       # 문제형
+    ]
+    l1, l2 = angles[seed % len(angles)]
+    if not (l1 or "").strip():
+        l1, l2 = angles[0]
+    return l1, (l2 or tk)
+
+
 def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str, Any]:
     niche = product["niche"]
     name = short_product_name(product)
@@ -175,6 +192,10 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
         "disclosure": src_disclosure,
         # 상단 헤더용 — 가격 포함 솔루션을 한눈에 보이는 상시 제목으로(운영자 지시 2026-06-20)
         "header_title": f"{name} · {price:,}원",
+        # 썸네일 비주얼 스타일 변형 인덱스(제품별 결정적) — frames에서 % len(styles)
+        "thumb_variant": int(
+            hashlib.md5((product["product_id"] + "|style").encode()).hexdigest(), 16
+        ) % 720,
         # 컴플라이언스 하드게이트가 '링크 직노출' 무결성을 검사할 수 있도록 명시 노출
         "affiliate_url": product["affiliate_url"],
         "tags": list(profile.get("tags") or []),
@@ -183,8 +204,10 @@ def build_creative(product: dict[str, Any], profile: dict[str, Any]) -> dict[str
             f"제품 보러가기 → {product['affiliate_url']}\n{src_disclosure}"
         ),
         "scenes": scenes,
-        "thumbnail_line1": accent.rstrip(","),
-        "thumbnail_line2": hook_rest or niche["title_keyword"],
+        **dict(zip(("thumbnail_line1", "thumbnail_line2"), _thumb_lines(
+            int(hashlib.md5((product["product_id"] + "|angle").encode()).hexdigest(), 16),
+            accent, hook_rest, niche, price,
+        ))),
         "tts_voice": profile.get("tts_voice", "ko-KR-SunHiNeural"),
         "tts_rate": profile.get("tts_rate", "+12%"),
     }
