@@ -3405,5 +3405,59 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7936791669.mp4"
+  },
+  {
+    "product_id": "AE1005007192746175",
+    "aliexpress_product_id": "1005007192746175",
+    "created_at": "2026-06-21",
+    "status": "PUBLISHED",
+    "product_name": "재미 있은 고양이 입구 현관 매트 개 미끄럼 방지 PVC 바닥 매트 쉬운 깨끗한 항목 현관 복도 입구 홈 장식 먼지 제거 카펫",
+    "display_name": "현관 흙먼지 매트",
+    "category": "청소",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005007192746175.html?pdp_npi=6%40dis%21KRW%219830%219830%21%21%2142.09%2142.09%21%402101611117820108187798639e0e3d%2112000039756130755%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c32jX7gZ",
+    "price": 9830,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S0781c99ac73948d486203c80a2ffbfa8N.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0781c99ac73948d486203c80a2ffbfa8N.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S4dbb667e56b5497b90f742e3f93740199.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Se58f5120a67e4030ba92c39f11a009d9r.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd25a7773139545648108f31f28997cb55.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S13eedd1fe20a4d35bf485ff6e8e4e215W.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sca6f9f73c51e4072968cc9d72c284c4eB.jpg"
+    ],
+    "video_url": "",
+    "rating": 97.3,
+    "review_count": 51,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "현관 먼지 제거 매트",
+      "category": "청소",
+      "title_keyword": "현관 흙먼지 매트",
+      "old_way": "현관 모래 매번 쓸기",
+      "hook": "현관에 모래알, 쓸어도 다음날 또 있죠?",
+      "problem": "신발에 묻어 들어온 흙과 모래가 현관을 지나 거실까지 들어옵니다.",
+      "usage": "현관에 깔아두면 신발 바닥의 흙먼지를 매트가 잡아줍니다. 더러워지면 털거나 물세척.",
+      "benefit": "거실 바닥에 밟히는 모래알이 눈에 띄게 줄어요.",
+      "downside": "사이즈가 현관보다 작으면 효과가 떨어지니 치수를 재고 골라야 합니다",
+      "target": "현관 모래알이 거실까지 들어와 거슬리는 사람"
+    },
+    "problem": "신발에 묻어 들어온 흙과 모래가 현관을 지나 거실까지 들어옵니다.",
+    "video_angle": "현관에 모래알, 쓸어도 다음날 또 있죠?",
+    "known_downside": "사이즈가 현관보다 작으면 효과가 떨어지니 치수를 재고 골라야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007192746175.mp4",
+    "post_url": "https://www.youtube.com/shorts/vEUsomMK0Ak"
   }
 ]
