@@ -3513,5 +3513,57 @@
     "known_downside": "자석식이라 표면이 자석에 안 붙는 냉장고에는 쓸 수 없습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012506043138.mp4",
     "post_url": "https://www.youtube.com/shorts/jHEgLJxZwo8"
+  },
+  {
+    "product_id": "AE1005007060226895",
+    "aliexpress_product_id": "1005007060226895",
+    "created_at": "2026-06-22",
+    "status": "PUBLISHED",
+    "product_name": "이지라이프 스텐 접이식 빨래 건조대 거치대 행거 중형 대형 화이트",
+    "display_name": "스텐 건조대",
+    "category": "세탁",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005007060226895.html?pdp_npi=6%40dis%21KRW%2116900%2114872%21%21%2116900%2114872%21%402151fce817820540212396501e1082%2112000044204075625%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3wDnUw1",
+    "price": 14872,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S1df7d1e2f6934280a1e4e898cdd2a6dbT.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S1df7d1e2f6934280a1e4e898cdd2a6dbT.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7262e13540244552a3f89966b0879208l.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/A283199c7ff094e77ae43c33d6f3e9a15p.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/A4e0faf4059da450cab89cabc2c8c9034i.jpg"
+    ],
+    "video_url": "",
+    "rating": 91.1,
+    "review_count": 216,
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "스텐 빨래 건조대 대형",
+      "category": "세탁",
+      "title_keyword": "스텐 건조대",
+      "old_way": "좁고 휘청대는 건조대에 빨래 욱여넣기",
+      "hook": "빨래 건조대, 자꾸 휘청거리고 모자라죠?",
+      "problem": "빨래 많은 날엔 좁은 건조대에 다 못 널고, 약한 프레임은 무게에 휘청거리죠.",
+      "usage": "넓게 펼쳐 한 번에 많이 널고, 안 쓸 땐 접어서 세워두면 됩니다.",
+      "benefit": "한 번에 넉넉히 널 수 있어서 빨래가 잘 마르고 공간도 깔끔해져요.",
+      "downside": "기본 건조대보다 무겁고 부피가 있어 보관 공간은 좀 필요해요",
+      "target": "빨래 널 곳이 늘 부족한 사람"
+    },
+    "problem": "빨래 많은 날엔 좁은 건조대에 다 못 널고, 약한 프레임은 무게에 휘청거리죠.",
+    "video_angle": "빨래 건조대, 자꾸 휘청거리고 모자라죠?",
+    "known_downside": "기본 건조대보다 무겁고 부피가 있어 보관 공간은 좀 필요해요",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007060226895.mp4",
+    "post_url": "https://www.youtube.com/shorts/Gvx2YHxEfnA"
   }
 ]
