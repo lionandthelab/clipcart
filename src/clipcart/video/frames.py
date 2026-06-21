@@ -2,7 +2,7 @@
 
 흥행 쇼츠 자막 스타일 모방:
 - 굵은 고딕 + 흰 글자 + 검정 외곽선
-- 핵심 구절 노랑 강조
+- 핵심 구절 블루 강조
 - 하단 중앙 배치, 훅은 중앙 대형
 - 전 장면 좌상단 '광고 · 쿠팡 파트너스' 상시 노출 (공정위 표시)
 """
@@ -20,10 +20,11 @@ from clipcart.video.fonts import load_font as _load_font
 W, H = 1080, 1920
 
 WHITE = "#FFFFFF"
-YELLOW = "#FFD400"
+# 테마: 푸른 계열(운영자 지시 2026-06-22) — 노랑/빨강 강조를 블루로 통일.
+ACCENT = "#38B2FF"        # 밝은 azure — 주 강조
 BLACK = "#000000"
-DARK = "#15171B"
-RED = "#FF3B30"
+DARK = "#0E1626"          # 다크 네이비
+ACCENT_DEEP = "#2563EB"   # 로열블루 — 가격 펠릿 등
 
 
 def _font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
@@ -184,7 +185,7 @@ def compose_scene_frame(product_img: Image.Image, scene: dict, out_path: Path) -
         caption_font = _font(82)
         y = 640
         if scene.get("accent"):
-            y = _draw_lines(draw, _wrap(draw, scene["accent"], accent_font, W - 140), accent_font, y, YELLOW, 8)
+            y = _draw_lines(draw, _wrap(draw, scene["accent"], accent_font, W - 140), accent_font, y, ACCENT, 8)
             y += 14
         if scene.get("caption"):
             _draw_lines(draw, _wrap(draw, scene["caption"], caption_font, W - 140), caption_font, y, WHITE, 8)
@@ -198,7 +199,7 @@ def compose_scene_frame(product_img: Image.Image, scene: dict, out_path: Path) -
             price_w = draw.textlength(scene["price_text"], font=badge_font) + 64
             rocket_w = (draw.textlength("로켓배송", font=badge_font) + 64 + 24) if scene.get("rocket") else 0
             bx = int((W - price_w - rocket_w) // 2)
-            end_x, _ = _pill(draw, (bx, 1430), scene["price_text"], badge_font, WHITE, RED, pad=(32, 18))
+            end_x, _ = _pill(draw, (bx, 1430), scene["price_text"], badge_font, WHITE, ACCENT_DEEP, pad=(32, 18))
             if scene.get("rocket"):
                 _pill(draw, (end_x + 24, 1430), "로켓배송", badge_font, WHITE, "#1A73E8", pad=(32, 18))
         if scene.get("sub"):
@@ -209,11 +210,11 @@ def compose_scene_frame(product_img: Image.Image, scene: dict, out_path: Path) -
         accent_font = _font(84)
         body_font = _font(62)
         y = 480
-        y = _draw_lines(draw, ["아쉬운 점 하나"], accent_font, y, YELLOW, 8)
+        y = _draw_lines(draw, ["아쉬운 점 하나"], accent_font, y, ACCENT, 8)
         y += 16
         y = _draw_lines(draw, _wrap(draw, scene.get("caption", ""), body_font, W - 150), body_font, y, WHITE, 7)
         cta_font = _font(72)
-        _draw_lines(draw, ["구매 링크는 설명란에 ▼"], cta_font, 1430, YELLOW, 8)
+        _draw_lines(draw, ["구매 링크는 설명란에 ▼"], cta_font, 1430, ACCENT, 8)
         if scene.get("disclosure"):
             disc_font = _font(34, bold=False)
             _draw_lines(draw, _wrap(draw, scene["disclosure"], disc_font, W - 140), disc_font, 1640, "#DDDDDD", 3, spacing=8)
@@ -253,7 +254,7 @@ def draw_product_card_static(canvas: Image.Image, name: str, price_text: str, ro
     price_w = draw.textlength(price_text, font=badge_font) + 64
     rocket_w = (draw.textlength("로켓배송", font=badge_font) + 64 + 24) if rocket else 0
     bx = int((W - price_w - rocket_w) // 2)
-    end_x, _ = _pill(draw, (bx, 1392), price_text, badge_font, WHITE, RED, pad=(32, 18))
+    end_x, _ = _pill(draw, (bx, 1392), price_text, badge_font, WHITE, ACCENT_DEEP, pad=(32, 18))
     if rocket:
         _pill(draw, (end_x + 24, 1392), "로켓배송", badge_font, WHITE, "#1A73E8", pad=(32, 18))
 
@@ -263,7 +264,7 @@ def draw_cta_static(canvas: Image.Image, cta: str, disclosure: str) -> None:
     draw = ImageDraw.Draw(canvas, "RGBA")
     cta_font = _font(64)
     cw = draw.textlength(cta, font=cta_font)
-    draw.text(((W - cw) // 2, 1414), cta, font=cta_font, fill=YELLOW,
+    draw.text(((W - cw) // 2, 1414), cta, font=cta_font, fill=ACCENT,
               stroke_width=8, stroke_fill=BLACK)
     disc_font = _font(32, bold=False)
     y = 1690
@@ -292,12 +293,12 @@ def draw_chrome(canvas: Image.Image) -> None:
 # 썸네일 비주얼 변형 — 제품ID로 결정적 선택해 영상마다 다른 룩(색·위치·하이라이트 밴드).
 # band이 있으면 line1을 색 박스 위 흰 글씨로(하이라이터), 없으면 accent 색 글씨.
 _THUMB_STYLES = [
-    {"accent": YELLOW,    "dark": 120, "line_y": 235, "card_y": 820, "card": 720, "band": None},
-    {"accent": WHITE,     "dark": 150, "line_y": 200, "card_y": 835, "card": 690, "band": RED},
-    {"accent": "#7DE25A", "dark": 120, "line_y": 235, "card_y": 820, "card": 720, "band": None},
-    {"accent": "#3FC4FF", "dark": 150, "line_y": 200, "card_y": 835, "card": 690, "band": None},
-    {"accent": WHITE,     "dark": 130, "line_y": 235, "card_y": 820, "card": 720, "band": "#1A73E8"},
-    {"accent": "#FF8A24", "dark": 120, "line_y": 215, "card_y": 825, "card": 710, "band": None},
+    {"accent": "#38B2FF", "dark": 120, "line_y": 235, "card_y": 820, "card": 720, "band": None},      # 밝은 azure
+    {"accent": WHITE,     "dark": 150, "line_y": 200, "card_y": 835, "card": 690, "band": "#2563EB"},  # 로열블루 밴드
+    {"accent": "#5ED0FF", "dark": 120, "line_y": 235, "card_y": 820, "card": 720, "band": None},      # 라이트 시안블루
+    {"accent": "#7FA8FF", "dark": 150, "line_y": 200, "card_y": 835, "card": 690, "band": None},      # 페리윙클
+    {"accent": WHITE,     "dark": 130, "line_y": 235, "card_y": 820, "card": 720, "band": "#0E7490"},  # 틸 밴드
+    {"accent": "#9AD8FF", "dark": 120, "line_y": 215, "card_y": 825, "card": 710, "band": None},      # 아주 밝은 하늘
 ]
 
 

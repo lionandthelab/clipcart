@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from PIL import Image, ImageDraw, ImageFont
 
-from clipcart.video.frames import BLACK, RED, W, YELLOW, _font
+from clipcart.video.frames import ACCENT, BLACK, W, _font
 
 WHITE = "#FFFFFF"
 DIM = (255, 255, 255, 90)
@@ -47,7 +47,7 @@ class Caption:
         max_words: int = 5,
         bottom: int = 1640,
         line_gap: int = 16,
-        highlight: str = YELLOW,
+        highlight: str = ACCENT,
         max_width: int | None = None,
     ) -> None:
         self.words = words

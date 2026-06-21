@@ -46,18 +46,20 @@ _FONT_BOLD = True
 _FONT_REG = False
 
 WHITE = (245, 245, 245)
-YELLOW = (255, 209, 0)
-RED = (232, 38, 38)
-INK = (10, 11, 14)
-DIM = (200, 200, 205)
-_COLORS = {"red": RED, "yellow": YELLOW, "white": WHITE}
+# 테마: 푸른 계열(운영자 지시 2026-06-22) — 기존 노랑/빨강 강조를 블루로 통일.
+ACCENT = (56, 178, 255)       # 밝은 azure — 주 강조(가격·이모티콘 슬램)
+ACCENT_DEEP = (37, 99, 235)   # 로열블루 — 보조 강조
+INK = (9, 14, 26)             # 다크 네이비 배경(거의 검정, 푸른 기)
+DIM = (200, 205, 215)
+# 비트의 color 이름(red/yellow/white)을 블루 테마로 매핑 — 의미 키는 유지
+_COLORS = {"red": ACCENT_DEEP, "yellow": ACCENT, "white": WHITE}
 
-# story 템플릿 팔레트 — 밝고 화사한 크림 톤(검정 광고 톤과 대비)
-CREAM = (247, 243, 236)
-CHARCOAL = (44, 46, 51)
-SAGE = (126, 155, 122)
-# story에서 강조어 색(promo 노랑/빨강)을 차콜/세이지로 순화
-_STORY_COLOR = {"red": SAGE, "yellow": SAGE, "white": CHARCOAL}
+# story 템플릿 팔레트 — 쿨 오프화이트 + 슬레이트 블루
+CREAM = (238, 242, 248)
+CHARCOAL = (40, 46, 58)
+SLATE = (96, 132, 196)
+# story에서 강조어 색(promo 블루)을 차콜/슬레이트로 순화
+_STORY_COLOR = {"red": SLATE, "yellow": SLATE, "white": CHARCOAL}
 
 BANNER_TEXT = "광고 · 쿠팡 파트너스 수수료 지급"
 BRAND = "살림해결소"
@@ -330,7 +332,7 @@ def _fit(text, bold, box_w, box_h, max_size, min_size, stroke, max_lines, displa
 
 
 def _draw_block(text, bold, zone_y0, zone_y1, max_size, min_size,
-                color=WHITE, accent=None, accent_color=YELLOW, stroke=6, display=False, modern=False):
+                color=WHITE, accent=None, accent_color=ACCENT, stroke=6, display=False, modern=False):
     box_w = int(W * 0.88)
     box_h = (zone_y1 - zone_y0) - 20
     max_lines = 2 if (zone_y1 - zone_y0) < 0.25 * H else 3
@@ -384,8 +386,8 @@ def _korlen(s: str) -> int:
 # 하단 자막: 또렷한 배경 칩(검정 띠 위에서도 보이게 밝은 차콜) + 디스플레이 폰트, 가능하면 한 줄.
 SUB_MAX_SIZE, SUB_MIN_SIZE = 78, 42
 # 배경 칩은 더 투명하게(운영자 지시 2026-06-20) — 글자 흰색 스트로크로 가독성 보존.
-SUB_BG = (44, 47, 60, 180)
-SUB_BORDER = (255, 255, 255, 50)
+SUB_BG = (20, 32, 54, 180)
+SUB_BORDER = (160, 200, 255, 55)
 
 
 def _subtitle_png(text: str) -> np.ndarray:
@@ -685,7 +687,7 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
             max_size=72, min_size=40,
             color=(CHARCOAL if STORY else WHITE),
             accent=(price_m.group(0) if price_m else None),
-            accent_color=(SAGE if STORY else YELLOW),
+            accent_color=(SLATE if STORY else ACCENT),
             stroke=(3 if STORY else 7), display=not STORY, modern=STORY,
         )
         header_clip = _overlay(header_png, 0.0, total, fi=0.0, fo=0.0)
@@ -723,7 +725,7 @@ def render_promo(beats: list[dict[str, Any]], product_img_path: str, out_path: s
         layers.append(_logo_overlay(str(logo), end_start + 0.1, end_card_dur - 0.2))
     else:
         layers.append(_overlay(_draw_block(BRAND, _FONT_BOLD, int(0.42 * H), int(0.58 * H),
-                      96, 54, color=YELLOW), end_start + 0.1, end_card_dur - 0.2))
+                      96, 54, color=ACCENT), end_start + 0.1, end_card_dur - 0.2))
 
     final = CompositeVideoClip(layers, size=(W, H)).with_duration(total).with_fps(fps)
 
