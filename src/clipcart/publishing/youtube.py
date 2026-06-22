@@ -14,6 +14,10 @@ SCOPES = [
     "https://www.googleapis.com/auth/youtube.upload",
     "https://www.googleapis.com/auth/youtube.force-ssl",  # 댓글 작성/메타데이터 수정
 ]
+# 동의(재인증) 전용 — 갱신용 SCOPES에 analytics를 더하면 기존 토큰 갱신이
+# invalid_scope로 깨져 업로드가 막힌다. 그래서 '새 동의'에서만 리텐션 읽기 권한을
+# 추가로 요청한다(재인증 후 토큰은 상위집합이라 SCOPES로의 갱신=부분집합이라 안전).
+CONSENT_SCOPES = [*SCOPES, "https://www.googleapis.com/auth/yt-analytics.readonly"]
 
 
 class YouTubePublisher(PlatformPublisher):

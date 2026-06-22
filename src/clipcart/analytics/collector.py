@@ -17,6 +17,9 @@ from clipcart.coupang import report_clicks, report_commission, report_orders
 from clipcart.storage import load_metrics, load_posts, save_metrics
 
 YOUTUBE_VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
+YT_ANALYTICS_URL = "https://youtubeanalytics.googleapis.com/v2/reports"
+# 리텐션은 Data API(키)로 안 되고 Analytics API(OAuth) 전용 스코프가 필요하다.
+YT_ANALYTICS_SCOPES = ["https://www.googleapis.com/auth/yt-analytics.readonly"]
 
 
 def fetch_video_stats(video_ids: list[str]) -> dict[str, dict[str, int]]:
@@ -41,6 +44,91 @@ def fetch_video_stats(video_ids: list[str]) -> dict[str, dict[str, int]]:
                 "comments": int(s.get("commentCount", 0)),
             }
     return stats
+
+
+def parse_retention_report(report: dict[str, Any]) -> dict[str, dict[str, float]]:
+    """YouTube Analytics API 응답(columnHeaders/rows) → {영상ID: {avg_view_pct, avg_view_duration}}."""
+    rows = report.get("rows") or []
+    cols = [c.get("name") for c in report.get("columnHeaders", [])]
+    try:
+        i_vid = cols.index("video")
+        i_pct = cols.index("averageViewPercentage")
+        i_dur = cols.index("averageViewDuration")
+    except ValueError:
+        return {}
+    out: dict[str, dict[str, float]] = {}
+    for row in rows:
+        out[row[i_vid]] = {
+            "avg_view_pct": row[i_pct],
+            "avg_view_duration": row[i_dur],
+        }
+    return out
+
+
+def fetch_retention(
+    video_ids: list[str], start_date: str, end_date: str
+) -> tuple[dict[str, dict[str, float]], str | None]:
+    """YouTube Analytics API로 영상별 평균 시청%/시청시간 조회. (retention, error) 반환.
+
+    OAuth에 yt-analytics.readonly 스코프가 필요하다. 업로드 토큰엔 보통 없어서
+    403이 나는데, 그때는 빈 dict + 안내(운영자 재인증 필요)로 부드럽게 실패한다.
+    """
+    if not video_ids:
+        return {}, None
+    try:
+        from google.auth.transport.requests import Request
+        from google.oauth2.credentials import Credentials
+
+        from clipcart.config import load_youtube_config
+
+        cfg = load_youtube_config()
+        if not (cfg.refresh_token and cfg.client_id and cfg.client_secret):
+            return {}, "YouTube OAuth 미설정 — 리텐션 수집 불가"
+        creds = Credentials(
+            token=None,
+            refresh_token=cfg.refresh_token,
+            token_uri="https://oauth2.googleapis.com/token",
+            client_id=cfg.client_id,
+            client_secret=cfg.client_secret,
+            scopes=YT_ANALYTICS_SCOPES,
+        )
+        creds.refresh(Request())
+        sd = f"{start_date[:4]}-{start_date[4:6]}-{start_date[6:]}"
+        ed = f"{end_date[:4]}-{end_date[4:6]}-{end_date[6:]}"
+        out: dict[str, dict[str, float]] = {}
+        for i in range(0, len(video_ids), 200):  # video== 필터 한도(500) 내 안전 배치
+            batch = video_ids[i : i + 200]
+            resp = requests.get(
+                YT_ANALYTICS_URL,
+                params={
+                    "ids": "channel==MINE",
+                    "startDate": sd,
+                    "endDate": ed,
+                    "metrics": "views,averageViewPercentage,averageViewDuration",
+                    "dimensions": "video",
+                    "filters": "video==" + ",".join(batch),
+                    "maxResults": 200,
+                    "sort": "-views",
+                },
+                headers={"Authorization": f"Bearer {creds.token}"},
+                timeout=30,
+            )
+            if resp.status_code in (401, 403):
+                return {}, (
+                    "YouTube Analytics 스코프 없음(yt-analytics.readonly) — "
+                    "운영자가 analytics 권한 포함해 재인증 필요"
+                )
+            resp.raise_for_status()
+            out.update(parse_retention_report(resp.json()))
+        return out, None
+    except Exception as exc:  # noqa: BLE001 — 리텐션 실패가 전체 수집을 막지 않는다
+        msg = str(exc)
+        if "invalid_scope" in msg or "insufficient" in msg.lower():
+            return {}, (
+                "YouTube 리텐션 권한 없음 — `clipcart auth`로 재인증 필요"
+                "(동의 화면에 'YouTube 분석 보기' 권한 체크). 현재 토큰엔 미포함."
+            )
+        return {}, msg[:200]
 
 
 def dead_video_ids(queried_ids: list[str], live_ids: set[str]) -> set[str]:
@@ -107,8 +195,14 @@ def build_snapshot(
     collected_at: str,
     start_date: str,
     end_date: str,
+    retention: dict[str, dict[str, float]] | None = None,
 ) -> dict[str, Any]:
-    """게시 기록 + YouTube 통계 + 쿠팡 리포트를 subId로 조인한 스냅샷."""
+    """게시 기록 + YouTube 통계 + 쿠팡 리포트를 subId로 조인한 스냅샷.
+
+    retention(YouTube Analytics): {영상ID: {avg_view_pct, avg_view_duration}} — 시청
+    유지율. 조회수만 보면 '왜 안 터지나'를 모른다(이탈 지점이 핵심). 미수집 시 None.
+    """
+    retention = retention or {}
     clicks_by_sub = _sum_by_sub_id(clicks, "click")
     commission_by_sub = _sum_by_sub_id(commission, "commission")
     orders_by_sub = _sum_by_sub_id(commission, "order")
@@ -143,6 +237,9 @@ def build_snapshot(
                 # 알리는 subId 미지원이라 측정 불가(None).
                 "bio_clicks": int(clicks_by_sub.get(bio_sub, 0)) if bio_sub else None,
                 "bio_commission": float(commission_by_sub.get(bio_sub, 0.0)) if bio_sub else None,
+                # 시청 유지율 — 미수집 시 None(0과 구분)
+                "avg_view_pct": (retention.get(vid) or {}).get("avg_view_pct"),
+                "avg_view_duration": (retention.get(vid) or {}).get("avg_view_duration"),
             }
         )
 
@@ -167,6 +264,16 @@ def build_snapshot(
             if k not in attributed_subs and not _is_bio_sub(k)
         )
     )
+    # 채널 시청 유지율 — 조회수 가중 평균(유지율 있는 영상만). 없으면 None.
+    ret_num = sum(
+        v["avg_view_pct"] * v["views"]
+        for v in videos
+        if v.get("avg_view_pct") is not None and v["views"]
+    )
+    ret_den = sum(
+        v["views"] for v in videos if v.get("avg_view_pct") is not None and v["views"]
+    )
+    avg_view_pct = round(ret_num / ret_den, 2) if ret_den else None
     return {
         "collected_at": collected_at,
         "window": {"start": start_date, "end": end_date},
@@ -179,6 +286,7 @@ def build_snapshot(
             "bio_commission_total": bio_commission_total,
             "unattributed_clicks": unattributed_clicks,
             "unattributed_commission": unattributed_commission,
+            "avg_view_pct": avg_view_pct,
         },
     }
 
@@ -257,6 +365,10 @@ def collect(days: int = 7) -> dict[str, Any]:
     else:
         coupang_error = None
 
+    retention, retention_error = fetch_retention(
+        [p["post_id"] for p in posts if p.get("post_id")], start_s, end_s
+    )
+
     snapshot = build_snapshot(
         posts,
         stats,
@@ -265,10 +377,13 @@ def collect(days: int = 7) -> dict[str, Any]:
         datetime.now(timezone.utc).isoformat(),
         start_s,
         end_s,
+        retention=retention,
     )
     snapshot["coupang_orders"] = orders  # 24시간 쿠키 주문 원본(상품명·gmv 포함)
     if coupang_error:
         snapshot["coupang_error"] = coupang_error
+    if retention_error:
+        snapshot["retention_error"] = retention_error
 
     history = load_metrics()
     history.append(snapshot)

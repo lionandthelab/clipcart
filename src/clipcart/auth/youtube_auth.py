@@ -10,7 +10,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 from clipcart.config import PROJECT_ROOT
-from clipcart.publishing.youtube import SCOPES
+from clipcart.publishing.youtube import CONSENT_SCOPES, SCOPES
 
 SERVICE_ACCOUNT_NOTE = (
     "YouTube Data API는 서비스 계정 업로드를 지원하지 않습니다. "
@@ -70,7 +70,7 @@ def setup_youtube_oauth(
     token_path = PROJECT_ROOT / ".youtube-token.json"
 
     if secrets_file and secrets_file.is_file():
-        flow = InstalledAppFlow.from_client_secrets_file(str(secrets_file), SCOPES)
+        flow = InstalledAppFlow.from_client_secrets_file(str(secrets_file), CONSENT_SCOPES)
     elif client_id and client_secret:
         secrets_path = PROJECT_ROOT / ".youtube_client_secret.json"
         secrets_path.write_text(
@@ -88,7 +88,7 @@ def setup_youtube_oauth(
             ),
             encoding="utf-8",
         )
-        flow = InstalledAppFlow.from_client_secrets_file(str(secrets_path), SCOPES)
+        flow = InstalledAppFlow.from_client_secrets_file(str(secrets_path), CONSENT_SCOPES)
     else:
         raise RuntimeError(
             "YouTube OAuth Client ID/Secret 필요.\n"

@@ -137,6 +137,55 @@ def test_legacy_video_without_sub_id_has_null_attribution():
     assert a["commission"] is None
 
 
+def test_parse_retention_report_maps_video_to_avg_view_pct():
+    from clipcart.analytics.collector import parse_retention_report
+    resp = {
+        "columnHeaders": [
+            {"name": "video"}, {"name": "views"},
+            {"name": "averageViewPercentage"}, {"name": "averageViewDuration"},
+        ],
+        "rows": [
+            ["vidA", 1200, 41.5, 12],
+            ["vidB", 300, 18.0, 5],
+        ],
+    }
+    r = parse_retention_report(resp)
+    assert r["vidA"]["avg_view_pct"] == 41.5
+    assert r["vidA"]["avg_view_duration"] == 12
+    assert r["vidB"]["avg_view_pct"] == 18.0
+
+
+def test_parse_retention_report_handles_empty():
+    from clipcart.analytics.collector import parse_retention_report
+    assert parse_retention_report({}) == {}
+    assert parse_retention_report({"rows": []}) == {}
+
+
+def test_fetch_retention_short_circuits_on_empty_ids():
+    from clipcart.analytics.collector import fetch_retention
+    assert fetch_retention([], "20260605", "20260612") == ({}, None)
+
+
+def test_build_snapshot_attaches_retention_and_weighted_channel_avg():
+    posts = [_post("vidA", "CP1", "s1"), _post("vidB", "CP2", "s2")]
+    retention = {
+        "vidA": {"avg_view_pct": 40.0, "avg_view_duration": 12},
+        "vidB": {"avg_view_pct": 20.0, "avg_view_duration": 6},
+    }
+    snap = build_snapshot(posts, STATS, [], [], "t", "20260605", "20260612", retention=retention)
+    a = next(v for v in snap["videos"] if v["video_id"] == "vidA")
+    assert a["avg_view_pct"] == 40.0
+    assert a["avg_view_duration"] == 12
+    # 조회수 가중 평균: (40*1200 + 20*300) / 1500 = 36.0
+    assert round(snap["channel"]["avg_view_pct"], 1) == 36.0
+
+
+def test_build_snapshot_retention_none_when_absent():
+    snap = build_snapshot([_post("vidA", "CP1", "s1")], STATS, [], [], "t", "20260605", "20260612")
+    assert snap["videos"][0]["avg_view_pct"] is None
+    assert snap["channel"]["avg_view_pct"] is None
+
+
 def test_summarize_sorts_by_views_and_totals():
     posts = [_post("vidA", "CP111", "ss111"), _post("vidB", "CP222", "ss222")]
     snap = build_snapshot(posts, STATS, [{"date": "d", "subId": "ss222", "click": 3}], [],
@@ -188,3 +237,12 @@ def test_load_metrics_tolerates_empty_file(tmp_path, monkeypatch):
     assert storage.load_metrics() == []
     storage.save_metrics([{"collected_at": "x"}])
     assert json.loads((tmp_path / "metrics.json").read_text(encoding="utf-8"))[0]["collected_at"] == "x"
+
+
+def test_consent_scopes_include_analytics_superset_of_refresh_scopes():
+    # 동의 플로우는 리텐션 읽기 권한을 추가로 요청하되, 갱신용 SCOPES는 그대로여야
+    # 기존 업로드 토큰 갱신이 invalid_scope로 깨지지 않는다.
+    from clipcart.publishing.youtube import CONSENT_SCOPES, SCOPES
+    assert set(SCOPES).issubset(set(CONSENT_SCOPES))
+    assert any("yt-analytics" in s for s in CONSENT_SCOPES)
+    assert not any("yt-analytics" in s for s in SCOPES)
