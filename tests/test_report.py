@@ -17,19 +17,20 @@ def _snapshot():
             {"video_id": "a", "source": "coupang", "title_template": "{hook}",
              "script_style": "direct",
              "title": "A", "views": 2000, "likes": 10, "comments": 1,
-             "sub_id": "s_a", "clicks": 5, "orders": 1, "commission": 300.0},
+             "sub_id": "s_a", "clicks": 5, "orders": 1, "commission": 300.0, "avg_view_pct": 35.0},
             {"video_id": "b", "source": "coupang", "title_template": "{hook}",
              "title": "B", "views": 1000, "likes": 4, "comments": 0,
-             "sub_id": "s_b", "clicks": 1, "orders": 0, "commission": 0.0},
+             "sub_id": "s_b", "clicks": 1, "orders": 0, "commission": 0.0, "avg_view_pct": 22.0},
             {"video_id": "c", "source": "aliexpress", "title_template": "아직도 {old_way}? 이거 보세요",
              "title": "C", "views": 1500, "likes": 6, "comments": 1,
-             "sub_id": None, "clicks": None, "orders": None, "commission": None},
+             "sub_id": None, "clicks": None, "orders": None, "commission": None, "avg_view_pct": 28.0},
             {"video_id": "z", "source": "coupang", "title_template": "{hook}",
              "title": "Z(통계없음)", "views": 0, "likes": 0, "comments": 0,
-             "sub_id": "s_z", "clicks": None, "orders": None, "commission": None},
+             "sub_id": "s_z", "clicks": None, "orders": None, "commission": None, "avg_view_pct": None},
         ],
         "channel": {"views": 4500, "clicks_total": 12, "commission_total": 800.0,
-                    "unattributed_clicks": 6, "unattributed_commission": 500.0},
+                    "unattributed_clicks": 6, "unattributed_commission": 500.0,
+                    "avg_view_pct": 29.78},
     }
 
 
@@ -107,6 +108,24 @@ def test_render_text_shows_profile_funnel_line():
     txt = render_text(build_report(snap, _history()))
     assert "프로필" in txt
     assert "4" in txt
+
+
+def test_totals_include_avg_view_pct():
+    r = build_report(_snapshot(), _history())
+    assert r["totals"]["avg_view_pct"] == 29.78
+
+
+def test_by_source_includes_weighted_avg_view_pct():
+    r = build_report(_snapshot(), _history())
+    src = {g["key"]: g for g in r["by_source"]}
+    # coupang a(35,2000)+b(22,1000) = (70000+22000)/3000 = 30.67
+    assert round(src["coupang"]["avg_view_pct"], 1) == 30.7
+    assert round(src["aliexpress"]["avg_view_pct"], 1) == 28.0
+
+
+def test_render_text_shows_retention():
+    txt = render_text(build_report(_snapshot(), _history()))
+    assert "유지율" in txt
 
 
 def test_render_text_is_readable_string():

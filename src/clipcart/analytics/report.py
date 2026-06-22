@@ -21,6 +21,15 @@ def _attr_sum(videos: list[dict[str, Any]], field: str) -> int | float | None:
     return sum(vals) if vals else None
 
 
+def _wavg_view_pct(videos: list[dict[str, Any]]) -> float | None:
+    """조회수 가중 평균 시청 유지율(유지율 있는 영상만). 없으면 None."""
+    num = sum(v["avg_view_pct"] * v["views"] for v in videos
+              if v.get("avg_view_pct") is not None and v.get("views"))
+    den = sum(v["views"] for v in videos
+              if v.get("avg_view_pct") is not None and v.get("views"))
+    return round(num / den, 1) if den else None
+
+
 def _group(videos: list[dict[str, Any]], keyfn: Callable[[dict], str]) -> list[dict[str, Any]]:
     groups: dict[str, list[dict]] = {}
     for v in videos:
@@ -37,6 +46,7 @@ def _group(videos: list[dict[str, Any]], keyfn: Callable[[dict], str]) -> list[d
                 "views_total": sum(views),
                 "clicks": _attr_sum(vs, "clicks"),
                 "commission": _attr_sum(vs, "commission"),
+                "avg_view_pct": _wavg_view_pct(vs),
             }
         )
     return sorted(out, key=lambda g: g["views_median"], reverse=True)
@@ -64,6 +74,7 @@ def build_report(snapshot: dict[str, Any], history: list[dict[str, Any]]) -> dic
             "bio_commission": ch.get("bio_commission_total", 0),
             "unattributed_clicks": ch.get("unattributed_clicks", 0),
             "unattributed_commission": ch.get("unattributed_commission", 0),
+            "avg_view_pct": ch.get("avg_view_pct"),
         },
         "by_source": _group(videos, lambda v: v.get("source", "coupang")),
         "by_hook": _group(videos, lambda v: v.get("title_template") or "(미기록)"),
@@ -90,11 +101,16 @@ def _fmt_clicks(c: int | float | None) -> str:
     return "-" if c is None else f"{c:g}"
 
 
+def _fmt_pct(p: float | None) -> str:
+    return "-" if p is None else f"{p:g}%"
+
+
 def _render_groups(title: str, groups: list[dict[str, Any]]) -> list[str]:
-    lines = [f"### {title} — 조회 중앙값 / 클릭(귀속)"]
+    lines = [f"### {title} — 조회 중앙값 / 유지율 / 클릭(귀속)"]
     for g in groups:
         lines.append(
-            f"  {g['views_median']:>5}  n={g['n']:<2} 클릭={_fmt_clicks(g['clicks']):>4}  {g['key']}"
+            f"  {g['views_median']:>5}  유지율={_fmt_pct(g.get('avg_view_pct')):>5}  "
+            f"n={g['n']:<2} 클릭={_fmt_clicks(g['clicks']):>4}  {g['key']}"
         )
     return lines
 
@@ -104,7 +120,8 @@ def render_text(report: dict[str, Any]) -> str:
     w = report.get("window", {})
     lines = [
         f"성과 분석  ({w.get('start','?')}~{w.get('end','?')})",
-        f"  영상 {t['videos']}편 · 누적 {t['views']:,}뷰 · "
+        f"  영상 {t['videos']}편 · 누적 {t['views']:,}뷰 · 평균 시청 유지율 "
+        f"{_fmt_pct(t['avg_view_pct'])} · "
         f"귀속클릭 {t['clicks_attributed']:g} · 귀속커미션 {t['commission_attributed']:g}원",
         f"  프로필발(bio): 클릭 {t['bio_clicks']:g} · 커미션 {t['bio_commission']:g}원 "
         f"(채널설명·고정프로필 링크 경유)",
