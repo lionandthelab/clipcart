@@ -33,3 +33,18 @@ def test_niche_pool_covers_cadence():
     # 알리 4편/일 × 니치 겹침 회피 10일 = 약 40 니치 필요. 풀이 그보다 넉넉해야
     # 선정이 막히지 않는다(2026-06-23 업로드 중단 원인이 풀 부족+큐버그였음).
     assert len(NICHES) >= 40
+
+
+def test_electric_appliance_products_are_excluded():
+    # 로봇청소기·전동/진공 가전은 제외 카테고리(고가 가전·전기 안전)
+    from clipcart.research.niches import PRODUCT_EXCLUDE_KEYWORDS
+
+    def excluded(name):  # _is_excluded와 동일: 원문 그대로 부분일치
+        return any(kw in name for kw in PRODUCT_EXCLUDE_KEYWORDS)
+
+    assert excluded("스마트 진공 청소 로봇 미니 물걸레 흡입 및 청소 통합형 완전 자동 청소 로봇")
+    assert excluded("무선 전동 진공청소기 가정용")
+    # 비전기 생활용품은 통과해야 함(오탐 방지)
+    assert not excluded("극세사 물걸레 청소포 100매")
+    assert not excluded("유리창 양면 자석 청소기")  # 수동 자석 청소기는 가전 아님
+    assert not excluded("욕실 흡착 선반")            # 흡착(吸着)은 흡입(吸入)과 다름
