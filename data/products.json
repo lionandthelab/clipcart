@@ -3918,5 +3918,47 @@
     "known_downside": "냉장고 칸 높이에 따라 두 단 쌓기가 빠듯할 수 있어 주문 전 높이 확인은 필요합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010529970810.mp4",
     "post_url": "https://www.youtube.com/shorts/BdKUp-7kDjI"
+  },
+  {
+    "product_id": "CP7060653716",
+    "coupang_product_id": "7060653716",
+    "sub_id": "salrimshorts7060653716",
+    "created_at": "2026-06-24",
+    "status": "VIDEO_READY",
+    "product_name": "헨로포우 고양이 모래매트, 단일색상, 1세트",
+    "display_name": "고양이 화장실 매트",
+    "category": "반려동물",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=7060653716&itemId=24025924200&vendorItemId=94872903549&traceid=V0-153-35a6c378ab1689b9&clickBeacon=c9844900-6f51-11f1-a6d8-b76ef3774efd%7E3&requestid=20260624072048851115812739&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/ePsWuFOBIO",
+    "price": 20500,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/j1cZsC2-QOLeU3nnj_STViMSQ0eYLadtD7oEuoLzEAdsAVul6WE8mCFRXXdLSUrtZTFDHJGV81h-MtLQh2Qq1pII__YrpMlFRyMhWpXVT7ErMpX89NfY62NlSHa_oC2tizrMQTqQQM4wS1CZ7uqVkTlaMxCYpeg9KtXTdTXx9pZYmI3CfVW8g5iDY10pBZuHJYViwsKH0wcaVmJhFZGl58ykirzFqQBB4sju5qmLPxYXfUK04D7Im7hvn-Q_VO9346O7hgF0haZs5Fp-Hy3oZPT6rUe9---co_QJnyhu9qWZcCQe7rncAQs_cWKmF1ToWm2m",
+    "score": 83,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 12,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "고양이 화장실 매트",
+      "category": "반려동물",
+      "title_keyword": "고양이 화장실 매트",
+      "old_way": "화장실 주변 모래 매일 쓸기",
+      "hook": "고양이 모래, 집안에 흘리고 다니나요?",
+      "problem": "화장실만 다녀오면 발에 묻은 모래가 거실까지 따라옵니다. 매일 쓸고 닦아도 자고 일어나면 또 밟히죠.",
+      "usage": "화장실 앞에 깔아두면 고양이가 지나갈 때 발 사이 모래가 걸러집니다. 홈에 모인 모래는 한쪽으로 모아 다시 화장실에 부어주면 됩니다.",
+      "benefit": "집안에 흩어지는 모래가 줄어서 청소 횟수가 눈에 띄게 줄어요.",
+      "downside": "매트 홈에 낀 미세한 가루는 가끔 털어내거나 물청소를 해줘야 합니다",
+      "target": "고양이 모래가 집안에 굴러다녀 매일 쓸고 닦는 사람"
+    },
+    "problem": "화장실만 다녀오면 발에 묻은 모래가 거실까지 따라옵니다. 매일 쓸고 닦아도 자고 일어나면 또 밟히죠.",
+    "video_angle": "고양이 모래, 집안에 흘리고 다니나요?",
+    "known_downside": "매트 홈에 낀 미세한 가루는 가끔 털어내거나 물청소를 해줘야 합니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7060653716.mp4"
   }
 ]
