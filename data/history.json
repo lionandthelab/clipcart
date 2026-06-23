@@ -923,5 +923,39 @@
     "post_url": "https://www.youtube.com/shorts/YbMLw9QkVHs",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4euN8jF",
     "sub_id": null
+  },
+  {
+    "date": "2026-06-24",
+    "post_id": "jPffrnj1j4E",
+    "product_id": "AE1005009881919249",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005009881919249",
+    "product_name": "스마트 진공 청소 로봇 미니 물걸레 흡입 및 청소 통합형 완전 자동 청소 로봇",
+    "niche_keyword": "물걸레 청소포 부직포",
+    "category": "청소",
+    "title": "다들 걸레 빨아 짜서 바닥 닦기, 근데 이거 보면 생각 바뀝니다",
+    "title_template": "다들 {old_way}, 근데 이거 보면 생각 바뀝니다",
+    "script_style": "contrarian",
+    "post_url": "https://www.youtube.com/shorts/jPffrnj1j4E",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2yvu2aZ",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-24",
+    "post_id": "9vpymz5bRCo",
+    "product_id": "AE1005010179308100",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005010179308100",
+    "product_name": "1-12개 세탁볼 엉킴 방지 매직 세탁볼 건조 세탁볼 재사용 가능한 가정용 세탁기 의류 섬유유연제",
+    "niche_keyword": "세탁볼 빨래볼",
+    "category": "세탁",
+    "title": "다들 빨래 세제 매번 계량하기, 근데 이거 보면 생각 바뀝니다",
+    "title_template": "다들 {old_way}, 근데 이거 보면 생각 바뀝니다",
+    "script_style": "contrarian",
+    "post_url": "https://www.youtube.com/shorts/9vpymz5bRCo",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4WEzc4N",
+    "sub_id": null
   }
 ]

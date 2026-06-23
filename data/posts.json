@@ -893,5 +893,37 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgzuoAtYxTOYgSCl2mB4AaABAg"
+  },
+  {
+    "post_id": "jPffrnj1j4E",
+    "product_id": "AE1005009881919249",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/jPffrnj1j4E",
+    "published_at": "2026-06-23T16:50:08.864984+00:00",
+    "status": "PUBLISHED",
+    "title": "다들 걸레 빨아 짜서 바닥 닦기, 근데 이거 보면 생각 바뀝니다",
+    "title_template": "다들 {old_way}, 근데 이거 보면 생각 바뀝니다",
+    "script_style": "contrarian",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2yvu2aZ",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgxcpYVyliSVl8F--J54AaABAg"
+  },
+  {
+    "post_id": "9vpymz5bRCo",
+    "product_id": "AE1005010179308100",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/9vpymz5bRCo",
+    "published_at": "2026-06-23T17:12:04.882325+00:00",
+    "status": "PUBLISHED",
+    "title": "다들 빨래 세제 매번 계량하기, 근데 이거 보면 생각 바뀝니다",
+    "title_template": "다들 {old_way}, 근데 이거 보면 생각 바뀝니다",
+    "script_style": "contrarian",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4WEzc4N",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgwEiBXn3ooemxuzYHl4AaABAg"
   }
 ]
