@@ -115,11 +115,11 @@ def test_totals_include_avg_view_pct():
     assert r["totals"]["avg_view_pct"] == 29.78
 
 
-def test_by_source_includes_weighted_avg_view_pct():
+def test_by_source_includes_median_avg_view_pct():
     r = build_report(_snapshot(), _history())
     src = {g["key"]: g for g in r["by_source"]}
-    # coupang a(35,2000)+b(22,1000) = (70000+22000)/3000 = 30.67
-    assert round(src["coupang"]["avg_view_pct"], 1) == 30.7
+    # 중앙값(이상치 강건): coupang median(35, 22) = 28.5, ali median(28) = 28.0
+    assert round(src["coupang"]["avg_view_pct"], 1) == 28.5
     assert round(src["aliexpress"]["avg_view_pct"], 1) == 28.0
 
 

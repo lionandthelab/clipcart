@@ -176,8 +176,21 @@ def test_build_snapshot_attaches_retention_and_weighted_channel_avg():
     a = next(v for v in snap["videos"] if v["video_id"] == "vidA")
     assert a["avg_view_pct"] == 40.0
     assert a["avg_view_duration"] == 12
-    # 조회수 가중 평균: (40*1200 + 20*300) / 1500 = 36.0
-    assert round(snap["channel"]["avg_view_pct"], 1) == 36.0
+    # 채널은 중앙값(이상치에 강건): median(40, 20) = 30.0
+    assert round(snap["channel"]["avg_view_pct"], 1) == 30.0
+
+
+def test_channel_avg_view_pct_median_ignores_single_outlier():
+    # 쇼츠 루프/API 글리치로 한 영상이 3144% 같은 손상값이어도 중앙값은 흔들리지 않는다.
+    posts = [_post("vidA", "CP1", "s1"), _post("vidB", "CP2", "s2"), _post("vidC", "CP3", "s3")]
+    stats = {k: {"views": 1000, "likes": 0, "comments": 0} for k in ("vidA", "vidB", "vidC")}
+    retention = {
+        "vidA": {"avg_view_pct": 40.0, "avg_view_duration": 16},
+        "vidB": {"avg_view_pct": 50.0, "avg_view_duration": 20},
+        "vidC": {"avg_view_pct": 3144.0, "avg_view_duration": 1352},  # 손상값
+    }
+    snap = build_snapshot(posts, stats, [], [], "t", "20260605", "20260612", retention=retention)
+    assert snap["channel"]["avg_view_pct"] == 50.0  # median(40,50,3144) = 50
 
 
 def test_build_snapshot_retention_none_when_absent():
