@@ -70,6 +70,20 @@ SCRIPT_STYLES: list[dict[str, str]] = [
         "result_tail": "그 작은 게 생각보다 편해요.",
         "cta": "궁금하면 링크는 고정 댓글에 둘게요.",
     },
+    {
+        # 역발상(insider POV) — '다들 이렇게 하는데, 사실 더 나은 게 있다'. 특정 제품
+        # 비방이 아니라 '흔한 방법(old_way)의 함정 → 더 나은 선택'으로 신뢰를 만든다.
+        # 자동 풀에선 제외하고 CLIPCART_SCRIPT_STYLE=contrarian으로만 동작(수동 검증 단계).
+        # hook 필드가 있으면 beats가 훅 나레이션까지 역발상으로 덮어쓴다(첫 3초 차별화).
+        "name": "contrarian",
+        "hook": "다들 {old_way}, 사실 그럴 필요 없어요.",
+        "switch": "{old_way}, 다들 그렇게 하죠. 근데 요즘 아는 사람은 이렇게 바꿨어요.",
+        "switch_caption": "다들 이렇게 하지만",
+        "switch_emphasis": "아는 사람은 이렇게",
+        "usage": "방법은 오히려 더 간단해요. {usage}",
+        "result_tail": "이 가격이면 진작 바꿀 걸 싶죠.",
+        "cta": "더 궁금하면 고정 댓글 링크 보세요.",
+    },
 ]
 
 _BY_NAME = {s["name"]: s for s in SCRIPT_STYLES}
@@ -83,8 +97,9 @@ def pick_script_style(product: dict[str, Any]) -> tuple[str, dict[str, str]]:
         return forced, _BY_NAME[forced]
     if current_template() == "story":
         return "story", _BY_NAME["story"]
-    # promo는 story 말투를 무작위로 섞지 않는다(시각 톤과 불일치 방지)
-    pool = [s for s in SCRIPT_STYLES if s["name"] != "story"]
+    # story·contrarian은 자동 무작위 풀에서 제외(전자는 시각 톤 불일치, 후자는 수동
+    # 검증 단계라 CLIPCART_SCRIPT_STYLE 강제로만 동작).
+    pool = [s for s in SCRIPT_STYLES if s["name"] not in ("story", "contrarian")]
     seed = int(hashlib.md5(f"{date.today()}{product.get('product_id','')}".encode()).hexdigest(), 16)
     style = pool[seed % len(pool)]
     return style["name"], style

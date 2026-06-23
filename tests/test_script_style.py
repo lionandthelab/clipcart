@@ -74,3 +74,19 @@ def test_beats_cta_drops_downside_text():
     cta = next(b for b in build_beats(product) if b["role"] == "cta")
     assert niche["downside"] not in cta["narration"]
     assert "단점" not in cta["narration"]
+
+
+def test_contrarian_style_is_forced_only_not_in_auto_pool(monkeypatch):
+    # 수동 1편 단계: 강제하지 않으면 자동 선택에서 contrarian이 나오면 안 된다.
+    monkeypatch.delenv("CLIPCART_SCRIPT_STYLE", raising=False)
+    from clipcart.video.promo.script import pick_script_style
+    names = {pick_script_style({"product_id": f"P{i}"})[0] for i in range(60)}
+    assert "contrarian" not in names
+
+
+def test_forcing_contrarian_returns_style_with_hook(monkeypatch):
+    monkeypatch.setenv("CLIPCART_SCRIPT_STYLE", "contrarian")
+    from clipcart.video.promo.script import pick_script_style
+    name, style = pick_script_style({"product_id": "X"})
+    assert name == "contrarian"
+    assert "{old_way}" in style.get("hook", "")

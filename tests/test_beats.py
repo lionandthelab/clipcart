@@ -172,3 +172,19 @@ def test_promo_has_no_model_clip_tokens(monkeypatch):
     beats = build_beats(_product())
     blob = " ".join((b.get("source", "") + " " + " ".join(b.get("shots") or [])) for b in beats)
     assert "modelclip" not in blob
+
+
+def test_contrarian_style_overrides_hook_narration(monkeypatch):
+    # 역발상 스타일: 훅을 '다들 ~? 사실 그럴 필요 없어요'로 장악(첫 3초 차별화)
+    monkeypatch.setenv("CLIPCART_SCRIPT_STYLE", "contrarian")
+    beats = build_beats(_product())
+    hook = next(b for b in beats if b["role"] == "hook")
+    assert "다들" in hook["narration"] and "사실" in hook["narration"]
+    assert "{old_way}" not in hook["narration"]  # 렌더됨
+
+
+def test_default_style_keeps_niche_hook(monkeypatch):
+    monkeypatch.delenv("CLIPCART_SCRIPT_STYLE", raising=False)
+    beats = build_beats(_product())
+    hook = next(b for b in beats if b["role"] == "hook")
+    assert hook["narration"] == _product()["niche"]["hook"]

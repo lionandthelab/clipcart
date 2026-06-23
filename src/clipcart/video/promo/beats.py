@@ -145,12 +145,19 @@ def build_beats(product: dict[str, Any]) -> list[dict[str, Any]]:
         product_shots = ["productvideo", *(product_shots or [f"motionshot:{scenes[0]}"])]
         usage_shots = ["productvideo", *usage_shots]
 
+    # 스타일이 훅 문장을 제공하면(역발상 등) 첫 3초까지 그 톤으로 덮어쓴다. 없으면 니치 훅.
+    hook_text = (
+        render_line(style["hook"], old_way=niche["old_way"], title_keyword=niche["title_keyword"])
+        if style.get("hook")
+        else niche["hook"]
+    )
+
     beats: list[dict[str, Any]] = [
         {
             "role": "hook",
             "tone": "hook",
-            "narration": niche["hook"],
-            "caption": niche["hook"],
+            "narration": hook_text,
+            "caption": hook_text,
             # 훅: 실영상 우선(주목), 미스 시 공감 생성 이미지
             "source": f"pexels:{br['pain']}",
             "fallback": f"gemini:{empathy}",
