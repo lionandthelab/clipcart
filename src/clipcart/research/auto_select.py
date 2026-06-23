@@ -16,7 +16,12 @@ from urllib.parse import parse_qs, urlparse
 from clipcart.config import DATA_DIR
 from clipcart.coupang import create_deeplinks, make_sub_id, search_products
 from clipcart.research import history
-from clipcart.research.niches import NICHES, PRODUCT_EXCLUDE_KEYWORDS, product_type_ok
+from clipcart.research.niches import (
+    NICHES,
+    PRODUCT_EXCLUDE_KEYWORDS,
+    order_niche_queue,
+    product_type_ok,
+)
 from clipcart.research.scoring import ScoreInput, score_product
 
 NICHE_STATE_FILE = DATA_DIR / "niche_state.json"
@@ -103,7 +108,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
     gap_days = int(os.getenv("CLIPCART_KEYWORD_GAP_DAYS", "10"))
     ranked = sorted(NICHES, key=lambda n: (last_used.get(n["keyword"], ""), n["keyword"]))
     fresh = [n for n in ranked if history.days_since(last_used.get(n["keyword"], "")) >= gap_days]
-    niche_queue = fresh or ranked
+    niche_queue = order_niche_queue(ranked, fresh)
     if force_keyword:
         niche_queue = [n for n in NICHES if n["keyword"] == force_keyword] or niche_queue
 

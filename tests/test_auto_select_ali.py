@@ -169,3 +169,19 @@ def test_video_outside_top5_not_promoted(monkeypatch):
     monkeypatch.setattr(sel, "query_products", lambda keyword, **kw_: items if keyword == kw else [])
     p = sel.select_today_product(force_keyword=kw)
     assert p["aliexpress_product_id"] == "1"
+
+
+def test_order_niche_queue_fresh_first_then_rest_no_dup():
+    # fresh(겹침 회피 기간 지난 니치)를 먼저, 그다음 나머지 ranked를 이어붙인다.
+    # fresh가 1개뿐이어도 그것만 시도하다 실패하던 버그(상품 소진 시 업로드 중단) 방지.
+    from clipcart.research.niches import order_niche_queue
+    ranked = [{"keyword": "a"}, {"keyword": "b"}, {"keyword": "c"}, {"keyword": "d"}]
+    fresh = [{"keyword": "c"}]
+    q = order_niche_queue(ranked, fresh)
+    assert [n["keyword"] for n in q] == ["c", "a", "b", "d"]
+
+
+def test_order_niche_queue_empty_fresh_returns_full_ranked():
+    from clipcart.research.niches import order_niche_queue
+    ranked = [{"keyword": "a"}, {"keyword": "b"}]
+    assert [n["keyword"] for n in order_niche_queue(ranked, [])] == ["a", "b"]

@@ -18,7 +18,12 @@ from typing import Any
 from clipcart.aliexpress import generate_affiliate_links, query_products
 from clipcart.config import DATA_DIR
 from clipcart.research import history
-from clipcart.research.niches import NICHES, PRODUCT_EXCLUDE_KEYWORDS, product_type_ok
+from clipcart.research.niches import (
+    NICHES,
+    PRODUCT_EXCLUDE_KEYWORDS,
+    order_niche_queue,
+    product_type_ok,
+)
 from clipcart.research.scoring import ScoreInput, score_product
 
 NICHE_STATE_FILE = DATA_DIR / "niche_state_ali.json"
@@ -27,7 +32,9 @@ NICHE_STATE_FILE = DATA_DIR / "niche_state_ali.json"
 PRICE_MIN = int(os.getenv("CLIPCART_ALI_PRICE_MIN", "2500"))
 PRICE_MAX = int(os.getenv("CLIPCART_ALI_PRICE_MAX", "30000"))
 
-MAX_SEARCH_CALLS_PER_RUN = 8
+# 앞쪽 fresh 니치들이 상품 소진/검색 0건이면 뒤의 상품 풍부한 니치까지 닿도록 넉넉히.
+# 알리 검색은 32니치 연속 조회도 rate limit에 안 걸림(실측 2026-06-23).
+MAX_SEARCH_CALLS_PER_RUN = 12
 
 
 def _load_state() -> dict[str, Any]:
@@ -161,7 +168,7 @@ def select_today_product(force_keyword: str | None = None) -> dict[str, Any] | N
     gap_days = int(os.getenv("CLIPCART_KEYWORD_GAP_DAYS", "10"))
     ranked = sorted(NICHES, key=lambda n: (last_used.get(n["keyword"], ""), n["keyword"]))
     fresh = [n for n in ranked if history.days_since(last_used.get(n["keyword"], "")) >= gap_days]
-    niche_queue = fresh or ranked
+    niche_queue = order_niche_queue(ranked, fresh)
     if force_keyword:
         niche_queue = [n for n in NICHES if n["keyword"] == force_keyword] or niche_queue
 

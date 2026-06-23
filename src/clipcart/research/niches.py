@@ -7,6 +7,21 @@
 
 from __future__ import annotations
 
+from typing import Any
+
+
+def order_niche_queue(
+    ranked: list[dict[str, Any]], fresh: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """선정 시도 순서: fresh(겹침 회피 기간 지난 니치) 먼저, 그다음 나머지 ranked.
+
+    `fresh or ranked`로 두면 fresh가 1개라도 있으면 그것만 시도하다(상품이 중복으로
+    소진되면) 업로드가 통째로 멈춘다. fresh 우선이되 실패 시 나머지 니치로 이어가게 한다.
+    """
+    fresh_keys = {n["keyword"] for n in fresh}
+    return fresh + [n for n in ranked if n["keyword"] not in fresh_keys]
+
+
 NICHES: list[dict[str, str]] = [
     {
         "keyword": "배수구 거름망 스테인리스",
