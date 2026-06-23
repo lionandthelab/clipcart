@@ -110,6 +110,22 @@ def test_render_text_shows_profile_funnel_line():
     assert "4" in txt
 
 
+def test_totals_include_aliexpress_conversions():
+    snap = _snapshot()
+    snap["channel"]["aliexpress_orders_count"] = 3
+    snap["channel"]["aliexpress_commission"] = 1200.0
+    r = build_report(snap, _history())
+    assert r["totals"]["aliexpress_orders"] == 3
+    assert r["totals"]["aliexpress_commission"] == 1200.0
+
+
+def test_render_text_shows_aliexpress_conversion_line():
+    snap = _snapshot()
+    snap["channel"]["aliexpress_orders_count"] = 0
+    txt = render_text(build_report(snap, _history()))
+    assert "알리 전환" in txt
+
+
 def test_totals_include_avg_view_pct():
     r = build_report(_snapshot(), _history())
     assert r["totals"]["avg_view_pct"] == 29.78

@@ -132,6 +132,21 @@ def fetch_retention(
         return {}, msg[:200]
 
 
+def fetch_aliexpress_orders(
+    start_date: str, end_date: str
+) -> tuple[list[dict[str, Any]], str | None]:
+    """알리 어필리에이트 주문(전환) 조회. (orders, error). 키/권한/네트워크 문제 시 빈 리스트.
+    쿠팡 cookie 주문과 달리 알리는 subId 없어 채널 레벨 전환만 본다."""
+    try:
+        from clipcart.aliexpress import affiliate_orders
+
+        sd = f"{start_date[:4]}-{start_date[4:6]}-{start_date[6:]} 00:00:00"
+        ed = f"{end_date[:4]}-{end_date[4:6]}-{end_date[6:]} 23:59:59"
+        return affiliate_orders(sd, ed), None
+    except Exception as exc:  # noqa: BLE001 — 알리 주문 실패가 전체 수집을 막지 않는다
+        return [], str(exc)[:200]
+
+
 def dead_video_ids(queried_ids: list[str], live_ids: set[str]) -> set[str]:
     """조회한 ID 중 살아있지 않은 것. live가 비면 API 이상으로 보고 빈 집합."""
     if not live_ids:
@@ -381,6 +396,16 @@ def collect(days: int = 7) -> dict[str, Any]:
         snapshot["coupang_error"] = coupang_error
     if retention_error:
         snapshot["retention_error"] = retention_error
+
+    # 알리 전환(주문) 추적 — 그동안 깜깜이였던 알리 전환을 metrics에 기록한다.
+    ali_orders, ali_orders_error = fetch_aliexpress_orders(start_s, end_s)
+    snapshot["aliexpress_orders"] = ali_orders
+    snapshot["channel"]["aliexpress_orders_count"] = len(ali_orders)
+    snapshot["channel"]["aliexpress_commission"] = round(
+        sum(float(o.get("estimated_paid_commission") or 0) for o in ali_orders), 2
+    )
+    if ali_orders_error:
+        snapshot["aliexpress_orders_error"] = ali_orders_error
 
     history = load_metrics()
     history.append(snapshot)

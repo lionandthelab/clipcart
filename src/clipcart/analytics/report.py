@@ -74,6 +74,8 @@ def build_report(snapshot: dict[str, Any], history: list[dict[str, Any]]) -> dic
             "unattributed_clicks": ch.get("unattributed_clicks", 0),
             "unattributed_commission": ch.get("unattributed_commission", 0),
             "avg_view_pct": ch.get("avg_view_pct"),
+            "aliexpress_orders": ch.get("aliexpress_orders_count", 0),
+            "aliexpress_commission": ch.get("aliexpress_commission", 0),
         },
         "by_source": _group(videos, lambda v: v.get("source", "coupang")),
         "by_hook": _group(videos, lambda v: v.get("title_template") or "(미기록)"),
@@ -124,6 +126,8 @@ def render_text(report: dict[str, Any]) -> str:
         f"귀속클릭 {t['clicks_attributed']:g} · 귀속커미션 {t['commission_attributed']:g}원",
         f"  프로필발(bio): 클릭 {t['bio_clicks']:g} · 커미션 {t['bio_commission']:g}원 "
         f"(채널설명·고정프로필 링크 경유)",
+        f"  알리 전환: 주문 {t['aliexpress_orders']:g}건 · 추정커미션 {t['aliexpress_commission']:g} "
+        f"(알리 주문 API 실측, 채널 레벨)",
         f"  채널 미귀속: 클릭 {t['unattributed_clicks']:g} · 커미션 {t['unattributed_commission']:g}원 "
         f"(subId 이전 영상들)",
         "",

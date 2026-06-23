@@ -159,3 +159,18 @@ def test_generate_affiliate_links_parses_promotion_link(monkeypatch):
     assert links[0]["promotion_link"].startswith("https://s.click.aliexpress.com/")
     assert captured["data"]["tracking_id"] == "clipcart"
     assert captured["data"]["method"] == "aliexpress.affiliate.link.generate"
+
+
+def test_parse_order_list_extracts_orders():
+    res = {"orders": {"order": [
+        {"order_number": "1", "estimated_paid_commission": "100"},
+        {"order_number": "2", "estimated_paid_commission": "50"},
+    ]}, "total_record_count": "2"}
+    out = ali.parse_order_list(res)
+    assert len(out) == 2
+    assert out[0]["order_number"] == "1"
+
+
+def test_parse_order_list_normalizes_single_and_empty():
+    assert ali.parse_order_list({}) == []
+    assert ali.parse_order_list({"orders": {"order": {"order_number": "x"}}}) == [{"order_number": "x"}]

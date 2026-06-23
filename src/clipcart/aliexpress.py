@@ -156,3 +156,53 @@ def generate_affiliate_links(
     payload = _call("aliexpress.affiliate.link.generate", biz)
     result = _result(payload, "aliexpress_affiliate_link_generate_response")
     return (result.get("promotion_links") or {}).get("promotion_link") or []
+
+
+# 어필리에이트 주문(전환). order.list는 status가 필수라, 결제 이후 상태들을 조회해
+# order_number로 중복 제거한다(전환 = 결제 완료된 주문).
+ORDER_STATUSES = ("Payment Completed", "Buyer Confirmed Receipt", "Finished")
+_ORDER_FIELDS = (
+    "order_number,paid_amount,estimated_paid_commission,order_status,product_title,paid_time"
+)
+
+
+def parse_order_list(result: dict[str, Any]) -> list[dict[str, Any]]:
+    """order.list resp_result.result → 주문 리스트(단일/누락 정규화)."""
+    orders = (result.get("orders") or {}).get("order")
+    if orders is None:
+        return []
+    return orders if isinstance(orders, list) else [orders]
+
+
+def affiliate_orders(
+    start_time: str,
+    end_time: str,
+    statuses: tuple[str, ...] = ORDER_STATUSES,
+    page_size: int = 50,
+) -> list[dict[str, Any]]:
+    """기간 내 어필리에이트 주문(전환). 시간 형식 'yyyy-MM-dd HH:mm:ss'.
+    status별로 조회 후 order_number 기준 중복 제거."""
+    seen: dict[str, dict[str, Any]] = {}
+    for status in statuses:
+        page = 1
+        while True:
+            biz = {
+                "status": status,
+                "start_time": start_time,
+                "end_time": end_time,
+                "page_no": page,
+                "page_size": page_size,
+                "fields": _ORDER_FIELDS,
+            }
+            payload = _call("aliexpress.affiliate.order.list", biz)
+            result = _result(payload, "aliexpress_affiliate_order_list_response")
+            orders = parse_order_list(result)
+            for o in orders:
+                key = str(o.get("order_number") or "")
+                if key:
+                    seen[key] = o
+            total = int(result.get("total_record_count") or 0)
+            if not orders or page * page_size >= total:
+                break
+            page += 1
+    return list(seen.values())
