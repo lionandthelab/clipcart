@@ -877,5 +877,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgzDiIxGb1nVpaMN1iZ4AaABAg"
+  },
+  {
+    "post_id": "YbMLw9QkVHs",
+    "product_id": "AE1005012405379811",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/YbMLw9QkVHs",
+    "published_at": "2026-06-23T15:02:59.649763+00:00",
+    "status": "PUBLISHED",
+    "title": "18,300원으로 끝내는 침대 틈새 막이",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4euN8jF",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgzuoAtYxTOYgSCl2mB4AaABAg"
   }
 ]

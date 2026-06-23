@@ -3703,5 +3703,58 @@
     "known_downside": "두꺼운 수건 같은 큰 빨래에는 맞지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009040049722.mp4",
     "post_url": "https://www.youtube.com/shorts/bU-feqrqyi0"
+  },
+  {
+    "product_id": "AE1005012405379811",
+    "aliexpress_product_id": "1005012405379811",
+    "created_at": "2026-06-24",
+    "status": "PUBLISHED",
+    "product_name": "학생 기숙사 침대 틈새 채우개 벽면 옆 침대 틈새 막이 낙하 방지 용품 직사각형 일본식 침실 장식 베개",
+    "display_name": "침대 틈새 막이",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012405379811.html?pdp_npi=6%40dis%21KRW%2118316%2118300%21%21%2111.58%2111.57%21%402140d36217822268165035304e12ab%2112000058315864917%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4euN8jF",
+    "price": 18300,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sc98623ea5fe8441a8cf9e1f660c6e63cu.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc98623ea5fe8441a8cf9e1f660c6e63cu.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S70e917ff66c44ffca793c1c975678311h.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S84c706ab6912426eb1ff14191a56d7afm.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S4746fc2dc1e647d590e1c6e1fa24dc7fS.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S4ea9886664204d39bf3f1cb67cbe395dr.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 1,
+    "score": 86,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "침대 틈새 막이 패드",
+      "category": "정리/수납",
+      "title_keyword": "침대 틈새 막이",
+      "old_way": "침대 밑 떨어진 물건 포기",
+      "hook": "침대와 벽 사이로 폰 빠뜨려본 사람?",
+      "problem": "침대 틈으로 폰, 리모컨, 머리끈이 빠지면 침대를 밀어야 꺼낼 수 있죠.",
+      "usage": "틈에 끼워 넣기만 하면 물건이 빠지지 않게 막아줍니다.",
+      "benefit": "침대 밀어서 물건 꺼내는 일이 사라져요.",
+      "downside": "틈 폭이 아주 넓으면 맞는 사이즈를 찾기 어렵습니다",
+      "target": "침대 틈으로 물건을 자주 빠뜨리는 사람"
+    },
+    "problem": "침대 틈으로 폰, 리모컨, 머리끈이 빠지면 침대를 밀어야 꺼낼 수 있죠.",
+    "video_angle": "침대와 벽 사이로 폰 빠뜨려본 사람?",
+    "known_downside": "틈 폭이 아주 넓으면 맞는 사이즈를 찾기 어렵습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012405379811.mp4",
+    "post_url": "https://www.youtube.com/shorts/YbMLw9QkVHs"
   }
 ]
