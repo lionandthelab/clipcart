@@ -3864,5 +3864,59 @@
     "known_downside": "소재가 가벼워서 빨래 양이 너무 적으면 통 안에서 부딪히는 소리가 날 수 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010179308100.mp4",
     "post_url": "https://www.youtube.com/shorts/9vpymz5bRCo"
+  },
+  {
+    "product_id": "AE1005010529970810",
+    "aliexpress_product_id": "1005010529970810",
+    "created_at": "2026-06-24",
+    "status": "PUBLISHED",
+    "product_name": "이중층 냉장고 계란 보관함 사다리형 자동 롤링 계란 홀더 랙 냉장고 디스펜서 계란 정리대",
+    "display_name": "계란 보관함",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005010529970810.html?pdp_npi=6%40dis%21KRW%219197%214600%21%21%2139.41%2119.71%21%402140d33617822484101105316e0eb8%2112000052713317582%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3dSrAGV",
+    "price": 4600,
+    "original_price": 9197,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S7394d1f38c9d46a387561ae259a91204w.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7394d1f38c9d46a387561ae259a91204w.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8a97c7fc495241e1a79bfae73003da338.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sbebe8182afd1499d88758d47ba18b14d9.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa275dfdb3ea749b3a8aa85eca57d70e0a.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0b841bb19e8d485b83728bed36693373I.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8be5cf8ff3a94a3d98f73424fec78262n.jpg"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 2474,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "계란 보관함 냉장고",
+      "category": "주방",
+      "title_keyword": "계란 보관함",
+      "old_way": "계란 종이판째 냉장고에 쌓기",
+      "hook": "냉장고 계란, 아직 종이판째 넣으세요?",
+      "problem": "계란 사 오면 종이판째 냉장고에 쑤셔 넣게 되죠. 자리는 많이 차지하는데 몇 개 남았는지는 매번 열어봐야 알고요.",
+      "usage": "계란을 한 칸씩 끼워 냉장고에 넣어두면 됩니다. 위아래로 쌓을 수 있어서 자리도 덜 차지해요.",
+      "benefit": "남은 개수가 한눈에 보이고 굴러다니지 않아서 냉장고 정리가 한결 수월해집니다.",
+      "downside": "냉장고 칸 높이에 따라 두 단 쌓기가 빠듯할 수 있어 주문 전 높이 확인은 필요합니다",
+      "target": "냉장고 속 계란을 종이판째 쌓아두는 사람"
+    },
+    "problem": "계란 사 오면 종이판째 냉장고에 쑤셔 넣게 되죠. 자리는 많이 차지하는데 몇 개 남았는지는 매번 열어봐야 알고요.",
+    "video_angle": "냉장고 계란, 아직 종이판째 넣으세요?",
+    "known_downside": "냉장고 칸 높이에 따라 두 단 쌓기가 빠듯할 수 있어 주문 전 높이 확인은 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010529970810.mp4",
+    "post_url": "https://www.youtube.com/shorts/BdKUp-7kDjI"
   }
 ]

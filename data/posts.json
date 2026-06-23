@@ -901,14 +901,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/jPffrnj1j4E",
     "published_at": "2026-06-23T16:50:08.864984+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "다들 걸레 빨아 짜서 바닥 닦기, 근데 이거 보면 생각 바뀝니다",
     "title_template": "다들 {old_way}, 근데 이거 보면 생각 바뀝니다",
     "script_style": "contrarian",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c2yvu2aZ",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "UgxcpYVyliSVl8F--J54AaABAg"
+    "comment_id": "UgxcpYVyliSVl8F--J54AaABAg",
+    "not_live_at": "2026-06-24"
   },
   {
     "post_id": "9vpymz5bRCo",
@@ -925,5 +926,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgwEiBXn3ooemxuzYHl4AaABAg"
+  },
+  {
+    "post_id": "BdKUp-7kDjI",
+    "product_id": "AE1005010529970810",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/BdKUp-7kDjI",
+    "published_at": "2026-06-23T21:03:44.841038+00:00",
+    "status": "PUBLISHED",
+    "title": "4,600원으로 끝내는 계란 보관함",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3dSrAGV",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "Ugzxfhhfd4rLTLmvxwd4AaABAg"
   }
 ]

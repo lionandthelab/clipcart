@@ -939,7 +939,9 @@
     "script_style": "contrarian",
     "post_url": "https://www.youtube.com/shorts/jPffrnj1j4E",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c2yvu2aZ",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-24"
   },
   {
     "date": "2026-06-24",
@@ -956,6 +958,23 @@
     "script_style": "contrarian",
     "post_url": "https://www.youtube.com/shorts/9vpymz5bRCo",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4WEzc4N",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-24",
+    "post_id": "BdKUp-7kDjI",
+    "product_id": "AE1005010529970810",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005010529970810",
+    "product_name": "이중층 냉장고 계란 보관함 사다리형 자동 롤링 계란 홀더 랙 냉장고 디스펜서 계란 정리대",
+    "niche_keyword": "계란 보관함 냉장고",
+    "category": "주방",
+    "title": "4,600원으로 끝내는 계란 보관함",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "direct",
+    "post_url": "https://www.youtube.com/shorts/BdKUp-7kDjI",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3dSrAGV",
     "sub_id": null
   }
 ]
