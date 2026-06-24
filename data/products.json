@@ -4014,5 +4014,59 @@
     "known_downside": "매트 홈에 낀 미세한 가루는 가끔 털어내거나 물청소를 해줘야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007171370278.mp4",
     "post_url": "https://www.youtube.com/shorts/QRDiPaopKRo"
+  },
+  {
+    "product_id": "AE1005010285533315",
+    "aliexpress_product_id": "1005010285533315",
+    "created_at": "2026-06-24",
+    "status": "PUBLISHED",
+    "product_name": "연장봉이 있는 먼지떨이, 접이식 먼지 브러시, 극세사 먼지 브러시, 재사용 가능, 세척 가능한 천장 청소 도구",
+    "display_name": "먼지떨이",
+    "category": "청소",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005010285533315.html?pdp_npi=6%40dis%21KRW%217500%213600%21%21%2132.22%2115.46%21%402102f1cd17822916093762250e0e8d%2112000051791992278%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2ui8grT",
+    "price": 3600,
+    "original_price": 7500,
+    "discount_pct": 52,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S614d4b78a30a41c8b671cc487297a399g.png",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S614d4b78a30a41c8b671cc487297a399g.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8e31ba57759248878c175c658186bba2p.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd0bbbfbae7564f089d08ad4101f72298D.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc37f187b260b4334b17416f4ee06b0d0n.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Seaa72ecaa05c4320a51e5e17b447f7ec9.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S571a378813aa427a8f5905f5b9d1e9a02.png"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 3118,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "극세사 먼지떨이",
+      "category": "청소",
+      "title_keyword": "먼지떨이",
+      "old_way": "먼지 털었다가 다시 앉히기",
+      "hook": "먼지떨이로 털면 먼지 다시 내려앉지 않나요?",
+      "problem": "선반이랑 가전 위 먼지, 깃털 먼지떨이로 털면 잠깐뿐이죠. 공중에 떠올랐다가 금세 다시 내려앉아서 결국 또 닦게 돼요.",
+      "usage": "극세사 모가 먼지를 털어내는 게 아니라 그대로 잡아둡니다. 모니터 위, 블라인드, 선반 틈을 슥 훑으면 먼지가 모에 달라붙어요.",
+      "benefit": "먼지를 흩날리지 않고 모아서 거둘 수 있어 청소 후 공기가 한결 깔끔합니다.",
+      "downside": "모에 먼지가 차면 물세탁으로 털어 말려 써야 합니다",
+      "target": "먼지를 털어도 금방 다시 쌓여 답답한 사람"
+    },
+    "problem": "선반이랑 가전 위 먼지, 깃털 먼지떨이로 털면 잠깐뿐이죠. 공중에 떠올랐다가 금세 다시 내려앉아서 결국 또 닦게 돼요.",
+    "video_angle": "먼지떨이로 털면 먼지 다시 내려앉지 않나요?",
+    "known_downside": "모에 먼지가 차면 물세탁으로 털어 말려 써야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010285533315.mp4",
+    "post_url": "https://www.youtube.com/shorts/31-83n5dXYs"
   }
 ]
