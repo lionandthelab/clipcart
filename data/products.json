@@ -3960,5 +3960,59 @@
     "video_angle": "고양이 모래, 집안에 흘리고 다니나요?",
     "known_downside": "매트 홈에 낀 미세한 가루는 가끔 털어내거나 물청소를 해줘야 합니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7060653716.mp4"
+  },
+  {
+    "product_id": "AE1005007171370278",
+    "aliexpress_product_id": "1005007171370278",
+    "created_at": "2026-06-24",
+    "status": "PUBLISHED",
+    "product_name": "고양이 화장실 매트 선물 포함 이중층 방수 애완동물 화장실 매트 미끄럼 방지 모래 고양이 패드 세탁 가능 침대 매트 청소 패드 제품",
+    "display_name": "고양이 화장실 매트",
+    "category": "반려동물",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005007171370278.html?pdp_npi=6%40dis%21KRW%215480%212740%21%21%2123.48%2111.74%21%402140d33617822700101315379e0e52%2112000039693333280%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3UUaYkd",
+    "price": 2740,
+    "original_price": 5480,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sd6636d4e2f79408f8316292110290a22W.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd6636d4e2f79408f8316292110290a22W.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sbd7a6dbcf1ec4e1495c4f67c483af8f9t.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc15c25a25a38400ebe228845fb6e55cbg.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd675c6e15f504526be9ea1c957736113g.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf78092d3f77f43b196bcd15e04aa4f9eb.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5fd7e1ebf6114d6190fa7547f2a3f179z.jpg"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 5448,
+    "score": 94,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "고양이 화장실 매트",
+      "category": "반려동물",
+      "title_keyword": "고양이 화장실 매트",
+      "old_way": "화장실 주변 모래 매일 쓸기",
+      "hook": "고양이 모래, 집안에 흘리고 다니나요?",
+      "problem": "화장실만 다녀오면 발에 묻은 모래가 거실까지 따라옵니다. 매일 쓸고 닦아도 자고 일어나면 또 밟히죠.",
+      "usage": "화장실 앞에 깔아두면 고양이가 지나갈 때 발 사이 모래가 걸러집니다. 홈에 모인 모래는 한쪽으로 모아 다시 화장실에 부어주면 됩니다.",
+      "benefit": "집안에 흩어지는 모래가 줄어서 청소 횟수가 눈에 띄게 줄어요.",
+      "downside": "매트 홈에 낀 미세한 가루는 가끔 털어내거나 물청소를 해줘야 합니다",
+      "target": "고양이 모래가 집안에 굴러다녀 매일 쓸고 닦는 사람"
+    },
+    "problem": "화장실만 다녀오면 발에 묻은 모래가 거실까지 따라옵니다. 매일 쓸고 닦아도 자고 일어나면 또 밟히죠.",
+    "video_angle": "고양이 모래, 집안에 흘리고 다니나요?",
+    "known_downside": "매트 홈에 낀 미세한 가루는 가끔 털어내거나 물청소를 해줘야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007171370278.mp4",
+    "post_url": "https://www.youtube.com/shorts/QRDiPaopKRo"
   }
 ]

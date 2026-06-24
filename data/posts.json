@@ -942,5 +942,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "Ugzxfhhfd4rLTLmvxwd4AaABAg"
+  },
+  {
+    "post_id": "QRDiPaopKRo",
+    "product_id": "AE1005007171370278",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/QRDiPaopKRo",
+    "published_at": "2026-06-24T03:04:24.854771+00:00",
+    "status": "PUBLISHED",
+    "title": "고양이 화장실 매트 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3UUaYkd",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgxFIOQWvJo9UEg22r14AaABAg"
   }
 ]
