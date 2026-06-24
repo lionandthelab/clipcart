@@ -4176,5 +4176,47 @@
     "known_downside": "용량이 크지 않아서 비누를 자주 채워줘야 하는 편입니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007016139775.mp4",
     "post_url": "https://www.youtube.com/shorts/oQqJAtBLylw"
+  },
+  {
+    "product_id": "CP7853444919",
+    "coupang_product_id": "7853444919",
+    "sub_id": "salrimshorts7853444919",
+    "created_at": "2026-06-25",
+    "status": "VIDEO_READY",
+    "product_name": "하비티 베이직 콤팩트 좌식 폴딩 다리미판, 체크 그레이",
+    "display_name": "다리미판",
+    "category": "세탁",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=7853444919&itemId=21412406036&vendorItemId=88468727068&traceid=V0-153-73487ccab626d60d&clickBeacon=0bddcff0-701b-11f1-892e-df2467c5aa5c%7E3&requestid=20260625072128989283303212&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eQ7TvBFHNY",
+    "price": 9290,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/RTztLM9FD7kNh9U6RQ-QnCkwY1OB_d__EtXu7sZxUmr1QFmB-kJgKLHR__Uu8Vjm_dGux7IeO6GdLoRMcXE4lqwhdvOPBzAh4ncqF1iFu0D8w00Yt1OU7bAQm1s0YqAM-1FlO6yJiuTe8BM2der_EWY6F51ySq6AlPxjyMfAu1knjniSiOv-fEHOsdSUg44p7u-6KdnzOjNWZ688zN2GKeVLjVLcqGwHsOV0SrIBxalPnyDgchr7OcdD2phvAt5HRX1xjtFQEt8RPYhbcXRU7kgHVw8vuhdBBlk1WqxxZco45ZQCQuRMZdK-DGxqDddAi90pvlujcXU4V10=",
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "미니 다리미판",
+      "category": "세탁",
+      "title_keyword": "다리미판",
+      "old_way": "큰 다리미판 꺼내 펼치기",
+      "hook": "셔츠 한 장 다리는데 다리미판 다 펴세요?",
+      "problem": "셔츠 한 장 다리려고 큰 다리미판을 꺼내 펴는 것도 일이죠. 둘 데가 마땅찮아 결국 침대나 식탁 위에서 대충 다리게 됩니다.",
+      "usage": "책상이나 식탁 위에 바로 올려두고 셔츠를 다립니다. 다 쓰면 접어서 틈새에 세워두기만 하면 됩니다.",
+      "benefit": "자리를 거의 안 차지해서 급할 때 셔츠 한 장 바로 다리기 좋아요.",
+      "downside": "판이 작아서 큰 이불이나 침구를 한 번에 다리기엔 무리가 있습니다",
+      "target": "셔츠 한 장 다리자고 큰 다리미판 펴기 번거로운 사람"
+    },
+    "problem": "셔츠 한 장 다리려고 큰 다리미판을 꺼내 펴는 것도 일이죠. 둘 데가 마땅찮아 결국 침대나 식탁 위에서 대충 다리게 됩니다.",
+    "video_angle": "셔츠 한 장 다리는데 다리미판 다 펴세요?",
+    "known_downside": "판이 작아서 큰 이불이나 침구를 한 번에 다리기엔 무리가 있습니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7853444919.mp4"
   }
 ]
