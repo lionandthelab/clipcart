@@ -4380,5 +4380,59 @@
     "known_downside": "통풍이 잘 되는 곳이 아니면 두꺼운 옷은 마르는 데 시간이 좀 걸립니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012284116650.mp4",
     "post_url": "https://www.youtube.com/shorts/PMYu_M7Wmj8"
+  },
+  {
+    "product_id": "AE1005011587167691",
+    "aliexpress_product_id": "1005011587167691",
+    "created_at": "2026-06-26",
+    "status": "PUBLISHED",
+    "product_name": "10개 서랍 칸막이, 조절 가능한 칸막이 서랍, 서랍 정리 시스템, 찬장용 서랍 칸막이, 속옷, 양말용",
+    "display_name": "서랍 정리 칸막이",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005011587167691.html?pdp_npi=6%40dis%21KRW%2112585%216300%21%21%2153.80%2126.93%21%402151fd2c17824212098015950e1120%2112000055993289162%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3cs6dNL",
+    "price": 6300,
+    "original_price": 12585,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sddd878f240d947adab00d58a0699b4e1h.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sddd878f240d947adab00d58a0699b4e1h.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Se4152a68480a44ef8ee22abbe7d83e61e.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sbeab5218e4394dc9b73dddbdc2658715S.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2ebb2beccdb749c6ae24bcab27026bf3C.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S963890bb163a427e953f51aadbc589f6N.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Scfa56561fac24d45bfd7f45b65f1eba4v.jpg"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 323,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "서랍 정리 칸막이 조절",
+      "category": "정리/수납",
+      "title_keyword": "서랍 정리 칸막이",
+      "old_way": "서랍 속 물건 한데 뒤섞임",
+      "hook": "서랍 열 때마다 뒤죽박죽이세요?",
+      "problem": "양말, 속옷, 자잘한 물건이 서랍 속에서 섞여 매번 헤집게 되죠. 찾던 건 항상 맨 밑에 깔려 있고요.",
+      "usage": "서랍 폭에 맞게 칸막이를 밀어 길이를 조절하고 끼우기만 하면 됩니다. 칸마다 물건을 종류별로 세워 담아두세요.",
+      "benefit": "칸이 나뉘어 있으니 한눈에 보이고, 꺼낼 때 옆 칸이 흐트러지지 않아요.",
+      "downside": "서랍이 너무 깊거나 폭이 안 맞으면 조절 범위를 벗어날 수 있어 주문 전 사이즈 확인은 필요합니다",
+      "target": "서랍 속 물건이 섞여 매번 헤집는 사람"
+    },
+    "problem": "양말, 속옷, 자잘한 물건이 서랍 속에서 섞여 매번 헤집게 되죠. 찾던 건 항상 맨 밑에 깔려 있고요.",
+    "video_angle": "서랍 열 때마다 뒤죽박죽이세요?",
+    "known_downside": "서랍이 너무 깊거나 폭이 안 맞으면 조절 범위를 벗어날 수 있어 주문 전 사이즈 확인은 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011587167691.mp4",
+    "post_url": "https://www.youtube.com/shorts/tCOQk2-auuI"
   }
 ]
