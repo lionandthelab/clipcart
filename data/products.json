@@ -4326,5 +4326,59 @@
     "known_downside": "반려동물 체구에 따라 그릇 높이가 안 맞을 수 있어서 주문 전 사이즈 확인은 필요합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005008541420838.mp4",
     "post_url": "https://www.youtube.com/shorts/jc1RWs7zcSM"
+  },
+  {
+    "product_id": "AE1005012284116650",
+    "aliexpress_product_id": "1005012284116650",
+    "created_at": "2026-06-26",
+    "status": "PUBLISHED",
+    "product_name": "세탁망 패딩 네트 빨래 신발 보호대 푹신한 섬유 폴리에스터 세탁 신발 세탁기 사용 가능 빨래망 건조망",
+    "display_name": "빨래 건조망",
+    "category": "세탁",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012284116650.html?pdp_npi=6%40dis%21KRW%2111042%215300%21%21%2147.21%2122.66%21%402140d33617823996126187791e1064%2112000057953445330%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c38J2doD",
+    "price": 5300,
+    "original_price": 11042,
+    "discount_pct": 52,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S77c26b9bf9fb4854bffdaa94b526207ff.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S77c26b9bf9fb4854bffdaa94b526207ff.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc0076b15e8e9465a9a8b79ae0764b6e46.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sffb1922f407b48b59bf72c1ce83bb85bS.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0cfd1d6dc5d543bfa0157d4ac1fb6eadW.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5f329150b379469ca0452afa06d3fa84L.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7e37a82f175542f2a2045fa84aa6b62eA.jpg"
+    ],
+    "video_url": "",
+    "rating": 100.0,
+    "review_count": 7,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "빨래 건조망 채반",
+      "category": "세탁",
+      "title_keyword": "빨래 건조망",
+      "old_way": "속옷 양말 빨래줄에 빨래집게로 널기",
+      "hook": "속옷 양말, 아직 빨래집게로 너세요?",
+      "problem": "속옷이며 양말이며 작은 빨래는 집게로 하나하나 너는 게 은근 일이죠. 바람 한 번 불면 바닥에 떨어져 다시 빨아야 할 때도 있고요.",
+      "usage": "채반처럼 펼쳐서 그 위에 빨래를 올려두기만 하면 됩니다. 다 마르면 통째로 접어서 보관하면 끝이에요.",
+      "benefit": "집게 없이 한 번에 여러 장을 펼쳐 널 수 있어서 작은 빨래 너는 시간이 확 줄어요.",
+      "downside": "통풍이 잘 되는 곳이 아니면 두꺼운 옷은 마르는 데 시간이 좀 걸립니다",
+      "target": "속옷 양말 같은 작은 빨래 너는 게 번거로운 사람"
+    },
+    "problem": "속옷이며 양말이며 작은 빨래는 집게로 하나하나 너는 게 은근 일이죠. 바람 한 번 불면 바닥에 떨어져 다시 빨아야 할 때도 있고요.",
+    "video_angle": "속옷 양말, 아직 빨래집게로 너세요?",
+    "known_downside": "통풍이 잘 되는 곳이 아니면 두꺼운 옷은 마르는 데 시간이 좀 걸립니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012284116650.mp4",
+    "post_url": "https://www.youtube.com/shorts/PMYu_M7Wmj8"
   }
 ]

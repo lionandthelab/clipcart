@@ -958,7 +958,9 @@
     "script_style": "contrarian",
     "post_url": "https://www.youtube.com/shorts/9vpymz5bRCo",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4WEzc4N",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-26"
   },
   {
     "date": "2026-06-24",
@@ -1026,7 +1028,9 @@
     "script_style": "direct",
     "post_url": "https://www.youtube.com/shorts/jU58EbVOf4k",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4rRLqAh",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-26"
   },
   {
     "date": "2026-06-25",
@@ -1077,6 +1081,23 @@
     "script_style": "empathetic",
     "post_url": "https://www.youtube.com/shorts/jc1RWs7zcSM",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c36YDVwH",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-26",
+    "post_id": "PMYu_M7Wmj8",
+    "product_id": "AE1005012284116650",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005012284116650",
+    "product_name": "세탁망 패딩 네트 빨래 신발 보호대 푹신한 섬유 폴리에스터 세탁 신발 세탁기 사용 가능 빨래망 건조망",
+    "niche_keyword": "빨래 건조망 채반",
+    "category": "세탁",
+    "title": "빨래 건조망 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "script_style": "empathetic",
+    "post_url": "https://www.youtube.com/shorts/PMYu_M7Wmj8",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c38J2doD",
     "sub_id": null
   }
 ]

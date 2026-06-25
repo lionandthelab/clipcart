@@ -918,14 +918,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/9vpymz5bRCo",
     "published_at": "2026-06-23T17:12:04.882325+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "다들 빨래 세제 매번 계량하기, 근데 이거 보면 생각 바뀝니다",
     "title_template": "다들 {old_way}, 근데 이거 보면 생각 바뀝니다",
     "script_style": "contrarian",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4WEzc4N",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "UgwEiBXn3ooemxuzYHl4AaABAg"
+    "comment_id": "UgwEiBXn3ooemxuzYHl4AaABAg",
+    "not_live_at": "2026-06-26"
   },
   {
     "post_id": "BdKUp-7kDjI",
@@ -982,14 +983,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/jU58EbVOf4k",
     "published_at": "2026-06-24T15:03:38.282253+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "아직도 소파 위 리모컨 아무 데나 두기? 이거 보세요",
     "title_template": "아직도 {old_way}? 이거 보세요",
     "script_style": "direct",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4rRLqAh",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "Ugxf9jo2GCc5fdxrnxB4AaABAg"
+    "comment_id": "Ugxf9jo2GCc5fdxrnxB4AaABAg",
+    "not_live_at": "2026-06-26"
   },
   {
     "post_id": "oQqJAtBLylw",
@@ -1038,5 +1040,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "Ugx1fJ2JeFC1psLC8ZB4AaABAg"
+  },
+  {
+    "post_id": "PMYu_M7Wmj8",
+    "product_id": "AE1005012284116650",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/PMYu_M7Wmj8",
+    "published_at": "2026-06-25T15:03:29.868093+00:00",
+    "status": "PUBLISHED",
+    "title": "빨래 건조망 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c38J2doD",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "Ugy1pCW0ERMCRiP785N4AaABAg"
   }
 ]
