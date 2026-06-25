@@ -4272,5 +4272,59 @@
     "known_downside": "판이 작아서 큰 이불이나 침구를 한 번에 다리기엔 무리가 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007438862547.mp4",
     "post_url": "https://www.youtube.com/shorts/3aFTqsR7ezs"
+  },
+  {
+    "product_id": "AE1005008541420838",
+    "aliexpress_product_id": "1005008541420838",
+    "created_at": "2026-06-25",
+    "status": "PUBLISHED",
+    "product_name": "3단 고급형 고양이 식기 받침대, 나무 및 스테인리스 스틸 재질, 각도 조절 가능 15도 경사형 반려동물 밥그릇",
+    "display_name": "강아지 밥그릇",
+    "category": "반려동물",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005008541420838.html?pdp_npi=6%40dis%21KRW%2116500%2116500%21%21%2170.54%2170.54%21%402140da8b17823780088374651e103e%2112000045634395135%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c36YDVwH",
+    "price": 16500,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Se98e4e473be94ed582bbc8f6913587feW.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Se98e4e473be94ed582bbc8f6913587feW.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2c3b6a4902b94cd1b6e3090a1abe27022.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0ccefe1869a942fa8b0366158db54ca2G.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2c692c5d72f141aab5bd719a03fe2f0cs.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf352793011c54b049802a71d65b97c038.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd686659efb764e4bb379ff93dd91239eR.jpg"
+    ],
+    "video_url": "",
+    "rating": 95.0,
+    "review_count": 124,
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "반려동물 식기 밥그릇",
+      "category": "반려동물",
+      "title_keyword": "강아지 밥그릇",
+      "old_way": "바닥에 평평한 밥그릇 그대로 쓰기",
+      "hook": "강아지 밥 먹을 때 사료 다 흘리지 않나요?",
+      "problem": "밥 먹고 나면 그릇 주변에 사료랑 물이 흥건하게 떨어져 있죠. 그릇이 자꾸 밀려서 따라다니며 먹는 모습도 안쓰럽고요.",
+      "usage": "기울어진 그릇에 사료를 담아 두기만 하면 됩니다. 바닥 미끄럼 방지가 있어서 먹는 동안 그릇이 밀리지 않아요.",
+      "benefit": "사료가 한쪽으로 모여서 흘리는 양이 줄고, 먹은 자리도 한결 깔끔하게 정리돼요.",
+      "downside": "반려동물 체구에 따라 그릇 높이가 안 맞을 수 있어서 주문 전 사이즈 확인은 필요합니다",
+      "target": "밥 먹을 때마다 사료 흘려서 매번 치우는 사람"
+    },
+    "problem": "밥 먹고 나면 그릇 주변에 사료랑 물이 흥건하게 떨어져 있죠. 그릇이 자꾸 밀려서 따라다니며 먹는 모습도 안쓰럽고요.",
+    "video_angle": "강아지 밥 먹을 때 사료 다 흘리지 않나요?",
+    "known_downside": "반려동물 체구에 따라 그릇 높이가 안 맞을 수 있어서 주문 전 사이즈 확인은 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005008541420838.mp4",
+    "post_url": "https://www.youtube.com/shorts/jc1RWs7zcSM"
   }
 ]

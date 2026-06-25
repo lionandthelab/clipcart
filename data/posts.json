@@ -1022,5 +1022,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgwVzBKQ9bUm1T1HN5R4AaABAg"
+  },
+  {
+    "post_id": "jc1RWs7zcSM",
+    "product_id": "AE1005008541420838",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/jc1RWs7zcSM",
+    "published_at": "2026-06-25T09:03:28.072907+00:00",
+    "status": "PUBLISHED",
+    "title": "강아지 밥그릇 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c36YDVwH",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "Ugx1fJ2JeFC1psLC8ZB4AaABAg"
   }
 ]
