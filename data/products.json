@@ -4434,5 +4434,47 @@
     "known_downside": "서랍이 너무 깊거나 폭이 안 맞으면 조절 범위를 벗어날 수 있어 주문 전 사이즈 확인은 필요합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011587167691.mp4",
     "post_url": "https://www.youtube.com/shorts/tCOQk2-auuI"
+  },
+  {
+    "product_id": "CP6458409564",
+    "coupang_product_id": "6458409564",
+    "sub_id": "salrimshorts6458409564",
+    "created_at": "2026-06-26",
+    "status": "VIDEO_READY",
+    "product_name": "블럭마트 만능 수건걸이, 크롬, 1개",
+    "display_name": "수건걸이",
+    "category": "욕실",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=6458409564&itemId=14046491022&vendorItemId=81294177316&traceid=V0-153-222f27937dbfc611&clickBeacon=0d6fa130-70e4-11f1-b8c5-006b639bc1ec%7E3&requestid=20260626072020464249895295&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/eSMItWigHk",
+    "price": 12230,
+    "is_rocket": true,
+    "image_url": "https://ads-partners.coupang.com/image1/wdpSmuZ111H1gvoawSbWoJuddVgfM9QDu15k1sklQ5RWhoG-GOE8tpfPbzRjBNb6yIYmpS7sW9ZPH2lqZz2FOLeIvm8S4NqvQ0UXbQneruP5fHi3drGEXSi8JeHEtuXY7JRISYn1bsR8Mmlm55MVrPjo-w6TyhBBmiac03dVKkzCkDaljI2BRWuV5yKZBqfpbNuEf9GyZU1FJWgufxUSnYG8iwwo_YeqLMpFkI2mbDk0-kJGb8WKo6CcYQcFV4rZWs2JuLLp6GXVPbENglAIWrNVQgsaVChqqfYyCL9Pp7FfLqM98yvOlMiWbpYV-rinoKvFd8YLby3tWw==",
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "수건걸이 무타공",
+      "category": "욕실",
+      "title_keyword": "수건걸이",
+      "old_way": "젖은 수건 문고리에 걸기",
+      "hook": "수건 걸 데 없어서 문고리에 거셨죠?",
+      "problem": "화장실에 수건 걸 곳이 마땅치 않아 문고리나 세면대에 아무렇게나 걸어두게 되죠. 벽에 구멍 뚫기는 부담스럽고요.",
+      "usage": "벽이나 타일에 붙이기만 하면 바로 수건걸이가 생깁니다. 떼고 싶을 땐 부착 패드만 교체하면 자리도 안 남아요.",
+      "benefit": "구멍 안 뚫고도 수건을 가지런히 걸 수 있어서 욕실이 한결 정돈돼 보입니다.",
+      "downside": "접착식이라 울퉁불퉁한 벽면에는 부착력이 약할 수 있어 매끈한 면에 붙이는 게 좋습니다",
+      "target": "벽에 구멍 뚫기 부담스러워 수건 둘 곳이 마땅찮은 사람"
+    },
+    "problem": "화장실에 수건 걸 곳이 마땅치 않아 문고리나 세면대에 아무렇게나 걸어두게 되죠. 벽에 구멍 뚫기는 부담스럽고요.",
+    "video_angle": "수건 걸 데 없어서 문고리에 거셨죠?",
+    "known_downside": "접착식이라 울퉁불퉁한 벽면에는 부착력이 약할 수 있어 매끈한 면에 붙이는 게 좋습니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP6458409564.mp4"
   }
 ]
