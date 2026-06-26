@@ -1,12 +1,16 @@
 {
   "_source": "2026-06-10 흥행 쇼츠 트렌드 리서치 워크플로우 합성 결과 (docs/trend-analysis.md 참조)",
   "title_templates": [
+    "{title_keyword} 쓰기 전에 꼭 보세요",
+    "{title_keyword} 쓰기 전에 꼭 보세요",
+    "{title_keyword} 쓰기 전에 꼭 보세요",
     "{hook}",
+    "{hook}",
+    "{title_keyword}, 단점까지 보고 결정하세요",
+    "{title_keyword}, 단점까지 보고 결정하세요",
     "아직도 {old_way}? 이거 보세요",
     "{target}만 보세요",
-    "{title_keyword}, 단점까지 보고 결정하세요",
-    "{price_won}원으로 끝내는 {title_keyword}",
-    "{title_keyword} 쓰기 전에 꼭 보세요"
+    "{price_won}원으로 끝내는 {title_keyword}"
   ],
   "title_templates_story": [
     "{hook}",
