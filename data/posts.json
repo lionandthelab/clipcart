@@ -1120,5 +1120,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgzImzVb4ObCDOEZmnV4AaABAg"
+  },
+  {
+    "post_id": "qAfijRpa9_E",
+    "product_id": "AE1005012447405564",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/qAfijRpa9_E",
+    "published_at": "2026-06-26T21:04:29.400359+00:00",
+    "status": "PUBLISHED",
+    "title": "이불, 그냥 세탁기에 욱여넣으세요?",
+    "title_template": "{hook}",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3voMEON",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "Ugz6DpW-UqNFwtjsFuV4AaABAg"
   }
 ]
