@@ -4584,5 +4584,59 @@
     "known_downside": "단단한 소재라 떨어뜨리면 깨질 수 있어서 다룰 때 조심해야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007031096651.mp4",
     "post_url": "https://www.youtube.com/shorts/Q8KGZIIDtaA"
+  },
+  {
+    "product_id": "AE1005010102684170",
+    "aliexpress_product_id": "1005010102684170",
+    "created_at": "2026-06-27",
+    "status": "PUBLISHED",
+    "product_name": "양면 자석 창문 청소기 자동 배수 와이퍼 유리창 세척기 가정용 청소 도구",
+    "display_name": "유리창 청소기",
+    "category": "청소",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005010102684170.html?pdp_npi=6%40dis%21KRW%2115776%2114186%21%21%2167.33%2160.54%21%400b8ded7b17824860126447937e1148%2112000051153375220%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4tY5QTb",
+    "price": 14186,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sd02c2f3791ad4e73bbdc96525b82d3a0R.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd02c2f3791ad4e73bbdc96525b82d3a0R.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc0e9c173d2644c45a4381bd04fd4eae94.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sfa1d90ac2c7d4f0a9a86ac7c47dc9d8eb.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S528a22adfc2f4462a11b18f470e29462q.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd71b3913248f49b9ab8cfec92dc68aaa6.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5eb91f10a9dd4884a8e29015b8a848f80.jpg"
+    ],
+    "video_url": "",
+    "rating": 84.6,
+    "review_count": 497,
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "유리창 양면 자석 청소기",
+      "category": "청소",
+      "title_keyword": "유리창 청소기",
+      "old_way": "유리창 바깥쪽 손 닿는 데까지만 닦기",
+      "hook": "유리창 바깥쪽, 손도 안 닿는데 어떻게 닦으세요?",
+      "problem": "창문 안쪽은 닦아도 바깥쪽은 손이 안 닿아 늘 뿌옇게 남죠. 고층이면 창밖으로 팔 빼기도 무서워서 그냥 포기하게 됩니다.",
+      "usage": "자석 두 개를 유리 양면에 붙이고 안쪽만 움직이면 바깥쪽도 같이 닦입니다. 한 손으로 쓱쓱 밀면 안팎이 한 번에 정리돼요.",
+      "benefit": "손 안 닿던 바깥쪽까지 닦이니 창문으로 들어오는 햇빛이 한결 환해집니다.",
+      "downside": "유리 두께에 맞는 자석 세기를 골라야 해서 주문 전에 창 두께 확인은 필요합니다",
+      "target": "유리창 바깥쪽 닦는 게 늘 부담스러웠던 사람"
+    },
+    "problem": "창문 안쪽은 닦아도 바깥쪽은 손이 안 닿아 늘 뿌옇게 남죠. 고층이면 창밖으로 팔 빼기도 무서워서 그냥 포기하게 됩니다.",
+    "video_angle": "유리창 바깥쪽, 손도 안 닿는데 어떻게 닦으세요?",
+    "known_downside": "유리 두께에 맞는 자석 세기를 골라야 해서 주문 전에 창 두께 확인은 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010102684170.mp4",
+    "post_url": "https://www.youtube.com/shorts/TxjBiHqL3KQ"
   }
 ]
