@@ -90,3 +90,12 @@ def test_forcing_contrarian_returns_style_with_hook(monkeypatch):
     name, style = pick_script_style({"product_id": "X"})
     assert name == "contrarian"
     assert "{old_way}" in style.get("hook", "")
+
+
+def test_casual_has_higher_weight_in_auto_pool():
+    # 유지율 실측(n=7): casual 69.2% vs direct 48.5% vs empathetic 47.6%
+    # casual이 자동 풀에서 다른 말투보다 가중치가 높아야 한다.
+    auto_styles = [s for s in SCRIPT_STYLES if s["name"] not in ("story", "contrarian")]
+    weights = {s["name"]: s.get("weight", 1) for s in auto_styles}
+    assert weights["casual"] > weights.get("direct", 1), "casual weight > direct"
+    assert weights["casual"] > weights.get("empathetic", 1), "casual weight > empathetic"

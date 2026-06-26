@@ -33,7 +33,8 @@ def render_line(template: str, **ctx: Any) -> str:
 # 모든 switch는 명사구 old_way에 자연스럽게 붙는다('해보셨죠' 금지).
 SCRIPT_STYLES: list[dict[str, str]] = [
     {
-        "name": "casual",  # 친근·구어체
+        "name": "casual",  # 친근·구어체 — 유지율 69.2%(n=7) 최고, 자동 풀 2배 가중
+        "weight": 2,
         "switch": "{old_way}, 솔직히 좀 번거롭죠. 요즘은 이렇게들 바꿔요.",
         "switch_caption": "아직 그렇게 쓰세요?",
         "switch_emphasis": "요즘은 이렇게",
@@ -99,7 +100,10 @@ def pick_script_style(product: dict[str, Any]) -> tuple[str, dict[str, str]]:
         return "story", _BY_NAME["story"]
     # story·contrarian은 자동 무작위 풀에서 제외(전자는 시각 톤 불일치, 후자는 수동
     # 검증 단계라 CLIPCART_SCRIPT_STYLE 강제로만 동작).
-    pool = [s for s in SCRIPT_STYLES if s["name"] not in ("story", "contrarian")]
+    pool = []
+    for s in SCRIPT_STYLES:
+        if s["name"] not in ("story", "contrarian"):
+            pool.extend([s] * s.get("weight", 1))
     seed = int(hashlib.md5(f"{date.today()}{product.get('product_id','')}".encode()).hexdigest(), 16)
     style = pool[seed % len(pool)]
     return style["name"], style
