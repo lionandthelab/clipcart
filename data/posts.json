@@ -1072,5 +1072,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgxcTjgBAVzUfKyDKux4AaABAg"
+  },
+  {
+    "post_id": "4ZMUHJgOPKI",
+    "product_id": "AE1005007010483361",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/4ZMUHJgOPKI",
+    "published_at": "2026-06-26T03:03:53.864004+00:00",
+    "status": "PUBLISHED",
+    "title": "수건걸이 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3Glu45P",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgzG2K79a0OTQm7F7YF4AaABAg"
   }
 ]
