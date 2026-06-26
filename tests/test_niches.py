@@ -35,6 +35,12 @@ def test_niche_pool_covers_cadence():
     assert len(NICHES) >= 40
 
 
+def test_pet_category_is_paused():
+    # 조회수 664/662뷰로 지속 최하위 — 일시 중단(2026-06-27). 재개 시 이 테스트 삭제.
+    pet = [n for n in NICHES if n.get("category") == "반려동물"]
+    assert not pet, f"반려동물 카테고리 중단 중: {[n['keyword'] for n in pet]}"
+
+
 def test_electric_appliance_products_are_excluded():
     # 로봇청소기·전동/진공 가전은 제외 카테고리(고가 가전·전기 안전)
     from clipcart.research.niches import PRODUCT_EXCLUDE_KEYWORDS
