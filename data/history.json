@@ -1115,7 +1115,9 @@
     "script_style": "empathetic",
     "post_url": "https://www.youtube.com/shorts/tCOQk2-auuI",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3cs6dNL",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-27"
   },
   {
     "date": "2026-06-26",
@@ -1149,7 +1151,9 @@
     "script_style": "empathetic",
     "post_url": "https://www.youtube.com/shorts/Q8KGZIIDtaA",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4Pnpyvf",
-    "sub_id": null
+    "sub_id": null,
+    "live": false,
+    "not_live_at": "2026-06-27"
   },
   {
     "date": "2026-06-27",
@@ -1183,6 +1187,23 @@
     "script_style": "empathetic",
     "post_url": "https://www.youtube.com/shorts/qAfijRpa9_E",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3voMEON",
+    "sub_id": null
+  },
+  {
+    "date": "2026-06-27",
+    "post_id": "xbRR5Em-NRQ",
+    "product_id": "AE1005009157717398",
+    "source": "aliexpress",
+    "coupang_product_id": null,
+    "aliexpress_product_id": "1005009157717398",
+    "product_name": "문 위에 걸 수 있는 신발 정리대, 12/14/24/28/35/40개의 큰 메쉬 포켓이 있는 옷장용 걸이식 신발 정리대",
+    "niche_keyword": "신발 정리대 2단",
+    "category": "정리/수납",
+    "title": "신발 정리대 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "script_style": "direct",
+    "post_url": "https://www.youtube.com/shorts/xbRR5Em-NRQ",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4UmYWml",
     "sub_id": null
   }
 ]

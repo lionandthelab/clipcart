@@ -4734,5 +4734,59 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP8989476616.mp4"
+  },
+  {
+    "product_id": "AE1005009157717398",
+    "aliexpress_product_id": "1005009157717398",
+    "created_at": "2026-06-27",
+    "status": "PUBLISHED",
+    "product_name": "문 위에 걸 수 있는 신발 정리대, 12/14/24/28/35/40개의 큰 메쉬 포켓이 있는 옷장용 걸이식 신발 정리대",
+    "display_name": "신발 정리대",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009157717398.html?pdp_npi=6%40dis%21KRW%218470%218060%21%21%2136.15%2134.40%21%402151fca717825292128836862e0dee%2112000048129290909%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4UmYWml",
+    "price": 8060,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sa8cce05c15204206879a002c83cf221bu.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa8cce05c15204206879a002c83cf221bu.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S937613365b2443a5b5cd7a7109b34d80g.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf69b534004d04e1ea91696e89ae79ddao.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5c4979ba9d7248ee86bac35127d233ccX.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S724a29d89ebe481c9e7f47195649ad70I.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S848f942fd35446a0b87887040b7d3f5cd.jpg"
+    ],
+    "video_url": "",
+    "rating": 93.9,
+    "review_count": 1156,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "신발 정리대 2단",
+      "category": "정리/수납",
+      "title_keyword": "신발 정리대",
+      "old_way": "신발장 가득 차서 현관에 쌓기",
+      "hook": "신발장이 꽉 차서 현관에 신발 쌓아두죠?",
+      "problem": "신발은 늘어나는데 신발장 자리는 그대로라 현관이 항상 어수선합니다.",
+      "usage": "신발을 위아래 2단으로 겹쳐 꽂으면 같은 칸에 두 배로 들어갑니다.",
+      "benefit": "신발장 공간이 두 배가 되고 현관 바닥이 비워져요.",
+      "downside": "부츠나 굽 높은 신발에는 쓸 수 없습니다",
+      "target": "신발장 공간이 늘 부족한 집"
+    },
+    "problem": "신발은 늘어나는데 신발장 자리는 그대로라 현관이 항상 어수선합니다.",
+    "video_angle": "신발장이 꽉 차서 현관에 신발 쌓아두죠?",
+    "known_downside": "부츠나 굽 높은 신발에는 쓸 수 없습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009157717398.mp4",
+    "post_url": "https://www.youtube.com/shorts/xbRR5Em-NRQ"
   }
 ]

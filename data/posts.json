@@ -1064,14 +1064,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/tCOQk2-auuI",
     "published_at": "2026-06-25T21:03:33.095508+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "서랍 정리 칸막이 쓰기 전에 꼭 보세요",
     "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
     "script_style": "empathetic",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c3cs6dNL",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "UgxcTjgBAVzUfKyDKux4AaABAg"
+    "comment_id": "UgxcTjgBAVzUfKyDKux4AaABAg",
+    "not_live_at": "2026-06-27"
   },
   {
     "post_id": "4ZMUHJgOPKI",
@@ -1096,14 +1097,15 @@
     "source": "aliexpress",
     "post_url": "https://www.youtube.com/shorts/Q8KGZIIDtaA",
     "published_at": "2026-06-26T09:03:16.407189+00:00",
-    "status": "PUBLISHED",
+    "status": "NOT_LIVE",
     "title": "젖은 천 발매트가 늘 축축해서 신경 쓰이는 사람만 보세요",
     "title_template": "{target}만 보세요",
     "script_style": "empathetic",
     "affiliate_url": "https://s.click.aliexpress.com/e/_c4Pnpyvf",
     "sub_id": null,
     "thumbnail_set": true,
-    "comment_id": "UgwOxvgFYi21z8xFb2h4AaABAg"
+    "comment_id": "UgwOxvgFYi21z8xFb2h4AaABAg",
+    "not_live_at": "2026-06-27"
   },
   {
     "post_id": "TxjBiHqL3KQ",
@@ -1136,5 +1138,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "Ugz6DpW-UqNFwtjsFuV4AaABAg"
+  },
+  {
+    "post_id": "xbRR5Em-NRQ",
+    "product_id": "AE1005009157717398",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/xbRR5Em-NRQ",
+    "published_at": "2026-06-27T03:03:35.656682+00:00",
+    "status": "PUBLISHED",
+    "title": "신발 정리대 쓰기 전에 꼭 보세요",
+    "title_template": "{title_keyword} 쓰기 전에 꼭 보세요",
+    "script_style": "direct",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4UmYWml",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "Ugw2Y20c2gZ5FUUqSqh4AaABAg"
   }
 ]
