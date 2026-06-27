@@ -4788,5 +4788,59 @@
     "known_downside": "부츠나 굽 높은 신발에는 쓸 수 없습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009157717398.mp4",
     "post_url": "https://www.youtube.com/shorts/xbRR5Em-NRQ"
+  },
+  {
+    "product_id": "AE1005009771006382",
+    "aliexpress_product_id": "1005009771006382",
+    "created_at": "2026-06-28",
+    "status": "PUBLISHED",
+    "product_name": "47*24cm 실리콘 스테인레스 스틸 싱크대 배수구 건조대 주방 롤러 셔터 식기 과일 및 채소 보관함 12개 튜브",
+    "display_name": "식기건조대",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009771006382.html?pdp_npi=6%40dis%21KRW%213680%213680%21%21%2115.71%2115.71%21%402140d36217825724146726248e11f8%2112000050109209516%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2JJcmsZ",
+    "price": 3680,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S8a3520b5c9fb4c70ae7b4cb48380b94eE.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8a3520b5c9fb4c70ae7b4cb48380b94eE.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0ec3c6bbf6cd4794b6dedff9d9f7b059o.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sb7f7fd5af98f41678c73c79fd98b80adA.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa642fb42eafe4631a7592ac18e18220df.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S27a4578f990240faaa22fc88323bd1e4X.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc85f5081dddf4f6cb5a1cd01500109a2N.jpg"
+    ],
+    "video_url": "https://video.aliexpress-media.com/play/u/ae_sg_item/2676026207/p/1/e/6/t/10301/4000302192165.mp4",
+    "rating": 90.9,
+    "review_count": 289,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "싱크대 식기건조대",
+      "category": "주방",
+      "title_keyword": "식기건조대",
+      "old_way": "그릇 행주 위에 쌓아 말리기",
+      "hook": "좁은 싱크대, 그릇 말릴 데가 없죠?",
+      "problem": "설거지한 그릇을 행주 위에 쌓아두면 잘 안 마르고 물이 흥건하게 고이죠.",
+      "usage": "싱크대 위나 개수대에 올려 그릇을 세워두면 물이 아래로 빠져나갑니다. 안 쓸 땐 접어두는 제품도 있어요.",
+      "benefit": "그릇이 빨리 마르고 조리대 물기도 한곳으로 모여 정리돼요.",
+      "downside": "자동 배수가 안 되는 제품은 받침 물을 가끔 비워줘야 합니다",
+      "target": "싱크대가 좁아 그릇 말릴 곳이 마땅찮은 사람"
+    },
+    "problem": "설거지한 그릇을 행주 위에 쌓아두면 잘 안 마르고 물이 흥건하게 고이죠.",
+    "video_angle": "좁은 싱크대, 그릇 말릴 데가 없죠?",
+    "known_downside": "자동 배수가 안 되는 제품은 받침 물을 가끔 비워줘야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009771006382.mp4",
+    "post_url": "https://www.youtube.com/shorts/fJspH5G3S4A"
   }
 ]
