@@ -4884,5 +4884,59 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7296129124.mp4"
+  },
+  {
+    "product_id": "AE1005012014118080",
+    "aliexpress_product_id": "1005012014118080",
+    "created_at": "2026-06-29",
+    "status": "PUBLISHED",
+    "product_name": "방수 실링 테이프 스트립 PVC 자가 접착 벽 스티커 욕실 샤워 욕조 씰링 코킹 스트립 주방 싱크대 곰팡이 방지",
+    "display_name": "곰팡이 방지 테이프",
+    "category": "욕실",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012014118080.html?pdp_npi=6%40dis%21KRW%215871%212940%21%21%2125.06%2112.55%21%402140f88817826588115037252e12ae%2112000057286886775%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3CUNxcd",
+    "price": 2940,
+    "original_price": 5871,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S8afecf0d4d6d43109d4197aba425f76cO.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8afecf0d4d6d43109d4197aba425f76cO.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf72faabb5d114f1191135aeae6cbee2aY.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S3e172707d08048f483c097112e068760S.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7b09f3bc15f1449c952ff5a17917e532R.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2b387f6b36de469d844358563cbf3f19h.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S312e3da161924fc28a5081f97d42356eT.jpg"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 2872,
+    "score": 94,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "욕실 곰팡이 방지 테이프",
+      "category": "욕실",
+      "title_keyword": "곰팡이 방지 테이프",
+      "old_way": "실리콘 틈 거뭇한 자국 방치",
+      "hook": "욕실 실리콘 틈, 까맣게 올라온 자국 보이죠?",
+      "problem": "장마철 습한 욕실은 실리콘 이음새가 한 번 거뭇해지면 닦아도 잘 안 지워져요.",
+      "usage": "닦아서 말린 이음새 위에 붙여두면 물과 습기가 실리콘 틈으로 스미는 걸 막아줍니다. 더러워지면 떼고 새로 붙이면 돼요.",
+      "benefit": "이음새가 깔끔하게 가려지고 다시 거뭇해지는 속도를 늦춰줘요.",
+      "downside": "이미 올라온 자국 위에 그냥 붙이면 효과가 떨어져서, 닦아낸 뒤 마른 상태에서 붙여야 합니다",
+      "target": "장마철 욕실 실리콘 틈이 신경 쓰이는 사람"
+    },
+    "problem": "장마철 습한 욕실은 실리콘 이음새가 한 번 거뭇해지면 닦아도 잘 안 지워져요.",
+    "video_angle": "욕실 실리콘 틈, 까맣게 올라온 자국 보이죠?",
+    "known_downside": "이미 올라온 자국 위에 그냥 붙이면 효과가 떨어져서, 닦아낸 뒤 마른 상태에서 붙여야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012014118080.mp4",
+    "post_url": "https://www.youtube.com/shorts/QyQB69BNQiA"
   }
 ]
