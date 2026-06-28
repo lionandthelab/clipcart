@@ -4938,5 +4938,59 @@
     "known_downside": "이미 올라온 자국 위에 그냥 붙이면 효과가 떨어져서, 닦아낸 뒤 마른 상태에서 붙여야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012014118080.mp4",
     "post_url": "https://www.youtube.com/shorts/QyQB69BNQiA"
+  },
+  {
+    "product_id": "AE1005007045035499",
+    "aliexpress_product_id": "1005007045035499",
+    "created_at": "2026-06-29",
+    "status": "PUBLISHED",
+    "product_name": "범용 버킷 정리함 자동차 보관 키트, 외부 걸이식 디테일링 도구, 브러시 미트, 빠르고 쉬운 업데이트 스타일 청소 키트",
+    "display_name": "청소도구 걸이",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005007045035499.html?pdp_npi=6%40dis%21KRW%215841%215620%21%21%2124.93%2123.99%21%402140d36117826804185046565e0e2f%2112000039206855158%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3ay0Lj7",
+    "price": 5620,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sb8cd906db56c4d32ae941ab38f3688c3k.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sb8cd906db56c4d32ae941ab38f3688c3k.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8528b0a5e21c47ac9fdd795b46c4775cn.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S638427cca4ef433daa9e3ae02e79cf89D.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc163a6d1201041a3a0acf735fbf05efbl.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S83c452e8471e481faa15935706db47a3E.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Se31b9ea6e6e34dda9d996420527c3aa8H.jpg"
+    ],
+    "video_url": "https://video.aliexpress-media.com/play/u/ae_sg_item/2682792001/p/1/e/6/t/10301/4000194902334.mp4",
+    "rating": 95.0,
+    "review_count": 1327,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "청소도구 정리 걸이",
+      "category": "정리/수납",
+      "title_keyword": "청소도구 걸이",
+      "old_way": "밀대·솔 구석에 세워두기",
+      "hook": "청소도구, 베란다 구석에 쓰러뜨려 두셨죠?",
+      "problem": "밀대랑 빗자루를 벽에 세워두면 자꾸 쓰러지고, 바닥에 닿은 부분에 물때가 끼죠.",
+      "usage": "벽에 붙이고 자루를 끼우면 집게가 잡아줍니다. 도구마다 자리가 생겨서 바닥에서 띄워 보관돼요.",
+      "benefit": "청소도구가 한자리에 정리되고 바닥에 안 닿아 깔끔하게 보관돼요.",
+      "downside": "무타공 접착식은 울퉁불퉁한 벽면에서는 지지력이 약할 수 있습니다",
+      "target": "청소도구가 여기저기 흩어져 있는 사람"
+    },
+    "problem": "밀대랑 빗자루를 벽에 세워두면 자꾸 쓰러지고, 바닥에 닿은 부분에 물때가 끼죠.",
+    "video_angle": "청소도구, 베란다 구석에 쓰러뜨려 두셨죠?",
+    "known_downside": "무타공 접착식은 울퉁불퉁한 벽면에서는 지지력이 약할 수 있습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007045035499.mp4",
+    "post_url": "https://www.youtube.com/shorts/6zl48s9mB8M"
   }
 ]

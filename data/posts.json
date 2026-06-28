@@ -1186,5 +1186,21 @@
     "sub_id": null,
     "thumbnail_set": true,
     "comment_id": "UgzXuhPuhA3cH7T6_OF4AaABAg"
+  },
+  {
+    "post_id": "6zl48s9mB8M",
+    "product_id": "AE1005007045035499",
+    "platform": "youtube_shorts",
+    "source": "aliexpress",
+    "post_url": "https://www.youtube.com/shorts/6zl48s9mB8M",
+    "published_at": "2026-06-28T21:03:48.300753+00:00",
+    "status": "PUBLISHED",
+    "title": "5,620원으로 끝내는 청소도구 걸이",
+    "title_template": "{price_won}원으로 끝내는 {title_keyword}",
+    "script_style": "empathetic",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3ay0Lj7",
+    "sub_id": null,
+    "thumbnail_set": true,
+    "comment_id": "UgzK1445fdL7_fla5xd4AaABAg"
   }
 ]
