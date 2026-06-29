@@ -5088,5 +5088,59 @@
     "known_downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007917712273.mp4",
     "post_url": "https://www.youtube.com/shorts/gczPIH7SuLo"
+  },
+  {
+    "product_id": "AE1005012494653637",
+    "aliexpress_product_id": "1005012494653637",
+    "created_at": "2026-06-30",
+    "status": "PUBLISHED",
+    "product_name": "접이식 실리콘 빨대 세척 브러쉬, 부드럽고 흠집 없는 솔, 텀블러, 젖병, 물병의 딥 클리닝",
+    "display_name": "텀블러 세척솔",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012494653637.html?pdp_npi=6%40dis%21KRW%218286%212900%21%21%2135.53%2112.43%21%402151fce817827668156478872e1169%2112000058527919161%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3vaVuzT",
+    "price": 2900,
+    "original_price": 8286,
+    "discount_pct": 65,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sca8ab908f9b2456690b6fa493b3e51bbg.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sca8ab908f9b2456690b6fa493b3e51bbg.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8c2260d9faf349ad8ae1d30ce6743d6cP.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S224e15ba4c6c4731bec8f7e907c0115fj.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0db583e025a44b24807915f037260331v.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S561c14c5789a415884e68d16e253f082t.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S02055738224b4aedaf8a2eb37470284es.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 4,
+    "score": 88,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "텀블러 세척솔 스펀지",
+      "category": "주방",
+      "title_keyword": "텀블러 세척솔",
+      "old_way": "손 안 닿는 바닥 포기",
+      "hook": "텀블러 바닥, 사실 못 닦고 계시죠?",
+      "problem": "텀블러는 입구가 좁아서 손이 바닥까지 안 닿아요. 냄새가 나도 헹구기만 하게 되죠.",
+      "usage": "긴 손잡이 솔이 바닥과 모서리까지 닿아서 구석을 닦아냅니다.",
+      "benefit": "바닥까지 닦이니 커피 냄새가 남는 일이 줄어요.",
+      "downside": "솔도 소모품이라 몇 달에 한 번은 교체해야 합니다",
+      "target": "매일 텀블러 쓰는데 제대로 못 닦는 사람"
+    },
+    "problem": "텀블러는 입구가 좁아서 손이 바닥까지 안 닿아요. 냄새가 나도 헹구기만 하게 되죠.",
+    "video_angle": "텀블러 바닥, 사실 못 닦고 계시죠?",
+    "known_downside": "솔도 소모품이라 몇 달에 한 번은 교체해야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012494653637.mp4",
+    "post_url": "https://www.youtube.com/shorts/y1eZr_viZ1Y"
   }
 ]
