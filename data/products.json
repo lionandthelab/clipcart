@@ -5034,5 +5034,59 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP9598478959.mp4"
+  },
+  {
+    "product_id": "AE1005007917712273",
+    "aliexpress_product_id": "1005007917712273",
+    "created_at": "2026-06-30",
+    "status": "PUBLISHED",
+    "product_name": "확장 가능한 팬 정리함 랙, 조절 가능한 7 칸, 접시 보관 랙, 냄비 뚜껑, 정리함 냄비, 거치대 주방 용품 랙",
+    "display_name": "냄비 뚜껑 거치대",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005007917712273.html?pdp_npi=6%40dis%21KRW%2111650%2111650%21%21%2149.96%2149.96%21%402140da8b17827452212903588e0fd0%2112000042836591617%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3ISzNud",
+    "price": 11650,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Saa3be4469fad4465bc2ca781e5626634l.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Saa3be4469fad4465bc2ca781e5626634l.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc13426cbcd88495d833064f8fe8192a9F.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7ce0fc9717b14e3a8b8e63489b4dbe0e5.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf78d5b0d85c34acfaec61893ac0e6d15V.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/See536c807e424b61b3f314b866f0cb02v.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S24550c1628d9465d8293673d11e4d192Y.jpg"
+    ],
+    "video_url": "https://video.aliexpress-media.com/play/u/ae_sg_item/2654017800/p/1/e/6/t/10301/4000236638369.mp4",
+    "rating": 89.6,
+    "review_count": 380,
+    "score": 89,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "냄비 뚜껑 거치대 주방",
+      "category": "주방",
+      "title_keyword": "냄비 뚜껑 거치대",
+      "old_way": "뜨거운 뚜껑 들고 두리번",
+      "hook": "요리하다 뜨거운 뚜껑, 어디다 두세요?",
+      "problem": "요리 중에 뚜껑을 열면 둘 곳이 없어서 싱크대에 그냥 뒤집어 두게 되죠. 물자국에 양념까지.",
+      "usage": "거치대에 세우기만 하면 됩니다. 국자도 같이 걸 수 있는 제품이 많아요.",
+      "benefit": "조리대가 지저분해질 일이 줄고 동선이 편해집니다.",
+      "downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
+      "target": "좁은 주방에서 요리하는 사람"
+    },
+    "problem": "요리 중에 뚜껑을 열면 둘 곳이 없어서 싱크대에 그냥 뒤집어 두게 되죠. 물자국에 양념까지.",
+    "video_angle": "요리하다 뜨거운 뚜껑, 어디다 두세요?",
+    "known_downside": "아주 크고 무거운 뚜껑은 기울어질 수 있습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007917712273.mp4",
+    "post_url": "https://www.youtube.com/shorts/gczPIH7SuLo"
   }
 ]
