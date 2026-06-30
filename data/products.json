@@ -5184,5 +5184,59 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP7608115523.mp4"
+  },
+  {
+    "product_id": "AE1005009569538237",
+    "aliexpress_product_id": "1005009569538237",
+    "created_at": "2026-06-30",
+    "status": "PUBLISHED",
+    "product_name": "접착식 케이블 정리 벽걸이형 멀티탭 홀더 플러그인 데스크탑 정리함 탈부착식 소켓 고정대",
+    "display_name": "멀티탭 정리함",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009569538237.html?pdp_npi=6%40dis%21KRW%213160%213160%21%21%2113.55%2113.55%21%402140f89017827884184263895e109c%2112000049489535896%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3r5vkHF",
+    "price": 3160,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S9705e136fdc64959b435a2289773bef9y.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9705e136fdc64959b435a2289773bef9y.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf80f72cf968a48a68807651587ff13c4A.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S79e255d26e8c449d806efabd02f822f5q.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S133cc7934d7a4aa6805a1f6db6acf5e0K.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa3582cf4ddb04f458922b1319fc939207.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S85601eed89364b28b038b63e43e5adcfx.jpg"
+    ],
+    "video_url": "https://video.aliexpress-media.com/play/u/ae_sg_item/2681714179/p/1/e/6/t/10301/4000295722956.mp4",
+    "rating": 100.0,
+    "review_count": 43,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "멀티탭 정리함",
+      "category": "정리/수납",
+      "title_keyword": "멀티탭 정리함",
+      "old_way": "바닥 멀티탭 먼지 방치",
+      "hook": "바닥에 굴러다니는 멀티탭, 위험해 보이지 않나요?",
+      "problem": "멀티탭이 바닥에 그대로 있으면 먼지가 쌓이고 발에 걸리고, 보기에도 지저분하죠.",
+      "usage": "멀티탭을 통째로 넣고 선만 빼면 됩니다. 뚜껑을 덮으면 먼지도 차단.",
+      "benefit": "바닥이 깔끔해지고 먼지 쌓임도 줄어듭니다.",
+      "downside": "대형 멀티탭은 안 들어갈 수 있어 내부 치수 확인이 필요합니다",
+      "target": "책상 밑 멀티탭이 거슬리는 사람"
+    },
+    "problem": "멀티탭이 바닥에 그대로 있으면 먼지가 쌓이고 발에 걸리고, 보기에도 지저분하죠.",
+    "video_angle": "바닥에 굴러다니는 멀티탭, 위험해 보이지 않나요?",
+    "known_downside": "대형 멀티탭은 안 들어갈 수 있어 내부 치수 확인이 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009569538237.mp4",
+    "post_url": "https://www.youtube.com/shorts/ppEl3GsBHfw"
   }
 ]
