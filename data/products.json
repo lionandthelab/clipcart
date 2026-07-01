@@ -5385,5 +5385,47 @@
     "video_angle": "배수구 청소, 아직 손으로 하세요?",
     "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007010464309.mp4"
+  },
+  {
+    "product_id": "CP9618366918",
+    "coupang_product_id": "9618366918",
+    "sub_id": "salrimshorts9618366918",
+    "created_at": "2026-07-02",
+    "status": "VIDEO_READY",
+    "product_name": "키샤 진공 음식물 쓰레기통 1.5L",
+    "display_name": "음식물 쓰레기통",
+    "category": "주방",
+    "source": "coupang_partners",
+    "product_url": "https://link.coupang.com/re/AFFSDP?lptag=AF5566201&subid=salrimshorts&pageKey=9618366918&itemId=28720509795&vendorItemId=95661004260&traceid=V0-153-7dad1a6cf98027ad&requestid=20260702072026546017587350&token=31850C%7CMIXED",
+    "affiliate_url": "https://link.coupang.com/a/e2J9bzXom4",
+    "price": 13200,
+    "is_rocket": false,
+    "image_url": "https://ads-partners.coupang.com/image1/622ja5VDK4GlQ8R762HgvKe9LOoH0koSWFPtGYGy0lP4fPXAP3bgd0dI9l0-9Xl7gFqWjhVEd8LDBHYub48ujtwPB3XmO3cqB9lly5HjEfNS8YVVgd5k5EYOZ2mxacD_JJAeWlTK4ujSvsL4mFbYVnQplPBf-DCordq6qARRRUZhDnVSBX99yII-9_5SORqVNXUbdgwm-mEz9XPTHJef-8_IMPSgqvc6NnPllmX_lslEtCCBYWfbnuROy7_pCGlmJCAdeAe9TtPWz5PEVAS3LnA4OOaV6pnEAyEFYe0wO0Re2DV4h4K4CwXmIw8RN9PvZ8abYxqUacuhPXv2",
+    "score": 86,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 16,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "음식물 쓰레기통 밀폐 뚜껑",
+      "category": "주방",
+      "title_keyword": "음식물 쓰레기통",
+      "old_way": "냄새 나는 봉투 방치",
+      "hook": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+      "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+      "usage": "밀폐 뚜껑이 냄새를 잡아주고, 페달로 열어서 손도 안 대요. 통은 분리해서 통째로 세척.",
+      "benefit": "주방에 가까이 둬도 냄새 스트레스가 줄어듭니다.",
+      "downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+      "target": "음식물 쓰레기 냄새가 고민인 사람"
+    },
+    "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+    "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+    "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+    "video_path": "C:\\Users\\ikess\\Workspace\\lionandthelab\\clipcart\\outbox\\publishing\\CP9618366918.mp4"
   }
 ]
