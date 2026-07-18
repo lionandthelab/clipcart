@@ -6390,5 +6390,58 @@
     "video_angle": "행주, 빨아 쓰는 거 위생적으로 괜찮을까요?",
     "known_downside": "일회용이라 계속 사야 하는 소모품이고, 일반 행주보다 두께는 얇아요",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012645123091.mp4"
+  },
+  {
+    "product_id": "AE1005006053653452",
+    "aliexpress_product_id": "1005006053653452",
+    "created_at": "2026-07-18",
+    "status": "VIDEO_READY",
+    "product_name": "스테인레스 스틸 주방 싱크대 필터 메쉬 하수구 여과기, 욕실 바닥 배수구 캐처, 폐기물 배수구 구멍 필터 트랩 스크린",
+    "display_name": "하수구 트랩",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005006053653452.html?pdp_npi=6%40dis%21KRW%215200%212600%21%21%2123.16%2111.58%21%402140d36217843436487807278e106c%2112000035513450576%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3HTAzcf",
+    "price": 2600,
+    "original_price": 5200,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Saa225433b3344ed888812537ca046e63g.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Saa225433b3344ed888812537ca046e63g.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sb157f1eb5fd547d187c8d78279880b83H.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S33fba9647f714b25af93d0ef3b5aa6f32.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S421b435bbe164740ab604bd866866205D.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5dfa8810f1434a00a11552be7b06d9a0f.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf90051ce95144f36a116ad6e1041054aV.jpg"
+    ],
+    "video_url": "",
+    "rating": 74.3,
+    "review_count": 1754,
+    "score": 91,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "하수구 냄새 차단 트랩",
+      "category": "주방",
+      "title_keyword": "하수구 트랩",
+      "old_way": "하수구에 컵 엎어두기",
+      "hook": "여름만 되면 싱크대에서 냄새 올라오죠?",
+      "problem": "날이 더워지면 하수구를 타고 악취가 올라오고, 작은 날벌레까지 꼬이기 쉬워요.",
+      "usage": "배수구에 끼우면 평소엔 닫혀 있다가 물 내릴 때만 열려서, 냄새와 벌레가 올라오는 길을 막아줍니다.",
+      "benefit": "여름철 싱크대 주변 냄새에 신경 쓸 일이 줄어들어요.",
+      "downside": "배수구 지름이 안 맞으면 들뜰 수 있어 주문 전에 사이즈 확인이 필요합니다",
+      "target": "여름 주방 하수구 냄새가 고민인 사람"
+    },
+    "problem": "날이 더워지면 하수구를 타고 악취가 올라오고, 작은 날벌레까지 꼬이기 쉬워요.",
+    "video_angle": "여름만 되면 싱크대에서 냄새 올라오죠?",
+    "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어 주문 전에 사이즈 확인이 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005006053653452.mp4"
   }
 ]
