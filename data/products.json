@@ -6655,5 +6655,58 @@
     "video_angle": "배수구 청소, 아직 손으로 하세요?",
     "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012055223007.mp4"
+  },
+  {
+    "product_id": "AE1005012722612291",
+    "aliexpress_product_id": "1005012722612291",
+    "created_at": "2026-07-23",
+    "status": "VIDEO_READY",
+    "product_name": "PVC 바닥 배수구 커버 냄새 방지 씰 스티커 원형 방수 화장실 싱크대 하수구 냄새 차단 플러그 주방 욕실 트랩용",
+    "display_name": "하수구 트랩",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012722612291.html?pdp_npi=6%40dis%21KRW%219384%213631%21%21%2141.70%2116.13%21%40214114e317847324169114464e20ff%2112000059130735149%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c422zDwn",
+    "price": 3631,
+    "original_price": 9384,
+    "discount_pct": 61,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sadb698080e614f04ad715b85cd0abdc0B.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sadb698080e614f04ad715b85cd0abdc0B.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S074774101be84c64b4e66b3d4b2c14f8K.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Seb76c85cfce84a4f9094e3f76727fcc4l.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc29d98cb350d4ba5953771e0820ab6a5X.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9d5181c86cde48debb8fb2430fac17fdm.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sfd5509137d644d02a1519d363fb77f0d6.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 1,
+    "score": 90,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "하수구 냄새 차단 트랩",
+      "category": "주방",
+      "title_keyword": "하수구 트랩",
+      "old_way": "하수구에 컵 엎어두기",
+      "hook": "여름만 되면 싱크대에서 냄새 올라오죠?",
+      "problem": "날이 더워지면 하수구를 타고 악취가 올라오고, 작은 날벌레까지 꼬이기 쉬워요.",
+      "usage": "배수구에 끼우면 평소엔 닫혀 있다가 물 내릴 때만 열려서, 냄새와 벌레가 올라오는 길을 막아줍니다.",
+      "benefit": "여름철 싱크대 주변 냄새에 신경 쓸 일이 줄어들어요.",
+      "downside": "배수구 지름이 안 맞으면 들뜰 수 있어 주문 전에 사이즈 확인이 필요합니다",
+      "target": "여름 주방 하수구 냄새가 고민인 사람"
+    },
+    "problem": "날이 더워지면 하수구를 타고 악취가 올라오고, 작은 날벌레까지 꼬이기 쉬워요.",
+    "video_angle": "여름만 되면 싱크대에서 냄새 올라오죠?",
+    "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어 주문 전에 사이즈 확인이 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012722612291.mp4"
   }
 ]
