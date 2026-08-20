@@ -8138,5 +8138,58 @@
     "video_angle": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
     "known_downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012900843777.mp4"
+  },
+  {
+    "product_id": "AE1005012784534890",
+    "aliexpress_product_id": "1005012784534890",
+    "created_at": "2026-08-21",
+    "status": "VIDEO_READY",
+    "product_name": "실리콘 틈새 방지 스트립 주방 가스레인지 실링 스트립 주방 기름때 방지 스트립 실리콘 스토브 카운터 틈새 커버",
+    "display_name": "가스레인지 틈새 커버",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012784534890.html?pdp_npi=6%40dis%21KRW%216019%212770%21%21%2128.19%2112.97%21%402151fce817872380240655855e0db1%2112000059347334415%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3lGSwRt",
+    "price": 2770,
+    "original_price": 6019,
+    "discount_pct": 54,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/A937898f7561645c8b3134aa8ae11267ek.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/A937898f7561645c8b3134aa8ae11267ek.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/A10ac064275874cd6a9926aa4f50391bfx.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/A807760c148ad4383af169e151485cc98g.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/A2851cdb79da94343b6927b966e193610h.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Aac569bfe194c47678232b9400fbef066w.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Aa35596e9f33a4da8a23a2d15c0462cfeW.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 1,
+    "score": 88,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "가스레인지 틈새 커버 실리콘",
+      "category": "주방",
+      "title_keyword": "가스레인지 틈새 커버",
+      "old_way": "틈에 낀 음식물 이쑤시개로 파기",
+      "hook": "가스레인지 옆 틈, 그 사이로 다 떨어져요",
+      "problem": "가스레인지와 싱크대 사이 틈으로 국물이며 부스러기가 떨어져서 닦을 수도 없죠.",
+      "usage": "틈 위에 올려 길이에 맞게 잘라 덮기만 하면 이물질이 못 들어갑니다.",
+      "benefit": "틈새 대청소를 할 일이 없어져요. 더러워지면 커버만 닦으면 끝.",
+      "downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
+      "target": "주방 틈새 청소를 포기한 사람"
+    },
+    "problem": "가스레인지와 싱크대 사이 틈으로 국물이며 부스러기가 떨어져서 닦을 수도 없죠.",
+    "video_angle": "가스레인지 옆 틈, 그 사이로 다 떨어져요",
+    "known_downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012784534890.mp4"
   }
 ]
