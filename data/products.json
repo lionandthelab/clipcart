@@ -8297,5 +8297,58 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012175602407.mp4"
+  },
+  {
+    "product_id": "AE1005012546660340",
+    "aliexpress_product_id": "1005012546660340",
+    "created_at": "2026-08-27",
+    "status": "VIDEO_READY",
+    "product_name": "20개/롤 만화 캐릭터 일회용 청소용 천 롤 두꺼운 흡수성 NS 스타일 주방 행주 손으로 찢는 걸레 가정용",
+    "display_name": "일회용 행주",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012546660340.html?pdp_npi=6%40dis%21KRW%219074%214540%21%21%2142.83%2121.43%21%402140d36217877996177638801e107a%2112000058646139445%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4EJE1ND",
+    "price": 4540,
+    "original_price": 9074,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sae7f85ddf302424bab26a9c38725b2d7E.png",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sae7f85ddf302424bab26a9c38725b2d7E.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6d79fe9b846a469d9fc1d8326ce3cb1dJ.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S57d4f303da5f49b48d4eb1cb459d4ce95.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S95e66bceebf94a2bbd3fb7df0650b72aj.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S40db8797994c4ab2886beb9591a2af2dr.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa9fb1de580b245c1bdb8b2533d2db5eek.png"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 2,
+    "score": 90,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "주방 일회용 행주 롤",
+      "category": "주방",
+      "title_keyword": "일회용 행주",
+      "old_way": "더러운 행주 빨아서 다시 쓰기",
+      "hook": "행주, 빨아 쓰는 거 위생적으로 괜찮을까요?",
+      "problem": "행주는 쓸수록 냄새나고 세균이 걱정되는데, 매번 삶거나 빨기도 번거롭죠.",
+      "usage": "필요한 만큼 한 칸씩 뜯어 쓰고, 더러워지면 그냥 버리면 됩니다. 물에 젖어도 잘 안 찢어져요.",
+      "benefit": "행주 빨 일이 없어지고 늘 새 행주처럼 깨끗하게 쓸 수 있어요.",
+      "downside": "일회용이라 계속 사야 하는 소모품이고, 일반 행주보다 두께는 얇아요",
+      "target": "행주 빨기 번거롭고 위생이 신경 쓰이는 사람"
+    },
+    "problem": "행주는 쓸수록 냄새나고 세균이 걱정되는데, 매번 삶거나 빨기도 번거롭죠.",
+    "video_angle": "행주, 빨아 쓰는 거 위생적으로 괜찮을까요?",
+    "known_downside": "일회용이라 계속 사야 하는 소모품이고, 일반 행주보다 두께는 얇아요",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012546660340.mp4"
   }
 ]
