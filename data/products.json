@@ -8350,5 +8350,57 @@
     "video_angle": "행주, 빨아 쓰는 거 위생적으로 괜찮을까요?",
     "known_downside": "일회용이라 계속 사야 하는 소모품이고, 일반 행주보다 두께는 얇아요",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012546660340.mp4"
+  },
+  {
+    "product_id": "AE1005012740654853",
+    "aliexpress_product_id": "1005012740654853",
+    "created_at": "2026-08-30",
+    "status": "VIDEO_READY",
+    "product_name": "50개 산리오 일회용 주방 물티슈 시나모롤 포차코 헬로키티 카와이 종이 타월 행주 선물",
+    "display_name": "일회용 행주",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012740654853.html?pdp_npi=6%40dis%21KRW%217270%217270%21%21%2134.46%2134.46%21%40212a7b8d17880588225073002e0fe7%2112000059184627919%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3Dh5cj9",
+    "price": 7270,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sf871bc3fa4cb4432b5886450b14074e7M.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf871bc3fa4cb4432b5886450b14074e7M.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S370b5d37df4e45c5aea5d05231429c3bf.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf49551054db147d7becfabfb0089b47c1.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6b0b29a56ddd40dea9144202e9fec0feX.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Se9ace1f10ec14ba7b54330a4509d8d57Q.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 9,
+    "score": 90,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "주방 일회용 행주 롤",
+      "category": "주방",
+      "title_keyword": "일회용 행주",
+      "old_way": "더러운 행주 빨아서 다시 쓰기",
+      "hook": "행주, 빨아 쓰는 거 위생적으로 괜찮을까요?",
+      "problem": "행주는 쓸수록 냄새나고 세균이 걱정되는데, 매번 삶거나 빨기도 번거롭죠.",
+      "usage": "필요한 만큼 한 칸씩 뜯어 쓰고, 더러워지면 그냥 버리면 됩니다. 물에 젖어도 잘 안 찢어져요.",
+      "benefit": "행주 빨 일이 없어지고 늘 새 행주처럼 깨끗하게 쓸 수 있어요.",
+      "downside": "일회용이라 계속 사야 하는 소모품이고, 일반 행주보다 두께는 얇아요",
+      "target": "행주 빨기 번거롭고 위생이 신경 쓰이는 사람"
+    },
+    "problem": "행주는 쓸수록 냄새나고 세균이 걱정되는데, 매번 삶거나 빨기도 번거롭죠.",
+    "video_angle": "행주, 빨아 쓰는 거 위생적으로 괜찮을까요?",
+    "known_downside": "일회용이라 계속 사야 하는 소모품이고, 일반 행주보다 두께는 얇아요",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012740654853.mp4"
   }
 ]
