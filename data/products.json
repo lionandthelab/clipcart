@@ -8402,5 +8402,57 @@
     "video_angle": "행주, 빨아 쓰는 거 위생적으로 괜찮을까요?",
     "known_downside": "일회용이라 계속 사야 하는 소모품이고, 일반 행주보다 두께는 얇아요",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012740654853.mp4"
+  },
+  {
+    "product_id": "AE1005011938800456",
+    "aliexpress_product_id": "1005011938800456",
+    "created_at": "2026-09-01",
+    "status": "VIDEO_READY",
+    "product_name": "50리터 검정색 쓰레기 봉투 60x80cm 특대형 찢김 방지 야외 정원용 대형 쓰레기통",
+    "display_name": "음식물 쓰레기통",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005011938800456.html?pdp_npi=6%40dis%21KRW%219520%214760%21%21%2145.22%2122.61%21%40212a7b8d17882100105315661e0e7c%2112000057072121467%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4p8aNM7",
+    "price": 4760,
+    "original_price": 9520,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Seb6bad55c8f149c993d95ccbec0960404.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Seb6bad55c8f149c993d95ccbec0960404.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S324feb54ad554a75ae0453d11f35acd17.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S7eb4ca766ff549e88a45ae3ae215e162J.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sbdd9b5a39cf5411a8bf3ddc91d28294bW.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8df620e926a94d38ba125c625eae9613B.jpg"
+    ],
+    "video_url": "",
+    "rating": 92.9,
+    "review_count": 140,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "음식물 쓰레기통 밀폐 뚜껑",
+      "category": "주방",
+      "title_keyword": "음식물 쓰레기통",
+      "old_way": "냄새 나는 봉투 방치",
+      "hook": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+      "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+      "usage": "밀폐 뚜껑이 냄새를 잡아주고, 페달로 열어서 손도 안 대요. 통은 분리해서 통째로 세척.",
+      "benefit": "주방에 가까이 둬도 냄새 스트레스가 줄어듭니다.",
+      "downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+      "target": "음식물 쓰레기 냄새가 고민인 사람"
+    },
+    "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+    "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+    "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005011938800456.mp4"
   }
 ]
