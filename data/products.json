@@ -8613,5 +8613,58 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005005888792012.mp4"
+  },
+  {
+    "product_id": "AE1005012191808667",
+    "aliexpress_product_id": "1005012191808667",
+    "created_at": "2026-09-05",
+    "status": "VIDEO_READY",
+    "product_name": "주방 싱크대 필터 랙 삼각형 자석 배수구 바구니 걸이형 쓰레기통 음식물 쓰레기 거름망 과일 야채 물기 제거 도구",
+    "display_name": "음식물 쓰레기통",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012191808667.html?pdp_npi=6%40dis%21KRW%212986%212860%21%21%2114.34%2113.73%21%402140da8b17885340127361951e1235%2112000057715835117%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3LXAJBr",
+    "price": 2860,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S52732c68ef684d9fa318a78b2ebbc89cw.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S52732c68ef684d9fa318a78b2ebbc89cw.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Abaaf9ced871e4c678b629c95da9c31c8V.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Ad640f095cf114fc59e9688ffc5c6384aw.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/A06c42d6fbc9448688e30e20d4c79a02el.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Ab6e7066fc9fb4bfe84b4ffbf4e4b22ac7.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Aa784c5e067fb48f7b430601b48668852i.jpg"
+    ],
+    "video_url": "",
+    "rating": 66.0,
+    "review_count": 115,
+    "score": 91,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "음식물 쓰레기통 밀폐 뚜껑",
+      "category": "주방",
+      "title_keyword": "음식물 쓰레기통",
+      "old_way": "냄새 나는 봉투 방치",
+      "hook": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+      "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+      "usage": "밀폐 뚜껑이 냄새를 잡아주고, 페달로 열어서 손도 안 대요. 통은 분리해서 통째로 세척.",
+      "benefit": "주방에 가까이 둬도 냄새 스트레스가 줄어듭니다.",
+      "downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+      "target": "음식물 쓰레기 냄새가 고민인 사람"
+    },
+    "problem": "음식물 쓰레기를 모아두면 냄새가 올라오고 초파리까지 꼬이죠.",
+    "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
+    "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012191808667.mp4"
   }
 ]
