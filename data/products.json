@@ -8772,5 +8772,58 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005008384393242.mp4"
+  },
+  {
+    "product_id": "AE1005010698390553",
+    "aliexpress_product_id": "1005010698390553",
+    "created_at": "2026-09-08",
+    "status": "VIDEO_READY",
+    "product_name": "1개 냉장고 보관함, 주방 정리, 계란 트레이 보존 상자, 계란 칸, 가정용 계란 트레이, 플라스틱 계란 상자, 오리",
+    "display_name": "냉장고 정리 트레이",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005010698390553.html?pdp_npi=6%40dis%21KRW%2111535%215770%21%21%2155.98%2128.00%21%402140da8b17887932213061226e10ec%2112000053228671739%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3LzCSGN",
+    "price": 5770,
+    "original_price": 11535,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S9be0dd8575874fb89f0e752432774503s.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9be0dd8575874fb89f0e752432774503s.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2765c01003d44f07aaac4570a2bf6faft.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S958b3424d2424e91860aa50b6c0807179.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sfbaa057b70db4b1aa1cffee3fa6fbfadK.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa1ce003fc479497faba2d6fcfa08962ar.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6f90cbfb3e754863916778bbd72dd9c9Y.jpg"
+    ],
+    "video_url": "",
+    "rating": 90.0,
+    "review_count": 5,
+    "score": 93,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "냉장고 정리 트레이 서랍형",
+      "category": "정리/수납",
+      "title_keyword": "냉장고 정리 트레이",
+      "old_way": "냉장고 안쪽 물건 다 꺼내기",
+      "hook": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
+      "problem": "냉장고 안쪽에 넣어둔 반찬은 꺼내기 귀찮아서 결국 잊고 버리게 되죠.",
+      "usage": "트레이에 담아 넣으면 서랍처럼 쭉 당겨서 안쪽 물건까지 바로 꺼낼 수 있어요.",
+      "benefit": "뭐가 있는지 한눈에 보여서 음식 버리는 일이 줄어듭니다.",
+      "downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
+      "target": "냉장고 정리가 매번 무너지는 사람"
+    },
+    "problem": "냉장고 안쪽에 넣어둔 반찬은 꺼내기 귀찮아서 결국 잊고 버리게 되죠.",
+    "video_angle": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
+    "known_downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010698390553.mp4"
   }
 ]
