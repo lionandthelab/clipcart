@@ -9037,5 +9037,58 @@
     "video_angle": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
     "known_downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012154368321.mp4"
+  },
+  {
+    "product_id": "AE1005012524384997",
+    "aliexpress_product_id": "1005012524384997",
+    "created_at": "2026-09-13",
+    "status": "VIDEO_READY",
+    "product_name": "360도 회전식 주방 양념통 회전판 타원형 미끄럼 방지 바닥 조미료 정리대 플라스틱 투명 회전 냉장고 트레이",
+    "display_name": "냉장고 정리 트레이",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012524384997.html?pdp_npi=6%40dis%21KRW%219500%219500%21%21%2145.95%2145.95%21%40214114e317892252318037998e0f15%2112000058624524252%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2RKiAzx",
+    "price": 9500,
+    "original_price": null,
+    "discount_pct": null,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S6a135bb03c6c47898164b8e264bb0f781.png",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6a135bb03c6c47898164b8e264bb0f781.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S1618ddf6881e494385655318cc1e35bak.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S719c23a597e84cfb963934736ea30256m.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S83e5229b2b7c4693b5d66f4164788a65q.png",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sfb7895999b1f4bf89c204a18e9357a92d.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf084a82c51e34d319a4a28344a23aae98.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 3,
+    "score": 90,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "냉장고 정리 트레이 서랍형",
+      "category": "정리/수납",
+      "title_keyword": "냉장고 정리 트레이",
+      "old_way": "냉장고 안쪽 물건 다 꺼내기",
+      "hook": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
+      "problem": "냉장고 안쪽에 넣어둔 반찬은 꺼내기 귀찮아서 결국 잊고 버리게 되죠.",
+      "usage": "트레이에 담아 넣으면 서랍처럼 쭉 당겨서 안쪽 물건까지 바로 꺼낼 수 있어요.",
+      "benefit": "뭐가 있는지 한눈에 보여서 음식 버리는 일이 줄어듭니다.",
+      "downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
+      "target": "냉장고 정리가 매번 무너지는 사람"
+    },
+    "problem": "냉장고 안쪽에 넣어둔 반찬은 꺼내기 귀찮아서 결국 잊고 버리게 되죠.",
+    "video_angle": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
+    "known_downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012524384997.mp4"
   }
 ]
