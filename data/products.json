@@ -9143,5 +9143,58 @@
     "video_angle": "키보드 틈새 먼지, 뒤집어 털어도 그대로죠?",
     "known_downside": "여러 번 쓰면 점착력이 떨어져서 소모품으로 봐야 합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005006522490594.mp4"
+  },
+  {
+    "product_id": "AE1005012031834223",
+    "aliexpress_product_id": "1005012031834223",
+    "created_at": "2026-09-17",
+    "status": "VIDEO_READY",
+    "product_name": "1개 매직 젤 먼지 제거제, 자동차 내부 먼지 제거제 - 자동차 통풍구, 키보드 등을 손쉽게 청소 - 완벽한 자동차 청소 도구",
+    "display_name": "키보드 청소 젤",
+    "category": "청소",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012031834223.html?pdp_npi=6%40dis%21KRW%215417%212600%21%21%2125.74%2112.35%21%402140da8b17895924161036315e116a%2112000057355624003%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3WhX4Px",
+    "price": 2600,
+    "original_price": 5417,
+    "discount_pct": 52,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S82244adac85b4f19ac335b5d2e1712cfP.jpeg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S82244adac85b4f19ac335b5d2e1712cfP.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S20bba2c52b68477ab0d3c8923a67e8f4J.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8baff06f37d8402f87466d20cbefe32dU.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S99c01ea34a1e4f42929573c0835cd7cbq.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S5d751095f942482eae0f50c95a98dc14S.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6b7671a381d04d6abacc6325cb1841abN.jpeg"
+    ],
+    "video_url": "",
+    "rating": 94.3,
+    "review_count": 321,
+    "score": 94,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "키보드 청소 젤",
+      "category": "청소",
+      "title_keyword": "키보드 청소 젤",
+      "old_way": "키보드 뒤집어서 털기",
+      "hook": "키보드 틈새 먼지, 뒤집어 털어도 그대로죠?",
+      "problem": "키보드 틈새에 낀 먼지와 부스러기는 뒤집어 털어도 잘 안 나와요.",
+      "usage": "젤을 키보드 위에 올려 꾹 눌렀다 떼면 틈새 먼지가 젤에 붙어 나옵니다.",
+      "benefit": "에어스프레이 없이도 틈새가 눈에 띄게 깨끗해져요.",
+      "downside": "여러 번 쓰면 점착력이 떨어져서 소모품으로 봐야 합니다",
+      "target": "책상은 닦아도 키보드는 포기한 사람"
+    },
+    "problem": "키보드 틈새에 낀 먼지와 부스러기는 뒤집어 털어도 잘 안 나와요.",
+    "video_angle": "키보드 틈새 먼지, 뒤집어 털어도 그대로죠?",
+    "known_downside": "여러 번 쓰면 점착력이 떨어져서 소모품으로 봐야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012031834223.mp4"
   }
 ]
