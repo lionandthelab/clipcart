@@ -9355,5 +9355,58 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005010015484932.mp4"
+  },
+  {
+    "product_id": "AE1005013129275660",
+    "aliexpress_product_id": "1005013129275660",
+    "created_at": "2026-09-23",
+    "status": "VIDEO_READY",
+    "product_name": "세탁기 배수구 거름망 - 먼지 필터 청소용 물받이, 세탁실 누수 방지용",
+    "display_name": "세탁기 먼지 거름망",
+    "category": "세탁",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005013129275660.html?pdp_npi=6%40dis%21KRW%216357%212540%21%21%2130.39%2112.15%21%402151fd3a17901108086888327e101b%2112000060363782107%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c3r7e5tB",
+    "price": 2540,
+    "original_price": 6357,
+    "discount_pct": 60,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S746d8d36ace34aa082caa20fefea96b2J.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S746d8d36ace34aa082caa20fefea96b2J.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd98f417e077944dc94ded1e6629d3837d.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S6f9005d797fe4060b7e698d9a37177766.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S28db03ed8cd748e6af4b1d95d5ecbbf0I.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S838376352d114c21a468f78c6df1e4deR.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf73cea1c50f7423a8c3d8b947ab73943v.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 6,
+    "score": 88,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "세탁기 먼지 거름망 부직포",
+      "category": "세탁",
+      "title_keyword": "세탁기 먼지 거름망",
+      "old_way": "옷에 붙은 먼지 손으로 떼기",
+      "hook": "빨래했는데 먼지가 더 붙어 나온다면?",
+      "problem": "세탁이 끝나면 검은 옷에 하얀 먼지가 잔뜩. 테이프로 떼는 것도 한두 번이죠.",
+      "usage": "세탁조에 같이 넣기만 하면 물에 떠다니는 먼지와 보풀을 모아줍니다.",
+      "benefit": "건져서 버리기만 하면 돼서 옷에 남는 먼지가 줄어요.",
+      "downside": "먼지가 아주 많은 빨래는 한 장으로 부족할 수 있습니다",
+      "target": "검은 옷 먼지 때문에 스트레스인 사람"
+    },
+    "problem": "세탁이 끝나면 검은 옷에 하얀 먼지가 잔뜩. 테이프로 떼는 것도 한두 번이죠.",
+    "video_angle": "빨래했는데 먼지가 더 붙어 나온다면?",
+    "known_downside": "먼지가 아주 많은 빨래는 한 장으로 부족할 수 있습니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005013129275660.mp4"
   }
 ]
