@@ -9461,5 +9461,58 @@
     "video_angle": "배수구 청소, 아직 손으로 하세요?",
     "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012192321263.mp4"
+  },
+  {
+    "product_id": "AE1005013120735916",
+    "aliexpress_product_id": "1005013120735916",
+    "created_at": "2026-09-25",
+    "status": "VIDEO_READY",
+    "product_name": "냉장고 측면 도어 정리를 위한 자동 회전 기능이 있는 계란 보관 트레이",
+    "display_name": "냉장고 정리 트레이",
+    "category": "정리/수납",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005013120735916.html?pdp_npi=6%40dis%21KRW%2120143%218460%21%21%2195.83%2140.25%21%402140f89017902836202014912e0ece%2112000060342968151%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/s/pyFri10M6ltAv61YZY9TfrxiDaaFXRreuZWJMeLtD8jig1wPxn51K2eq59ds8iT5Wl5L3w5KJyrl7SjOO3B0oJ0Xjwnc7n8AQA7gf5qnT4sCyU05LNms9JvyWQNFHNKtzBcoBpSguMg3UBR1FOODkmGTloXosMhqhnKgzzuJPYPxewVvzupiAiKSJA5SK0iQRxmaQ7UPG0AP2HC7uLitVpvXIfjMl7RnsnN7B8FrGfP9TWP7emQeaXV90Bp9fLEiLeKHsRf9R2jgKD32Axm5na4bRJdkhGVyv3GcDgMjmYrrZWinWctR9gnPwA4o2h7OsW8IURfktHrVCGa36wwUby6r78Bw9271mQBRFz6XNMlXMxa8WZqiE1As1C5xa25KH6GQsgTzaFG321zb0F0cDsvFfOefmFMfGvyC6Cen15pFlIJx8g3UUJT9CkCdUG8kXcR7u9rUsiWeQqhoKlArOqcBeEDHrsZKmNV9WcUEi7Tzhr4XVcvMNtGUeKCsGz2BMHa0W7aFOKWnNAXWuMavxnslzSPc9iJsLYOXAjPG1kLwLnzijXlWYHTV6NT8DAl2eMhesLSsqm5vge38DZI9CFqSsImDhh6rAYx1SoXO2s5Pdpcz7Xui1FuKXHDsHBg1ydn1loTXw75xUycXhKXHDRYv3v2YcVHw4qN1eLFnZu1KwGFpNkzM43Wgx0GUnaUcYVEIGT4Sdi5IrDI5jRUzo7BNW5qHSzkey1YugMcKzGuFuNT9tHg0zg29pNNdRmFNQXkAPTDtoYoBEu9gSWE8erOw9kl24VDRA71j7uF75fdUckroeQKz8OWLO4C0bNZYejRzTABTNIddAONl2sUmY0sIbOSETWczCuA0NisIRNYAohryCsX5dnlRhWxUEJgzXbG2ujvq5tPIN576hcfS8QZHL28Lfr1lcTSzbiEBIkRDUmnqayZQ600Aw8KYjOMKvanTz6jfX6pKoVK40uFHFiRr6bEbcQm47kCrxdNvsnmymRfvKAmdpdVzfbP5r1sVcXkdGksg",
+    "price": 8460,
+    "original_price": 20143,
+    "discount_pct": 58,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sb63362767c0949079fc83f06ad77dc85v.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sb63362767c0949079fc83f06ad77dc85v.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf124ecdea5ee4b19b5b8aa0231ec9691X.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S88450fe921334ac187a077784893a5f7Y.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S25f4abfd7dce4536886e0f93b5b5b4a2T.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Scf567c0d60e34c039333045dfbc1c5a04.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sf9ab6179e7c84f049c0c9bd698b052126.jpg"
+    ],
+    "video_url": "",
+    "rating": 0.0,
+    "review_count": 6,
+    "score": 90,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 9,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "냉장고 정리 트레이 서랍형",
+      "category": "정리/수납",
+      "title_keyword": "냉장고 정리 트레이",
+      "old_way": "냉장고 안쪽 물건 다 꺼내기",
+      "hook": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
+      "problem": "냉장고 안쪽에 넣어둔 반찬은 꺼내기 귀찮아서 결국 잊고 버리게 되죠.",
+      "usage": "트레이에 담아 넣으면 서랍처럼 쭉 당겨서 안쪽 물건까지 바로 꺼낼 수 있어요.",
+      "benefit": "뭐가 있는지 한눈에 보여서 음식 버리는 일이 줄어듭니다.",
+      "downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
+      "target": "냉장고 정리가 매번 무너지는 사람"
+    },
+    "problem": "냉장고 안쪽에 넣어둔 반찬은 꺼내기 귀찮아서 결국 잊고 버리게 되죠.",
+    "video_angle": "냉장고 안쪽 물건, 매번 다 꺼내세요?",
+    "known_downside": "냉장고 칸 높이와 깊이를 먼저 재봐야 합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005013120735916.mp4"
   }
 ]
