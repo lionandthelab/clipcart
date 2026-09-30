@@ -9620,5 +9620,58 @@
     "video_angle": "가스레인지 옆 틈, 그 사이로 다 떨어져요",
     "known_downside": "틈 폭이 넓으면 들뜰 수 있어 폭 확인이 필요합니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005013197905398.mp4"
+  },
+  {
+    "product_id": "AE1005012014088196",
+    "aliexpress_product_id": "1005012014088196",
+    "created_at": "2026-10-01",
+    "status": "VIDEO_READY",
+    "product_name": "2x 범위 후드 필터 교체 환기 알루미늄 흡인기 26*32CM 금속 메쉬 쿠커 후드 그리스 필터 주방 추출기",
+    "display_name": "주방 후드 필터",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005012014088196.html?pdp_npi=6%40dis%21KRW%2119980%219990%21%21%2195.80%2147.90%21%400b8ded7b17908020210282763e106d%2112000057272379831%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c2uu1JRx",
+    "price": 9990,
+    "original_price": 19980,
+    "discount_pct": 50,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S738dc4b7318f4badb4cc34f407d94ea6Q.jpeg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S738dc4b7318f4badb4cc34f407d94ea6Q.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S1cc6931416e44c4cba72d41cb8afa4a1n.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S77478d0767374297af7b8d792103ceefz.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S3cc0f3e8890248fe8d418f600796c70b4.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sd18b4cf510dc465688bfd02fae93385fI.jpeg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S37e3a634c93941f2af94f834a6021474l.jpeg"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 328,
+    "score": 96,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 10,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "후드 필터 기름때 시트",
+      "category": "주방",
+      "title_keyword": "주방 후드 필터",
+      "old_way": "기름 낀 후드 분해 세척",
+      "hook": "주방 후드, 마지막으로 닦은 게 언제예요?",
+      "problem": "후드 필터에 기름때가 끼면 분해해서 닦아야 하는데, 엄두가 안 나서 미루게 되죠.",
+      "usage": "필터 위에 시트를 붙여두면 기름을 시트가 먼저 흡수합니다. 더러워지면 시트만 교체.",
+      "benefit": "후드 분해 세척 주기가 길어집니다.",
+      "downside": "후드 모양에 따라 재단이 필요하고, 시트는 주기 교체 소모품입니다",
+      "target": "후드 청소를 1년째 미루는 사람"
+    },
+    "problem": "후드 필터에 기름때가 끼면 분해해서 닦아야 하는데, 엄두가 안 나서 미루게 되죠.",
+    "video_angle": "주방 후드, 마지막으로 닦은 게 언제예요?",
+    "known_downside": "후드 모양에 따라 재단이 필요하고, 시트는 주기 교체 소모품입니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012014088196.mp4"
   }
 ]
