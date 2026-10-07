@@ -9884,5 +9884,58 @@
     "video_angle": "여름 주방 냄새, 원인은 음식물 쓰레기예요",
     "known_downside": "밀폐 고무패킹은 주기적으로 닦아줘야 냄새가 배지 않습니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005012336632073.mp4"
+  },
+  {
+    "product_id": "AE1005007805610570",
+    "aliexpress_product_id": "1005007805610570",
+    "created_at": "2026-10-08",
+    "status": "VIDEO_READY",
+    "product_name": "스테인리스 스틸 바닥 배수구 필터 머리카락 거름망 샤워 싱크 스트레이너 주방 싱크대 막힘 방지 필터 욕실 용품",
+    "display_name": "배수구 거름망",
+    "category": "욕실",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005007805610570.html?pdp_npi=6%40dis%21KRW%215250%212520%21%21%2125.53%2112.26%21%40210152bd17914068178736943e0d4c%2112000042262334427%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/e/_c4TNy9gh",
+    "price": 2520,
+    "original_price": 5250,
+    "discount_pct": 52,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S4e8dd01e26c6436abb43ee1e387affb0n.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S4e8dd01e26c6436abb43ee1e387affb0n.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sc928f4362ff642d98f35f10507af68bfO.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sae07da8928f84ee9937f5c387a1c04e3V.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Sa77906e30e0145f493b38222d3d044919.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S06017f0b731b4ffeb617fbca4c6db9baj.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S392a5154e9b240e89c79182cb100157bh.jpg"
+    ],
+    "video_url": "",
+    "rating": 98.0,
+    "review_count": 1160,
+    "score": 94,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 15,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "배수구 거름망 스테인리스",
+      "category": "욕실",
+      "title_keyword": "배수구 거름망",
+      "old_way": "배수구 머리카락 손으로 빼기",
+      "hook": "배수구 청소, 아직 손으로 하세요?",
+      "problem": "샤워하고 나면 배수구에 머리카락이 한가득. 손으로 빼자니 매번 곤욕이죠.",
+      "usage": "배수구 위에 올려두기만 하면 머리카락과 찌꺼기를 걸러줍니다. 가득 차면 들어서 탈탈 비우면 끝.",
+      "benefit": "손 안 대고 휴지로 한 번에 비울 수 있어서 배수구 막힘 걱정이 확 줄어요.",
+      "downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
+      "target": "배수구 머리카락 치우는 게 곤욕인 사람"
+    },
+    "problem": "샤워하고 나면 배수구에 머리카락이 한가득. 손으로 빼자니 매번 곤욕이죠.",
+    "video_angle": "배수구 청소, 아직 손으로 하세요?",
+    "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007805610570.mp4"
   }
 ]
