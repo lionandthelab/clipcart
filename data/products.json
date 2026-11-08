@@ -10678,5 +10678,58 @@
     "video_angle": "배수구 청소, 아직 손으로 하세요?",
     "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어서 주문 전에 사이즈 확인은 필수입니다",
     "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005007009791533.mp4"
+  },
+  {
+    "product_id": "AE1005009718171096",
+    "aliexpress_product_id": "1005009718171096",
+    "created_at": "2026-11-09",
+    "status": "VIDEO_READY",
+    "product_name": "주방 싱크대 배수구 거름망 막힘 방지 메쉬 트랩 쓰레기 걸름망 14.5cm 정사각형 하수구 배수구 필터 주방 욕실용품",
+    "display_name": "하수구 트랩",
+    "category": "주방",
+    "source": "aliexpress",
+    "product_url": "https://ko.aliexpress.com/item/1005009718171096.html?pdp_npi=6%40dis%21KRW%215609%212580%21%21%2126.78%2112.32%21%402140d36217941500168016776e0c42%2112000049940521160%21affd%21%21%21%211%210%21",
+    "affiliate_url": "https://s.click.aliexpress.com/s/pyFri10M6ltAv61YZY9TfrxiDaaFXRreuZWJMeLtD8jig1wPxn51K2eq59ds8iT5Wl5L3w5KJyrl7SjOO3B0oJ0Xjwnc7n8AQA7gf5qnT4sCyU05LNms9JvyWQNFHNKtzBcoBpSguMg3UBR1FOODkmGTloXosMhqhnKgzzuJPYPxewVvzupiAiKSJA5SK0iQRxmaQ7UPG0AP2HC7uLitVpvXIfjMl7RnsnN7B8FrGfP9TWP7emQeaXV90Bp9fLEiLeKHsRf9R2jgKD32Axm5na4bRJdkhGVyv3GcDgMjmYrrZWinWctR9gnPwA4EQQ8miRDULWpN1YU0FOrt84ieWqzGj5fjMfFOItLYm3KUBxN4E4hdgImcy1koiitN4c3D5gF9tAw3BTP7KiVoLag2rbO0chSvilRtnwbJhstGvH762VJbh1aPL7Arde9XUuTEZ2tb5bUw63L7F8O5ODFRhsFc81WiBdLwTrBDGp4LdkvewrUWZrcF3NfFfuDGBrHSdOHg4OGK7UtuigQbaTy5ZoT2ERRKp9GH4gc6g62fy996k23EII2y2SrENlM2jGQkKgmP1st1arEo3MHWROLho58AfVghAS7uSD4DmRBF5YnSzZ7a5uqRyQPML1VC8fON7d9XusFCs5Q5VVPRjE7Fuj7UxM6M5GUvlpTBMMsXXPPOa7NL2AHX18eMHf6mfZn0RIIZQKe8W2HDHADQDCJwUhmnZIXzqqK9Z5J35gvqNnzZloH6VSis57iz04OxnCRulkOOrrFea5kKf9ailTYBOLRl1IN0XwuFn0s12tzmLvZyVppzslgVPU3ivSU8Z7tLW1tEZCcIlxcbkQTGJYxFeaVo8rG6oZWrnyisTCwS5ZrEpxn1sg7p8iAmimpWMWFrH6jSgKnIwdXYJQjzMmzzPGHb0faJYtrRPWDD5Ae8wvdwuobTyu7Asx9boxEhMswB5c8EJMa4U7aClzdpN805ul3aMShRZSIwGlQKDSr566N0V9hK9E3ctrxUK4tU4BLXQ4uTEcHR",
+    "price": 2580,
+    "original_price": 5609,
+    "discount_pct": 54,
+    "image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S8bc5f47dbd91462c9fd7d2909b6c0b8ce.jpg",
+    "image_urls": [
+      "https://ae-pic-a1.aliexpress-media.com/kf/S8bc5f47dbd91462c9fd7d2909b6c0b8ce.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/Saceefa711af442bf8b20dcce0ba7e03d8.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2094880e414c49e8a98c2a7d939a9658K.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S0aac2fac622742dc83d7c1c49e2945baW.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S089a7e6a13694a2dae4744aad0b80d7cU.jpg",
+      "https://ae-pic-a1.aliexpress-media.com/kf/S9f38c90087c14fe38a4bb82231a91c78P.jpg"
+    ],
+    "video_url": "",
+    "rating": 100.0,
+    "review_count": 63,
+    "score": 91,
+    "score_breakdown": {
+      "problem_strength": 30,
+      "video_ease": 25,
+      "impulse_buy": 20,
+      "review_trust": 12,
+      "price_fit": 8,
+      "claim_risk": 4,
+      "regulatory_risk": 0
+    },
+    "niche": {
+      "keyword": "하수구 냄새 차단 트랩",
+      "category": "주방",
+      "title_keyword": "하수구 트랩",
+      "old_way": "하수구에 컵 엎어두기",
+      "hook": "여름만 되면 싱크대에서 냄새 올라오죠?",
+      "problem": "날이 더워지면 하수구를 타고 악취가 올라오고, 작은 날벌레까지 꼬이기 쉬워요.",
+      "usage": "배수구에 끼우면 평소엔 닫혀 있다가 물 내릴 때만 열려서, 냄새와 벌레가 올라오는 길을 막아줍니다.",
+      "benefit": "여름철 싱크대 주변 냄새에 신경 쓸 일이 줄어들어요.",
+      "downside": "배수구 지름이 안 맞으면 들뜰 수 있어 주문 전에 사이즈 확인이 필요합니다",
+      "target": "여름 주방 하수구 냄새가 고민인 사람"
+    },
+    "problem": "날이 더워지면 하수구를 타고 악취가 올라오고, 작은 날벌레까지 꼬이기 쉬워요.",
+    "video_angle": "여름만 되면 싱크대에서 냄새 올라오죠?",
+    "known_downside": "배수구 지름이 안 맞으면 들뜰 수 있어 주문 전에 사이즈 확인이 필요합니다",
+    "video_path": "/Users/mac/Workspace/lionandthelab/clipcart/outbox/publishing/AE1005009718171096.mp4"
   }
 ]
